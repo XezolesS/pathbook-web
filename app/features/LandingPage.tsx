@@ -1,10 +1,34 @@
+import './LandingPageStyle.css'
+
 export default function LandingPage() {
   return (
     <>
-      <div>
-        <p>
-          Landing Page
-        </p>
+      <div className='landing-main-container'>
+        <div className='landing-container'>
+          <div className='info' id='background-color-gray'>
+            Info
+          </div>
+
+          <div className='landing-container-right'>
+            <div className='login-button' id="background-color-gray">
+              Login_button
+            </div>
+            
+            <div className='landing-contents-viewer' id="background-color-gray">
+              Landing_Contents_Viewer
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className='landing-info-container'>
+        <div className='info-container' id='background-color-gray'>
+          Info_Container
+        </div>
+      </div>
+
+      <div className='footer-container'>
+        footer
       </div>
     </>
   )
