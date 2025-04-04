@@ -3,31 +3,31 @@ import './LandingPageStyle.css'
 export default function LandingPage() {
   return (
     <>
-      <div className='Landing_Main_Container'>
-        <div className='Landing_Container'>
-          <div className='Info' id='background_color_gray'>
+      <div className='landing-main-container'>
+        <div className='landing-container'>
+          <div className='info' id='background-color-gray'>
             Info
           </div>
 
-          <div className='Landing_Container_Right'>
-            <div className='Login_button' id="background_color_gray">
+          <div className='landing-container-right'>
+            <div className='login-button' id="background-color-gray">
               Login_button
             </div>
             
-            <div className='Landing_Contents_Viewer' id="background_color_gray">
+            <div className='landing-contents-viewer' id="background-color-gray">
               Landing_Contents_Viewer
             </div>
           </div>
         </div>
       </div>
 
-      <div className='Landing_Info_Container'>
-        <div className='Info_Container' id='background_color_gray'>
+      <div className='landing-info-container'>
+        <div className='info-container' id='background-color-gray'>
           Info_Container
         </div>
       </div>
 
-      <div className='footer_Container'>
+      <div className='footer-container'>
         footer
       </div>
     </>
