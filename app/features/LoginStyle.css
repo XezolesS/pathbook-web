@@ -48,20 +48,15 @@ input:focus {
   outline: 2px solid #ffc300; /* 너비, 색상 등 원하는 대로 조정 */
 }
 
-.input-email {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 19/1;
-
-  background-color: white;
-
+.login-form-section {
   margin-bottom: 1rem;
-  border-radius: 0.5rem;
 }
-.input-password {
+
+.input {
   width: 100%;
   height: auto;
-  aspect-ratio: 19/1;
+
+  padding: 0.2rem 0.5rem;
 
   background-color: white;
 
@@ -75,10 +70,14 @@ input:focus {
   margin-bottom: 1rem;
 }
 
+.logged-checkbox > input {
+  margin-right: 0.5rem;
+}
+
 .login-form-submit {
   width: 100%;
+  min-height: 2rem;
   height: auto;
-  aspect-ratio: 19/1;
 
   margin-top: 3rem;
 
@@ -95,4 +94,8 @@ input:focus {
   color: black;
   font-size: small;
   text-decoration: underline;
+}
+
+.other-menu-container > a {
+  padding: 0 1.5rem;
 }
