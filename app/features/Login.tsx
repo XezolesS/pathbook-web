@@ -45,7 +45,7 @@ export default function Login() {
       
       <div className='other-menu-container'>
         <a href='/register'>회원가입</a>
-        <a href='#'>비밀번호를 잊어버렸어요</a>
+        <a href='/reset-password-request'>비밀번호를 잊어버렸어요</a>
       </div>
     </>
   )
