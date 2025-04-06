@@ -1,13 +1,31 @@
 import { useState, useRef } from 'react';
-import './RigisterStyle.css';
+import './RegisterStyle.css';
 
 export default function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showMismatch, setShowMismatch] = useState(false);
+  const [lengthCheck, setLengthCheck] = useState(false);
+  const [upperCheck, setUpperCheck] = useState(false);
+  const [lowerCheck, setLowerCheck] = useState(false);
+  const [numberCheck, setNumberCheck] = useState(false);
+  const [specialCheck, setSpecialCheck] = useState(false);
   const confirmRef = useRef<HTMLInputElement>(null);
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setPassword(value);
+    setLengthCheck(value.length >= 8);
+    setUpperCheck(/[A-Z]/.test(value));
+    setLowerCheck(/[a-z]/.test(value));
+    setNumberCheck(/[0-9]/.test(value));
+    setSpecialCheck(/[^A-Za-z0-9]/.test(value));
+  };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!(lengthCheck && upperCheck && lowerCheck && numberCheck && specialCheck)) {
+      alert('비밀번호 형식이 올바르지 않습니다!');
+      return;
+    }
     if (password !== confirmPassword) {
       setShowMismatch(true);
       if (confirmRef.current) {
@@ -23,8 +41,6 @@ export default function Register() {
       // TODO: 여기에 API 연결하여 회원가입 처리하면 됨.
     }
   };
-
-  // TODO: 비밀번호 유효성 검사 추가
 
   return (
     <>
@@ -56,12 +72,24 @@ export default function Register() {
                 placeholder='비밀번호를 입력하세요'
                 required
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handlePasswordChange}
               />
               <div className='password-guide'>
-                • 영어 대소문자 포함<br />
-                • 숫자(0-9) 포함<br />
-                • 특수문자 1자 이상 포함
+                <p className={lengthCheck ? 'constraint-satisfied' : 'constraint'}>
+                  {lengthCheck ? '•' : '❌'} 최소 8자 이상
+                </p>
+                <p className={upperCheck ? 'constraint-satisfied' : 'constraint'}>
+                  {upperCheck ? '•' : '❌'} 영어 대문자 포함
+                </p>
+                <p className={lowerCheck ? 'constraint-satisfied' : 'constraint'}>
+                  {lowerCheck ? '•' : '❌'} 영어 소문자 포함
+                </p>
+                <p className={numberCheck ? 'constraint-satisfied' : 'constraint'}>
+                  {numberCheck ? '•' : '❌'} 숫자(0-9) 포함
+                </p>
+                <p className={specialCheck ? 'constraint-satisfied' : 'constraint'}>
+                  {specialCheck ? '•' : '❌'} 특수문자 1자 이상 포함
+                </p>
               </div>
             </div>
             <div className='register-form-section'>
