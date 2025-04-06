@@ -1,39 +1,28 @@
 import { useState, useRef } from 'react';
-import './RigisterStyle.css';
+import './RegisterStyle.css';
 
 export default function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showMismatch, setShowMismatch] = useState(false);
-  const [passwordError, setPasswordError] = useState('');
+  const [lengthCheck, setLengthCheck] = useState(false);
+  const [upperCheck, setUpperCheck] = useState(false);
+  const [lowerCheck, setLowerCheck] = useState(false);
+  const [numberCheck, setNumberCheck] = useState(false);
+  const [specialCheck, setSpecialCheck] = useState(false);
   const confirmRef = useRef<HTMLInputElement>(null);
-  const validatePassword = (value: string): string => {
-    if (value.length < 8) {
-      return '비밀번호는 최소 8자 이상이어야 합니다.';
-    }
-    if (!/[A-Z]/.test(value)) {
-      return '비밀번호에는 대문자가 최소 1개 이상 포함되어야 합니다.';
-    }
-    if (!/[a-z]/.test(value)) {
-      return '비밀번호에는 소문자가 최소 1개 이상 포함되어야 합니다.';
-    }
-    if (!/[0-9]/.test(value)) {
-      return '비밀번호에는 숫자가 최소 1개 이상 포함되어야 합니다.';
-    }
-    if (!/[^A-Za-z0-9]/.test(value)) {
-      return '비밀번호에는 특수문자가 최소 1개 이상 포함되어야 합니다.';
-    }
-    return '';
-  };
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setPassword(value);
-    const error = validatePassword(value);
-    setPasswordError(error);
+    setLengthCheck(value.length >= 8);
+    setUpperCheck(/[A-Z]/.test(value));
+    setLowerCheck(/[a-z]/.test(value));
+    setNumberCheck(/[0-9]/.test(value));
+    setSpecialCheck(/[^A-Za-z0-9]/.test(value));
   };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (passwordError) {
+    if (!(lengthCheck && upperCheck && lowerCheck && numberCheck && specialCheck)) {
       alert('비밀번호 형식이 올바르지 않습니다!');
       return;
     }
@@ -86,15 +75,22 @@ export default function Register() {
                 onChange={handlePasswordChange}
               />
               <div className='password-guide'>
-                • 영어 대소문자 포함<br />
-                • 숫자(0-9) 포함<br />
-                • 특수문자 1자 이상 포함
+                <p className={lengthCheck ? 'constraint-satisfied' : 'constraint'}>
+                  {lengthCheck ? '•' : '❌'} 최소 8자 이상
+                </p>
+                <p className={upperCheck ? 'constraint-satisfied' : 'constraint'}>
+                  {upperCheck ? '•' : '❌'} 영어 대문자 포함
+                </p>
+                <p className={lowerCheck ? 'constraint-satisfied' : 'constraint'}>
+                  {lowerCheck ? '•' : '❌'} 영어 소문자 포함
+                </p>
+                <p className={numberCheck ? 'constraint-satisfied' : 'constraint'}>
+                  {numberCheck ? '•' : '❌'} 숫자(0-9) 포함
+                </p>
+                <p className={specialCheck ? 'constraint-satisfied' : 'constraint'}>
+                  {specialCheck ? '•' : '❌'} 특수문자 1자 이상 포함
+                </p>
               </div>
-              {passwordError && (
-                  <div className="password-error">
-                    {passwordError}
-                  </div>
-              )}
             </div>
             <div className='register-form-section'>
               <label htmlFor='confirm-password'>비밀번호 재입력</label>
