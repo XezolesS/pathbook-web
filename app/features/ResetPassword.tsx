@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
-import './FindPasswordPageStyle.css';
+import './ResetPasswordStyle.css';
 
-export default function FindPasswordReset() {
+export default function ResetPassword() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showMismatch, setShowMismatch] = useState(false);

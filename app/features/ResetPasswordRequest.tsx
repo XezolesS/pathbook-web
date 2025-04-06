@@ -1,6 +1,6 @@
-import './FindPasswordPageStyle.css';
+import './ResetPasswordStyle.css';
 
-export default function FindPasswordRequest() {
+export default function ResetPasswordRequest() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('비밀번호 재설정 요청됨. (request)');
