@@ -10,7 +10,7 @@ export default function Login() {
           <form className='login-form' action='/login' method='post'>
             <div className='login-form-section'>
               <label htmlFor='email'>이메일</label>
-              <input>
+              <input
                 className='input input-email'
                 type='email'
                 id='email'
