@@ -11,7 +11,7 @@ export default function LandingPage() {
 
           <div className='landing-container-right'>
             <div className='login-button' id="background-color-gray">
-              Login_button
+              <a href='/login'>로그인</a>
             </div>
             
             <div className='landing-contents-viewer' id="background-color-gray">
