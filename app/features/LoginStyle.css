@@ -1,100 +1,101 @@
-.logo{
-    width: 100%;
-    height: auto;
-    
-    margin-top: 2rem;
-    
-    display: flex;
-    justify-content: center;
+.logo {
+  width: 100%;
+  height: auto;
+
+  margin-top: 2rem;
+
+  display: flex;
+  justify-content: center;
 }
 
-.login{
-    width: 100%;
-    height: auto;
-    
-    margin-bottom: 0.5rem;
-    
-    display: flex;
-    justify-content: center;
-    
+.login {
+  width: 100%;
+  height: auto;
+
+  margin-bottom: 0.5rem;
+
+  display: flex;
+  justify-content: center;
 }
 
-.login-container{
-    background-color: #E6E6E6;
-    
-    width: 50%;
-    max-width: 750px;
-    min-width: 135px;
-    height: auto;
-    
-    margin-top: 3rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-bottom: 1rem;
-    
-    border-radius: 1rem;
-    
+.login-container {
+  background-color: #e6e6e6;
+
+  width: 50%;
+  max-width: 750px;
+  min-width: 135px;
+  height: auto;
+
+  margin-top: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+
+  border-radius: 1rem;
 }
 
-.login-text{
-    width: 100%;
-    height: auto;
-    
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    
-    text-align: center;
-    font-weight: bold;
+.login-text {
+  width: 100%;
+  height: auto;
+
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  text-align: center;
+  font-weight: bold;
 }
 input:focus {
-    outline: 2px solid #FFC300; /* 너비, 색상 등 원하는 대로 조정 */
+  outline: 2px solid #ffc300; /* 너비, 색상 등 원하는 대로 조정 */
 }
 
-.input-email{
-    width: 100%;
-    height: auto;
-    aspect-ratio: 19/1;
-
-    background-color: white;
-    
-    margin-bottom: 1rem;
-    border-radius: 0.5rem;
-}
-.input-password{
-    width: 100%;
-    height: auto;
-    aspect-ratio: 19/1;
-
-    background-color: white;
-
-    border-radius: 0.5rem;
+.login-form-section {
+  margin-bottom: 1rem;
 }
 
-.logged-checkbox{
-    width: auto;
-    height: auto;
-    
-    margin-bottom: 1rem;
+.input {
+  width: 100%;
+  height: auto;
+
+  padding: 0.2rem 0.5rem;
+
+  background-color: white;
+
+  border-radius: 0.5rem;
 }
 
-.login-form-submit{
-    width: 100%;
-    height: auto;
-    aspect-ratio: 19/1;
-    
-    margin-top: 3rem;
+.logged-checkbox {
+  width: auto;
+  height: auto;
 
-    background-color: #FFC300;
-    border-radius: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-.other-menu-container{
-    width: 100%;
-    
-    display: flex;
-    justify-content: center;
-    
-    color: black;
-    font-size: small;
-    text-decoration: underline;
+.logged-checkbox > input {
+  margin-right: 0.5rem;
+}
+
+.login-form-submit {
+  width: 100%;
+  min-height: 2rem;
+  height: auto;
+
+  margin-top: 3rem;
+
+  background-color: #ffc300;
+  border-radius: 0.5rem;
+}
+
+.other-menu-container {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  color: black;
+  font-size: small;
+  text-decoration: underline;
+}
+
+.other-menu-container > a {
+  padding: 0 1.5rem;
 }
