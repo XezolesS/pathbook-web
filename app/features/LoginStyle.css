@@ -83,6 +83,7 @@ input:focus {
 
   background-color: #ffc300;
   border-radius: 0.5rem;
+  cursor: pointer;
 }
 
 .other-menu-container {

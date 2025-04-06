@@ -62,30 +62,25 @@ input:focus {
   outline: 2px solid #FFC300;
 }
 
-.input-email {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 19/1;
-
-  background-color: white;
-
+.register-form-section {
   margin-bottom: 1rem;
-  border-radius: 0.5rem;
 }
 
-.input-password {
+.input {
   width: 100%;
   height: auto;
-  aspect-ratio: 19/1;
+
+  padding: 0.2rem 0.5rem;
 
   background-color: white;
+
   border-radius: 0.5rem;
 }
 
 .register-form-submit {
   width: 100%;
+  min-height: 2rem;
   height: auto;
-  aspect-ratio: 19/1;
 
   margin-top: 3rem;
 
@@ -109,11 +104,11 @@ input:focus {
 }
 
 .password-mismatch{
-    font-size: small;
+  font-size: small;
 }
 
 .password-guide{
-    margin-bottom: 0.5rem;
-    
-    font-size: small;
+  margin-bottom: 0.5rem;
+  
+  font-size: small;
 }
