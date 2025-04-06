@@ -6,4 +6,6 @@ export default [
   route("home", "./features/Home.tsx"),
   route("login", "./features/Login.tsx"),
   route("register", "./features/Register.tsx"),
+  route("findpasswordpagerequest","./features/FindPasswordPageRequest.tsx"),
+  route("findpasswordpagereset","./features/FindPasswordPageReset.tsx"),
 ] satisfies RouteConfig;
