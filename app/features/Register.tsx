@@ -34,7 +34,7 @@ export default function Register() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (passwordError) {
-      alert('비밀번호 형식이 올바르지 않습니다.: ${passwordError}');
+      alert('비밀번호 형식이 올바르지 않습니다!');
       return;
     }
     if (password !== confirmPassword) {
