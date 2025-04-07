@@ -1,4 +1,5 @@
 import './ResetPasswordStyle.css';
+import textLogo from './assets/textLogo.png'
 
 export default function ResetPasswordRequest() {
   const handleSubmit = (e: React.FormEvent) => {
@@ -10,7 +11,7 @@ export default function ResetPasswordRequest() {
   return (
     <>
       <div>
-        <div className='logo'>PathBook</div>
+      <div className='logo'><a href='./#'><img src={textLogo}></img></a></div>
 
         <div className='find-password'>
           <div className='find-password-container'>
