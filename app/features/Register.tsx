@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect} from 'react';
 import './RegisterStyle.css';
 
 export default function Register() {
@@ -10,7 +10,11 @@ export default function Register() {
   const [lowerCheck, setLowerCheck] = useState(false);
   const [numberCheck, setNumberCheck] = useState(false);
   const [specialCheck, setSpecialCheck] = useState(false);
+  const [temporaryName, setTemporaryName] = useState('');
   const confirmRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    setTemporaryName('user-12345');
+  }, []);
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setPassword(value);
@@ -38,6 +42,11 @@ export default function Register() {
     } else {
       setShowMismatch(false);
       console.log('회원가입 요청.');
+      /*const registerData = {
+        email: (document.getElementById('email') as HTMLInputElement).value,
+        password: (document.getElementById('password') as HTMLInputElement).value,
+        nickname: (document.getElementById('name') as HTMLInputElement).value,
+      };*/
       // TODO: 여기에 API 연결하여 회원가입 처리하면 됨.
     }
   };
@@ -120,6 +129,7 @@ export default function Register() {
                 name='name'
                 placeholder='닉네임을 입력하세요'
                 required
+                defaultValue={temporaryName}
               />
             </div>
             <button type='submit' className='register-form-submit'>
