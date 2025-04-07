@@ -13,7 +13,7 @@ export default function Register() {
   const [temporaryName, setTemporaryName] = useState('');
   const confirmRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    setTemporaryName('user-12345');
+    setTemporaryName('user-12345'); // 추후 백엔드와 연동하여 임시 닉네임을 부여합니다.
   }, []);
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
