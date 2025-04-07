@@ -21,7 +21,7 @@ export default function LandingPage() {
         </div>
       </div>
 
-      <div className='landing-Details-container'>
+      <div className='landing-details-container'>
         <div className='Details-container'>
           <Details />
         </div>
