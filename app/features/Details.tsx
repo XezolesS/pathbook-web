@@ -1,4 +1,3 @@
-import React from 'react';
 import './DetailsStyle.css';
 import DescriptionBubble from './DescriptionBubble';
 
@@ -10,7 +9,7 @@ import sample_pic1_b from './assets/image/samplepic1.png';
 import sample_pic2_a from './assets/image/samplepic2_a.jpg';
 import sample_pic2_b from './assets/image/samplepic2.png';
 
-const Details: React.FC = () => {
+export default function Details() {
   return (
     <>
       <div className="description-bubble-container">
@@ -46,6 +45,4 @@ const Details: React.FC = () => {
       </div>
     </>
   );
-};
-
-export default Details;
+}
