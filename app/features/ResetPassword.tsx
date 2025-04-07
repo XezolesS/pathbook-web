@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import './ResetPasswordStyle.css';
+import textLogo from './assets/textLogo.png'
 
 export default function ResetPassword() {
   const [password, setPassword] = useState('');
@@ -47,7 +48,7 @@ export default function ResetPassword() {
   return (
     <>
       <div>
-        <div className='logo'>PathBook</div>
+      <div className='logo'><img src={textLogo}></img></div>
 
         <div className='find-password'>
           <div className='find-password-container'>

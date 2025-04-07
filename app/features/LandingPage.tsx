@@ -1,5 +1,5 @@
 import './LandingPageStyle.css'
-import InfoContainer from './InfoContainer' 
+import Details from './Details' 
 export default function LandingPage() {
   return (
     <>
@@ -21,9 +21,9 @@ export default function LandingPage() {
         </div>
       </div>
 
-      <div className='landing-info-container'>
-        <div className='info-container'>
-          <InfoContainer />
+      <div className='landing-Details-container'>
+        <div className='Details-container'>
+          <Details />
         </div>
       </div>
 

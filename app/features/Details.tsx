@@ -1,5 +1,5 @@
 import React from 'react';
-import './InfoContainerStyle.css';
+import './DetailsStyle.css';
 
 //svg, png, jpg등 경로 수정은 다음 import 경로를 수정해주세요.
 import arrow1_colored from './assets/arrow1_colored.svg';
@@ -10,7 +10,7 @@ import sample_pic1_b from './assets/image/samplepic1.png';
 import sample_pic2_a from './assets/image/samplepic2_a.jpg';
 import sample_pic2_b from './assets/image/samplepic2.png';
 
-const InfoContainer: React.FC = () => {
+const Details: React.FC = () => {
   return (
     <>
       <div className="description-bubble-container">
@@ -63,4 +63,4 @@ const InfoContainer: React.FC = () => {
   );
 };
 
-export default InfoContainer;
+export default Details;

@@ -1,9 +1,10 @@
 import './LoginStyle.css';
+import textLogo from './assets/textLogo.png'
 
 export default function Login() {
   return (
     <>
-      <div className='logo'>PathBook</div>
+      <div className='logo'><a href='./#'><img src={textLogo}></img></a></div>
       <div className='login'>
         <div className='login-container'>
           <div className='login-text'>로그인</div>

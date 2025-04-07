@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect} from 'react';
 import './RegisterStyle.css';
+import textLogo from './assets/textLogo.png'
 
 export default function Register() {
   const [password, setPassword] = useState('');
@@ -55,7 +56,7 @@ export default function Register() {
   return (
     <>
       <div>
-      <div className='logo'>PathBook</div>
+      <div className='logo'><a href='./#'><img src={textLogo}></img></a></div>
 
       <div className='register'>
         <div className='register-container'>
