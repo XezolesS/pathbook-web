@@ -1,5 +1,5 @@
 import './LandingPageStyle.css'
-
+import InfoContainer from './InfoContainer' 
 export default function LandingPage() {
   return (
     <>
@@ -22,8 +22,8 @@ export default function LandingPage() {
       </div>
 
       <div className='landing-info-container'>
-        <div className='info-container' id='background-color-gray'>
-          Info_Container
+        <div className='info-container'>
+          <InfoContainer />
         </div>
       </div>
 
