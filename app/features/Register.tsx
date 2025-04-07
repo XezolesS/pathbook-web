@@ -42,7 +42,8 @@ export default function Register() {
     } else {
       setShowMismatch(false);
       console.log('회원가입 요청.');
-      /*const registerData = {
+      //추후 백엔드 연동 시 사용할 데이터 셋.
+      /*const registerData = { 
         email: (document.getElementById('email') as HTMLInputElement).value,
         password: (document.getElementById('password') as HTMLInputElement).value,
         nickname: (document.getElementById('name') as HTMLInputElement).value,
