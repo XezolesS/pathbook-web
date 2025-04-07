@@ -1,13 +1,13 @@
 import './LandingPageStyle.css'
-import Info from './Info'
+import Welcome from './Welcome'
 
 export default function LandingPage() {
   return (
     <>
       <div className='landing-main-container'>
         <div className='landing-container'>
-          <div className='info'>
-            <Info />
+          <div className='welcome'>
+            <Welcome />
           </div>
 
           <div className='landing-container-right'>
