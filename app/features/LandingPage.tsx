@@ -1,5 +1,6 @@
 import './LandingPageStyle.css'
 import Details from './Details' 
+import LandingContentsViewer from './LandingContentsViewer'
 export default function LandingPage() {
   return (
     <>
@@ -14,8 +15,8 @@ export default function LandingPage() {
               <a href='/login'>로그인</a>
             </div>
             
-            <div className='landing-contents-viewer' id="background-color-gray">
-              Landing_Contents_Viewer
+            <div className='landing-contents-viewer'>
+              <LandingContentsViewer />
             </div>
           </div>
         </div>
