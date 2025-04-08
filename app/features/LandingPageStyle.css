@@ -6,6 +6,10 @@
   align-items: center;
 }
 
+html, body{
+  background-color: #FFFDF8;
+}
+
 .landing-main-container {
   width: 100%;
 
@@ -59,10 +63,9 @@
   margin-top: 2rem;
 }
 
-.landing-info-container {
+.landing-details-container {
   width: 100%;
   height: auto;
-  aspect-ratio: 4/5;
 
   margin-top: 5rem;
   padding-left: 3rem;
@@ -70,16 +73,17 @@
 
   display: flex;
   justify-content: center;
+
 }
 
-.info-container {
+.details-container {
   width: 100%;
-  max-width: 1350px;
-  min-width: 135px;
+  max-width: 1550px;
+  min-width: 155px;
   height: 100%;
 
   display: flex;
-  justify-content: center;
+  padding-bottom: 12vw;
 }
 
 .footer-container {

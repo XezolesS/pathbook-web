@@ -1,3 +1,7 @@
+html, body{
+  background-color: #FFFDF8;
+}
+
 .logo {
   width: 100%;
   height: auto;
@@ -6,6 +10,10 @@
 
   display: flex;
   justify-content: center;
+}
+.logo img{
+  width: 12vw;
+  min-width: 150px;
 }
 
 .login {
@@ -22,7 +30,7 @@
   background-color: #e6e6e6;
 
   width: 50%;
-  max-width: 750px;
+  max-width: 450px;
   min-width: 135px;
   height: auto;
 
@@ -32,6 +40,7 @@
   padding-bottom: 1rem;
 
   border-radius: 1rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 .login-text {

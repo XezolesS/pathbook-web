@@ -1,5 +1,6 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect} from 'react';
 import './RegisterStyle.css';
+import textLogo from './assets/textLogo.png'
 
 export default function Register() {
   const [password, setPassword] = useState('');
@@ -10,7 +11,11 @@ export default function Register() {
   const [lowerCheck, setLowerCheck] = useState(false);
   const [numberCheck, setNumberCheck] = useState(false);
   const [specialCheck, setSpecialCheck] = useState(false);
+  const [temporaryName, setTemporaryName] = useState('');
   const confirmRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    setTemporaryName('user-12345'); // 추후 백엔드와 연동하여 임시 닉네임을 부여합니다.
+  }, []);
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setPassword(value);
@@ -38,6 +43,12 @@ export default function Register() {
     } else {
       setShowMismatch(false);
       console.log('회원가입 요청.');
+      //추후 백엔드 연동 시 사용할 데이터 셋.
+      /*const registerData = { 
+        email: (document.getElementById('email') as HTMLInputElement).value,
+        password: (document.getElementById('password') as HTMLInputElement).value,
+        nickname: (document.getElementById('name') as HTMLInputElement).value,
+      };*/
       // TODO: 여기에 API 연결하여 회원가입 처리하면 됨.
     }
   };
@@ -45,7 +56,7 @@ export default function Register() {
   return (
     <>
       <div>
-      <div className='logo'>PathBook</div>
+      <div className='logo'><a href='./#'><img src={textLogo}></img></a></div>
 
       <div className='register'>
         <div className='register-container'>
@@ -120,6 +131,7 @@ export default function Register() {
                 name='name'
                 placeholder='닉네임을 입력하세요'
                 required
+                defaultValue={temporaryName}
               />
             </div>
             <button type='submit' className='register-form-submit'>

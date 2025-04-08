@@ -28,9 +28,9 @@ export default function LandingPage() {
         </div>
       </div>
 
-      <div className='landing-info-container'>
-        <div className='info-container' id='background-color-gray'>
-          Info_Container
+      <div className='landing-details-container'>
+        <div className='details-container'>
+          <Details />
         </div>
       </div>
 
