@@ -7,23 +7,25 @@ export default function LandingContentsViewer() {
         <div className="background-img">
           <img className="swipe-left" src=".\app\features\assets\arrow3.svg" />
           <img className="swipe-right" src=".\app\features\assets\arrow3.svg" />
-          
-          <div className="writer">
-            <div className="profile-pic"></div>
-            <div className="text">
-              <div className="author">작성자</div>
-              <div className="id">@writer · 2025/01/23 12:34 PM</div>
-            </div>
-          </div>
 
-          <div className="bookmarks">
-            <img className="book-open" src=".\app\features\assets\book-open.svg" />
-            <div className="bookmark-count">2,025</div>
-          </div>
-        
-          <div className="likes">
-            <img className="heart" src=".\app\features\assets\heart.svg" />
-            <div className="like-count">2,025</div>
+          <div className="show-detail">
+            <div className="writer">
+              <div className="profile-pic"></div>
+              <div className="text">
+                <div className="author">작성자</div>
+                <div className="id">@user_id · 2025/01/23 12:34 PM</div>
+              </div>
+            </div>
+            <div className="show-count">
+              <div className="bookmarks">
+                <img className="book-open" src=".\app\features\assets\book-open.svg" />
+                <div className="bookmark-count">2,025</div>
+              </div>
+              <div className="likes">
+                <img className="heart" src=".\app\features\assets\heart.svg" />
+                <div className="like-count">2,025</div>
+              </div>
+            </div>
           </div>
 
           <div className="overlay-content">
