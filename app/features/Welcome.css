@@ -1,0 +1,66 @@
+.catchphrase {
+  display: flex;
+  font-size: 2vw;
+  font-weight: 700;
+  text-align: left;
+  width: 100%;
+  padding: 1vw;
+  margin-top: 3vw;
+  /*margin-bottom: 2vw;*/
+}
+
+.intro-section {
+  display: flex;
+  aspect-ratio: 2/1;
+  text-align: left;
+  font-size: 1.3vw;
+  font-weight: 300;
+  padding: 1.5vw;
+  width: 100%;
+  height: 11vw;
+}
+
+.intro-section ul {
+  list-style-type: disc;
+  padding-left: 1vw;
+}
+
+.join-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 4vw;
+}
+
+.join-section-title {
+  font-size: 1vw;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 0.5vw;
+}
+
+.button-theme {
+  background: #ff7d90;
+  border-radius: 0.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 50%;
+  aspect-ratio: 4/1;
+}
+
+.button-text {
+  font-size: 1.5vw;
+  font-weight: 700;
+}
+
+.guest-text {
+  text-decoration: underline;
+  color: #666666;
+  font-size: 0.625vw;
+  letter-spacing: 0.1vw;
+  width: 50%;
+  text-align: center;  
+}
