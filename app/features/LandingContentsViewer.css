@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: aquamarine; /* 임시 추가 */
 }
 
 .background-img {
