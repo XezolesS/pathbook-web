@@ -226,7 +226,7 @@ input:focus {
 
   .content-head {
     width: 80%;
-    height: clamp(10px, 10vw, 30px);
+    height: clamp(10px, 10vw, 40px);
 
     
     display: flex;
