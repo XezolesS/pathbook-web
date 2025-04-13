@@ -1,14 +1,29 @@
 import './LoginStyle.css';
 import textLogo from './assets/textLogo.png'
+import { LoginRequest } from '../api/pathbook/LoginRequest';
 
 export default function Login() {
+  async function sendLoginRequest(formData: FormData) {
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+    
+    try {
+      const response = await LoginRequest.login(email, password);
+      console.log(response);
+    }
+    catch (error) {
+      console.error('Login failed:', error);
+      alert('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.');
+    }
+  }
+
   return (
     <>
       <div className='logo'><a href='./#'><img src={textLogo}></img></a></div>
       <div className='login'>
         <div className='login-container'>
           <div className='login-text'>로그인</div>
-          <form className='login-form' action='/login' method='post'>
+          <form className='login-form' action={sendLoginRequest}>
             <div className='login-form-section'>
               <label htmlFor='email'>이메일</label>
               <input
