@@ -20,9 +20,7 @@ export default function LandingPage() {
                className='login-button-text'
             >
               <div className='login-button'>
-                
-                  로그인
-                
+                로그인
               </div>
             </a>
             <div className='landing-contents-viewer'>
