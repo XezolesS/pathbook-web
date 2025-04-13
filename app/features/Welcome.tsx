@@ -17,7 +17,7 @@ export default function Welcome() {
         <button className="button-theme" onClick={() => window.location.href = '/Register'}>
           <div className="button-text">지금 가입하기</div>
         </button>
-        <div className="guest-text">또는 익명으로 둘러보기</div>
+        <div className="guest-text"><a href='main'>또는 익명으로 둘러보기</a></div>
       </div>
     </>
   )
