@@ -2,29 +2,31 @@ import './LandingPageStyle.css'
 import Details from './Details' 
 import LandingContentsViewer from './LandingContentsViewer'
 import Welcome from './Welcome'
+import textLogo from './assets/textLogo.png'
 
 export default function LandingPage() {
   return (
     <>
+      
       <div className='landing-main-container'>
         <div className='landing-container'>
           <div className='welcome'>
+          <div className='logo'><a href='./#'><img src={textLogo}></img></a></div>
             <Welcome />
           </div>
 
           <div className='landing-container-right'>
-            <div className='login-button' 
-              style={{ background: '#ffc400', borderRadius: 12,
-              display: 'flex', justifyContent: 'center', alignItems: 'center',
-              }}
+            <a href='/login'
+               className='login-button-text'
             >
-              <a href='/login'
-                style={{ color: 'black', fontSize: '1.5vw', fontWeight: 400 }}
-              >로그인</a>
-            </div>
-            
+              <div className='login-button'>
+                
+                  로그인
+                
+              </div>
+            </a>
             <div className='landing-contents-viewer'>
-              <LandingContentsViewer />
+            <LandingContentsViewer />
             </div>
           </div>
         </div>
