@@ -218,6 +218,10 @@ input:focus {
   border-radius: clamp(1px, 0.5rem, 10px);
 }
 
+.login-button:hover{
+  cursor: pointer;
+}
+
 .register-button{
   width: 100%;
 
@@ -229,6 +233,10 @@ input:focus {
   text-align: center;
   background-color: #ff7d90;
   border-radius: clamp(1px, 0.5rem, 10px);
+}
+
+.register-button:hover{
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1120px) {
