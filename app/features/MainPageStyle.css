@@ -29,6 +29,11 @@ html, body {
 
   visibility: hidden;
 }
+.profile-name:hover .edit,
+.profile-bio:hover .edit {
+  visibility: visible;
+  cursor: pointer;
+}
 
 .menu-container {
   width: 80%;
