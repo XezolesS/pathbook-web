@@ -170,6 +170,10 @@ input:focus {
   border-bottom-right-radius: clamp(1px, 0.5rem, 10px);
 }
 
+.search-button:hover{
+  cursor: pointer;
+}
+
 .write-button {
   width: auto;
   height: 100%;
