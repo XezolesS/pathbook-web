@@ -8,10 +8,11 @@ import ring_svg from './assets/ring.svg'
 import book_svg from './assets/book.svg'
 import menu_svg from './assets/menu.svg'
 import Profile from './Profile'
+import Anonymity from './Anonymity'
 
 export default function Main() {
   const menuRef = useRef<HTMLDivElement | null>(null)
-  const [selectedMenu, setSelectedMenu] = useState('menu_home')
+  const [selectedMenu, setSelectedMenu] = useState('menu-home')
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,19 +34,19 @@ export default function Main() {
     <div className='mainpage'>
       <div className='main-menu-container'>
         <div className='menu-container' ref={menuRef}>
-          
-          <Profile />
+
+          <Anonymity /> {/* 로그인 세션이 존재하면, 여기에 <Profile />호출*/}
 
           {[
-            { name: 'menu_home', icon: home_svg, label: '===========' },
-            { name: 'menu_star', icon: star_svg, label: '===========' },
-            { name: 'menu_ring', icon: ring_svg, label: '===========' },
-            { name: 'menu_book', icon: book_svg, label: '===========' },
-            { name: 'menu_menu', icon: menu_svg, label: '===========' }
+            { name: 'menu-home', icon: home_svg, label: '===========' },
+            { name: 'menu-star', icon: star_svg, label: '===========' },
+            { name: 'menu-ring', icon: ring_svg, label: '===========' },
+            { name: 'menu-book', icon: book_svg, label: '===========' },
+            { name: 'menu-menu', icon: menu_svg, label: '===========' }
           ].map(item => (
             <div
               key={item.name}
-              className={`menu_item ${selectedMenu === item.name ? 'selected' : ''}`}
+              className={`menu-item ${selectedMenu === item.name ? 'selected' : ''}`}
               onClick={() => setSelectedMenu(item.name)}
             >
               <img className={item.name} src={item.icon} alt={item.name} />

@@ -88,7 +88,7 @@ html, body {
   background-color: #FFC300;
 }
 
-.menu_item {
+.menu-item {
   width: 100%;
 
   padding-top: clamp(6px, 1vw, 18px);
@@ -97,11 +97,11 @@ html, body {
   display: flex;
   justify-content: center;
 }
-.menu_item:hover{
+.menu-item:hover{
   cursor: pointer;
 }
 
-.menu_item span {
+.menu-item span {
   width: 75%;
 
   margin-left: 5%;
@@ -114,11 +114,11 @@ html, body {
   align-items: center;
 }
 
-.menu_item.selected span {
+.menu-item.selected span {
   background-color: #FFD300;
 }
 
-.menu_item.selected img {
+.menu-item.selected img {
   color: #FFD300;
   filter: brightness(1) saturate(100%) invert(80%) sepia(100%) saturate(750%) hue-rotate(5deg);
 }
@@ -196,6 +196,41 @@ input:focus {
   text-decoration: underline;
 }
 
+.anonymity-comment{
+  width: 100%;
+
+  text-align: center;
+  font-size: clamp(12px, 1vw, 20px);
+  font-weight: bold;
+  margin-bottom: 5%;
+}
+
+.login-button{
+  width: 100%;
+
+  margin-bottom: 5%;
+  padding: 2%;
+
+  font-size: clamp(12px, 1vw, 20px);
+  font-weight: bold;
+  text-align: center;
+  background-color: #FFC300;
+  border-radius: clamp(1px, 0.5rem, 10px);
+}
+
+.register-button{
+  width: 100%;
+
+  margin-bottom: 5%;
+  padding: 2%;
+
+  font-size: clamp(12px, 1vw, 20px);
+  font-weight: bold;
+  text-align: center;
+  background-color: #ff7d90;
+  border-radius: clamp(1px, 0.5rem, 10px);
+}
+
 @media screen and (max-width: 1120px) {
   .main-menu-container {
     width: 10%;
@@ -271,8 +306,28 @@ input:focus {
 
     visibility: hidden;
   }
-  .menu_item span {
+
+  .menu-item span {
     width: 0;
     visibility: hidden;
   }
+
+  .anonymity-comment{
+    width: 0;
+    height: 0;
+    visibility: hidden;
+  }
+
+  .login-button{
+    width: 0;
+    height: 0;
+    visibility: hidden;
+  }
+
+  .register-button{
+    width: 0;
+    height: 0;
+    visibility: hidden;
+  }
+
 }
