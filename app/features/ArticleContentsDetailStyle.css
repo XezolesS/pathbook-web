@@ -1,0 +1,277 @@
+.article-contents-frame {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  margin: 0 auto;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  padding: 1rem;
+  
+  gap: 1rem;
+}
+
+.map {
+  background-image: url('./app/features/assets/image/samplepic3.png');
+
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+
+  border-radius: 0.5rem;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  position: relative;
+}
+.map::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 0;
+}
+
+
+.show-detail {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.writer {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.profile-pic {
+  width: clamp(30px, 1.2vw, 40px);
+
+  aspect-ratio: 1 / 1;
+
+  background: #d9d9d9;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+}
+
+.author {
+  font-size: clamp(15px, 0.65rem, 18px);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-align: left;  
+}
+
+.id-with-time {
+  color: rgba(219, 219, 219, 0.8);
+  font-size: clamp(10px, 0.65vw, 12px);
+  letter-spacing: 0.05em;
+
+  font-weight: 400;
+  text-align: left;
+  white-space: nowrap;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.show-count {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.chats {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.chat {
+  width: 1.5rem;
+  flex-shrink: 0;
+}
+
+.chat-count {
+  font-size: clamp(15px, 0.65rem, 18px);
+  /*폰트 사이즈 조절 필요*/
+}
+
+.likes {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.heart {
+  width: 1.5rem;
+  flex-shrink: 0;
+}
+
+.like-count {
+  color: #ff7d90;
+}
+
+.bookmarks {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.book-open {
+  width: 1.5rem;
+  flex-shrink: 0;
+}
+
+.bookmark-count {
+  color: #ffc400;
+}
+
+.show-text {
+  font-size: clamp(15px, 0.65rem, 18px);
+  font-weight: 400;
+  text-align: left;
+
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.subject {
+  font-size: clamp(18px, 1rem, 24px);
+  font-weight: 700;
+}
+
+.tag-list {
+  color: #ffc400;
+  font-size: clamp(15px, 0.65rem, 18px);
+  text-align: right;
+}
+
+.description {
+  font-size: clamp(15px, 0.65rem, 18px);
+}
+
+.comment-desc {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-self: flex-start;
+  gap: 0.5em;
+
+  padding-top: 2rem;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.comment-explain {
+  font-size: clamp(15px, 0.65rem, 18px);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-align: center;  
+}
+
+.comment-container {
+  width: calc(100% - 3rem);
+  border-radius: 0.5rem;
+  border: 1px solid #000000;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-textarea {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+  border-bottom: 1px solid #000000;
+}
+
+.comment-input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid #000000;
+  border-radius: 0.5rem;
+  font-size: clamp(15px, 0.65rem, 18px);
+}
+.comment-push {
+  background-color: #ffc400;
+
+  font-size: clamp(15px, 0.65rem, 18px);
+
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  aspect-ratio: 2 / 1;
+  margin-left: auto;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comment-list {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-item {
+  font-size: clamp(15px, 0.65rem, 18px);
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border-top: 1px solid #000000;
+}
+
+.space {
+  width: 100%;
+}
+
+.text {
+  font-size: clamp(15px, 0.65rem, 18px);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-align: left;  
+}
+
+.reply-item {
+  font-size: clamp(15px, 0.65rem, 18px);
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  padding-left: 3rem;
+  border-top: 1px solid #000000;
+}

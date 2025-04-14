@@ -10,4 +10,5 @@ export default [
   route("reset-password","./features/ResetPassword.tsx"),
   route("article-write", "./features/ArticleWrite.tsx"),
   route("article-contents", "./features/ArticleContents.tsx"),
+  route("article-contents-detail", "./features/ArticleContentsDetail.tsx"),
 ] satisfies RouteConfig;

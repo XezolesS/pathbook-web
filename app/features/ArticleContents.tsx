@@ -1,4 +1,4 @@
-import "./ArticleContents.css";
+import "./ArticleContentsStyle.css";
 
 export default function ArticleContents() {
   return (
