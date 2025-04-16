@@ -2,37 +2,37 @@
   width: 100%;
   max-width: 800px;
   height: auto;
+
   margin: 0 auto;
+  padding: 1rem;
+  gap: 1rem;
 
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: transparent;
-  padding: 1rem;
-  
-  gap: 1rem;
 }
 
 .map {
   background-image: url('./app/features/assets/image/samplepic3.png');
 
   background-size: cover;
-  background-position: center;
   width: 100%;
   aspect-ratio: 2 / 1;
 
-  border-radius: 0.5rem;
-  border: 1px solid #000000;
-  box-sizing: border-box;
-
-  display: flex;
-  flex-direction: column;
   gap: 1rem;
   padding: 1.5rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  
+  box-sizing: border-box;
+  background-position: center;
+  border-radius: 0.5rem;
+  border: 1px solid #000000;
 
+  display: flex;
+  flex-direction: column;
   position: relative;
 }
 .map::before {
@@ -47,23 +47,24 @@
 .show-detail {
   width: 100%;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   gap: 1rem;
   padding-right: 1.5rem;
   padding-left: 1.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .writer {
+  gap: 0.5em;
+  width: 100%;
   display: flex;
   align-items: center;
-  gap: 0.5em;
 }
 
 .profile-pic {
   width: clamp(30px, 1.2vw, 40px);
-
   aspect-ratio: 1 / 1;
 
   background: #d9d9d9;
@@ -71,10 +72,6 @@
   flex-shrink: 0;
 }
 
-.text {
-  display: flex;
-  flex-direction: column;
-}
 
 .author {
   font-size: clamp(15px, 0.65rem, 18px);
@@ -83,32 +80,52 @@
   text-align: left;  
 }
 
+.comment-info {
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+}
+
 .id-with-time {
-  color: rgba(219, 219, 219, 0.8);
   font-size: clamp(10px, 0.65vw, 12px);
   letter-spacing: 0.05em;
 
   font-weight: 400;
+  gap: 0.5em;
+
   text-align: left;
   white-space: nowrap;
-
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.5em;
+  color: rgba(219, 219, 219, 0.8);
 }
+.comment-likes {
+  display: flex;
 
+  gap: 0.5em;
+  margin-left: auto;
+
+  flex-direction: row;
+  align-items: center;
+  font-size: clamp(10px, 0.65vw, 12px);
+  letter-spacing: 0.05em;
+}
+.cm-like-count {
+  font-size: 0.9rem;
+  display: inline-block;
+}
 .show-count {
+  gap: 1.5rem;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
 }
 
 .chats {
+  gap: 0.5em;
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.5em;
 }
 
 .chat {
@@ -118,19 +135,20 @@
 
 .chat-count {
   font-size: clamp(15px, 0.65rem, 18px);
-  /*폰트 사이즈 조절 필요*/
 }
 
 .likes {
+  gap: 0.5em;
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.5em;
 }
 
 .heart {
   width: 1.5rem;
   flex-shrink: 0;
+  object-fit: contain;
+  vertical-align: middle;
 }
 
 .like-count {
@@ -138,10 +156,10 @@
 }
 
 .bookmarks {
+  gap: 0.5em;
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.5em;
 }
 
 .book-open {
@@ -156,8 +174,8 @@
 .show-text {
   font-size: clamp(15px, 0.65rem, 18px);
   font-weight: 400;
-  text-align: left;
 
+  text-align: left;
   padding-right: 1.5rem;
   padding-left: 1.5rem;
 }
@@ -168,9 +186,9 @@
 }
 
 .tag-list {
-  color: #ffc400;
   font-size: clamp(15px, 0.65rem, 18px);
   text-align: right;
+  color: #ffc400;
 }
 
 .description {
@@ -178,15 +196,15 @@
 }
 
 .comment-desc {
+  padding-top: 2rem;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+  gap: 0.5em;
+
   display: flex;
   flex-direction: row;
   align-items: center;
   align-self: flex-start;
-  gap: 0.5em;
-
-  padding-top: 2rem;
-  padding-right: 1.5rem;
-  padding-left: 1.5rem;
 }
 
 .comment-explain {
@@ -198,9 +216,9 @@
 
 .comment-container {
   width: calc(100% - 3rem);
+
   border-radius: 0.5rem;
   border: 1px solid #000000;
-
   display: flex;
   flex-direction: column;
 }
@@ -208,33 +226,36 @@
 .comment-textarea {
   width: 100%;
 
-  display: flex;
-  align-items: center;
   padding: 1rem;
   gap: 1rem;
+
+  display: flex;
+  align-items: center;
   border-bottom: 1px solid #000000;
 }
 
 .comment-input {
+  font-size: clamp(15px, 0.65rem, 18px);
   width: 100%;
+
   padding: 0.5rem 1rem;
   border: 1px solid #000000;
   border-radius: 0.5rem;
-  font-size: clamp(15px, 0.65rem, 18px);
 }
 .comment-push {
-  background-color: #ffc400;
-
   font-size: clamp(15px, 0.65rem, 18px);
 
   padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
   aspect-ratio: 2 / 1;
   margin-left: auto;
+
+  border-radius: 0.5rem;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #ffc400;
+
 }
 
 .comment-list {
@@ -246,10 +267,9 @@
 
 .comment-item {
   font-size: clamp(15px, 0.65rem, 18px);
-
   width: 100%;
+
   display: flex;
-  align-items: center;
   padding: 0.5rem;
   border-top: 1px solid #000000;
 }
@@ -262,16 +282,21 @@
   font-size: clamp(15px, 0.65rem, 18px);
   font-weight: 400;
   letter-spacing: 0.05em;
-  text-align: left;  
+  text-align: left;
+  
+  word-break: break-word;
+  white-space: normal;
+  flex-wrap: wrap;
 }
 
 .reply-item {
   font-size: clamp(15px, 0.65rem, 18px);
-
   width: 100%;
-  display: flex;
-  align-items: center;
+
   padding: 0.5rem;
   padding-left: 3rem;
-  border-top: 1px solid #000000;
+
+  display: flex;
+  align-items: center;
+  border-top: 1px solid hsl(0, 0%, 0%);
 }

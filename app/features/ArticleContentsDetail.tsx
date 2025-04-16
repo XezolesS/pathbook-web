@@ -55,10 +55,16 @@ export default function ArticleContents() {
               <div className="writer">
                 <div className="profile-pic"></div>
                 <div className="space">
-                  <div className="text">댓글달아요</div>
-                  <div className="id-with-time">
-                    <div className="id">@user_id</div>
-                    <div className="time">2025/01/23 12:34 PM</div>
+                  <div className="text">댓글달아요. 가끔은 이런 긴 댓글도 달 수 있잖아요? 그럴 때 칸과 박스가 어떻게 변하는지, 글씨가 넘치지는 않는지 확인할 필요가 있잖아요? </div>
+                  <div className="comment-info">
+                    <div className="id-with-time">
+                      <div className="id">@user_id</div>
+                      <div className="time">2025/01/23 12:34 PM</div>
+                    </div>
+                    <div className="comment-likes">
+                      <img className="heart" src=".\app\features\assets\heart.svg" />
+                      <div className="cm-like-count">45</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -67,10 +73,16 @@ export default function ArticleContents() {
               <div className="writer">
                 <div className="profile-pic"></div>
                 <div className="space">
-                  <div className="text">답글달아요</div>
-                  <div className="id-with-time">
-                    <div className="id">@user_id</div>
-                    <div className="time">2025/01/23 12:34 PM</div>
+                  <div className="text">답글달아요 근데 댓글이 길지 않으면?</div>
+                  <div className="comment-info">
+                    <div className="id-with-time">
+                      <div className="id">@user_id</div>
+                      <div className="time">2025/01/23 12:34 PM</div>
+                    </div>
+                    <div className="comment-likes">
+                      <img className="heart" src=".\app\features\assets\heart.svg" />
+                      <div className="cm-like-count">5</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -80,9 +92,15 @@ export default function ArticleContents() {
                 <div className="profile-pic"></div>
                 <div className="space">
                   <div className="text">댓글달아요</div>
-                  <div className="id-with-time">
-                    <div className="id">@user_id</div>
-                    <div className="time">2025/01/23 12:34 PM</div>
+                  <div className="comment-info">
+                    <div className="id-with-time">
+                      <div className="id">@user_id</div>
+                      <div className="time">2025/01/23 12:34 PM</div>
+                    </div>
+                    <div className="comment-likes">
+                      <img className="heart" src=".\app\features\assets\heart.svg" />
+                      <div className="cm-like-count">1</div>
+                    </div>
                   </div>
                 </div>
               </div>
