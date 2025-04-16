@@ -26,7 +26,8 @@
 .frame {
   width: 95%;
   max-width: 760px;
-  border-radius: 1.5em;
+  border-radius: 0.5rem;
+  border: 1px solid #000000;
 }
 
 .subject {
@@ -34,9 +35,7 @@
   
   width: 100%;
   padding: 1rem 1rem;
-  border: 1px solid #000000;
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
+  border-bottom: 1px solid #000000;
 }
 
 .tag-list {
@@ -44,28 +43,12 @@
   font-weight: 400;
   width: 100%;
   padding: 0.3rem 1rem;
-  border: 1px solid #000000;
-}
-
-#editor {
-  border: 1px solid #000000;
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-}
-
-.ql-toolbar {
-  border: 1px solid #000000 !important;
-}
-
-#editor .ql-editor {
-  color: hsl(0, 0%, 0%);
-  width: 90%;
-  padding: 10px;
-  min-height: 200px; 
+  border-bottom: 1px solid #000000;
 }
 
 .button-container {
   width: 95%;
+  max-width: 760px;
   display: flex;
   justify-content: flex-end;
 }
