@@ -8,5 +8,10 @@ export default [
   route("register", "./features/Register.tsx"),
   route("reset-password-request","./features/ResetPasswordRequest.tsx"),
   route("reset-password","./features/ResetPassword.tsx"),
+  // DEBUG ONLY
+  route("article-write", "./features/ArticleWrite.tsx"),
+  route("article-contents", "./features/ArticleContents.tsx"),
+  route("article-contents-detail", "./features/ArticleContentsDetail.tsx"),
+  
   route("main","./features/MainPage.tsx"),
 ] satisfies RouteConfig;
