@@ -1,7 +1,11 @@
 import './ArticleWriteStyle.css';
 import RichTextEditor from './component/RichTextEditor';
 
-export default function ArticleWrite() {
+interface ArticleWriteDetailProps{
+  cancelOnclick: () => void;
+}
+
+export default function ArticleWrite(Details: ArticleWriteDetailProps) {
   return (
     <>
       <div className="article-write-frame">
@@ -13,8 +17,9 @@ export default function ArticleWrite() {
           <RichTextEditor />
         </div>
         <div className="button-container">
-          <button className="submit">작성하기</button>
-        </div>
+            <button className="cancel" onClick={Details.cancelOnclick}>작성취소</button>
+            <button className="submit">작성하기</button>
+          </div>
       </div>
     </>
   )
