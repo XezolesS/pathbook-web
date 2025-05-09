@@ -9,12 +9,28 @@ import book_svg from './assets/book.svg'
 import menu_svg from './assets/menu.svg'
 import Profile from './Profile'
 import Anonymity from './Anonymity'
+import ArticleWrite from './ArticleWrite'
+import ArticleContentsDetail from './ArticleContentsDetail'
+import ArticleContents from './ArticleContents.tsx'
+
+import articleList from './data/testData.json';
 
 export default function Main() {
+  const [selectedArticleID, setSelectedArticleID] = useState<number | null>(null);
+  const selectedData = articleList.find(item => item.articleID === selectedArticleID);
   const menuRef = useRef<HTMLDivElement | null>(null)
   const [selectedMenu, setSelectedMenu] = useState('menu-home')
-
+  const [showWrite, setShowWrite] = useState(false)
+  const [showContentsDetail, setContentsDetail] = useState(false)
   useEffect(() => {
+    // 뒤로가기 무효화
+    history.pushState(null, '', location.href);
+    const handlePopState = (e: PopStateEvent) => {
+      location.reload();
+    };
+    window.addEventListener('popstate', handlePopState);
+
+
     const handleScroll = () => {
       if (!menuRef.current) return;
       const menuHeight = menuRef.current.offsetHeight;
@@ -27,6 +43,7 @@ export default function Main() {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('popstate', handlePopState);
     }
   }, [])
 
@@ -53,16 +70,69 @@ export default function Main() {
               <span>{item.label}</span>
             </div>
           ))}
-
         </div>
       </div>
 
       <div className='main-content-container'>
         <div className='content-head'>
-          <input className='search-textbox'></input>
-          <img className='search-button' src={search_svg}></img>
-          <img className='write-button' src={write_svg}></img>
+          <input className='search-textbox' />
+          <img className='search-button' src={search_svg} alt='search' />
+          <img className='write-button' src={write_svg} alt='write' onClick={() => {setShowWrite(prev => !prev);}}/>
         </div>
+
+        {/*여기 아래 부터 동적 컴포넌트 영역*/}
+
+        {/*글 작성 컴포넌트*/}
+        <div className='articlewrite-container' style={{ display: showWrite ? 'block' : 'none' }}>
+          <ArticleWrite 
+            cancelOnclick={() => setShowWrite(false)}
+          />
+          
+        </div>
+
+        {/*콘텐츠 뷰 컴포넌트*/}
+        <div className='article-contents' onClick={() => setContentsDetail(true)} style={{ display: !showContentsDetail&&!showWrite ? 'block' : 'none' }}>
+          {articleList.slice(0, 3).map(article => (
+            <div key={article.articleID} onClick={() => {
+              setSelectedArticleID(article.articleID);
+              setContentsDetail(true);
+            }}>
+              <ArticleContents
+                title={article.title}
+                writerNickname={article.writerNickname}
+                writeTime={article.writeTime}
+                tagList={article.tagList}
+                description={article.description}
+                writerId={article.writerId}
+                chat={article.chat}
+                like={article.like}
+                bookmark={article.bookmark}
+              />
+            </div>
+          ))}
+        </div>
+        
+
+        {/*작성된 글 컴포넌트 */}
+        <div className='article-detail-contents' style={{ display: showContentsDetail&&!showWrite ? 'block' : 'none' }}>
+        {selectedData && (
+          <>
+          <ArticleContentsDetail
+            title={selectedData.title}
+            writerNickname={selectedData.writerNickname}
+            writeTime={selectedData.writeTime}
+            tagList={selectedData.tagList}
+            description={selectedData.description}
+            writerId={selectedData.writerId}
+            chat={selectedData.chat}
+            like={selectedData.like}
+            bookmark={selectedData.bookmark}
+            cancelOnclick={() => setContentsDetail(false)}
+          />
+          </>
+        )}
+        </div>
+
       </div>
     </div>
   )
