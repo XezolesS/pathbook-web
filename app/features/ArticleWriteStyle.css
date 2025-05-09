@@ -1,62 +1,96 @@
 .article-write-frame {
   width: 100%;
   height: auto;
-  
+
+  padding: 1rem;
+
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: transparent;
-  padding: 1rem;
   gap: 1rem;
 }
 
 .draw-path {
-  background-image: url('./app/features/assets/image/samplepic3.png');
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  max-width: 800px;
-  aspect-ratio: 2 / 1; 
-  
+  width: 95%;
+  height: auto;
+
   border-radius: 0.5rem;
   border: 1px solid #000000;
   position: relative;
+  background-image: url('./app/features/assets/image/samplepic3.png');
+  background-size: cover;
+  background-position: center;
+  aspect-ratio: 2 / 1;
 }
 
 .frame {
   width: 95%;
-  max-width: 760px;
+  height: auto;
+
   border-radius: 0.5rem;
   border: 1px solid #000000;
+  aspect-ratio: 5 / 3;
 }
 
 .subject {
-  font-weight: 600;
-  
   width: 100%;
+
   padding: 1rem 1rem;
+
+  font-weight: 600;
   border-bottom: 1px solid #000000;
 }
 
 .tag-list {
+  width: 100%;
+
+  padding: 0.3rem 1rem;
+
   color: #ffc400;
   font-weight: 400;
-  width: 100%;
-  padding: 0.3rem 1rem;
   border-bottom: 1px solid #000000;
 }
 
 .button-container {
   width: 95%;
-  max-width: 760px;
+
   display: flex;
   justify-content: flex-end;
+  gap: 1rem;
 }
 
 .submit {
-  background: #ffc400;
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  position: relative;
+  width: 15rem;
+  height: auto;
+
+  padding: 0.5rem;
+
+  font-size: clamp(12px, 1rem, 20px);
+  font-weight: bold;
+  text-align: center;
+  background-color: #FFC300;
+  border-radius: clamp(1px, 0.5rem, 10px);
+}
+
+.submit:hover {
+  cursor: pointer;
+}
+
+.cancel {
+  width: 15rem;
+  height: auto;
+
+  padding: 0.5rem;
+
+  font-size: clamp(12px, 1rem, 20px);
+  font-weight: bold;
+  text-align: center;
+  background-color: #FFC300;
+  border-radius: clamp(1px, 0.5rem, 10px);
+}
+
+.cancel:hover {
+  cursor: pointer;
 }
