@@ -1,5 +1,5 @@
 import "./ArticleContentsDetailStyle.css";
-import { formatCountNumber } from './script/count';
+import { formatCountNumber } from '../scripts/count';
 
 interface ArticleContentsDetailProps {
   writerNickname: string;

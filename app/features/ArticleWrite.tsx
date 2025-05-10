@@ -1,5 +1,5 @@
 import './ArticleWriteStyle.css';
-import RichTextEditor from './component/RichTextEditor';
+import RichTextEditor from '../components/RichTextEditor';
 
 interface ArticleWriteDetailProps{
   cancelOnclick: () => void;

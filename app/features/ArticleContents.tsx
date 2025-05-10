@@ -1,5 +1,5 @@
 import "./ArticleContentsStyle.css";
-import { formatCountNumber } from './script/count';
+import { formatCountNumber } from '../scripts/count';
 
 interface ArticleContentsProps{
   writerNickname: string;
@@ -35,15 +35,15 @@ export default function ArticleContents(Details: ArticleContentsProps) {
           </div>
           <div className="show-count">
             <div className="chats">
-              <img className="chat" src=".\app\features\assets\chat.svg" />
+              <img className="chat" src=".\app\assets\chat.svg" />
               <div className="chat-count">{formatCountNumber(Details.chat)}</div> 
             </div>
             <div className="likes">
-              <img className="heart" src=".\app\features\assets\heart.svg" />
+              <img className="heart" src=".\app\assets\heart.svg" />
               <div className="like-count">{formatCountNumber(Details.like)}</div>
             </div>
             <div className="bookmarks">
-              <img className="book-open" src=".\app\features\assets\book-open.svg" />
+              <img className="book-open" src=".\app\assets\book-open.svg" />
               <div className="bookmark-count">{formatCountNumber(Details.bookmark)}</div>
             </div>
               
