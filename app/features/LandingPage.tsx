@@ -2,7 +2,7 @@ import './LandingPageStyle.css'
 import Details from './Details' 
 import LandingContentsViewer from './LandingContentsViewer'
 import Welcome from './Welcome'
-import textLogo from './assets/textLogo.png'
+import textLogo from '../assets/textLogo.png'
 
 export default function LandingPage() {
   return (

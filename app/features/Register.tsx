@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect} from 'react';
 import './RegisterStyle.css';
-import textLogo from './assets/textLogo.png'
+import textLogo from '../assets/textLogo.png'
 
 export default function Register() {
   const [password, setPassword] = useState('');

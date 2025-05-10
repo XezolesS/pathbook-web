@@ -15,7 +15,7 @@
   border-radius: 1.5em;
   position: relative;
 
-  background-image: url('./app/features/assets/image/samplepic3.png');
+  background-image: url('./app/assets/image/samplepic3.png');
   background-size: cover;
   background-position: center;
 }

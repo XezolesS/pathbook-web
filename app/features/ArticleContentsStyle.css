@@ -2,37 +2,35 @@
   width: 100%;
   height: auto;
 
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-right: 5rem;
+  padding-left: 5rem;
+
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: transparent;
-  padding: 1rem;
   gap: 1rem;
 }
 
 .map {
-  background-image: url('./app/features/assets/image/samplepic3.png');
+  width: 100%;
 
+  background-image: url('./app/assets/image/samplepic3.png');
   background-size: cover;
   background-position: center;
-  width: 100%;
   max-width: 800px;
   aspect-ratio: 2 / 1;
-
   border-radius: 0.5rem;
   border: 1px solid #000000;
   box-sizing: border-box;
-
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1.5rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-
   position: relative;
 }
+
 .map::before {
   content: '';
   position: absolute;
@@ -40,32 +38,41 @@
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 0;
 }
+
 .map > * {
   position: relative;
   z-index: 1;
 }
 
 .subject {
-  font-weight: 700;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+  width: calc(100% - 2rem);
 
+  margin-left: 1rem;
+  margin-right: 1rem;
+
+  font-weight: bold;
+  font-size: 1.2rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .bottom-container {
+  margin-top: auto;
+
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
   display: flex;
   flex-direction: column;
   font-weight: 400;
-  margin-top: auto;
+  background-color: rgba(220, 220, 220, 0.7);
 }
 
 .tag-list {
-  color: #ffc400;
+  color: #ffc300;
   font-size: clamp(15px, 0.65rem, 18px);
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -73,8 +80,6 @@
 
 .description {
   font-size: clamp(15px, 0.65rem, 18px);
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
@@ -86,12 +91,13 @@
   width: 100%;
   max-width: 800px;
 
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding-right: 1.5rem;
-  padding-left: 1.5rem;
 }
 
 .writer {
@@ -104,8 +110,7 @@
   width: clamp(30px, 1.2vw, 35px);
 
   aspect-ratio: 1 / 1;
-
-  background: #d9d9d9;
+  background: darkgray;
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -120,12 +125,11 @@
   font-weight: 400;
   letter-spacing: 0.05em;
   text-align: left;
-
   font-family: "NotoSansKr-Regular", sans-serif;
 }
 
 .id {
-  color: rgba(219, 219, 219, 0.8);
+  color: darkgray;
   font-family: "NotoSansKr-Regular", sans-serif;
   font-size: clamp(10px, 0.65vw, 12px);
   letter-spacing: 0.05em;
@@ -135,9 +139,35 @@
 }
 
 .show-count {
+  width: 100%;
+
+  gap: 1rem;
   display: flex;
-  align-items: center;
-  gap: 1.5rem;
+  justify-content: flex-end;
+}
+
+.chat {
+  width: 1rem;
+
+  flex-shrink: 0;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.heart {
+  width: 1rem;
+
+  flex-shrink: 0;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.book-open {
+  width: 1rem;
+
+  flex-shrink: 0;
+  object-fit: contain;
+  vertical-align: middle;
 }
 
 .chats {
@@ -147,14 +177,8 @@
   gap: 0.5em;
 }
 
-.chat {
-  width: 1.5rem;
-  flex-shrink: 0;
-}
-
 .chat-count {
   font-size: clamp(15px, 0.65rem, 18px);
-  /*폰트 사이즈 조절 필요*/
 }
 
 .likes {
@@ -162,11 +186,6 @@
   flex-direction: row;
   align-items: center;
   gap: 0.5em;
-}
-
-.heart {
-  width: 1.5rem;
-  flex-shrink: 0;
 }
 
 .like-count {
@@ -178,11 +197,6 @@
   flex-direction: row;
   align-items: center;
   gap: 0.5em;
-}
-
-.book-open {
-  width: 1.5rem;
-  flex-shrink: 0;
 }
 
 .bookmark-count {
