@@ -1,6 +1,7 @@
 import LoginRequest from "../api/pathbook/requests/auth/LoginRequest";
 import "./LoginStyle.css";
 import textLogo from "../assets/textLogo.png";
+import { AuthRedirect } from "./AuthRedirect";
 
 export default function Login() {
   async function loginAction(formData: FormData) {
@@ -19,7 +20,7 @@ export default function Login() {
   }
 
   return (
-    <>
+    <AuthRedirect>
       <div className='logo'><a href='./#'><img src={textLogo}></img></a></div>
       <div className='login'>
         <div className='login-container'>
@@ -64,7 +65,7 @@ export default function Login() {
         <a href='/register'>회원가입</a>
         <a href='/reset-password-request'>비밀번호를 잊어버렸어요</a>
       </div>
-    </>
+    </AuthRedirect>
   )
 }
   
