@@ -1,6 +1,6 @@
-import LoginRequest from "../api/pathbook/requests/LoginRequest";
+import LoginRequest from "../api/pathbook/requests/auth/LoginRequest";
 import "./LoginStyle.css";
-import textLogo from "./assets/textLogo.png";
+import textLogo from "../assets/textLogo.png";
 
 export default function Login() {
   async function loginAction(formData: FormData) {
