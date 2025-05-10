@@ -1,6 +1,6 @@
 
 import './MainPageStyle.css'
-import edit_svg from './assets/edit.svg'
+import edit_svg from '../assets/edit.svg'
 
 export default function Main() {
   return (

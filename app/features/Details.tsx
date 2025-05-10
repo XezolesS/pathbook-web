@@ -2,12 +2,12 @@ import './DetailsStyle.css';
 import DescriptionBubble from './DescriptionBubble';
 
 //svg, png, jpg등 경로 수정은 다음 import 경로를 수정해주세요.
-import arrow1_colored from './assets/arrow1_colored.svg';
-import arrow2_colored from './assets/arrow2_colored.svg';
-import sample_pic1_a from './assets/image/samplepic1_a.jpg';
-import sample_pic1_b from './assets/image/samplepic1.png';
-import sample_pic2_a from './assets/image/samplepic2_a.jpg';
-import sample_pic2_b from './assets/image/samplepic2.png';
+import arrow1_colored from '../assets/arrow1_colored.svg';
+import arrow2_colored from '../assets/arrow2_colored.svg';
+import sample_pic1_a from '../assets/image/samplepic1_a.jpg';
+import sample_pic1_b from '../assets/image/samplepic1.png';
+import sample_pic2_a from '../assets/image/samplepic2_a.jpg';
+import sample_pic2_b from '../assets/image/samplepic2.png';
 
 export default function Details() {
   return (
