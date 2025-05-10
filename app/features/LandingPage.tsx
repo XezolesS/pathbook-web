@@ -1,13 +1,13 @@
-import './LandingPageStyle.css'
-import Details from './Details' 
-import LandingContentsViewer from './LandingContentsViewer'
-import Welcome from './Welcome'
 import textLogo from '../assets/textLogo.png'
+import { AuthRedirect } from "./AuthRedirect"
+import Details from './Details'
+import LandingContentsViewer from './LandingContentsViewer'
+import './LandingPageStyle.css'
+import Welcome from './Welcome'
 
 export default function LandingPage() {
   return (
-    <>
-      
+    <AuthRedirect>
       <div className='landing-main-container'>
         <div className='landing-container'>
           <div className='welcome'>
@@ -39,6 +39,6 @@ export default function LandingPage() {
       <div className='footer-container'>
         footer
       </div>
-    </>
+    </AuthRedirect>
   )
 }

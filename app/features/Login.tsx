@@ -1,14 +1,31 @@
-import './LoginStyle.css';
-import textLogo from '../assets/textLogo.png'
+import LoginRequest from "../api/pathbook/requests/auth/LoginRequest";
+import "./LoginStyle.css";
+import textLogo from "../assets/textLogo.png";
+import { AuthRedirect } from "./AuthRedirect";
 
 export default function Login() {
+  async function loginAction(formData: FormData) {
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    const request = new LoginRequest(email, password);
+
+    try {
+      const response = await request.send();
+      console.debug(response);
+    } catch (error) {
+      console.error("Login failed:", error);
+      alert("로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.");
+    }
+  }
+
   return (
-    <>
+    <AuthRedirect>
       <div className='logo'><a href='./#'><img src={textLogo}></img></a></div>
       <div className='login'>
         <div className='login-container'>
           <div className='login-text'>로그인</div>
-          <form className='login-form' action='/login' method='post'>
+          <form className='login-form' action={loginAction}>
             <div className='login-form-section'>
               <label htmlFor='email'>이메일</label>
               <input
@@ -48,7 +65,7 @@ export default function Login() {
         <a href='/register'>회원가입</a>
         <a href='/reset-password-request'>비밀번호를 잊어버렸어요</a>
       </div>
-    </>
+    </AuthRedirect>
   )
 }
   
