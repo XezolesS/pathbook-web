@@ -8,7 +8,7 @@ import { HTTPRequestError } from "../errors/HTTPRequestError";
  * 생성자에서 API 엔드포인트 요청 정보를 설정합니다.
  *
  * @example
- * export class MyAPIRequest extends HTTPRequest<MyAPIResponse> {
+ * class MyAPIRequest extends HTTPRequest<MyAPIResponse> {
  *   constructor(username: string) {
  *     super("/my-request", HTTPMethod.GET);
  *
@@ -18,7 +18,8 @@ import { HTTPRequestError } from "../errors/HTTPRequestError";
  *   protected async parseSuccessResponse(
  *     response: Response
  *   ): Promise<MyAPIResponse> {
- *     return await response.text();
+ *     const data = await response.json();
+ *     return data as MyAPIResponse;
  *   }
  * }
  */
