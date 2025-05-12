@@ -1,20 +1,25 @@
 import { redirect } from "react-router";
 import textLogo from "../assets/textLogo.png";
-import { checkLoggedIn } from "../scripts/auth";
+import { parseCookies } from "../scripts/cookie";
 import type { Route } from "./+types/LandingPage";
 import Details from "./Details";
 import LandingContentsViewer from "./LandingContentsViewer";
 import "./LandingPageStyle.css";
 import Welcome from "./Welcome";
 
-export async function loader() {
-  let isAuthenticated = checkLoggedIn();
+export async function loader({
+  request
+}: Route.LoaderArgs) {
+  const cookieHeader = request.headers.get("Cookie");
+  const cookies = parseCookies(cookieHeader);
 
-  if (isAuthenticated) {
+  const isLoggedIn = cookies.get("logged_in");
+  
+  if (isLoggedIn) {
     throw redirect("/main");
   }
 
-  return { isAuthenticated: isAuthenticated }
+  return { isLoggedIn: isLoggedIn }
 }
 
 export default function LandingPage({
