@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './DetailsStyle.css';
-import description_bubble_head from './assets/description-bubble-head.svg';
+import description_bubble_head from '../assets/description-bubble-head.svg';
 
 interface Props {
   title: string;

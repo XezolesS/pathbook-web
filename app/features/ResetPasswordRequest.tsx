@@ -1,5 +1,5 @@
 import './ResetPasswordStyle.css';
-import textLogo from './assets/textLogo.png'
+import textLogo from '../assets/textLogo.png'
 
 export default function ResetPasswordRequest() {
   const handleSubmit = (e: React.FormEvent) => {
