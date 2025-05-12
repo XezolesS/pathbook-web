@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import UserRequest from "../api/pathbook/requests/auth/UserRequest.ts";
+import type { User } from "../api/pathbook/types/User";
 import book_svg from "../assets/book.svg";
 import home_svg from "../assets/home.svg";
 import menu_svg from "../assets/menu.svg";
@@ -6,25 +8,66 @@ import ring_svg from "../assets/ring.svg";
 import search_svg from "../assets/search.svg";
 import star_svg from "../assets/star.svg";
 import write_svg from "../assets/write.svg";
-import Anonymity from "./Anonymity";
+import articleList from "../mock/ArticleData.json";
+import { parseCookies } from "../scripts/cookie";
+import AnonymousProfileComponent from "./AnonymousProfile";
 import ArticleContents from "./ArticleContents.tsx";
 import ArticleContentsDetail from "./ArticleContentsDetail";
 import ArticleWrite from "./ArticleWrite";
+import type { Route } from "./feature/+types/Main";
 import "./MainPageStyle.css";
+import UserProfileComponent from "./UserProfile.tsx";
 
-import articleList from "../mock/ArticleData.json";
+export async function loader({ request }: Route.ClientLoaderArgs) {
+  const cookieHeader = request.headers.get("Cookie");
+  const cookies = parseCookies(cookieHeader);
 
-export default function Main() {
+  const loggedIn = cookies.get("logged_in");
+
+  return { loggedIn: loggedIn };
+}
+
+export default function Main({ loaderData }: Route.ComponentProps) {
+  const { loggedIn } = loaderData;
+
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [selectedArticleID, setSelectedArticleID] = useState<number | null>(
     null
   );
-  const selectedData = articleList.find(
-    (item) => item.articleID === selectedArticleID
-  );
-  const menuRef = useRef<HTMLDivElement | null>(null);
   const [selectedMenu, setSelectedMenu] = useState("menu-home");
   const [showWrite, setShowWrite] = useState(false);
   const [showContentsDetail, setContentsDetail] = useState(false);
+
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
+  const selectedData = articleList.find(
+    (item) => item.articleID === selectedArticleID
+  );
+
+  // 유저 불러오기
+  useEffect(() => {
+    const fetchUser = async () => {
+      console.log(loggedIn);
+      if (!loggedIn) {
+        setCurrentUser(null);
+        return;
+      }
+
+      try {
+        const userRequest = new UserRequest();
+        const userResponse = await userRequest.send();
+        
+        console.log(userResponse);
+  
+        setCurrentUser(userResponse.user);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchUser();
+  }, [])
+
   useEffect(() => {
     // 뒤로가기 무효화
     history.pushState(null, "", location.href);
@@ -47,13 +90,17 @@ export default function Main() {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("popstate", handlePopState);
     };
-  }, []);
+  });
 
   return (
     <div className="mainpage">
       <div className="main-menu-container">
         <div className="menu-container" ref={menuRef}>
-          <Anonymity /> {/* 로그인 세션이 존재하면, 여기에 <Profile />호출*/}
+          {currentUser ? (
+            <UserProfileComponent user={currentUser} />
+          ) : (
+            <AnonymousProfileComponent />
+          )}
           {[
             { name: "menu-home", icon: home_svg, label: "===========" },
             { name: "menu-star", icon: star_svg, label: "===========" },

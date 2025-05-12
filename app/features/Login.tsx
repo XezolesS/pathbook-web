@@ -1,14 +1,54 @@
-import './LoginStyle.css';
-import textLogo from '../assets/textLogo.png'
+import { redirect, useNavigate } from "react-router";
+import LoginRequest from "../api/pathbook/requests/auth/LoginRequest";
+import textLogo from "../assets/textLogo.png";
+import { parseCookies } from "../scripts/cookie";
+import type { Route } from "./features/+types/Login";
+import "./LoginStyle.css";
 
-export default function Login() {
+export async function loader({
+  request
+}: Route.LoaderArgs) {
+  const cookieHeader = request.headers.get("Cookie");
+  const cookies = parseCookies(cookieHeader);
+
+  const isLoggedIn = cookies.get("logged_in");
+  
+  if (isLoggedIn) {
+    throw redirect("/main");
+  }
+
+  return { isLoggedIn: isLoggedIn }
+}
+
+export default function Login({
+  loaderData
+}: Route.ComponentProps) {
+  const navigate = useNavigate();
+
+  const handleLoginAction = async (formData: FormData) => {
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    const request = new LoginRequest(email, password);
+
+    try {
+      const response = await request.send();
+      console.debug(response);
+
+      navigate("/main");
+    } catch (error) {
+      console.error("Login failed:", error);
+      alert("로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.");
+    }
+  }
+
   return (
     <>
       <div className='logo'><a href='./#'><img src={textLogo}></img></a></div>
       <div className='login'>
         <div className='login-container'>
           <div className='login-text'>로그인</div>
-          <form className='login-form' action='/login' method='post'>
+          <form className='login-form' action={handleLoginAction}>
             <div className='login-form-section'>
               <label htmlFor='email'>이메일</label>
               <input
