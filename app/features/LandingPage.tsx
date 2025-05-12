@@ -1,6 +1,6 @@
 import { redirect } from "react-router";
 import textLogo from "../assets/textLogo.png";
-import { checkAuthToken } from "../scripts/auth";
+import { checkLoggedIn } from "../scripts/auth";
 import type { Route } from "./+types/LandingPage";
 import Details from "./Details";
 import LandingContentsViewer from "./LandingContentsViewer";
@@ -8,7 +8,7 @@ import "./LandingPageStyle.css";
 import Welcome from "./Welcome";
 
 export async function loader() {
-  let isAuthenticated = checkAuthToken();
+  let isAuthenticated = checkLoggedIn();
 
   if (isAuthenticated) {
     throw redirect("/main");

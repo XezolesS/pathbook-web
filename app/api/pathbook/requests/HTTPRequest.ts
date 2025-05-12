@@ -4,7 +4,7 @@ import { HTTPRequestError } from "../errors/HTTPRequestError";
 
 /**
  * HTTPRequest 추상 클래스
- * 
+ *
  * 생성자에서 API 엔드포인트 요청 정보를 설정합니다.
  *
  * @example
@@ -26,11 +26,11 @@ import { HTTPRequestError } from "../errors/HTTPRequestError";
 export default abstract class HTTPRequest<ResponseType> {
   private path: string;
   private method: HTTPMethod;
+  private credentials: RequestCredentials | undefined;
   private header: Headers;
   private body: Record<string, any> | null;
   private queryParams: URLSearchParams | null;
   private pathParams: Array<string> | null;
-  protected credentials: RequestCredentials | undefined;
 
   constructor(path: string, method: HTTPMethod) {
     this.path = path;
@@ -40,6 +40,15 @@ export default abstract class HTTPRequest<ResponseType> {
     this.queryParams = null;
     this.pathParams = null;
     this.credentials = undefined;
+  }
+
+  /**
+   * Credentials 값을 설정합니다.
+   *
+   * @param credentials Credentials 값. ("include" | "omit" | "same-origin")
+   */
+  protected setCredentials(credentials: RequestCredentials): void {
+    this.credentials = credentials;
   }
 
   /**

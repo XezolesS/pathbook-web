@@ -1,19 +1,8 @@
-import UserRequest from "../api/pathbook/requests/auth/UserRequest";
 import Cookies from "js-cookie";
 
-export async function loadUser() {
-  try {
-    const request = new UserRequest();
-    const user = await request.send();
+export function checkLoggedIn(): boolean {
+  const loggedIn = Cookies.get("logged_in");
+  console.debug(loggedIn);
 
-    return { user };
-  } catch (error) {
-    return { user: null };
-  }
-}
-
-export function checkAuthToken(): boolean {
-  console.debug(Cookies.get("JSESSIONID"));
-
-  return !Cookies.get("JSESSIONID");
+  return loggedIn === "1";
 }

@@ -8,4 +8,4 @@ export type User = {
   accountNonLocked: boolean,
   credentialsNonExpired: boolean,
   enabled: boolean,
-}
+};
