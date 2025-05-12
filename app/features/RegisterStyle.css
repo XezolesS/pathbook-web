@@ -1,14 +1,33 @@
 @keyframes shake {
-  0% { transform: translateX(0); background-color: #FF7D90;}
-  20% { transform: translateX(-5px); background-color: #FF7D90;}
-  40% { transform: translateX(5px); background-color: #FF7D90;}
-  60% { transform: translateX(-5px); background-color: #FF7D90;}
-  80% { transform: translateX(5px); background-color: #FF7D90;}
-  100% { transform: translateX(0); background-color: white;}
+  0% {
+    transform: translateX(0);
+    background-color: #ff7d90;
+  }
+  20% {
+    transform: translateX(-5px);
+    background-color: #ff7d90;
+  }
+  40% {
+    transform: translateX(5px);
+    background-color: #ff7d90;
+  }
+  60% {
+    transform: translateX(-5px);
+    background-color: #ff7d90;
+  }
+  80% {
+    transform: translateX(5px);
+    background-color: #ff7d90;
+  }
+  100% {
+    transform: translateX(0);
+    background-color: white;
+  }
 }
 
-html, body{
-  background-color: #FFFDF8;
+html,
+body {
+  background-color: #fffdf8;
 }
 
 .shake {
@@ -24,7 +43,7 @@ html, body{
   display: flex;
   justify-content: center;
 }
-.logo img{
+.logo img {
   width: 12vw;
   min-width: 150px;
 }
@@ -40,7 +59,7 @@ html, body{
 }
 
 .register-container {
-  background-color: #E6E6E6;
+  background-color: #e6e6e6;
 
   width: 50%;
   max-width: 500px;
@@ -53,7 +72,7 @@ html, body{
   padding-bottom: 1rem;
 
   border-radius: 1rem;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 .register-text {
@@ -68,7 +87,7 @@ html, body{
 }
 
 input:focus {
-  outline: 2px solid #FFC300;
+  outline: 2px solid #ffc300;
 }
 
 .register-form-section {
@@ -93,9 +112,13 @@ input:focus {
 
   margin-top: 3rem;
 
-  background-color: #FFC300;
+  background-color: #ffc300;
   border-radius: 0.5rem;
   cursor: pointer;
+}
+
+.register-form-submit:disabled {
+  background-color: #94928a;
 }
 
 .other-menu-container {
@@ -107,22 +130,27 @@ input:focus {
   color: black;
   font-size: small;
 }
-.other-menu-container a{
+.other-menu-container a {
   color: black;
   text-decoration: underline;
 }
 
-.password-mismatch{
+.password-mismatch {
   font-size: small;
 }
 
-.password-guide{
+.password-guide {
   margin-bottom: 0.5rem;
-  
+
   font-size: small;
 }
 
-.constraint{
-  color: #FF7D90;
+.constraint {
+  color: #ff7d90;
+  font-weight: bold;
+}
+
+.constraint-satisfied {
+  color: #54b961;
   font-weight: bold;
 }
