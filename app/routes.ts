@@ -9,5 +9,5 @@ export default [
   route("reset-password-request", "./features/ResetPasswordRequest.tsx"),
   route("reset-password", "./features/ResetPassword.tsx"),
 
-  route("main", "./features/MainPage.tsx"),
+  route("main", "./pages/Main.tsx"),
 ] satisfies RouteConfig;

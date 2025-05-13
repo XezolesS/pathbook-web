@@ -8,15 +8,15 @@ import ring_svg from "../assets/ring.svg";
 import search_svg from "../assets/search.svg";
 import star_svg from "../assets/star.svg";
 import write_svg from "../assets/write.svg";
+import AnonymousProfileComponent from "../features/AnonymousProfile.tsx";
+import ArticleContents from "../features/ArticleContents.tsx";
+import ArticleContentsDetail from "../features/ArticleContentsDetail.tsx";
+import ArticleWrite from "../features/ArticleWrite.tsx";
+import UserProfileComponent from "../features/UserProfile.tsx";
 import articleList from "../mock/ArticleData.json";
-import { parseCookies } from "../scripts/cookie";
-import AnonymousProfileComponent from "./AnonymousProfile";
-import ArticleContents from "./ArticleContents.tsx";
-import ArticleContentsDetail from "./ArticleContentsDetail";
-import ArticleWrite from "./ArticleWrite";
-import type { Route } from "./feature/+types/Main";
-import "./MainPageStyle.css";
-import UserProfileComponent from "./UserProfile.tsx";
+import { parseCookies } from "../scripts/cookie.ts";
+import "./Main.css";
+import type { Route } from "./pages/+types/Main";
 
 export async function loader({ request }: Route.ClientLoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -27,7 +27,7 @@ export async function loader({ request }: Route.ClientLoaderArgs) {
   return { loggedIn: loggedIn };
 }
 
-export default function Main({ loaderData }: Route.ComponentProps) {
+export default function MainPage({ loaderData }: Route.ComponentProps) {
   const { loggedIn } = loaderData;
 
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -56,9 +56,9 @@ export default function Main({ loaderData }: Route.ComponentProps) {
       try {
         const userRequest = new UserRequest();
         const userResponse = await userRequest.send();
-        
+
         console.log(userResponse);
-  
+
         setCurrentUser(userResponse.user);
       } catch (error) {
         console.error(error);
@@ -66,7 +66,7 @@ export default function Main({ loaderData }: Route.ComponentProps) {
     };
 
     fetchUser();
-  }, [])
+  }, []);
 
   useEffect(() => {
     // 뒤로가기 무효화
