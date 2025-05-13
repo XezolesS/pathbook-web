@@ -8,12 +8,13 @@
   background-color: gray;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   min-width: 1280px;
   height: 100%;
 
-  background-color: #FFFDF8;
+  background-color: #fffdf8;
 }
 
 .landing-main-container {
@@ -72,7 +73,7 @@ html, body {
   justify-content: center;
   align-items: center;
 
-  background-color: #FFD300;
+  background-color: #ffd300;
   aspect-ratio: 4/1;
   border-radius: clamp(12px, 1.5rem, 20px);
 }
