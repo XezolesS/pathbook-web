@@ -84,7 +84,7 @@ export default function LoginPage({ loaderData }: Route.ComponentProps) {
 
       <div className="other-menu-container">
         <a href="/register">회원가입</a>
-        <a href="/reset-password-request">비밀번호를 잊어버렸어요</a>
+        <a href="/forgot-password">비밀번호를 잊어버렸어요</a>
       </div>
     </>
   );

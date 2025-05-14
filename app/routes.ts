@@ -5,8 +5,8 @@ export default [
   
   route("login", "./pages/Login.tsx"),
   route("register", "./pages/Register.tsx"),
-  route("reset-password-request", "./features/ResetPasswordRequest.tsx"),
-  route("reset-password", "./features/ResetPassword.tsx"),
+  route("forgot-password", "./pages/ForgotPassword.tsx"),
+  route("reset-password", "./pages/ResetPassword.tsx"),
 
   route("main", "./pages/Main.tsx"),
   route("home", "./features/Home.tsx"),
