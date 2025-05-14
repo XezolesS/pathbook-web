@@ -1,8 +1,9 @@
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
   min-width: 720px;
-  background-color: #FFFDF8;
+  background-color: #fffdf8;
   display: flex;
   justify-content: center;
 }
@@ -43,7 +44,7 @@ html, body {
   padding: clamp(5px, 0.5rem, 10px);
   padding-top: clamp(10px, 1rem, 15px);
 
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   position: absolute;
   right: 5%;
   border-radius: clamp(5px, 1rem, 10px);
@@ -83,9 +84,8 @@ html, body {
   height: auto;
   aspect-ratio: 1/1;
 
-  
   border-radius: 50%;
-  background-color: #FFC300;
+  background-color: #ffc300;
 }
 
 .menu-item {
@@ -97,7 +97,7 @@ html, body {
   display: flex;
   justify-content: center;
 }
-.menu-item:hover{
+.menu-item:hover {
   cursor: pointer;
 }
 
@@ -107,7 +107,7 @@ html, body {
   margin-left: 5%;
   margin-right: 5%;
 
-  background-color: #B3B3B3;
+  background-color: #b3b3b3;
   border-radius: clamp(5px, 1rem, 10px);
   display: flex;
   justify-content: center;
@@ -115,12 +115,13 @@ html, body {
 }
 
 .menu-item.selected span {
-  background-color: #FFD300;
+  background-color: #ffd300;
 }
 
 .menu-item.selected img {
-  color: #FFD300;
-  filter: brightness(1) saturate(100%) invert(80%) sepia(100%) saturate(750%) hue-rotate(5deg);
+  color: #ffd300;
+  filter: brightness(1) saturate(100%) invert(80%) sepia(100%) saturate(750%)
+    hue-rotate(5deg);
 }
 
 .main-content-container {
@@ -129,7 +130,7 @@ html, body {
 
   padding-top: clamp(20px, 3rem, 100px);
 
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -140,7 +141,7 @@ html, body {
   height: clamp(10px, 10vw, 50px);
 
   margin-bottom: 5rem;
-  
+
   display: flex;
   align-items: center;
   font-size: clamp(12px, 100%, 28px);
@@ -153,7 +154,7 @@ html, body {
 
   padding-left: 2.5%;
 
-  background-color: #BFBFBF;
+  background-color: #bfbfbf;
   border-top-left-radius: clamp(1px, 0.5rem, 10px);
   border-bottom-left-radius: clamp(1px, 0.5rem, 10px);
 }
@@ -165,13 +166,13 @@ input:focus {
 .search-button {
   padding: clamp(1px, 0.5rem, 10px);
 
-  background-color: #BFBFBF;
+  background-color: #bfbfbf;
   height: 100%;
   border-top-right-radius: clamp(1px, 0.5rem, 10px);
   border-bottom-right-radius: clamp(1px, 0.5rem, 10px);
 }
 
-.search-button:hover{
+.search-button:hover {
   cursor: pointer;
 }
 
@@ -183,12 +184,12 @@ input:focus {
   padding: clamp(1px, 0.5rem, 10px);
   margin-left: 2.5%;
 
-  background-color: #FFD300;
+  background-color: #ffd300;
   border-radius: clamp(1px, 0.5rem, 10px);
   background-position: center center;
   background-size: cover;
 }
-.write-button:hover{
+.write-button:hover {
   cursor: pointer;
 }
 
@@ -204,7 +205,7 @@ input:focus {
   text-decoration: underline;
 }
 
-.anonymity-comment{
+.anonymity-comment {
   width: 100%;
 
   text-align: center;
@@ -213,7 +214,7 @@ input:focus {
   margin-bottom: 5%;
 }
 
-.login-button{
+.login-button {
   width: 100%;
 
   margin-bottom: 5%;
@@ -222,15 +223,15 @@ input:focus {
   font-size: clamp(12px, 1vw, 20px);
   font-weight: bold;
   text-align: center;
-  background-color: #FFC300;
+  background-color: #ffc300;
   border-radius: clamp(1px, 0.5rem, 10px);
 }
 
-.login-button:hover{
+.login-button:hover {
   cursor: pointer;
 }
 
-.register-button{
+.register-button {
   width: 100%;
 
   margin-bottom: 5%;
@@ -243,23 +244,23 @@ input:focus {
   border-radius: clamp(1px, 0.5rem, 10px);
 }
 
-.register-button:hover{
+.register-button:hover {
   cursor: pointer;
 }
 
-.articlewrite-container{
+.articlewrite-container {
   width: 90%;
   height: auto;
   aspect-ratio: 3/4;
 }
-.article-contents{
+.article-contents {
   width: 100%;
 }
-.article-contents:hover{
+.article-contents:hover {
   cursor: pointer;
 }
 
-.article-detail-contents{
+.article-detail-contents {
   width: 100%;
 }
 
@@ -276,8 +277,7 @@ input:focus {
     height: auto;
     aspect-ratio: 1/5;
 
-    
-    background-color: #D9D9D9;
+    background-color: #d9d9d9;
     position: absolute;
     right: 5%;
     border-radius: 10px;
@@ -287,14 +287,12 @@ input:focus {
     width: 90%;
     height: 5000px;
 
-    background-color: #D9D9D9;
+    background-color: #d9d9d9;
   }
 
   .content-head {
     width: 80%;
     height: clamp(10px, 10vw, 40px);
-
-    
 
     display: flex;
     align-items: center;
@@ -307,7 +305,7 @@ input:focus {
 
     padding-left: 2.5%;
 
-    background-color: #BFBFBF;
+    background-color: #bfbfbf;
     border-top-left-radius: clamp(1px, 0.5rem, 10px);
     border-bottom-left-radius: clamp(1px, 0.5rem, 10px);
   }
@@ -319,7 +317,7 @@ input:focus {
 
     margin-left: 2.5%;
 
-    background-color: #FFD300;
+    background-color: #ffd300;
     border-radius: clamp(1px, 0.5rem, 10px);
   }
 
@@ -329,7 +327,7 @@ input:focus {
     aspect-ratio: 1/1;
 
     border-radius: 50%;
-    background-color: #FFC300;
+    background-color: #ffc300;
   }
 
   .profile-info {
@@ -344,22 +342,21 @@ input:focus {
     visibility: hidden;
   }
 
-  .anonymity-comment{
+  .anonymity-comment {
     width: 0;
     height: 0;
     visibility: hidden;
   }
 
-  .login-button{
+  .login-button {
     width: 0;
     height: 0;
     visibility: hidden;
   }
 
-  .register-button{
+  .register-button {
     width: 0;
     height: 0;
     visibility: hidden;
   }
-
 }

@@ -1,30 +1,26 @@
 import { redirect } from "react-router";
 import textLogo from "../assets/textLogo.png";
+import Details from "../components/Details";
+import LandingContentsViewer from "../components/PostSlidePreview";
+import Welcome from "../components/Welcome";
 import { parseCookies } from "../scripts/cookie";
-import type { Route } from "./+types/LandingPage";
-import Details from "./Details";
-import LandingContentsViewer from "./LandingContentsViewer";
-import "./LandingPageStyle.css";
-import Welcome from "./Welcome";
+import "./Landing.css";
+import type { Route } from "./pages/+types/Landing";
 
-export async function loader({
-  request
-}: Route.LoaderArgs) {
+export async function loader({ request }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
   const cookies = parseCookies(cookieHeader);
 
   const isLoggedIn = cookies.get("logged_in");
-  
+
   if (isLoggedIn) {
     throw redirect("/main");
   }
 
-  return { isLoggedIn: isLoggedIn }
+  return { isLoggedIn: isLoggedIn };
 }
 
-export default function LandingPage({
-  loaderData,
-}: Route.ComponentProps) {
+export default function LandingPage({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <div className="landing-main-container">

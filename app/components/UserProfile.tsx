@@ -1,7 +1,7 @@
 import LogoutRequest from "../api/pathbook/requests/auth/LogoutRequest";
 import { User } from "../api/pathbook/types/User";
 import edit_svg from "../assets/edit.svg";
-import "./MainPageStyle.css";
+import "../pages/Main.css";
 
 interface UserProfileComponentProps {
   user: User;
@@ -35,7 +35,9 @@ export default function UserProfileComponent({
           </div>
           <div className="profile-options">
             <a href="">내 정보 수정</a>
-            <a href="" onClick={handleLogoutClick}>로그아웃</a>
+            <a href="" onClick={handleLogoutClick}>
+              로그아웃
+            </a>
           </div>
         </div>
       </div>

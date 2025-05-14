@@ -1,4 +1,4 @@
-.article-write-frame {
+.post-write-frame {
   width: 100%;
   height: auto;
 
@@ -19,7 +19,7 @@
   border-radius: 0.5rem;
   border: 1px solid #000000;
   position: relative;
-  background-image: url('./app/assets/image/samplepic3.png');
+  background-image: url("./app/assets/image/samplepic3.png");
   background-size: cover;
   background-position: center;
   aspect-ratio: 2 / 1;
@@ -70,7 +70,7 @@
   font-size: clamp(12px, 1rem, 20px);
   font-weight: bold;
   text-align: center;
-  background-color: #FFC300;
+  background-color: #ffc300;
   border-radius: clamp(1px, 0.5rem, 10px);
 }
 
@@ -87,7 +87,7 @@
   font-size: clamp(12px, 1rem, 20px);
   font-weight: bold;
   text-align: center;
-  background-color: #FFC300;
+  background-color: #ffc300;
   border-radius: clamp(1px, 0.5rem, 10px);
 }
 

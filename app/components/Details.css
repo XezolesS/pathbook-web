@@ -6,7 +6,7 @@
   padding-bottom: clamp(48px, 12rem, 160px);
   margin: clamp(20px, 4rem, 60px);
 
-  border-left: clamp(4px, 1rem, 16px) solid #FFD300;
+  border-left: clamp(4px, 1rem, 16px) solid #ffd300;
 
   display: flex;
   flex-direction: column;
@@ -15,7 +15,8 @@
   position: relative;
 }
 
-.arrow1, .arrow2 {
+.arrow1,
+.arrow2 {
   width: clamp(20px, 5rem, 80px);
   height: auto;
 
@@ -78,7 +79,7 @@
   font-size: clamp(16px, 1.7rem, 28px);
   margin-bottom: clamp(8px, 1rem, 16px);
 
-  color: #FFC400;
+  color: #ffc400;
 }
 
 .description-bubble-br {

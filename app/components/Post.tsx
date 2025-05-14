@@ -1,7 +1,7 @@
-import "./ArticleContentsStyle.css";
-import { formatCountNumber } from '../scripts/count';
+import { formatCountNumber } from "../scripts/count";
+import "./Post.css";
 
-interface ArticleContentsProps{
+interface PostProps {
   writerNickname: string;
   writeTime: string;
   title: string;
@@ -13,16 +13,15 @@ interface ArticleContentsProps{
   bookmark: number;
 }
 
-export default function ArticleContents(Details: ArticleContentsProps) {
+export default function PostComponent(Details: PostProps) {
   return (
     <>
-      <div className="article-contents-frame">
+      <div className="post-frame">
         <div className="map">
           <div className="subject">{Details.title}</div>
           <div className="bottom-container">
             <div className="tag-list">{Details.tagList}</div>
-            <div className="description">{Details.description}
-            </div>
+            <div className="description">{Details.description}</div>
           </div>
         </div>
         <div className="show-detail">
@@ -30,26 +29,33 @@ export default function ArticleContents(Details: ArticleContentsProps) {
             <div className="profile-pic"></div>
             <div className="text">
               <div className="author">{Details.writerNickname}</div>
-              <div className="id">{Details.writerId} · {Details.writeTime}</div>
+              <div className="id">
+                {Details.writerId} · {Details.writeTime}
+              </div>
             </div>
           </div>
           <div className="show-count">
             <div className="chats">
               <img className="chat" src=".\app\assets\chat.svg" />
-              <div className="chat-count">{formatCountNumber(Details.chat)}</div> 
+              <div className="chat-count">
+                {formatCountNumber(Details.chat)}
+              </div>
             </div>
             <div className="likes">
               <img className="heart" src=".\app\assets\heart.svg" />
-              <div className="like-count">{formatCountNumber(Details.like)}</div>
+              <div className="like-count">
+                {formatCountNumber(Details.like)}
+              </div>
             </div>
             <div className="bookmarks">
               <img className="book-open" src=".\app\assets\book-open.svg" />
-              <div className="bookmark-count">{formatCountNumber(Details.bookmark)}</div>
+              <div className="bookmark-count">
+                {formatCountNumber(Details.bookmark)}
+              </div>
             </div>
-              
           </div>
         </div>
       </div>
     </>
-  )
+  );
 }
