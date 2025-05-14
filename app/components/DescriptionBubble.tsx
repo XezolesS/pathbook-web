@@ -1,13 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
-import './DetailsStyle.css';
-import description_bubble_head from '../assets/description-bubble-head.svg';
+import React, { useEffect, useRef, useState } from "react";
+import description_bubble_head from "../assets/description-bubble-head.svg";
+import "./Details.css";
 
-interface Props {
+interface DescriptionBubbleProps {
   title: string;
   text: string;
 }
 
-const DescriptionBubble: React.FC<Props> = ({ title, text }) => {
+const DescriptionBubbleComponent: React.FC<DescriptionBubbleProps> = ({
+  title,
+  text,
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
 
@@ -15,7 +18,7 @@ const DescriptionBubble: React.FC<Props> = ({ title, text }) => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !hasAnimated) {
-          ref.current?.classList.add('show');
+          ref.current?.classList.add("show");
           setHasAnimated(true);
           observer.disconnect();
         }
@@ -24,7 +27,7 @@ const DescriptionBubble: React.FC<Props> = ({ title, text }) => {
     );
 
     if (ref.current) {
-      ref.current.classList.add('hidden');
+      ref.current.classList.add("hidden");
       observer.observe(ref.current);
     }
 
@@ -45,4 +48,4 @@ const DescriptionBubble: React.FC<Props> = ({ title, text }) => {
   );
 };
 
-export default DescriptionBubble;
+export default DescriptionBubbleComponent;

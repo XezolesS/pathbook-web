@@ -35,7 +35,9 @@ export default function UserProfileComponent({
           </div>
           <div className="profile-options">
             <a href="">내 정보 수정</a>
-            <a href="" onClick={handleLogoutClick}>로그아웃</a>
+            <a href="" onClick={handleLogoutClick}>
+              로그아웃
+            </a>
           </div>
         </div>
       </div>

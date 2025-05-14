@@ -1,8 +1,8 @@
 import { redirect } from "react-router";
 import textLogo from "../assets/textLogo.png";
-import Details from "../features/Details";
-import LandingContentsViewer from "../features/LandingContentsViewer";
-import Welcome from "../features/Welcome";
+import Details from "../components/Details";
+import LandingContentsViewer from "../components/PostSlidePreview";
+import Welcome from "../components/Welcome";
 import { parseCookies } from "../scripts/cookie";
 import "./Landing.css";
 import type { Route } from "./pages/+types/Landing";

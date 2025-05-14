@@ -1,6 +1,6 @@
-import './LandingContentsViewer.css';
+import "./PostSlidePreview.css";
 
-export default function LandingContentsViewer() {
+export default function PostSlidePreviewComponent() {
   return (
     <>
       <div className="viewer">
@@ -32,11 +32,12 @@ export default function LandingContentsViewer() {
             <div className="left-desc">
               <div className="post-title">제목</div>
               <div className="post-content">
-                여기는 자신이 그린 코스에 대한 설명을 부여할 수 있다. 여기부터 해당 루트에 대한 설명을 잘라서 보여준다. 2줄 까지만 나오고 그 이상으로 길어지면 이렇게 ...으로 보이도록 설정해놨다.
+                여기는 자신이 그린 코스에 대한 설명을 부여할 수 있다. 여기부터
+                해당 루트에 대한 설명을 잘라서 보여준다. 2줄 까지만 나오고 그
+                이상으로 길어지면 이렇게 ...으로 보이도록 설정해놨다.
               </div>
             </div>
-          
-          
+
             <div className="right-desc">
               <div className="hashtag">#도보 #테마 #해시태그</div>
               <div className="location-detail">
@@ -53,9 +54,9 @@ export default function LandingContentsViewer() {
           <div className="indicator2"></div>
           <div className="indicator3"></div>
           <div className="indicator4"></div>
-          <div className="indicator5"></div>        
+          <div className="indicator5"></div>
         </div>
       </div>
     </>
-  )
+  );
 }

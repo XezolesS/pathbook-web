@@ -1,4 +1,4 @@
-.article-contents-frame {
+.post-frame {
   width: 100%;
   height: auto;
 
@@ -18,7 +18,7 @@
 .map {
   width: 100%;
 
-  background-image: url('./app/assets/image/samplepic3.png');
+  background-image: url("./app/assets/image/samplepic3.png");
   background-size: cover;
   background-position: center;
   max-width: 800px;
@@ -32,7 +32,7 @@
 }
 
 .map::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.2);

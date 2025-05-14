@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react";
 import "quill/dist/quill.snow.css";
+import { useEffect, useRef } from "react";
 
-export default function RichTextEditor() {
+export default function RichTextEditorComponent() {
   const editorRef = useRef<HTMLDivElement>(null);
   const quillRef = useRef<any>(null);
 
@@ -18,21 +18,20 @@ export default function RichTextEditor() {
         modules: {
           toolbar: [
             ["bold", "italic", "underline", "strike"],
-            ['image'],
-            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-            [{ 'size': ['small', false, 'large', 'huge'] }],
-            [{ 'color': [] }, { 'background': [] }],      
+            ["image"],
+            [{ list: "ordered" }, { list: "bullet" }],
+            [{ size: ["small", false, "large", "huge"] }],
+            [{ color: [] }, { background: [] }],
           ],
         },
       });
-      
+
       // 에디터 초기값 (Delta로)
-      const initialContent = new Delta()
-        .insert("")
+      const initialContent = new Delta().insert("");
 
       quill.setContents(initialContent);
       quillRef.current = quill;
-     
+
       const toolbar = document.querySelector(".ql-toolbar");
       if (toolbar) {
         (toolbar as HTMLElement).style.borderBottom = "1px solid #000";

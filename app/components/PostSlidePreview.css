@@ -15,7 +15,7 @@
   border-radius: 1.5em;
   position: relative;
 
-  background-image: url('./app/assets/image/samplepic3.png');
+  background-image: url("./app/assets/image/samplepic3.png");
   background-size: cover;
   background-position: center;
 }
@@ -92,9 +92,7 @@
   color: #ffffff;
   font-family: "NotoSansKr-Regular", sans-serif;
   white-space: nowrap;
-  text-shadow:
-    0 0 2px rgba(0, 0, 0, 0.7),
-    0 0 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.7), 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
 .id {
