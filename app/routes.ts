@@ -4,7 +4,7 @@ export default [
   index("./pages/Landing.tsx"),
   
   route("login", "./pages/Login.tsx"),
-  route("register", "./features/Register.tsx"),
+  route("register", "./pages/Register.tsx"),
   route("reset-password-request", "./features/ResetPasswordRequest.tsx"),
   route("reset-password", "./features/ResetPassword.tsx"),
 

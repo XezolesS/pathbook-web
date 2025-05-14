@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import RegisterRequest from "../api/pathbook/requests/auth/RegisterRequest";
 import textLogo from "../assets/textLogo.png";
-import "./RegisterStyle.css";
+import "./Register.css";
 
-export default function Register() {
+export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPasswordTouched, setConfirmPasswordTouched] = useState(false);

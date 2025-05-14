@@ -3,7 +3,7 @@ import LoginRequest from "../api/pathbook/requests/auth/LoginRequest";
 import textLogo from "../assets/textLogo.png";
 import { parseCookies } from "../scripts/cookie";
 import type { Route } from "./pages/+types/Login";
-import "./LoginStyle.css";
+import "./Login.css";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
