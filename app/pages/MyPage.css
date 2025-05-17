@@ -1,0 +1,100 @@
+.mypage-container {
+  font-family: sans-serif;
+  width: 100%;
+}
+
+.mypage-header img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.mypage-profile {
+  display: flex;
+  align-items: center;
+  background-color: #FFEB3B;
+  padding: 20px;
+  position: relative;
+}
+
+.profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #FFC107;
+  margin-right: 20px;
+}
+
+.profile-info h2 {
+  margin: 0;
+}
+
+.profile-info h2 span {
+  color: #555;
+  font-weight: normal;
+}
+
+.edit-button {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: none;
+  border: none;
+  color: #0000EE;
+  cursor: pointer;
+}
+
+.mypage-tabmenu {
+  display: flex;
+  background-color: #FF9800;
+  text-align: center;
+}
+
+.tab-item {
+  flex: 1;
+  padding: 15px 0;
+  font-weight: bold;
+  border-right: 1px solid #fff;
+  color: #333;
+  background-color: #FF9800;
+  cursor: pointer;
+}
+
+.tab-item:last-child {
+  border-right: none;
+}
+
+.tab-item.active {
+  background-color: #F57C00;
+  color: white;
+}
+
+.mypage-searchbar {
+  display: flex;
+  align-items: center;
+  background-color: #EDE7F6;
+  padding: 10px 20px;
+}
+
+.mypage-searchbar input {
+  width: 90%;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.mypage-searchbar button {
+  font-size: 20px;
+  background-color: #D1C4E9;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.mypage-empty {
+  background-color: #DADADA;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
