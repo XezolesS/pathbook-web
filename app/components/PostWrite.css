@@ -16,13 +16,122 @@
   width: 95%;
   height: auto;
 
+  display: flex;
   border-radius: 0.5rem;
   border: 1px solid #000000;
   position: relative;
-  background-image: url("./app/assets/image/samplepic3.png");
   background-size: cover;
   background-position: center;
   aspect-ratio: 2 / 1;
+}
+
+.kakao-map {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.draw-tool-container {
+  width: 7%;
+  height: 100%;
+
+  padding: 1%;
+  gap: 3.5%;
+
+  top: 0;
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 10;
+}
+
+.draw-tool-drawing,
+.draw-tool-redo,
+.draw-tool-undo,
+.draw-tool-reset {
+  width: 100%;
+  height: auto;
+
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.2);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #d9d9d9;
+  border: 1px solid #000000;
+  aspect-ratio: 1 / 1;
+}
+
+.draw-tool-drawing:hover,
+.draw-tool-redo:hover,
+.draw-tool-undo:hover,
+.draw-tool-reset:hover {
+  cursor: pointer;
+}
+.draw-tool-redo:active,
+.draw-tool-undo:active,
+.draw-tool-reset:active {
+  background-color: #ffc300;
+}
+
+.draw-tool-drawing {
+  background-image: url("../assets/draw.svg");
+}
+.draw-tool-redo {
+  background-image: url("../assets/redo.svg");
+}
+.draw-tool-undo {
+  background-image: url("../assets/undo.svg");
+}
+.draw-tool-reset {
+  background-image: url("../assets/refresh.svg");
+}
+
+.map-search-container {
+  width: 30%;
+  height: 10%;
+
+  top: 1%;
+  right: 1%;
+
+  display: flex;
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.2);
+  background-color: #d9d9d9;
+  border: 1px solid #000000;
+  position: absolute;
+  z-index: 10;
+}
+
+.map-search-icon {
+  width: auto;
+  height: 100%;
+
+  margin-left: auto;
+
+  background-image: url("../assets/search.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  aspect-ratio: 1 / 1;
+}
+
+.map-search-icon:hover {
+  cursor: pointer;
+}
+
+.map-search-input {
+  width: 100%;
+  height: 100%;
+
+  padding: 1%;
+
+  font-size: 1.2vw;
 }
 
 .frame {
@@ -34,7 +143,7 @@
   aspect-ratio: 5 / 3;
 }
 
-.subject {
+.write-subject {
   width: 100%;
 
   padding: 1rem 1rem;
