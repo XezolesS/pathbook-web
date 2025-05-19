@@ -266,7 +266,7 @@ input:focus {
   width: 100%;
 }
 
-@media screen and (max-width: 1150px) {
+@media screen and (max-width: 1120px) {
   .main-menu-container {
     width: 10%;
     height: 100%;
@@ -287,11 +287,12 @@ input:focus {
     aspect-ratio: 1/5;
   }
 
-  .main-content-container {
-    width: 70%;
-    height: 5000px;
-
-    background-color: #d9d9d9;
+  .main-content-container{
+    width: 80%;
+  }
+  .mainpage{
+    width: 100%;
+    transform: translateX(-10%);
   }
 
   .content-head {
