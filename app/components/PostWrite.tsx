@@ -1,6 +1,6 @@
 import "./PostWrite.css";
 import RichTextEditor from "./RichTextEditor";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 interface PostWriteProps {
   cancelOnclick: () => void;
@@ -16,6 +16,7 @@ export default function PostWriteComponent(Details: PostWriteProps) {
   const [isDrawingMode, setIsDrawingMode] = useState(false);
   const [path, setPath] = useState<{ lat: number; lng: number }[]>([]);
   const [redoStack, setRedoStack] = useState<{ lat: number; lng: number }[]>([]);
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   const isDrawingModeRef = useRef(isDrawingMode);
   const pathRef = useRef(path);
@@ -41,13 +42,21 @@ export default function PostWriteComponent(Details: PostWriteProps) {
     script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=357e1eb7fc25d648387238964179b068&autoload=false`;
     script.async = true;
     script.onload = () => {
-      window.kakao.maps.load(() => {
-        const container = mapRef.current;
-        const options = {
-          center: new window.kakao.maps.LatLng(37.5665, 126.978),
-          level: 3,
-        };
-        const map = new window.kakao.maps.Map(container, options);
+      window.kakao.maps.load(() => setMapLoaded(true));
+    };
+    document.head.appendChild(script);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!mapLoaded || !mapRef.current) return;
+
+    const observer = new ResizeObserver((entries) => {
+      const height = entries[0].contentRect.height;
+      if (height > 0) {
+        const map = new window.kakao.maps.Map(mapRef.current, {
+          center: new window.kakao.maps.LatLng(35.1398173087151, 126.931692188988),
+          level: 4,
+        });
         mapInstanceRef.current = map;
 
         polylineRef.current = new window.kakao.maps.Polyline({
@@ -59,24 +68,25 @@ export default function PostWriteComponent(Details: PostWriteProps) {
           strokeStyle: "solid",
         });
 
-        window.kakao.maps.event.addListener(map, "click", function (mouseEvent: any) {
+        window.kakao.maps.event.addListener(map, "click", (mouseEvent: any) => {
           if (!isDrawingModeRef.current) return;
-
           const latlng = mouseEvent.latLng;
           const newPoint = { lat: latlng.getLat(), lng: latlng.getLng() };
           const newPath = [...pathRef.current, newPoint];
-
           setPath(newPath);
           setRedoStack([]);
-
           polylineRef.current.setPath(
             newPath.map((p) => new window.kakao.maps.LatLng(p.lat, p.lng))
           );
         });
-      });
-    };
-    document.head.appendChild(script);
-  }, []);
+
+        observer.disconnect();
+      }
+    });
+
+    observer.observe(mapRef.current);
+    return () => observer.disconnect();
+  }, [mapLoaded]);
 
   const toggleDrawingMode = () => setIsDrawingMode(prev => !prev);
 
