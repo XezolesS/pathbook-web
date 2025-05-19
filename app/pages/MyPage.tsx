@@ -11,6 +11,7 @@ const MyPage = () => {
 
   const [showBgModal, setShowBgModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const [selectedFileName, setSelectedFileName] = useState("선택된 파일 없음");
 
@@ -60,6 +61,35 @@ const MyPage = () => {
     </div>
   );
 
+const renderDeleteModal = () => (
+  <div className="modal-overlay">
+    <div className="modal-content">
+      <h3>정말 탈퇴하시겠어요?</h3>
+      <p>이 작업은 되돌릴 수 없습니다.</p>
+      <div className="modal-button-group">
+        <button
+          className="modal-delete-button"
+          onClick={() => {
+            alert("회원 탈퇴가 완료되었습니다.");
+            setShowDeleteModal(false);
+          }}
+        >
+          탈퇴하기
+        </button>
+        <button
+          className="modal-cancel-button"
+          onClick={() => setShowDeleteModal(false)}
+        >
+          취소
+        </button>
+      </div>
+    </div>
+  </div>
+);
+
+
+
+
   const renderContent = () => {
     switch (activeTab) {
       case "posts":
@@ -87,43 +117,60 @@ const MyPage = () => {
 
       {showBgModal && renderModal("background")}
       {showProfileModal && renderModal("profile")}
+      {showDeleteModal && renderDeleteModal()}
 
-      <div className="mypage-profile">
-        <div
-          className="profile-image"
-          style={{ backgroundImage: `url(${profileImage})`, backgroundSize: "cover" }}
-          onClick={() => setShowProfileModal(true)}
-        />
-        <div className="profile-info">
-          {isEditing ? (
-            <>
-              <input
-                type="text"
-                value={nickname}
-                onChange={(e) => setNickname(e.target.value)}
-              />
-              <input
-                type="text"
-                value={bio}
-                onChange={(e) => setBio(e.target.value)}
-              />
-            </>
-          ) : (
-            <>
-              <h2>
-                {nickname} <span>@아이디</span>
-              </h2>
-              <p>{bio}</p>
-            </>
-          )}
-        </div>
-        <button
-          className="edit-button"
-          onClick={() => setIsEditing((prev) => !prev)}
-        >
-          {isEditing ? "저장" : "프로필 편집하기"}
-        </button>
-      </div>
+<div className="mypage-profile">
+  <div className="profile-left">
+    <div
+      className="profile-image"
+      style={{
+        backgroundImage: `url(${profileImage})`,
+        backgroundSize: "cover",
+      }}
+      onClick={() => setShowProfileModal(true)}
+    />
+    <div className="profile-info">
+      {isEditing ? (
+        <>
+          <input
+            type="text"
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+          />
+          <input
+            type="text"
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
+          />
+        </>
+      ) : (
+        <>
+          <h2>
+            {nickname} <span>@아이디</span>
+          </h2>
+          <p>{bio}</p>
+        </>
+      )}
+    </div>
+  </div>
+
+  <div className="profile-buttons">
+    <button
+      className="edit-button"
+      onClick={() => setIsEditing((prev) => !prev)}
+    >
+      {isEditing ? "저장" : "프로필 편집하기"}
+    </button>
+    <button
+      className="edit-button delete-button"
+      onClick={() => setShowDeleteModal(true)}
+    >
+      회원탈퇴
+    </button>
+  </div>
+</div>
+
+
 
       <div className="mypage-tabmenu">
         <div
@@ -167,6 +214,5 @@ const EmptyContent = ({ label }: { label: string }) => (
     <div className="content-area">{label} (비워둠)</div>
   </div>
 );
-
 
 export default MyPage;

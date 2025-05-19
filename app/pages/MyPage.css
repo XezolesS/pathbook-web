@@ -1,5 +1,19 @@
-.mypage-container {
+html, body {
+  background-color: #fef9e7;
+  margin: 0;
+  padding: 0;
   font-family: sans-serif;
+}
+
+button {
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 8px;
+  padding: 10px 20px;
+  transition: background-color 0.2s ease;
+}
+
+.mypage-container {
   width: 100%;
 }
 
@@ -7,14 +21,23 @@
   width: 100%;
   height: 200px;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .mypage-profile {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   background-color: #F3E061;
   padding: 20px;
-  position: relative;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.profile-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .profile-image {
@@ -22,7 +45,8 @@
   height: 80px;
   border-radius: 50%;
   background-color: #FFC107;
-  margin-right: 20px;
+  background-size: cover;
+  background-position: center;
   cursor: pointer;
 }
 
@@ -33,22 +57,54 @@
 .profile-info h2 span {
   color: #555;
   font-weight: normal;
+  margin-left: 8px;
+}
+
+.profile-info p {
+  margin: 5px 0 0;
+}
+
+.mypage-profile input[type="text"] {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin: 5px 0;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.mypage-profile input[type="text"]:focus {
+  border-color: #4a90e2;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+.profile-buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .edit-button {
-  position: absolute;
-  right: 20px;
-  top: 20px;
   background: none;
-  border: none;
+  border: 1px solid #ccc;
   color: #0000EE;
-  cursor: pointer;
+  font-weight: bold;
+}
+
+.edit-button.delete-button {
+  background-color: #e53935;
+  color: white;
+  border: none;
 }
 
 .mypage-tabmenu {
   display: flex;
   background-color: #FF9800;
-  text-align: center;
 }
 
 .tab-item {
@@ -58,7 +114,7 @@
   border-right: 1px solid #fff;
   color: #333;
   background-color: #FF9800;
-  cursor: pointer;
+  text-align: center;
 }
 
 .tab-item:last-child {
@@ -88,16 +144,26 @@
   background-color: #D1C4E9;
   border: none;
   padding: 5px 10px;
-  cursor: pointer;
 }
 
-.mypage-empty {
-  background-color: #DADADA;
-  height: 400px;
+.mypage-content {
+  background-color: #fef9e7;
+  padding: 40px;
+  min-height: 400px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: 24px;
+  align-items: center;
+}
+
+.content-area {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  font-size: 20px;
+  color: #444;
+  min-width: 60%;
+  text-align: center;
 }
 
 .modal-overlay {
@@ -130,6 +196,18 @@
   color: #333;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/*배경/프로필 업로드 모달*/
 .file-upload-wrapper {
   display: flex;
   flex-direction: column;
@@ -142,9 +220,7 @@
   color: #333;
   padding: 10px 20px;
   border-radius: 8px;
-  cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.2s ease;
   margin-bottom: 12px;
   display: inline-block;
 }
@@ -163,73 +239,32 @@
   word-break: break-all;
 }
 
-.modal-content button {
+.upload-modal-button {
   background-color: #ff9900;
   color: white;
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  margin-top: 10px;
 }
 
-.modal-content button:hover {
+.upload-modal-button:hover {
   background-color: #e68700;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.mypage-profile input[type="text"] {
-  width: 100%;
-  max-width: 400px;
-  padding: 10px;
-  margin: 5px 0;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.mypage-profile input[type="text"]:focus {
-  border-color: #4a90e2;
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
-}
-
-.mypage-content {
-  background-color: #fef9e7;
-  padding: 40px;
-  min-height: 400px;
+/*회원 탈퇴 모달 버튼*/
+.modal-button-group {
   display: flex;
   justify-content: center;
-  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
 }
 
-.content-area {
-  background-color: #ffffff;
-  border-radius: 16px;
-  padding: 40px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  font-size: 20px;
-  color: #444;
-  min-width: 60%;
-  text-align: center;
+.modal-delete-button {
+  background-color: #e53935;
+  color: white;
+  border: none;
 }
 
-html, body {
-  background-color: #fef9e7;
-  margin: 0;
-  padding: 0;
+.modal-cancel-button {
+  background-color: #cccccc;
+  color: white;
+  border: none;
 }
