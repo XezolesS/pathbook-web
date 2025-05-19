@@ -1,17 +1,142 @@
 import "./PostWrite.css";
 import RichTextEditor from "./RichTextEditor";
+import { useEffect, useRef, useState } from "react";
 
 interface PostWriteProps {
   cancelOnclick: () => void;
 }
 
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
+
 export default function PostWriteComponent(Details: PostWriteProps) {
+  const [isDrawingMode, setIsDrawingMode] = useState(false);
+  const [path, setPath] = useState<{ lat: number; lng: number }[]>([]);
+  const [redoStack, setRedoStack] = useState<{ lat: number; lng: number }[]>([]);
+
+  const isDrawingModeRef = useRef(isDrawingMode);
+  const pathRef = useRef(path);
+  const redoRef = useRef(redoStack);
+  const mapRef = useRef<HTMLDivElement | null>(null);
+  const polylineRef = useRef<any>(null);
+  const mapInstanceRef = useRef<any>(null);
+
+  useEffect(() => {
+    isDrawingModeRef.current = isDrawingMode;
+  }, [isDrawingMode]);
+
+  useEffect(() => {
+    pathRef.current = path;
+  }, [path]);
+
+  useEffect(() => {
+    redoRef.current = redoStack;
+  }, [redoStack]);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=357e1eb7fc25d648387238964179b068&autoload=false`;
+    script.async = true;
+    script.onload = () => {
+      window.kakao.maps.load(() => {
+        const container = mapRef.current;
+        const options = {
+          center: new window.kakao.maps.LatLng(37.5665, 126.978),
+          level: 3,
+        };
+        const map = new window.kakao.maps.Map(container, options);
+        mapInstanceRef.current = map;
+
+        polylineRef.current = new window.kakao.maps.Polyline({
+          map,
+          path: [],
+          strokeWeight: 5,
+          strokeColor: "#FF0000",
+          strokeOpacity: 0.8,
+          strokeStyle: "solid",
+        });
+
+        window.kakao.maps.event.addListener(map, "click", function (mouseEvent: any) {
+          if (!isDrawingModeRef.current) return;
+
+          const latlng = mouseEvent.latLng;
+          const newPoint = { lat: latlng.getLat(), lng: latlng.getLng() };
+          const newPath = [...pathRef.current, newPoint];
+
+          setPath(newPath);
+          setRedoStack([]);
+
+          polylineRef.current.setPath(
+            newPath.map((p) => new window.kakao.maps.LatLng(p.lat, p.lng))
+          );
+        });
+      });
+    };
+    document.head.appendChild(script);
+  }, []);
+
+  const toggleDrawingMode = () => setIsDrawingMode(prev => !prev);
+
+  const handleUndo = () => {
+    if (pathRef.current.length === 0) return;
+    const newPath = [...pathRef.current];
+    const last = newPath.pop();
+    if (last) {
+      setPath(newPath);
+      setRedoStack([...redoRef.current, last]);
+      polylineRef.current.setPath(
+        newPath.map(p => new window.kakao.maps.LatLng(p.lat, p.lng))
+      );
+    }
+  };
+
+  const handleRedo = () => {
+    if (redoRef.current.length === 0) return;
+    const newRedo = [...redoRef.current];
+    const recovered = newRedo.pop();
+    if (recovered) {
+      const newPath = [...pathRef.current, recovered];
+      setPath(newPath);
+      setRedoStack(newRedo);
+      polylineRef.current.setPath(
+        newPath.map(p => new window.kakao.maps.LatLng(p.lat, p.lng))
+      );
+    }
+  };
+
+  const handleReset = () => {
+    setPath([]);
+    setRedoStack([]);
+    polylineRef.current.setPath([]);
+  };
+
   return (
-    <>
-      <div className="post-write-frame">
-        <img className="draw-path" />
+    <div className="post-write-frame">
+      <div className="draw-path">
+        <div className="draw-tool-container">
+          <div
+            className="draw-tool-drawing"
+            onClick={toggleDrawingMode}
+            style={{
+              backgroundColor: isDrawingMode ? "#ffc300" : "#d9d9d9",
+              cursor: "pointer",
+            }}
+          />
+          <div className="draw-tool-redo" onClick={handleRedo} />
+          <div className="draw-tool-undo" onClick={handleUndo} />
+          <div className="draw-tool-reset" onClick={handleReset} />
+        </div>
+        <div className="map-search-container">
+          <input className="map-search-input" />
+          <div className="map-search-icon" />
+        </div>
+        <div ref={mapRef} className="kakao-map" />
+      </div>
         <div className="frame">
-          <input className="subject" placeholder="제목을 입력해 주세요"></input>
+          <input className="write-subject" placeholder="제목을 입력해 주세요"></input>
           <p></p>
           <input className="tag-list" placeholder="#태그_추가"></input>
           <RichTextEditor />
@@ -23,6 +148,5 @@ export default function PostWriteComponent(Details: PostWriteProps) {
           <button className="submit">작성하기</button>
         </div>
       </div>
-    </>
   );
 }
