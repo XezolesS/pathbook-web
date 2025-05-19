@@ -1,6 +1,6 @@
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import "./PostWrite.css";
 import RichTextEditor from "./RichTextEditor";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 interface PostWriteProps {
   cancelOnclick: () => void;
@@ -15,7 +15,9 @@ declare global {
 export default function PostWriteComponent(Details: PostWriteProps) {
   const [isDrawingMode, setIsDrawingMode] = useState(false);
   const [path, setPath] = useState<{ lat: number; lng: number }[]>([]);
-  const [redoStack, setRedoStack] = useState<{ lat: number; lng: number }[]>([]);
+  const [redoStack, setRedoStack] = useState<{ lat: number; lng: number }[]>(
+    []
+  );
   const [mapLoaded, setMapLoaded] = useState(false);
 
   const isDrawingModeRef = useRef(isDrawingMode);
@@ -54,7 +56,10 @@ export default function PostWriteComponent(Details: PostWriteProps) {
       const height = entries[0].contentRect.height;
       if (height > 0) {
         const map = new window.kakao.maps.Map(mapRef.current, {
-          center: new window.kakao.maps.LatLng(35.1398173087151, 126.931692188988),
+          center: new window.kakao.maps.LatLng(
+            35.1398173087151,
+            126.931692188988
+          ),
           level: 4,
         });
         mapInstanceRef.current = map;
@@ -88,7 +93,7 @@ export default function PostWriteComponent(Details: PostWriteProps) {
     return () => observer.disconnect();
   }, [mapLoaded]);
 
-  const toggleDrawingMode = () => setIsDrawingMode(prev => !prev);
+  const toggleDrawingMode = () => setIsDrawingMode((prev) => !prev);
 
   const handleUndo = () => {
     if (pathRef.current.length === 0) return;
@@ -98,7 +103,7 @@ export default function PostWriteComponent(Details: PostWriteProps) {
       setPath(newPath);
       setRedoStack([...redoRef.current, last]);
       polylineRef.current.setPath(
-        newPath.map(p => new window.kakao.maps.LatLng(p.lat, p.lng))
+        newPath.map((p) => new window.kakao.maps.LatLng(p.lat, p.lng))
       );
     }
   };
@@ -112,7 +117,7 @@ export default function PostWriteComponent(Details: PostWriteProps) {
       setPath(newPath);
       setRedoStack(newRedo);
       polylineRef.current.setPath(
-        newPath.map(p => new window.kakao.maps.LatLng(p.lat, p.lng))
+        newPath.map((p) => new window.kakao.maps.LatLng(p.lat, p.lng))
       );
     }
   };
@@ -145,18 +150,21 @@ export default function PostWriteComponent(Details: PostWriteProps) {
         </div>
         <div ref={mapRef} className="kakao-map" />
       </div>
-        <div className="frame">
-          <input className="write-subject" placeholder="제목을 입력해 주세요"></input>
-          <p></p>
-          <input className="tag-list" placeholder="#태그_추가"></input>
-          <RichTextEditor />
-        </div>
-        <div className="button-container">
-          <button className="cancel" onClick={Details.cancelOnclick}>
-            작성취소
-          </button>
-          <button className="submit">작성하기</button>
-        </div>
+      <div className="frame">
+        <input
+          className="write-subject"
+          placeholder="제목을 입력해 주세요"
+        ></input>
+        <p></p>
+        <input className="tag-list" placeholder="#태그_추가"></input>
+        <RichTextEditor />
       </div>
+      <div className="button-container">
+        <button className="cancel" onClick={Details.cancelOnclick}>
+          작성취소
+        </button>
+        <button className="submit">작성하기</button>
+      </div>
+    </div>
   );
 }

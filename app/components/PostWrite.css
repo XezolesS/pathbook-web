@@ -36,12 +36,12 @@
   overflow: hidden;
 }
 
-.draw-tool-container{
+.draw-tool-container {
   width: 7%;
   height: 100%;
 
   padding: 1%;
-  gap:3.5%;
+  gap: 3.5%;
 
   top: 0;
   left: 0;
@@ -52,7 +52,10 @@
   z-index: 10;
 }
 
-.draw-tool-drawing, .draw-tool-redo, .draw-tool-undo, .draw-tool-reset{
+.draw-tool-drawing,
+.draw-tool-redo,
+.draw-tool-undo,
+.draw-tool-reset {
   width: 100%;
   height: auto;
 
@@ -65,27 +68,32 @@
   aspect-ratio: 1 / 1;
 }
 
-.draw-tool-drawing:hover, .draw-tool-redo:hover, .draw-tool-undo:hover, .draw-tool-reset:hover{
+.draw-tool-drawing:hover,
+.draw-tool-redo:hover,
+.draw-tool-undo:hover,
+.draw-tool-reset:hover {
   cursor: pointer;
 }
-.draw-tool-redo:active, .draw-tool-undo:active, .draw-tool-reset:active{
+.draw-tool-redo:active,
+.draw-tool-undo:active,
+.draw-tool-reset:active {
   background-color: #ffc300;
 }
 
-.draw-tool-drawing{
+.draw-tool-drawing {
   background-image: url("../assets/draw.svg");
 }
-.draw-tool-redo{
+.draw-tool-redo {
   background-image: url("../assets/redo.svg");
 }
-.draw-tool-undo{
+.draw-tool-undo {
   background-image: url("../assets/undo.svg");
 }
-.draw-tool-reset{
+.draw-tool-reset {
   background-image: url("../assets/refresh.svg");
 }
 
-.map-search-container{
+.map-search-container {
   width: 30%;
   height: 10%;
 
@@ -100,7 +108,7 @@
   z-index: 10;
 }
 
-.map-search-icon{
+.map-search-icon {
   width: auto;
   height: 100%;
 
@@ -113,11 +121,11 @@
   aspect-ratio: 1 / 1;
 }
 
-.map-search-icon:hover{
+.map-search-icon:hover {
   cursor: pointer;
 }
 
-.map-search-input{
+.map-search-input {
   width: 100%;
   height: 100%;
 
@@ -195,4 +203,3 @@
 .cancel:hover {
   cursor: pointer;
 }
-
