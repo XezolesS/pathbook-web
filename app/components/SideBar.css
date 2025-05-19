@@ -1,0 +1,92 @@
+.sidebar {
+  width: 260px;
+  background: #B0BEC5;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 32px 0 32px 0;
+  margin: 32px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sidebar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 5px;
+  background: #90A4AE;
+}
+
+.sidebar-logo {
+  font-family: 'Montserrat', 'Pretendard', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #000000;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.sidebar-sublogo {
+  font-size: 1rem;
+  color: #4F5B62;
+  font-weight: 500;
+  margin-bottom: 28px;
+}
+
+.sidebar-divider {
+  border: none;
+  border-top: 1px solid #B0BEC5;
+  margin: 0 32px 16px 32px;
+}
+
+.sidebar-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin: 12px 0 8px 32px;
+  cursor: pointer;
+  color: #000000;
+}
+
+.arrow-icon {
+  margin-left: 8px;
+  font-size: 1.2rem;
+  color: #000000;
+}
+
+.menu-list {
+  list-style: none;
+  padding: 0 0 0 32px;
+  margin: 0 0 8px 0;
+  display: none;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease-out;
+}
+
+.menu-list.open {
+  display: block;
+  max-height: 500px;
+}
+
+.menu-list li {
+  font-size: 1rem;
+  color: #000000;
+  margin-bottom: 8px;
+}
+
+
+
+.new-badge {
+  display: inline-block;
+  background: #FFEB3B;
+  color: #888;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 0 6px;
+  margin-left: 4px;
+}
+
