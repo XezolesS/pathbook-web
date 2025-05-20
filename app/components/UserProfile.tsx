@@ -34,7 +34,7 @@ export default function UserProfileComponent({
             <img className="edit" src={edit_svg}></img>
           </div>
           <div className="profile-options">
-            <a href="">내 정보 수정</a>
+            <a href="/mypage">마이페이지</a>
             <a href="" onClick={handleLogoutClick}>
               로그아웃
             </a>
