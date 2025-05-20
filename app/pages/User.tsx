@@ -114,7 +114,7 @@ export default function UserPage() {
     <div className="mypage-container">
       <div
         className="mypage-header"
-        onClick={() => setShowBgModal(true)}
+        onClick={isEditing ? () => setShowBgModal(true) : () => { /* 이미지 확대 */ }}
         style={{ cursor: "pointer" }}
       >
         <img src={bgImage} alt="배경 이미지" />
@@ -132,7 +132,7 @@ export default function UserPage() {
               backgroundImage: `url(${profileImage})`,
               backgroundSize: "cover",
             }}
-            onClick={() => setShowProfileModal(true)}
+            onClick={isEditing ? () => setShowProfileModal(true) : () => { /* 이미지 확대 */ }}
           />
           <div className="profile-info">
             {isEditing ? (
