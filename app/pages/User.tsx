@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./MyPage.css";
+import "./User.css";
 
-const MyPage = () => {
+export default function UserPage() {
   const [activeTab, setActiveTab] = useState("posts");
   const [isEditing, setIsEditing] = useState(false);
   const [nickname, setNickname] = useState("닉네임");
@@ -10,11 +10,9 @@ const MyPage = () => {
   const [profileImage, setProfileImage] = useState(
     "/app/assets/image/samplepic2.jpg"
   );
-
   const [showBgModal, setShowBgModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-
   const [selectedFileName, setSelectedFileName] = useState("선택된 파일 없음");
 
   const handleImageUpload = (
@@ -212,12 +210,10 @@ const MyPage = () => {
       {renderContent()}
     </div>
   );
-};
+}
 
 const EmptyContent = ({ label }: { label: string }) => (
   <div className="mypage-content">
     <div className="content-area">{label} (비워둠)</div>
   </div>
 );
-
-export default MyPage;

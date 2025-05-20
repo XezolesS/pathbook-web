@@ -1,4 +1,4 @@
-import { type RouteConfig, index, route } from "@react-router/dev/routes";
+import { type RouteConfig, index, prefix, route } from "@react-router/dev/routes";
 
 export default [
   index("./pages/Landing.tsx"),
@@ -9,5 +9,6 @@ export default [
   route("reset-password", "./pages/ResetPassword.tsx"),
 
   route("main", "./pages/Main.tsx"),
-  route("mypage", "./pages/MyPage.tsx"),
+
+  ...prefix("user", [route(":uid", "./pages/User.tsx")]),
 ] satisfies RouteConfig;
