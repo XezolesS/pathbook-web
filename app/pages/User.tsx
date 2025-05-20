@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ReactNode } from "react";
+import BookmarkFolder from "../components/BookmarkFolder";
 import "./User.css";
 
 export default function UserPage() {
@@ -104,7 +106,11 @@ export default function UserPage() {
       case "likes":
         return <EmptyContent label="좋아요" />;
       case "bookmarks":
-        return <EmptyContent label="북마크" />;
+        return (
+          <EmptyContent label="북마크">
+            <BookmarkFolder />
+          </EmptyContent>
+        );
       default:
         return null;
     }
@@ -212,8 +218,8 @@ export default function UserPage() {
   );
 }
 
-const EmptyContent = ({ label }: { label: string }) => (
+const EmptyContent = ({ label, children }: { label: string; children: ReactNode; }) => (
   <div className="mypage-content">
-    <div className="content-area">{label} (비워둠)</div>
+    <div className="content-area">{children}</div>
   </div>
 );
