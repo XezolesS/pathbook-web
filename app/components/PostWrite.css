@@ -17,7 +17,7 @@
   height: auto;
 
   display: flex;
-  border-radius: 0.5rem;
+  border-radius: var(--radius);
   border: 1px solid #000000;
   position: relative;
   background-size: cover;
@@ -32,7 +32,7 @@
   top: 0;
   left: 0;
   z-index: 0;
-  border-radius: 0.5rem;
+  border-radius: var(--radius);
   overflow: hidden;
 }
 
@@ -56,11 +56,11 @@
   width: 100%;
   height: auto;
 
-  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--box-shadow);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #d9d9d9;
+  background-color: var(--color-contents-bg);
   border: 1px solid #000000;
   aspect-ratio: 1 / 1;
 }
@@ -69,7 +69,7 @@
   cursor: pointer;
 }
 .draw-tool-redo:active, .draw-tool-undo:active, .draw-tool-reset:active{
-  background-color: #ffc300;
+  background-color: var(--color-primary);
 }
 
 .draw-tool-drawing{
@@ -93,8 +93,8 @@
   right: 1%;
 
   display: flex;
-  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.2);
-  background-color: #d9d9d9;
+  box-shadow: var(--box-shadow);
+  background-color: var(--color-contents-bg);
   border: 1px solid #000000;
   position: absolute;
   z-index: 10;
@@ -130,7 +130,7 @@
   width: 95%;
   height: auto;
 
-  border-radius: 0.5rem;
+  border-radius: var(--radius);
   border: 1px solid #000000;
   aspect-ratio: 5 / 3;
 }
@@ -149,7 +149,7 @@
 
   padding: 0.3rem 1rem;
 
-  color: #ffc400;
+  color: var(--color-primary);
   font-weight: 400;
   border-bottom: 1px solid #000000;
 }
@@ -171,8 +171,8 @@
   font-size: clamp(12px, 1rem, 20px);
   font-weight: bold;
   text-align: center;
-  background-color: #ffc300;
-  border-radius: clamp(1px, 0.5rem, 10px);
+  background-color: var(--color-primary);
+  border-radius: var(--radius);
 }
 
 .submit:hover {
@@ -188,8 +188,8 @@
   font-size: clamp(12px, 1rem, 20px);
   font-weight: bold;
   text-align: center;
-  background-color: #ffc300;
-  border-radius: clamp(1px, 0.5rem, 10px);
+  background-color: var(--color-primary);
+  border-radius: var(--radius);
 }
 
 .cancel:hover {

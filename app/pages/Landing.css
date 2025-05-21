@@ -14,7 +14,7 @@ body {
   min-width: 1280px;
   height: 100%;
 
-  background-color: #fffdf8;
+  background-color: var(--color-contents-bg);
 }
 
 .landing-main-container {
@@ -72,10 +72,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  background-color: #ffd300;
+  box-shadow: var(--box-shadow-a);
+  background-color: var(--color-primary);
   aspect-ratio: 4/1;
-  border-radius: clamp(4px, 0.5rem, 10px);
+  border-radius: var(--radius);
 }
 
 .landing-contents-viewer {

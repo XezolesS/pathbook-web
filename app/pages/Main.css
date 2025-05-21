@@ -3,7 +3,7 @@ body {
   width: 100%;
   height: 100%;
   min-width: 720px;
-  background-color: #fffdf8;
+  background-color: var(--color-bg);
   display: flex;
   justify-content: center;
 }
@@ -41,15 +41,16 @@ body {
 .menu-container {
   width: 80%;
   height: auto;
-  aspect-ratio: 4/9;
-
+  
+  right: 10%;
   padding: clamp(5px, 0.5rem, 10px);
   padding-top: clamp(10px, 1rem, 15px);
 
-  background-color: #d9d9d9;
+  box-shadow: var(--box-shadow);
+  background-color: var(--color-contents-bg);
   position: absolute;
-  right: 5%;
-  border-radius: clamp(5px, 1rem, 10px);
+  border-radius: var(--radius);
+  aspect-ratio: 4/9;
 }
 
 .profile {
@@ -87,7 +88,7 @@ body {
   aspect-ratio: 1/1;
 
   border-radius: 50%;
-  background-color: #ffc300;
+  background-color: var(--color-primary);
 }
 
 .menu-item {
@@ -109,19 +110,19 @@ body {
   margin-left: 5%;
   margin-right: 5%;
 
-  background-color: #b3b3b3;
-  border-radius: clamp(5px, 1rem, 10px);
+  background-color: var(--color-bg-surface);
+  border-radius: var(--radius);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .menu-item.selected span {
-  background-color: #ffd300;
+  background-color: var(--color-primary);
 }
 
 .menu-item.selected img {
-  color: #ffd300;
+  color: var(--color-primary);
   filter: brightness(1) saturate(100%) invert(80%) sepia(100%) saturate(750%)
     hue-rotate(5deg);
 }
@@ -130,20 +131,24 @@ body {
   width: 60%;
   height: 5000px;
 
-  padding-top: clamp(20px, 3rem, 100px);
-
-  background-color: #d9d9d9;
+  background-color: var(--color-contents-bg);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .content-head {
-  width: 80%;
-  height: clamp(10px, 10vw, 50px);
+  width: 100%;
+  height: clamp(5rem, auto, 8rem);
 
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
+  padding-left: 10%;
+  padding-right: 10%;
   margin-bottom: 5rem;
 
+  box-shadow: var(--box-shadow-a);
+  background-color: var(--color-primary);
   display: flex;
   align-items: center;
   font-size: clamp(12px, 100%, 28px);
@@ -156,9 +161,9 @@ body {
 
   padding-left: 2.5%;
 
-  background-color: #bfbfbf;
-  border-top-left-radius: clamp(1px, 0.5rem, 10px);
-  border-bottom-left-radius: clamp(1px, 0.5rem, 10px);
+  background-color: var(--color-contents-bg);
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(--radius);
 }
 
 input:focus {
@@ -166,12 +171,14 @@ input:focus {
 }
 
 .search-button {
-  padding: clamp(1px, 0.5rem, 10px);
-
-  background-color: #bfbfbf;
   height: 100%;
-  border-top-right-radius: clamp(1px, 0.5rem, 10px);
-  border-bottom-right-radius: clamp(1px, 0.5rem, 10px);
+
+  padding: clamp(1px, 0.5rem, 10px);
+  padding-right: 0.55px;
+  padding-left: 0.55px;
+
+  transform: scaleX(1.1);
+  background-color: var(--color-contents-bg);
 }
 
 .search-button:hover {
@@ -184,10 +191,11 @@ input:focus {
   aspect-ratio: 1/1;
 
   padding: clamp(1px, 0.5rem, 10px);
-  margin-left: 2.5%;
 
-  background-color: #ffd300;
-  border-radius: clamp(1px, 0.5rem, 10px);
+  background-color: var(--color-contents-bg);
+  border-radius: var(--radius);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
   background-position: center center;
   background-size: cover;
 }
@@ -225,8 +233,8 @@ input:focus {
   font-size: clamp(12px, 1vw, 20px);
   font-weight: bold;
   text-align: center;
-  background-color: #ffc300;
-  border-radius: clamp(1px, 0.5rem, 10px);
+  background-color: var(--color-primary);
+  border-radius: var(--radius);
 }
 
 .login-button:hover {
@@ -242,8 +250,8 @@ input:focus {
   font-size: clamp(12px, 1vw, 20px);
   font-weight: bold;
   text-align: center;
-  background-color: #ff7d90;
-  border-radius: clamp(1px, 0.5rem, 10px);
+  background-color: var(--color-accent);
+  border-radius: var(--radius);
 }
 
 .register-button:hover {
@@ -276,14 +284,15 @@ input:focus {
   }
 
   .menu-container {
-    width: 70%;
+    width: 60%;
     height: auto;
 
-    right: 5%;
+    right: 20%;
     
-    background-color: #d9d9d9;
+    box-shadow: var(--box-shadow);
+    background-color: var(--color-contents-bg);
     position: absolute;
-    border-radius: 10px;
+    border-radius: var(--radius);
     aspect-ratio: 1/5;
   }
 
@@ -296,9 +305,17 @@ input:focus {
   }
 
   .content-head {
-    width: 80%;
-    height: clamp(10px, 10vw, 40px);
+    width: 100%;
+    height: clamp(5rem, auto, 8rem);
 
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-bottom: 5rem;
+
+    box-shadow: var(--box-shadow-a);
+    background-color: var(--color-primary);
     display: flex;
     align-items: center;
     font-size: clamp(8px, 100%, 10px);
@@ -310,9 +327,9 @@ input:focus {
 
     padding-left: 2.5%;
 
-    background-color: #bfbfbf;
-    border-top-left-radius: clamp(1px, 0.5rem, 10px);
-    border-bottom-left-radius: clamp(1px, 0.5rem, 10px);
+    background-color: var(--color-contents-bg);
+    border-top-left-radius: var(--radius);
+    border-bottom-left-radius: var(--radius);
   }
 
   .write-button {
@@ -320,10 +337,10 @@ input:focus {
     height: 100%;
     aspect-ratio: 1/1;
 
-    margin-left: 2.5%;
-
-    background-color: #ffd300;
-    border-radius: clamp(1px, 0.5rem, 10px);
+    background-color: var(--color-contents-bg);
+    border-radius: var(--radius);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   }
 
   .profile-image {
@@ -332,7 +349,7 @@ input:focus {
     aspect-ratio: 1/1;
 
     border-radius: 50%;
-    background-color: #ffc300;
+    background-color: var(--color-primary);
   }
 
   .profile-info {
