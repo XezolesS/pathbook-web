@@ -2,8 +2,48 @@
 @import "tailwindcss";
 
 @theme {
+  --font-display: "Noto Sans KR";
   --font-sans: "Noto Sans KR", "Noto Sans", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  /* Theme colors */
+  --color-theme-50: hsl(46, 100%, 80%);
+  --color-theme-100: hsl(46, 100%, 74%);
+  --color-theme-200: hsl(46, 100%, 68%);
+  --color-theme-300: hsl(46, 100%, 62%);
+  --color-theme-400: hsl(46, 100%, 56%);
+  --color-theme-500: hsl(46, 100%, 50%);
+  --color-theme-600: hsl(46, 100%, 44%);
+  --color-theme-700: hsl(46, 100%, 38%);
+  --color-theme-800: hsl(46, 100%, 32%);
+  --color-theme-900: hsl(46, 100%, 26%);
+  --color-theme-950: hsl(46, 100%, 20%);
+
+  /* Accent colors */
+  --color-accent-50: hsl(351, 100%, 95%);
+  --color-accent-100: hsl(351, 100%, 91%);
+  --color-accent-200: hsl(351, 100%, 87%);
+  --color-accent-300: hsl(351, 100%, 83%);
+  --color-accent-400: hsl(351, 100%, 79%);
+  --color-accent-500: hsl(351, 100%, 75%);
+  --color-accent-600: hsl(351, 100%, 71%);
+  --color-accent-700: hsl(351, 100%, 67%);
+  --color-accent-800: hsl(351, 100%, 63%);
+  --color-accent-900: hsl(351, 100%, 59%);
+  --color-accent-950: hsl(351, 100%, 55%);
+
+  /* Semantic colors */
+  --color-error: hsl(4, 100%, 60%);
+  --color-warning: hsl(34, 100%, 50%);
+  --color-success: hsl(152, 100%, 35%);
+  --color-info: var(--color-theme-500);
+
+  --radius-normal: clamp(4px, 0.5rem, 10px);
+
+  --box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.25);
+  --box-shadow-a: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  --map-before: rgba(0, 0, 0, 0.15);
 }
 
 html,
@@ -15,19 +55,4 @@ body {
     color-scheme: dark;
   }
   */
-}
-
-:root {
-  --color-bg: #e3e6ea;
-  --color-bg-surface: #e9e9e9;
-  --color-contents-bg: #ffffff;
-  --color-primary: #ffd063;
-  --color-accent: #ff7d90;
-  --color-secondary: #ffffff;
-
-  --box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.25);
-  --box-shadow-a: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  --radius: clamp(4px, 0.5rem, 10px);
-
-  --map-before: rgba(0, 0, 0, 0.15);
 }
