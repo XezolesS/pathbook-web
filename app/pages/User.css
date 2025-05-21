@@ -1,0 +1,271 @@
+html,
+body {
+  background-color: #fef9e7;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+button {
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 8px;
+  padding: 10px 20px;
+  transition: background-color 0.2s ease;
+}
+
+.mypage-container {
+  width: 100%;
+}
+
+.mypage-header img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.mypage-profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f3e061;
+  padding: 20px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.profile-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #ffc107;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+}
+
+.profile-info h2 {
+  margin: 0;
+}
+
+.profile-info h2 span {
+  color: #555;
+  font-weight: normal;
+  margin-left: 8px;
+}
+
+.profile-info p {
+  margin: 5px 0 0;
+}
+
+.mypage-profile input[type="text"] {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin: 5px 0;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.mypage-profile input[type="text"]:focus {
+  border-color: #4a90e2;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+.profile-buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.edit-button {
+  background: none;
+  border: 1px solid #ccc;
+  color: #0000ee;
+  font-weight: bold;
+}
+
+.edit-button.delete-button {
+  background-color: #e53935;
+  color: white;
+  border: none;
+}
+
+.mypage-tabmenu {
+  display: flex;
+  background-color: #ff9800;
+}
+
+.tab-item {
+  flex: 1;
+  padding: 15px 0;
+  font-weight: bold;
+  border-right: 1px solid #fff;
+  color: #333;
+  background-color: #ff9800;
+  text-align: center;
+}
+
+.tab-item:last-child {
+  border-right: none;
+}
+
+.tab-item.active {
+  background-color: #f57c00;
+  color: white;
+}
+
+.mypage-searchbar {
+  display: flex;
+  align-items: center;
+  background-color: #ede7f6;
+  padding: 10px 20px;
+}
+
+.mypage-searchbar input {
+  width: 90%;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.mypage-searchbar button {
+  font-size: 20px;
+  background-color: #d1c4e9;
+  border: none;
+  padding: 5px 10px;
+}
+
+.mypage-content {
+  background-color: #fef9e7;
+  padding: 40px;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-area {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  font-size: 20px;
+  color: #444;
+  min-width: 60%;
+  text-align: center;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px 40px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content h3 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/*배경/프로필 업로드 모달*/
+.file-upload-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.file-upload-label {
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.file-upload-label:hover {
+  background-color: #ddd;
+}
+
+.modal-content input[type="file"] {
+  display: none;
+}
+
+.selected-file-name {
+  font-size: 0.95rem;
+  color: #666;
+  word-break: break-all;
+}
+
+.upload-modal-button {
+  background-color: #ff9900;
+  color: white;
+  border: none;
+}
+
+.upload-modal-button:hover {
+  background-color: #e68700;
+}
+
+/*회원 탈퇴 모달 버튼*/
+.modal-button-group {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.modal-delete-button {
+  background-color: #e53935;
+  color: white;
+  border: none;
+}
+
+.modal-cancel-button {
+  background-color: #cccccc;
+  color: white;
+  border: none;
+}
