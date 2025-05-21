@@ -50,20 +50,21 @@
 
 .button-theme {
   width: 100%;
-  aspect-ratio: 6/1;
-
+  
   margin-bottom: 2.5%;
-  background: #ff7d90;
-  border-radius: clamp(4px, 0.5rem, 10px);
+
+  box-shadow: var(--box-shadow-a);
+  background: var(--color-accent);
+  border-radius: var(--radius);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  aspect-ratio: 6/1;
 }
 
 .button-text {
   font-size: clamp(14px, 1.5rem, 24px);
-
   font-weight: 700;
 }
 
@@ -72,7 +73,6 @@
 
   font-size: clamp(8px, 0.625rem, 14px);
   letter-spacing: clamp(1px, 0.1rem, 2px);
-
   text-align: center;
   text-decoration: underline;
   color: #666666;
