@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   background-color: #fef9e7;
   margin: 0;
   padding: 0;
@@ -28,7 +29,7 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #F3E061;
+  background-color: #f3e061;
   padding: 20px;
   flex-wrap: wrap;
   gap: 20px;
@@ -44,7 +45,7 @@ button {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background-color: #FFC107;
+  background-color: #ffc107;
   background-size: cover;
   background-position: center;
   cursor: pointer;
@@ -92,7 +93,7 @@ button {
 .edit-button {
   background: none;
   border: 1px solid #ccc;
-  color: #0000EE;
+  color: #0000ee;
   font-weight: bold;
 }
 
@@ -104,7 +105,7 @@ button {
 
 .mypage-tabmenu {
   display: flex;
-  background-color: #FF9800;
+  background-color: #ff9800;
 }
 
 .tab-item {
@@ -113,7 +114,7 @@ button {
   font-weight: bold;
   border-right: 1px solid #fff;
   color: #333;
-  background-color: #FF9800;
+  background-color: #ff9800;
   text-align: center;
 }
 
@@ -122,14 +123,14 @@ button {
 }
 
 .tab-item.active {
-  background-color: #F57C00;
+  background-color: #f57c00;
   color: white;
 }
 
 .mypage-searchbar {
   display: flex;
   align-items: center;
-  background-color: #EDE7F6;
+  background-color: #ede7f6;
   padding: 10px 20px;
 }
 
@@ -141,7 +142,7 @@ button {
 
 .mypage-searchbar button {
   font-size: 20px;
-  background-color: #D1C4E9;
+  background-color: #d1c4e9;
   border: none;
   padding: 5px 10px;
 }
@@ -267,78 +268,4 @@ button {
   background-color: #cccccc;
   color: white;
   border: none;
-}
-
-.setting-container {
-  max-width: 600px;
-  margin: 40px auto;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  padding: 36px 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.setting-title {
-  color: #333;
-  margin-bottom: 16px;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  letter-spacing: -1px;
-}
-
-.setting-section {
-  padding: 28px 32px 24px 32px;
-  border-bottom: 1.5px solid #ececec;
-  background: #fff;
-  border-radius: 0;
-  box-shadow: none;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.setting-section:last-child {
-  border-bottom: none;
-}
-
-.setting-section-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 14px;
-  color: #ff9800;
-  letter-spacing: -0.5px;
-}
-
-.setting-section-delete .setting-section-title {
-  color: #e53935;
-}
-
-.setting-password-inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 400px;
-  width: 100%;
-}
-
-.mypage-profile-input {
-  width: 100%;
-  max-width: 400px;
-  padding: 10px;
-  margin: 5px 0;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.mypage-profile-input:focus {
-  border-color: #4a90e2;
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
 }
