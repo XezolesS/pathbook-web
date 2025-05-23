@@ -1,10 +1,19 @@
 import { useState } from "react";
 import "./BookmarkFolder.css";
+import delete_icon from "../assets/delete.svg";
 
-export function BookFolder({ bookType, userId, bookTitle, bgColor }: { bookType: string; userId: string; bookTitle: string; bgColor: string }) {
+export function BookFolder({ bookType, userId, bookTitle, bgColor, inModal=false }: { bookType: string; userId: string; bookTitle: string; bgColor: string; inModal?: boolean; }) {
   return (
-    <div className="basic-book">
+    <div className={`basic-book ${inModal ? 'modal-version' : ''}`}>
       <div className="book-shape">
+        {inModal && bookType !== 'book-type-add' && (
+          <img
+            className="delete-icon"
+            src={delete_icon}
+            alt="Delete"
+            role="button"
+          />
+        )}
         <div className="book-line"></div>
         <div className="fixed-title">Pathbook</div>
         <div className="book-user">@{userId}</div>
@@ -15,14 +24,15 @@ export function BookFolder({ bookType, userId, bookTitle, bgColor }: { bookType:
   );
 }
 
-
 export const BookmarkEditModal = ({ showBookmarkEditModal, setShowBookmarkEditModal }: {showBookmarkEditModal: boolean; setShowBookmarkEditModal: (value: boolean) => void;}) => {
+  const [showBookmarkAddModal, setShowBookmarkAddModal] = useState(false);
+
   return (
     <div className="bookmark-edit-modal-overlay">
       <div className="bookmark-edit-modal-background">
         <div className="bookmark-edit-modal-header">
           <button
-            className="cancle"
+            className="bookmark-edit-done"
             type="button"
             onClick={() => {
               setShowBookmarkEditModal(false);
@@ -33,7 +43,63 @@ export const BookmarkEditModal = ({ showBookmarkEditModal, setShowBookmarkEditMo
           <span>북 마크 편집</span>
         </div>
         <div className="bookmark-edit-modal-content">
-          ?
+          <div className="bookmark-edit-list">
+            <BookFolder bookType="book-type1" userId="user1" bookTitle="광주 산책 코스" bgColor="#e4fbbe" inModal={true}/>
+            <BookFolder bookType="book-type1" userId="user2" bookTitle="등산 코스" bgColor="#bec3fb" inModal={true}/>
+            <BookFolder bookType="book-type2" userId="user3" bookTitle="벚꽃 구경" bgColor="#fbbec8" inModal={true}/>
+            <BookFolder bookType="book-type3" userId="user4" bookTitle="드라이브 가자가자가자고" bgColor="#bec3fb" inModal={true}/>
+
+            <BookFolder bookType="book-type1" userId="user1" bookTitle="광주 산책 코스" bgColor="#e4fbbe" inModal={true}/>
+            <BookFolder bookType="book-type1" userId="user2" bookTitle="등산 코스" bgColor="#bec3fb" inModal={true}/>
+            <BookFolder bookType="book-type2" userId="user3" bookTitle="벚꽃 구경" bgColor="#fbbec8" inModal={true}/>
+            <BookFolder bookType="book-type3" userId="user4" bookTitle="드라이브 가자가자가자고" bgColor="#bec3fb" inModal={true}/>
+            
+            <BookFolder bookType="book-type1" userId="user1" bookTitle="광주 산책 코스" bgColor="#e4fbbe" inModal={true}/>
+            <BookFolder bookType="book-type1" userId="user2" bookTitle="등산 코스" bgColor="#bec3fb" inModal={true}/>
+            <BookFolder bookType="book-type2" userId="user3" bookTitle="벚꽃 구경" bgColor="#fbbec8" inModal={true}/>
+            <BookFolder bookType="book-type3" userId="user4" bookTitle="드라이브 가자가자가자고" bgColor="#bec3fb" inModal={true}/>
+
+            <BookFolder bookType="book-type-add" userId="userID" bookTitle="" bgColor="#d9d9d9" inModal={true}/>
+          </div>
+          <button
+            type="button"
+            className="add-bookmark-button"
+            onClick={() => {
+              setShowBookmarkAddModal(true);
+            }}
+            >
+            북마크 추가
+          </button>
+          {showBookmarkAddModal ? <BookmarkAddModal showBookmarkAddModal={showBookmarkAddModal} setShowBookmarkAddModal={setShowBookmarkAddModal} /> : null} 
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const BookmarkAddModal = ({ showBookmarkAddModal, setShowBookmarkAddModal }: {showBookmarkAddtModal: boolean; setShowBookmarkAddModal: (value: boolean) => void;}) => {
+
+  return (
+    <div className="bookmark-add-modal-overlay">
+      <div className="bookmark-add-modal-background">
+        <div className="bookmark-edit-modal-header">
+          <button
+            className="bookmark-edit-done"
+            type="button"
+            onClick={() => {
+              setShowBookmarkAddModal(false);
+            }}
+          >
+          취소
+          </button>
+          <span>북 마크 추가</span>
+        </div>
+        <div className="bookmark-edit-modal-content">
+          <div className="bookmark-edit-list">
+            <BookFolder bookType="book-type1" userId="user2" bookTitle="등산 코스" bgColor="#bec3fb" inModal={true}/>
+            <BookFolder bookType="book-type2" userId="user3" bookTitle="벚꽃 구경" bgColor="#fbbec8" inModal={true}/>
+            <BookFolder bookType="book-type3" userId="user4" bookTitle="드라이브 가자가자가자고" bgColor="#bec3fb" inModal={true}/>
+          </div>
         </div>
       </div>
     </div>

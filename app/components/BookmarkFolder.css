@@ -2,26 +2,41 @@
   box-sizing: border-box;
 }
 .basic-book {
-  width: 240px;
-  height: 315px;
+  font-size: clamp(6px, 1vw, 16px);
+  width: 15em;
+  height: 20em;
   position: relative;
-  cursor: pointer;
+  margin: 0 auto;
 }
 .book-shape {
   background: #ffffff;
-  border: 1px solid #818181;
-  border-radius: 0.5rem;
+  border: 0.0625em solid #818181;
+  border-radius: var(--radius);
   display: flex;
   flex-direction: row;
-  
-  width: 240px;
-  height: 315px;
-  min-width: 240px;
+  width: 15em;
+  height: 20em;
   position: relative;
+  cursor: pointer;
 }
+
+.delete-icon {
+  position: absolute;
+  top: -0.5em;
+  right: -0.5em;
+  width: 2em;
+  min-width: 20px;
+  height: 2em;
+  min-height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
 .book-type1 {
   background-color: #fbbec8;
-  border-radius: 0.5rem;
+  border-radius: var(--radius);
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -29,7 +44,7 @@
 }
 .book-type2 {
   background-color: #fbbec8;
-  border-radius: 0 0 0.5rem 0.5rem;
+  border-radius: 0 0 var(--radius) var(--radius);
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -41,16 +56,45 @@
   background-color: #fbbec8;
   display: flex;
   flex-direction: row;
-  width: 195px;
-  height: 148px;
+  width: 12.1875em;
+  height: 9.25em;
   position: absolute;
-  left: 50px;
-  top: 126px;
+  left: 3.125em;
+  top: 7.875em;
+}
+.book-type-add {
+  background-color: #fbbec8;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+.book-type-add::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/delete.svg');
+  background-repeat: no-repeat;
+  transform: rotate(45deg);
+  background-size: 40%;
+  background-position: center;
+  filter: invert(30%) sepia(80%) saturate(0%) hue-rotate(66deg) contrast(70%);
+  z-index: 2;
+}
+.book-type-add::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(205, 205, 205, 0.59);
+  border-radius: var(--radius);
+  z-index : 1;
+  pointer-events: none;
 }
 .book-line {
   position: absolute;
-  left: 22.17px;
-  width: 2px;
+  left: 1.3856em;
+  width: 0.125em;
   height: 100%;
   background-color: black;
   z-index: 1;
@@ -58,40 +102,34 @@
 .fixed-title {
   color: #000000;
   text-align: center;
-  font-family: var(--heading-font-family, "Inter-SemiBold", sans-serif);
-  font-size: var(--heading-font-size, 24px);
-  font-weight: var(--heading-font-weight, 600);
+  font-size: 1.5em;
+  font-weight: 600;
 
   position: absolute;
-  left: 43px;
-  top: 21px;
-  width: 175px;
+  left: 1em;
+  top: 1em;
+  width: 90%;
 }
 .book-user {
   color: #000000;
   text-align: left;
-  font-family: var(--body-base-font-family, "Inter-Regular", sans-serif);
-  font-size: var(--body-base-font-size, 16px);
-  line-height: var(--body-base-line-height, 140%);
-  font-weight: var(--body-base-font-weight, 400);
-
+  font-size: 1em;
+  text-align: end;
   position: absolute;
-  left: 163px;
-  top: 50px;
-  width: 65.54px;
+  left: 2em;
+  top: 3.5em;
+  width: 80%;
 }
 .book-title {
   color: #000000;
   text-align: center;
-  font-family: var(--heading-font-family, "Inter-SemiBold", sans-serif);
-  font-size: var(--heading-font-size, 24px);
-  line-height: var(--heading-line-height, 120%);
-  font-weight: var(--heading-font-weight, 600);
+  font-size: 1.5em;
+  font-weight: 600;
   
   position: absolute;
-  left: calc(50% - 67px);
-  top: 170px;
-  width: 181px 
+  left: 2.2em;
+  top: 6em;
+  width: 75%;
 }
 
 
@@ -110,17 +148,24 @@
 
 .bookmark-edit-modal-background {
   background: #ffffff;
-  width: 500px;
-  height: 500px;
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
+  width: 60%;
+  max-width: 100%;
+  height: 60%;
+  border-radius: var(--radius);
   position: relative;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--box-shadow);
   font-weight: 600;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1em;
   animation: fadeIn 0.3s ease-in-out;
+}
+
+.bookmark-edit-modal-content {
+  width: 100%;
+  padding-top: 0.5em;
+  overflow-y: auto;
 }
 
 @keyframes fadeIn {
@@ -139,7 +184,7 @@
   flex-direction: row;
 }
 
-.cancle {
+.bookmark-edit-done {
   position: absolute;
   top: 0.5rem;
   left: 1rem;
@@ -150,8 +195,15 @@
   color: #0f6cfc;
   font-weight: 600;
   border: 1px solid #0f6cfc;
-  border-radius: 5px;
+  border-radius: --radius;
+  box-shadow: var(--box-shadow-a);
+}
 
+.bookmark-edit-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  gap: 1em;
 }
 
 .bookmark-folder {
@@ -173,18 +225,61 @@
 
 .add-bookmark-button {
   all: unset;
-  padding: 10px 20px 10px 20px;
+  padding: 0.5rem 1rem;
   background-color: white;
   color: #333333;
+  font-size: 1rem;
   font-weight: 600;
   border: 1px solid #a6a6a6;
-  border-radius: 5px;
+  border-radius: var(--radius);
   cursor: pointer;
+  box-shadow: var(--box-shadow);
+}
+
+.bookmark-add-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /*background: rgba(0, 0, 0, 0.5);*/
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bookmark-add-modal-background {
+  background: #ffffff;
+  width: 60%;
+  max-width: 60%;
+  height: auto;
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  position: relative;
+  box-shadow: var(--box-shadow);
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .bookmark-folder-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 0fr));
-  gap: 3rem;
+  grid-template-columns: repeat(3, 1fr);
   justify-content: center;
+  gap: 1em;
 }
