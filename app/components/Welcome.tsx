@@ -3,17 +3,21 @@ import "./Welcome.css";
 export default function WelcomeComponent() {
   return (
     <>
-      <div className="catchphrase">캐치프레이즈 크고 짧게</div>
+      <div className="catchphrase">길을 책으로, 추억을 걷다<br/>Pathbook.</div>
 
       <div className="intro-section">
         <ul>
           <li>
-            무슨 커뮤니티인지, 내가 좋아하는 경로를 지정하고 사람들과 공유할 수
-            있어요!!
+            기억을 남기고 싶은 모든 이들을 위한, Pathbook
+            당신이 좋아하는 길, 익숙한 거리, 그 길 위의 장면들.
+            Pathbook은 단순한 경로가 아니라 기억을 걷는 방법입니다.
           </li>
+          <br/>
           <li>
-            어떤 특징을 가졌는지, 단순한 장소 저장이 아닌 원하는 경로 그 자체를
-            저장할 수 있어요!
+            기억하고 싶은 길, 책처럼 담다
+            언젠가 다시 걷고 싶은 길이 있나요?
+            오늘의 산책, 어제의 드라이브, 마음속에 담고 싶은 장소들.
+            Pathbook은 그 모든 경로를, 한 권의 책처럼 기록합니다.
           </li>
         </ul>
       </div>
