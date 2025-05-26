@@ -1,47 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./MyPage.css";
+import {
+  FetchProfileRequest,
+  UpdateProfileRequest,
+  UploadProfileImageRequest,
+  FetchTabDataRequest,
+} from "../api/pathbook/requests/auth/MyPageRequest";
 
-async function fetchProfile() {
-  const res = await fetch("/api/profile", { credentials: "include" });
-  if (!res.ok) throw new Error("프로필 정보를 불러올 수 없습니다.");
-  return await res.json();
-}
 
-async function updateProfile({ nickname, bio }) {
-  const res = await fetch("/api/profile", {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
-    body: JSON.stringify({ nickname, bio }),
-  });
-  if (!res.ok) throw new Error("프로필 수정 실패");
-  return await res.json();
-}
-
-async function uploadImage(file, type) {
-  const formData = new FormData();
-  formData.append("image", file);
-  formData.append("type", type);
-  const res = await fetch("/api/profile/image", {
-    method: "POST",
-    credentials: "include",
-    body: formData,
-  });
-  if (!res.ok) throw new Error("이미지 업로드 실패");
-  return await res.json();
-}
-
-async function fetchTabData(tab) {
-  const tabToEndpoint = {
-    posts: "/api/profile/posts",
-    comments: "/api/profile/comments",
-    likes: "/api/profile/likes",
-    bookmarks: "/api/profile/bookmarks",
-  };
-  const res = await fetch(tabToEndpoint[tab], { credentials: "include" });
-  if (!res.ok) throw new Error("데이터를 불러올 수 없습니다.");
-  return await res.json();
-}
 
 const MyPage = () => {
   const [activeTab, setActiveTab] = useState("posts");
@@ -60,7 +26,8 @@ const MyPage = () => {
   const [tabLoading, setTabLoading] = useState(false);
 
   useEffect(() => {
-    fetchProfile()
+    new FetchProfileRequest()
+      .send()
       .then((data) => {
         setNickname(data.nickname);
         setBio(data.bio);
@@ -75,21 +42,19 @@ const MyPage = () => {
 
   useEffect(() => {
     setTabLoading(true);
-    fetchTabData(activeTab)
+    new FetchTabDataRequest(activeTab)
+      .send()
       .then((data) => setTabData(data))
       .catch(() => setTabData([]))
       .finally(() => setTabLoading(false));
   }, [activeTab]);
 
-  const handleImageUpload = async (
-    e,
-    type
-  ) => {
+  const handleImageUpload = async (e, type) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setSelectedFileName(file.name);
       try {
-        const res = await uploadImage(file, type);
+        const res = await new UploadProfileImageRequest(file, type).send();
         if (type === "background") {
           setBgImage(res.url);
           setShowBgModal(false);
@@ -105,7 +70,7 @@ const MyPage = () => {
 
   const handleEditSave = async () => {
     try {
-      await updateProfile({ nickname, bio });
+      await new UpdateProfileRequest(nickname, bio).send();
       setIsEditing(false);
       alert("프로필이 저장되었습니다.");
     } catch {

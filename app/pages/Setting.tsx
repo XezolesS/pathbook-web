@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 import "./MyPage.css";
+import {
+  ChangeEmailRequest,
+  ChangePasswordRequest,
+  DeleteAccountRequest
+} from "../api/pathbook/requests/auth/SettingRequest";
+
 
 const Setting = () => {
   const [email, setEmail] = useState("");
@@ -17,21 +23,11 @@ const Setting = () => {
     if (!email) return setEmailMsg("이메일을 입력하세요.");
     if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) return setEmailMsg("이메일 형식이 올바르지 않습니다.");
 
-    // [API 연동 부분] 이메일 변경 요청
     try {
-      const res = await fetch("/api/user/email-change", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ newEmail: email }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setEmailMsg("이메일 변경 요청이 완료되었습니다.");
-      } else {
-        setEmailMsg(data.message || "이메일 변경 실패");
-      }
+      await new ChangeEmailRequest(email).send();
+      setEmailMsg("이메일 변경 요청이 완료되었습니다.");
     } catch (err) {
-      setEmailMsg("서버 오류가 발생했습니다.");
+      setEmailMsg(err.message || "이메일 변경 실패");
     }
   };
 
@@ -41,27 +37,30 @@ const Setting = () => {
     if (newPassword !== confirmPassword) return setPwMsg("새 비밀번호가 일치하지 않습니다.");
     if (newPassword.length < 6) return setPwMsg("비밀번호는 6자리 이상이어야 합니다.");
 
-    // [API 연동 부분] 비밀번호 변경 요청
     try {
-      const res = await fetch("/api/user/password-change", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ currentPassword, newPassword }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setPwMsg("비밀번호가 변경되었습니다.");
-        setCurrentPassword("");
-        setNewPassword("");
-        setConfirmPassword("");
-      } else {
-        setPwMsg(data.message || "비밀번호 변경 실패");
-      }
+      await new ChangePasswordRequest(currentPassword, newPassword).send();
+      setPwMsg("비밀번호가 변경되었습니다.");
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
     } catch (err) {
-      setPwMsg("서버 오류가 발생했습니다.");
+      setPwMsg(err.message || "비밀번호 변경 실패");
     }
   };
 
+  const handleDeleteAccount = async () => {
+    try {
+      await new DeleteAccountRequest().send();
+      alert("회원 탈퇴가 완료되었습니다.");
+      setShowDeleteModal(false);
+      window.location.href = "/main";
+    } catch (err) {
+      alert(err.message || "회원 탈퇴 실패");
+      setShowDeleteModal(false);
+    }
+  };
+
+  // 탈퇴 모달
   const renderDeleteModal = () => (
     <div className="modal-overlay">
       <div className="modal-content">
@@ -70,11 +69,7 @@ const Setting = () => {
         <div className="modal-button-group">
           <button
             className="modal-delete-button"
-            onClick={() => {
-              alert("회원 탈퇴가 완료되었습니다.");
-              setShowDeleteModal(false);
-              // [API 연동 부분] 실제 회원탈퇴 API 호출 필요
-            }}
+            onClick={handleDeleteAccount}
           >
             탈퇴하기
           </button>

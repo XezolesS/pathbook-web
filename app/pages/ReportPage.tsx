@@ -1,40 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./ReportPage.css";
+import ReportRequest from "../api/pathbook/requests/auth/ReportRequest"; // 상대경로 import
 
-// 신고 사유 리스트
 const REPORT_REASONS = [
   "정치/종교적 게시물",
   "특정 유저 언급(저격) 게시물",
   "폭력성(욕설, 비방) 게시물",
   "기타",
 ];
-
-class ReportRequest {
-  constructor(type, target, reason, content) {
-    this.type = type;
-    this.target = target;
-    this.reason = reason;
-    this.content = content;
-  }
-
-  async send() {
-    const response = await fetch("/api/reports", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({
-        type: this.type,
-        target: this.target,
-        reason: this.reason,
-        content: this.content,
-      }),
-    });
-    if (!response.ok) {
-      throw new Error("신고 등록에 실패했습니다.");
-    }
-    return await response.json();
-  }
-}
 
 const ReportPage = () => {
   const [reports, setReports] = useState([]);
@@ -67,17 +40,11 @@ const ReportPage = () => {
         report.reason,
         report.content
       );
-      await request.send();
+      const saved = await request.send();
       alert("신고가 정상적으로 접수되었습니다.");
       setShowUserModal(false);
       setReports((prev) => [
-        {
-          ...report,
-          type: "user",
-          id: Date.now(),
-          date: new Date().toISOString().slice(0, 10),
-          status: "접수",
-        },
+        saved, 
         ...prev,
       ]);
     } catch (err) {
@@ -94,17 +61,11 @@ const ReportPage = () => {
         report.reason,
         report.content
       );
-      await request.send();
+      const saved = await request.send();
       alert("신고가 정상적으로 접수되었습니다.");
       setShowPostModal(false);
       setReports((prev) => [
-        {
-          ...report,
-          type: "post",
-          id: Date.now(),
-          date: new Date().toISOString().slice(0, 10),
-          status: "접수",
-        },
+        saved,
         ...prev,
       ]);
     } catch (err) {
