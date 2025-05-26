@@ -1,41 +1,119 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./MyPage.css";
+
+async function fetchProfile() {
+  const res = await fetch("/api/profile", { credentials: "include" });
+  if (!res.ok) throw new Error("프로필 정보를 불러올 수 없습니다.");
+  return await res.json();
+}
+
+async function updateProfile({ nickname, bio }) {
+  const res = await fetch("/api/profile", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+    body: JSON.stringify({ nickname, bio }),
+  });
+  if (!res.ok) throw new Error("프로필 수정 실패");
+  return await res.json();
+}
+
+async function uploadImage(file, type) {
+  const formData = new FormData();
+  formData.append("image", file);
+  formData.append("type", type);
+  const res = await fetch("/api/profile/image", {
+    method: "POST",
+    credentials: "include",
+    body: formData,
+  });
+  if (!res.ok) throw new Error("이미지 업로드 실패");
+  return await res.json();
+}
+
+async function fetchTabData(tab) {
+  const tabToEndpoint = {
+    posts: "/api/profile/posts",
+    comments: "/api/profile/comments",
+    likes: "/api/profile/likes",
+    bookmarks: "/api/profile/bookmarks",
+  };
+  const res = await fetch(tabToEndpoint[tab], { credentials: "include" });
+  if (!res.ok) throw new Error("데이터를 불러올 수 없습니다.");
+  return await res.json();
+}
 
 const MyPage = () => {
   const [activeTab, setActiveTab] = useState("posts");
   const [isEditing, setIsEditing] = useState(false);
-  const [nickname, setNickname] = useState("닉네임");
-  const [bio, setBio] = useState("바이오 / 상태 메시지");
-  const [bgImage, setBgImage] = useState("/app/assets/image/samplepic1_a.jpg");
-  const [profileImage, setProfileImage] = useState("/app/assets/image/samplepic2.jpg");
+  const [nickname, setNickname] = useState("");
+  const [bio, setBio] = useState("");
+  const [bgImage, setBgImage] = useState("");
+  const [profileImage, setProfileImage] = useState("");
+  const [userId, setUserId] = useState(""); //아디 넣기기
 
   const [showBgModal, setShowBgModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
-
   const [selectedFileName, setSelectedFileName] = useState("선택된 파일 없음");
 
-  const handleImageUpload = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    type: "background" | "profile"
+  const [tabData, setTabData] = useState([]);
+  const [tabLoading, setTabLoading] = useState(false);
+
+  useEffect(() => {
+    fetchProfile()
+      .then((data) => {
+        setNickname(data.nickname);
+        setBio(data.bio);
+        setBgImage(data.bgImageUrl);
+        setProfileImage(data.profileImageUrl);
+        setUserId(data.userId);
+      })
+      .catch(() => {
+        alert("프로필 정보를 불러오지 못했습니다.");
+      });
+  }, []);
+
+  useEffect(() => {
+    setTabLoading(true);
+    fetchTabData(activeTab)
+      .then((data) => setTabData(data))
+      .catch(() => setTabData([]))
+      .finally(() => setTabLoading(false));
+  }, [activeTab]);
+
+  const handleImageUpload = async (
+    e,
+    type
   ) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
-      const fileReader = new FileReader();
-      fileReader.onload = () => {
+      setSelectedFileName(file.name);
+      try {
+        const res = await uploadImage(file, type);
         if (type === "background") {
-          setBgImage(fileReader.result as string);
+          setBgImage(res.url);
           setShowBgModal(false);
         } else {
-          setProfileImage(fileReader.result as string);
+          setProfileImage(res.url);
           setShowProfileModal(false);
         }
-        setSelectedFileName(file.name);
-      };
-      fileReader.readAsDataURL(file);
+      } catch {
+        alert("이미지 업로드에 실패했습니다.");
+      }
     }
   };
 
-  const renderModal = (type: "background" | "profile") => (
+  const handleEditSave = async () => {
+    try {
+      await updateProfile({ nickname, bio });
+      setIsEditing(false);
+      alert("프로필이 저장되었습니다.");
+    } catch {
+      alert("프로필 저장에 실패했습니다.");
+    }
+  };
+
+  const renderModal = (type) => (
     <div className="modal-overlay">
       <div className="modal-content">
         <h3>{type === "background" ? "배경 이미지 업로드" : "프로필 이미지 업로드"}</h3>
@@ -61,18 +139,17 @@ const MyPage = () => {
   );
 
   const renderContent = () => {
-    switch (activeTab) {
-      case "posts":
-        return <EmptyContent label="작성글" />;
-      case "comments":
-        return <EmptyContent label="작성 댓글" />;
-      case "likes":
-        return <EmptyContent label="좋아요" />;
-      case "bookmarks":
-        return <EmptyContent label="북마크" />;
-      default:
-        return null;
-    }
+    if (tabLoading) return <EmptyContent label="불러오는 중..." />;
+    if (!tabData || tabData.length === 0) return <EmptyContent label="데이터 없음" />;
+    return (
+      <div className="mypage-content">
+        <ul>
+          {tabData.map((item, idx) => (
+            <li key={idx}>{JSON.stringify(item)}</li>
+          ))}
+        </ul>
+      </div>
+    );
   };
 
   return (
@@ -115,7 +192,7 @@ const MyPage = () => {
             ) : (
               <>
                 <h2>
-                  {nickname} <span>@아이디</span>
+                  {nickname} <span>@{userId}</span>
                 </h2>
                 <p>{bio}</p>
               </>
@@ -126,7 +203,10 @@ const MyPage = () => {
         <div className="profile-buttons">
           <button
             className="edit-button"
-            onClick={() => setIsEditing((prev) => !prev)}
+            onClick={() => {
+              if (isEditing) handleEditSave();
+              else setIsEditing(true);
+            }}
           >
             {isEditing ? "저장" : "프로필 편집하기"}
           </button>
@@ -170,9 +250,9 @@ const MyPage = () => {
   );
 };
 
-const EmptyContent = ({ label }: { label: string }) => (
+const EmptyContent = ({ label }) => (
   <div className="mypage-content">
-    <div className="content-area">{label} (비워둠)</div>
+    <div className="content-area">{label}</div>
   </div>
 );
 

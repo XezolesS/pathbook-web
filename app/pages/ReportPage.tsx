@@ -1,10 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ReportPage.css";
 
-const sampleReports = [
-  // { id: 1, type: "user", target: "닉네임", reason: "욕설", content: "심한 욕설", date: "2025-05-24", status: "접수" },
-];
-
+// 신고 사유 리스트
 const REPORT_REASONS = [
   "정치/종교적 게시물",
   "특정 유저 언급(저격) 게시물",
@@ -12,25 +9,107 @@ const REPORT_REASONS = [
   "기타",
 ];
 
+class ReportRequest {
+  constructor(type, target, reason, content) {
+    this.type = type;
+    this.target = target;
+    this.reason = reason;
+    this.content = content;
+  }
+
+  async send() {
+    const response = await fetch("/api/reports", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        type: this.type,
+        target: this.target,
+        reason: this.reason,
+        content: this.content,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error("신고 등록에 실패했습니다.");
+    }
+    return await response.json();
+  }
+}
+
 const ReportPage = () => {
-  const [reports, setReports] = useState(sampleReports);
+  const [reports, setReports] = useState([]);
   const [showUserModal, setShowUserModal] = useState(false);
   const [showPostModal, setShowPostModal] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const handleUserReport = (report) => {
-    setReports((prev) => [
-      { ...report, type: "user", id: prev.length + 1, date: new Date().toISOString().slice(0, 10), status: "접수" },
-      ...prev,
-    ]);
-    setShowUserModal(false);
+  useEffect(() => {
+    const fetchReports = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch("/api/reports", { credentials: "include" });
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        setReports(data);
+      } catch {
+        alert("신고 내역을 불러오지 못했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchReports();
+  }, []);
+
+  const handleUserReport = async (report) => {
+    try {
+      const request = new ReportRequest(
+        "user",
+        report.target,
+        report.reason,
+        report.content
+      );
+      await request.send();
+      alert("신고가 정상적으로 접수되었습니다.");
+      setShowUserModal(false);
+      setReports((prev) => [
+        {
+          ...report,
+          type: "user",
+          id: Date.now(),
+          date: new Date().toISOString().slice(0, 10),
+          status: "접수",
+        },
+        ...prev,
+      ]);
+    } catch (err) {
+      alert("신고 등록에 실패했습니다. 다시 시도해주세요.");
+    }
   };
 
-  const handlePostReport = (report) => {
-    setReports((prev) => [
-      { ...report, type: "post", id: prev.length + 1, date: new Date().toISOString().slice(0, 10), status: "접수" },
-      ...prev,
-    ]);
-    setShowPostModal(false);
+  // 글 신고 등록
+  const handlePostReport = async (report) => {
+    try {
+      const request = new ReportRequest(
+        "post",
+        report.target,
+        report.reason,
+        report.content
+      );
+      await request.send();
+      alert("신고가 정상적으로 접수되었습니다.");
+      setShowPostModal(false);
+      setReports((prev) => [
+        {
+          ...report,
+          type: "post",
+          id: Date.now(),
+          date: new Date().toISOString().slice(0, 10),
+          status: "접수",
+        },
+        ...prev,
+      ]);
+    } catch (err) {
+      alert("신고 등록에 실패했습니다. 다시 시도해주세요.");
+    }
   };
 
   return (
@@ -44,7 +123,9 @@ const ReportPage = () => {
       </div>
 
       <div className="report-list">
-        {reports.length === 0 ? (
+        {loading ? (
+          <div className="empty-content">불러오는 중...</div>
+        ) : reports.length === 0 ? (
           <EmptyContent label="신고 내역이 없습니다." />
         ) : (
           reports.map((r) => (
@@ -188,7 +269,7 @@ export const PostReportModal = ({ onClose, onSubmit }) => {
   );
 };
 
-const EmptyContent = ({ label }: { label: string }) => (
+const EmptyContent = ({ label }) => (
   <div className="empty-content">{label}</div>
 );
 
