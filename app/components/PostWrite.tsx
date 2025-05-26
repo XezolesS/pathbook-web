@@ -136,7 +136,9 @@ export default function PostWriteComponent(Details: PostWriteProps) {
             className="draw-tool-drawing"
             onClick={toggleDrawingMode}
             style={{
-              backgroundColor: isDrawingMode ? "#ffc300" : "#d9d9d9",
+              backgroundColor: isDrawingMode
+                ? "var(--color-primary)"
+                : "var(--color-contents-bg)",
               cursor: "pointer",
             }}
           />
