@@ -4,6 +4,7 @@ export default [
   index("./pages/Landing.tsx"),
   route("mypage", "./pages/MyPage.tsx"),
   route("setting", "./pages/Setting.tsx"),
+  route("report", "./pages/ReportPage.tsx"),
 
   route("login", "./pages/Login.tsx"),
   route("register", "./pages/Register.tsx"),
