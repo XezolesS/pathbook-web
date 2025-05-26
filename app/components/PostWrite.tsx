@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import "./PostWrite.css";
 import RichTextEditor from "./RichTextEditor";
 import html2canvas from "html2canvas";
-import CorrectTextRequest from "../api/spellcorrector/requests/spellcorrector/SpellCorrectorRequest";
+import CorrectTextRequest from "../api/spellcorrector/requests/spellcorrector/CorrectTextRequest";
 
 interface PostWriteProps {
   cancelOnclick: () => void;

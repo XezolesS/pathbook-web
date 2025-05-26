@@ -7,5 +7,5 @@ export enum HTTPMethod {
   DELETE = "DELETE",
   POST = "POST",
   PATCH = "PATCH",
-  CONNECT = "CONNECT"
+  CONNECT = "CONNECT",
 }
