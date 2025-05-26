@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import UserRequest from "../api/pathbook/requests/auth/UserRequest.ts";
+import type { User } from "../api/pathbook/types/User";
+import { parseCookies } from "../scripts/cookie.ts";
 import "./MyPage.css";
 import {
-  FetchProfileRequest,
   UpdateProfileRequest,
   UploadProfileImageRequest,
-  FetchTabDataRequest,
 } from "../api/pathbook/requests/auth/MyPageRequest";
-
-
 
 const MyPage = () => {
   const [activeTab, setActiveTab] = useState("posts");
@@ -16,40 +15,52 @@ const MyPage = () => {
   const [bio, setBio] = useState("");
   const [bgImage, setBgImage] = useState("");
   const [profileImage, setProfileImage] = useState("");
-  const [userId, setUserId] = useState(""); //아디 넣기기
+  const [userId, setUserId] = useState("");
 
   const [showBgModal, setShowBgModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [selectedFileName, setSelectedFileName] = useState("선택된 파일 없음");
 
-  const [tabData, setTabData] = useState([]);
+  const [tabData, setTabData] = useState<any[]>([]);
   const [tabLoading, setTabLoading] = useState(false);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
 
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
+  // 유저 정보 로드
   useEffect(() => {
-    new FetchProfileRequest()
-      .send()
-      .then((data) => {
-        setNickname(data.nickname);
-        setBio(data.bio);
-        setBgImage(data.bgImageUrl);
-        setProfileImage(data.profileImageUrl);
-        setUserId(data.userId);
-      })
-      .catch(() => {
-        alert("프로필 정보를 불러오지 못했습니다.");
-      });
+    const fetchUser = async () => {
+      const cookies = parseCookies(document.cookie);
+      const loggedIn = cookies.get("logged_in");
+
+      if (!loggedIn) {
+        setCurrentUser(null);
+        return;
+      }
+
+      try {
+        const userRequest = new UserRequest();
+        const userResponse = await userRequest.send();
+        const user = userResponse.user;
+
+        setCurrentUser(user);
+        setNickname(user.username);
+        setBio("바이오정보");
+        setBgImage("이미지정보");
+        setProfileImage("이미지정보");
+        setUserId(user.id);
+      } catch (error) {
+        console.error("유저 정보 로딩 실패:", error);
+      }
+    };
+
+    fetchUser();
   }, []);
 
-  useEffect(() => {
-    setTabLoading(true);
-    new FetchTabDataRequest(activeTab)
-      .send()
-      .then((data) => setTabData(data))
-      .catch(() => setTabData([]))
-      .finally(() => setTabLoading(false));
-  }, [activeTab]);
-
-  const handleImageUpload = async (e, type) => {
+  const handleImageUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    type: "background" | "profile" //이거 수정해야함 
+  ) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setSelectedFileName(file.name);
@@ -78,7 +89,7 @@ const MyPage = () => {
     }
   };
 
-  const renderModal = (type) => (
+  const renderModal = (type: string) => (
     <div className="modal-overlay">
       <div className="modal-content">
         <h3>{type === "background" ? "배경 이미지 업로드" : "프로필 이미지 업로드"}</h3>
@@ -157,7 +168,7 @@ const MyPage = () => {
             ) : (
               <>
                 <h2>
-                  {nickname} <span>@{userId}</span>
+                  {nickname} <span>{userId}</span>
                 </h2>
                 <p>{bio}</p>
               </>
@@ -179,30 +190,18 @@ const MyPage = () => {
       </div>
 
       <div className="mypage-tabmenu">
-        <div
-          className={`tab-item ${activeTab === "posts" ? "active" : ""}`}
-          onClick={() => setActiveTab("posts")}
-        >
-          작성글
-        </div>
-        <div
-          className={`tab-item ${activeTab === "comments" ? "active" : ""}`}
-          onClick={() => setActiveTab("comments")}
-        >
-          작성 댓글
-        </div>
-        <div
-          className={`tab-item ${activeTab === "likes" ? "active" : ""}`}
-          onClick={() => setActiveTab("likes")}
-        >
-          좋아요
-        </div>
-        <div
-          className={`tab-item ${activeTab === "bookmarks" ? "active" : ""}`}
-          onClick={() => setActiveTab("bookmarks")}
-        >
-          북마크
-        </div>
+        {["posts", "comments", "likes", "bookmarks"].map((tab) => (
+          <div
+            key={tab}
+            className={`tab-item ${activeTab === tab ? "active" : ""}`}
+            onClick={() => setActiveTab(tab)}
+          >
+            {tab === "posts" && "작성글"}
+            {tab === "comments" && "작성 댓글"}
+            {tab === "likes" && "좋아요"}
+            {tab === "bookmarks" && "북마크"}
+          </div>
+        ))}
       </div>
 
       <div className="mypage-searchbar">
@@ -215,7 +214,7 @@ const MyPage = () => {
   );
 };
 
-const EmptyContent = ({ label }) => (
+const EmptyContent = ({ label }: { label: string }) => (
   <div className="mypage-content">
     <div className="content-area">{label}</div>
   </div>
