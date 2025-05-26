@@ -288,17 +288,19 @@ input:focus {
     height: auto;
 
     right: 20%;
+    padding: 0.5rem;
+    padding-bottom: 1rem;
     
     box-shadow: var(--box-shadow);
     background-color: var(--color-contents-bg);
     position: absolute;
     border-radius: var(--radius);
-    aspect-ratio: 1/5;
   }
 
   .main-content-container{
     width: 80%;
   }
+
   .mainpage{
     width: 100%;
     transform: translateX(-10%);
@@ -361,12 +363,15 @@ input:focus {
   
   .menu-item {
     width: 100%;
+    height: auto;
 
-    padding-top: clamp(6px, 1vw, 18px);
+    padding: 0;
+    margin-top: 0.5rem;
 
     font-weight: bold;
     display: flex;
     justify-content: center;
+    aspect-ratio: 1/1;
   }
 
   .menu-item span {
