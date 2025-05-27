@@ -30,7 +30,7 @@ export default abstract class HTTPRequest<ResponseType> {
   private header: Headers;
   private body: Record<string, any> | null;
   private queryParams: URLSearchParams | null;
-  private pathParams: Array<string> | null;
+  private pathParams: Record<string, any> | null;
 
   constructor(path: string, method: HTTPMethod) {
     this.path = path;
@@ -141,8 +141,12 @@ export default abstract class HTTPRequest<ResponseType> {
    *
    * @param params 패스 파라미터 값의 배열
    */
-  protected setPathParams(params: Array<string>): void {
-    this.pathParams = params;
+  protected setPathParam(name: string, value: any): void {
+    if (!this.pathParams) {
+      this.pathParams = {};
+    }
+
+    this.pathParams[name] = value;
   }
 
   /**
@@ -162,15 +166,18 @@ export default abstract class HTTPRequest<ResponseType> {
 
     // Path parameters 존재 시 순차 적용
     if (this.pathParams) {
-      this.pathParams.forEach((param) => {
-        requestUrl = `${requestUrl}/${param}`;
-      });
+      console.debug(this.pathParams);
+      for (const [key, value] of Object.entries(this.pathParams)) {
+        requestUrl = requestUrl.replace(`:${key}`, value);
+      }
     }
 
     // Query parameters 존재 시 적용
     if (this.queryParams) {
       requestUrl = `${requestUrl}?${this.queryParams.toString()}`;
     }
+
+    console.debug(`Request URL built: ${requestUrl}`);
 
     return requestUrl;
   }

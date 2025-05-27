@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import UserRequest from "../api/pathbook/requests/auth/UserRequest.ts";
+import MeRequest from "../api/pathbook/requests/auth/MeRequest.js";
 import type { User } from "../api/pathbook/types/User";
 import book_svg from "../assets/book.svg";
 import home_svg from "../assets/home.svg";
@@ -54,8 +54,8 @@ export default function MainPage({ loaderData }: Route.ComponentProps) {
       }
 
       try {
-        const userRequest = new UserRequest();
-        const userResponse = await userRequest.send();
+        const meRequest = new MeRequest();
+        const userResponse = await meRequest.send();
 
         console.log(userResponse);
 

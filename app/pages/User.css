@@ -74,7 +74,9 @@ button {
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #f9f9f9;
-  transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition:
+    border 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
 }
 
 .mypage-profile input[type="text"]:focus {
@@ -268,4 +270,80 @@ button {
   background-color: #cccccc;
   color: white;
   border: none;
+}
+
+.setting-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  padding: 36px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.setting-title {
+  color: #333;
+  margin-bottom: 16px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: -1px;
+}
+
+.setting-section {
+  padding: 28px 32px 24px 32px;
+  border-bottom: 1.5px solid #ececec;
+  background: #fff;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.setting-section:last-child {
+  border-bottom: none;
+}
+
+.setting-section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: #ff9800;
+  letter-spacing: -0.5px;
+}
+
+.setting-section-delete .setting-section-title {
+  color: #e53935;
+}
+
+.setting-password-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.mypage-profile-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin: 5px 0;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition:
+    border 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+}
+
+.mypage-profile-input:focus {
+  border-color: #4a90e2;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
 }
