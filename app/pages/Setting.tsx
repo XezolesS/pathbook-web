@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./MyPage.css";
+import "./User.css";
 import {
   ChangeEmailRequest,
   ChangePasswordRequest,
