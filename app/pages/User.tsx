@@ -1,23 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { redirect, useNavigate, useParams } from "react-router";
 import "./User.css";
 import type { User } from "../api/pathbook/types/User";
 import type { Route } from "./pages/+types/User";
+import UserRequest from "../api/pathbook/requests/user/UserRequest";
+import GetIconRequest from "../api/pathbook/requests/user/GetIconRequest";
+import GetBannerRequest from "../api/pathbook/requests/user/GetBannerRequest";
 
-export async function loader({ request }: Route.LoaderArgs) {
-
-
-  return {};
+export async function loader({ request, params }: Route.LoaderArgs) {
+  return { userId: params.userid };
 }
 
-export default function UserPage() {
+export default function UserPage({ loaderData }: Route.ComponentProps) {
+  const { userId } = loaderData;
+
+  const navigate = useNavigate();
+
   const [activeTab, setActiveTab] = useState("posts");
   const [isEditing, setIsEditing] = useState(false);
-  const [nickname, setNickname] = useState("닉네임");
+  const [username, setUsername] = useState("닉네임");
   const [bio, setBio] = useState("바이오 / 상태 메시지");
-  const [bgImage, setBgImage] = useState("/app/assets/image/samplepic1_a.jpg");
-  const [profileImage, setProfileImage] = useState(
-    "/app/assets/image/samplepic2.jpg"
-  );
+  const [banner, setBanner] = useState("/app/assets/image/samplepic1_a.jpg");
+  const [icon, setIcon] = useState("/app/assets/image/samplepic2.jpg");
 
   const [showBgModal, setShowBgModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
@@ -26,6 +30,64 @@ export default function UserPage() {
   const [tabData, setTabData] = useState<any[]>([]);
   const [tabLoading, setTabLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+
+  // 유저 정보 불러오기
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        console.log(userId);
+
+        const userRequest = new UserRequest(userId);
+        const userResponse = await userRequest.send();
+
+        setUser(userResponse.user);
+      } catch (error) {
+        console.error(error);
+        navigate("/");
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  // 유저 정보 설정하기
+  useEffect(() => {
+    const blob2Url = (blob: Blob) => URL.createObjectURL(blob);
+
+    const fetchIcon = async () => {
+      try {
+        console.log(userId);
+
+        const getIconRequest = new GetIconRequest(userId);
+        const getIconResponse = await getIconRequest.send();
+
+        console.log(getIconResponse)
+        setIcon(blob2Url(getIconResponse.image));
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    const fetchBanner = async () => {
+      try {
+        console.log(userId);
+
+        const getBannerRequest = new GetBannerRequest(userId);
+        const getBannerResponse = await getBannerRequest.send();
+
+        console.log(getBannerResponse)
+        setBanner(blob2Url(getBannerResponse.image));
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    if (user === null) return;
+
+    setUsername(user.username);
+    fetchIcon();
+    fetchBanner();
+  }, [user]);
 
   const handleImageUpload = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -36,10 +98,10 @@ export default function UserPage() {
       const fileReader = new FileReader();
       fileReader.onload = () => {
         if (type === "background") {
-          setBgImage(fileReader.result as string);
+          setBanner(fileReader.result as string);
           setShowBgModal(false);
         } else {
-          setProfileImage(fileReader.result as string);
+          setIcon(fileReader.result as string);
           setShowProfileModal(false);
         }
         setSelectedFileName(file.name);
@@ -119,7 +181,7 @@ export default function UserPage() {
         }
         style={{ cursor: "pointer" }}
       >
-        <img src={bgImage} alt="배경 이미지" />
+        <img src={banner} alt="배경 이미지" />
       </div>
 
       {showBgModal && renderModal("background")}
@@ -130,7 +192,7 @@ export default function UserPage() {
           <div
             className="profile-image"
             style={{
-              backgroundImage: `url(${profileImage})`,
+              backgroundImage: `url(${icon})`,
               backgroundSize: "cover",
             }}
             onClick={
@@ -146,8 +208,8 @@ export default function UserPage() {
               <>
                 <input
                   type="text"
-                  value={nickname}
-                  onChange={(e) => setNickname(e.target.value)}
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
                 <input
                   type="text"
@@ -158,7 +220,7 @@ export default function UserPage() {
             ) : (
               <>
                 <h2>
-                  {nickname} <span>@아이디</span>
+                  {username} <span>{userId}</span>
                 </h2>
                 <p>{bio}</p>
               </>

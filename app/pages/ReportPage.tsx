@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./ReportPage.css";
-import ReportRequest from "../api/pathbook/requests/auth/ReportRequest"; // 상대경로 import
+import ReportRequest from "../api/pathbook/requests/ReportRequest"; // 상대경로 import
 
 const REPORT_REASONS = [
   "정치/종교적 게시물",

@@ -10,7 +10,7 @@ export default [
   
   route("main", "./pages/Main.tsx"),
   
-  ...prefix("user", [route(":uid", "./pages/User.tsx")]),
+  ...prefix("user", [route(":userid", "./pages/User.tsx")]),
   route("setting", "./pages/Setting.tsx"),
   route("report", "./pages/ReportPage.tsx"),
 ] satisfies RouteConfig;

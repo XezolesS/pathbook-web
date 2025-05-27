@@ -1,6 +1,6 @@
-import { HTTPMethod } from "../../enums/HTTPMethod";
-import HTTPRequest from "../HTTPRequest";
-import type { User } from "../../types/User";
+import { HTTPMethod } from "../enums/HTTPMethod";
+import HTTPRequest from "./HTTPRequest";
+import type { User } from "../types/User";
 
 export interface TabData {
   id: number;
@@ -39,7 +39,9 @@ export class UploadProfileImageRequest extends HTTPRequest<{ url: string }> {
     formData.append("type", type);
     this.setRawBody(formData);
   }
-  protected async parseSuccessResponse(response: Response): Promise<{ url: string }> {
+  protected async parseSuccessResponse(
+    response: Response
+  ): Promise<{ url: string }> {
     return await response.json();
   }
 }
@@ -58,4 +60,5 @@ export class FetchTabDataRequest extends HTTPRequest<TabData[]> {
   protected async parseSuccessResponse(response: Response): Promise<TabData[]> {
     return await response.json();
   }
+  
 }
