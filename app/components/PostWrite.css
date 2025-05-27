@@ -157,6 +157,17 @@
   border-bottom: 1px solid #000000;
 }
 
+.ql-container.ql-snow {
+  overflow-y: auto;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.ql-editor img {
+  max-width: 60% !important;
+  height: auto !important;
+}
+
 .button-container {
   width: 95%;
 
