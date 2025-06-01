@@ -20,7 +20,7 @@ export default function RichTextEditorComponent() {
             ["bold", "italic", "underline", "strike"],
             ["image"],
             [{ list: "ordered" }, { list: "bullet" }],
-            [{ size: ["small", false, "large", "huge"] }],
+            [{ 'align': [] }, { size: ["small", false, "large", "huge"] }],
             [{ color: [] }, { background: [] }],
           ],
         },
@@ -47,7 +47,7 @@ export default function RichTextEditorComponent() {
 
   return (
     <>
-      <div ref={editorRef} style={{ height: "200px" }} />
+      <div ref={editorRef} style={{ height: "400px" }} />
     </>
   );
 }
