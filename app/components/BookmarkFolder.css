@@ -35,7 +35,7 @@
 }
 
 .book-type1 {
-  background-color: #fbbec8;
+  background-color: var(--color-primary);
   border-radius: var(--radius);
   display: flex;
   flex-direction: row;
@@ -43,7 +43,7 @@
   height: 100%;
 }
 .book-type2 {
-  background-color: #fbbec8;
+  background-color: var(--color-primary);
   border-radius: 0 0 var(--radius) var(--radius);
   display: flex;
   flex-direction: row;
@@ -53,7 +53,7 @@
   bottom: 0;
 }
 .book-type3 {
-  background-color: #fbbec8;
+  background-color: var(--color-primary);
   display: flex;
   flex-direction: row;
   width: 12.1875em;
@@ -63,14 +63,23 @@
   top: 7.875em;
 }
 .book-type-add {
-  background-color: #fbbec8;
+  background-color: #ffffff;
   border-radius: var(--radius);
   display: flex;
   flex-direction: row;
   width: 100%;
   height: 100%;
 }
-.book-type-add::before {
+.book-type-add::after {
+  all: unset;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(205, 205, 205, 0.59);
+  border-radius: var(--radius);
+  z-index : 1;
+}
+.plus-icon {
   content: "";
   position: absolute;
   inset: 0;
@@ -82,25 +91,26 @@
   filter: invert(30%) sepia(80%) saturate(0%) hue-rotate(66deg) contrast(70%);
   z-index: 2;
 }
-.book-type-add::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(205, 205, 205, 0.59);
-  border-radius: var(--radius);
-  z-index : 1;
-  pointer-events: none;
-}
+
 .book-line {
   position: absolute;
   left: 1.3856em;
-  width: 0.125em;
+  width: 1px;
   height: 100%;
   background-color: black;
-  z-index: 1;
+  box-shadow:
+    -0.5px -0.5px 0 #ffffff,
+     0.5px -0.5px 0 #ffffff,
+    -0.5px  0.5px 0 #ffffff,
+     0.5px  0.5px 0 #ffffff;
 }
 .fixed-title {
   color: #000000;
+  text-shadow:
+    -0.8px -1px 0 #ffffff,
+     0.8px -1px 0 #ffffff,
+    -0.8px  1px 0 #ffffff,
+     0.8px  1px 0 #ffffff;
   text-align: center;
   font-size: 1.5em;
   font-weight: 600;
@@ -112,6 +122,11 @@
 }
 .book-user {
   color: #000000;
+  text-shadow:
+    -0.8px -1px 0 #ffffff,
+     0.8px -1px 0 #ffffff,
+    -0.8px  1px 0 #ffffff,
+     0.8px  1px 0 #ffffff;
   text-align: left;
   font-size: 1em;
   text-align: end;
@@ -120,8 +135,14 @@
   top: 3.5em;
   width: 80%;
 }
-.book-title {
+
+.book-title { 
   color: #000000;
+  text-shadow:
+    -0.8px -1px 0 #ffffff,
+     0.8px -1px 0 #ffffff,
+    -0.8px  1px 0 #ffffff,
+     0.8px  1px 0 #ffffff;
   text-align: center;
   font-size: 1.5em;
   font-weight: 600;
@@ -131,7 +152,6 @@
   top: 6em;
   width: 75%;
 }
-
 
 .bookmark-edit-modal-overlay {
   position: fixed;
@@ -149,8 +169,7 @@
 .bookmark-edit-modal-background {
   background: #ffffff;
   width: 60%;
-  max-width: 100%;
-  height: 60%;
+  height: 80%;
   border-radius: var(--radius);
   position: relative;
   box-shadow: var(--box-shadow);
@@ -158,14 +177,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1em;
   animation: fadeIn 0.3s ease-in-out;
-}
-
-.bookmark-edit-modal-content {
-  width: 100%;
-  padding-top: 0.5em;
-  overflow-y: auto;
 }
 
 @keyframes fadeIn {
@@ -179,24 +191,60 @@
   }
 }
 
-.bookmark-edit-modal-header {
+.bookmark-color-modal-background {
+  background: #ffffff;
+  width: 40%;
+  height: 30%;
+  border-radius: var(--radius);
+  position: relative;
+  box-shadow: var(--box-shadow);
+  font-weight: 600;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.bookmark-color-modal-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2em;
+}
+
+.bookmark-edit-modal-header {
+  width: 100%;
   flex-direction: row;
+  align-items: center;
+  padding: 0.5em;
+
+  position: relative; 
+  font-size: 16px;
 }
 
 .bookmark-edit-done {
   position: absolute;
-  top: 0.5rem;
-  left: 1rem;
-
+  left: 0.5em;
+  top: 0.5em;
   padding: 2px 3px;
 
   background-color: white;
   color: #0f6cfc;
-  font-weight: 600;
+  
   border: 1px solid #0f6cfc;
   border-radius: --radius;
   box-shadow: var(--box-shadow-a);
+}
+.bookmark-edit-title {
+  position: relative;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.bookmark-edit-modal-content {
+  width: 100%;
+  padding-top: 0.5em;
+  overflow-y: auto;
 }
 
 .bookmark-edit-list {
@@ -225,7 +273,7 @@
 
 .add-bookmark-button {
   all: unset;
-  padding: 0.5rem 1rem;
+  padding: 0.5em 1em;
   background-color: white;
   color: #333333;
   font-size: 1rem;
@@ -242,39 +290,10 @@
   left: 0;
   width: 100%;
   height: 100%;
-  /*background: rgba(0, 0, 0, 0.5);*/
   z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.bookmark-add-modal-background {
-  background: #ffffff;
-  width: 60%;
-  max-width: 60%;
-  height: auto;
-  border-radius: var(--radius);
-  padding: 0.5rem 1rem;
-  position: relative;
-  box-shadow: var(--box-shadow);
-  font-weight: 600;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1em;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
 
 .bookmark-folder-content {
@@ -282,4 +301,75 @@
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
   gap: 1em;
+}
+
+.choose-bookmark-design {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.bookmark-design-label {
+  font-size: 17px;
+  font-weight: 600;
+  text-align: left;
+  margin-left: 2em;
+  margin-top: 1em;
+}
+
+.preview-bookmark-design {
+  display: flex;
+  flex-direction: row;
+  margin-right: 2em;
+  align-items: center;
+}
+
+.set-book-design {
+  display: flex;
+  width: 60%;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  padding-bottom: 2em;
+}
+
+.bookmark-title-input {
+  width: 80%;
+  margin-left: 2em;
+  padding: 0.5em;
+  font-size: 1rem;
+  border: 1px solid #a6a6a6;
+  border-radius: var(--radius);
+}
+.set-book-color {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: left;
+  padding-bottom: 2em;
+}
+.color-square {
+  background-color: var(--color-primary);
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: var(--radius);
+  border: 1px solid #a6a6a6;
+  margin-left: 2em;
+  font-size: 17px;
+}
+.color-picker {
+  width: 1em;
+  height: 1em;
+  margin-left: 1em;
+  background-color: var(--color-primary);
+  border: 1px solid #a6a6a6;
+  border-radius: var(--radius);
+}
+
+.bookmark-add-done {
+  width: 80%;
+  margin-left: 2em;
+  background-color: var(--color-primary);
+  border: 1px solid #a6a6a6;
+  border-radius: var(--radius);
+  box-shadow: var(--box-shadow-a);
 }
