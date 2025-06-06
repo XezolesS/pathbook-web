@@ -52,7 +52,6 @@ body {
   background-color: var(--color-bg);
   position: absolute;
   border-radius: var(--radius);
-  aspect-ratio: 4/9;
 }
 
 .profile {
