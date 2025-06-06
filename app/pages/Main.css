@@ -2,8 +2,8 @@ html,
 body {
   width: 100%;
   height: 100%;
-  min-width: 720px;
-  background-color: var(--color-bg);
+  min-width: 920px;
+  background-color: var(--color-contents-bg);
   display: flex;
   justify-content: center;
 }
@@ -44,10 +44,12 @@ body {
   
   right: 10%;
   padding: clamp(5px, 0.5rem, 10px);
-  padding-top: clamp(10px, 1rem, 15px);
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
 
+  gap: 1rem;
   box-shadow: var(--box-shadow);
-  background-color: var(--color-contents-bg);
+  background-color: var(--color-bg);
   position: absolute;
   border-radius: var(--radius);
   aspect-ratio: 4/9;
@@ -93,6 +95,7 @@ body {
 
 .menu-item {
   width: 100%;
+  height: 3rem;
 
   padding-top: clamp(6px, 1vw, 18px);
 
@@ -104,34 +107,32 @@ body {
   cursor: pointer;
 }
 
+.menu-item img{
+  border-left: solid 0.5rem var(--color-contents-bg);
+  padding-left: 0.2rem;
+}
+
 .menu-item span {
   width: 75%;
 
   margin-left: 5%;
   margin-right: 5%;
 
-  background-color: var(--color-bg-surface);
-  border-radius: var(--radius);
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
 }
 
-.menu-item.selected span {
-  background-color: var(--color-primary);
-}
 
-.menu-item.selected img {
-  color: var(--color-primary);
-  filter: brightness(1) saturate(100%) invert(80%) sepia(100%) saturate(750%)
-    hue-rotate(5deg);
+.menu-item.selected img{
+  border-left: solid 0.5rem var(--color-primary);
 }
 
 .main-content-container {
   width: 60%;
   height: 5000px;
 
-  background-color: var(--color-contents-bg);
+  background-color: var(--color-bg);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -139,13 +140,13 @@ body {
 
 .content-head {
   width: 100%;
-  height: clamp(5rem, auto, 8rem);
+  height: 5rem;
 
-  padding-top: 2.5%;
-  padding-bottom: 2.5%;
-  padding-left: 10%;
-  padding-right: 10%;
-  margin-bottom: 5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  margin-bottom: 1rem;
 
   box-shadow: var(--box-shadow-a);
   background-color: var(--color-primary);
@@ -156,7 +157,7 @@ body {
 }
 
 .search-textbox {
-  width: 90%;
+  width: 100%;
   height: 100%;
 
   padding-left: 2.5%;
@@ -174,8 +175,8 @@ input:focus {
   height: 100%;
 
   padding: clamp(1px, 0.5rem, 10px);
-  padding-right: 0.55px;
-  padding-left: 0.55px;
+  padding-right: 1.1px;
+  padding-left: 1.1px;
 
   transform: scaleX(1.1);
   background-color: var(--color-contents-bg);
@@ -203,6 +204,33 @@ input:focus {
   cursor: pointer;
 }
 
+.profile-container{
+  width: 100%;
+  height: auto;
+
+  padding: 1rem;
+
+  border-top: solid 0.5rem var(--color-primary);
+  border-radius: var(--radius);
+  background-color: var(--color-contents-bg);
+  box-shadow: var(--box-shadow-a);
+}
+
+.Kategorie-container{
+  width: 100%;
+  height: auto;
+
+  padding: 0.5rem;
+  padding-bottom: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  
+
+  border-radius: var(--radius);
+  background-color: var(--color-contents-bg);
+  box-shadow: var(--box-shadow-a);
+}
+
 .profile-options {
   width: 70%;
 
@@ -215,11 +243,16 @@ input:focus {
   text-decoration: underline;
 }
 
+.profile-image-anonymous{
+  width: 0;
+  height: 0;
+}
+
 .anonymity-comment {
   width: 100%;
 
   text-align: center;
-  font-size: clamp(12px, 1vw, 20px);
+  font-size: clamp(10px, 0.8vw, 16px);
   font-weight: bold;
   margin-bottom: 5%;
 }
@@ -235,6 +268,7 @@ input:focus {
   text-align: center;
   background-color: var(--color-primary);
   border-radius: var(--radius);
+  box-shadow: var(--box-shadow-a);
 }
 
 .login-button:hover {
@@ -252,6 +286,7 @@ input:focus {
   text-align: center;
   background-color: var(--color-accent);
   border-radius: var(--radius);
+  box-shadow: var(--box-shadow-a);
 }
 
 .register-button:hover {
@@ -274,27 +309,13 @@ input:focus {
   width: 100%;
 }
 
-@media screen and (max-width: 1120px) {
+@media screen and (max-width: 1280px) {
   .main-menu-container {
     width: 10%;
     height: 100%;
 
     margin-left: auto;
     position: relative;
-  }
-
-  .menu-container {
-    width: 60%;
-    height: auto;
-
-    right: 20%;
-    padding: 0.5rem;
-    padding-bottom: 1rem;
-    
-    box-shadow: var(--box-shadow);
-    background-color: var(--color-contents-bg);
-    position: absolute;
-    border-radius: var(--radius);
   }
 
   .main-content-container{
@@ -306,72 +327,9 @@ input:focus {
     transform: translateX(-10%);
   }
 
-  .content-head {
-    width: 100%;
-    height: clamp(5rem, auto, 8rem);
-
-    padding-top: 2.5%;
-    padding-bottom: 2.5%;
-    padding-left: 10%;
-    padding-right: 10%;
-    margin-bottom: 5rem;
-
-    box-shadow: var(--box-shadow-a);
-    background-color: var(--color-primary);
-    display: flex;
-    align-items: center;
-    font-size: clamp(8px, 100%, 10px);
-  }
-
-  .search-textbox {
-    width: 90%;
-    height: 100%;
-
-    padding-left: 2.5%;
-
-    background-color: var(--color-contents-bg);
-    border-top-left-radius: var(--radius);
-    border-bottom-left-radius: var(--radius);
-  }
-
-  .write-button {
-    width: auto;
-    height: 100%;
-    aspect-ratio: 1/1;
-
-    background-color: var(--color-contents-bg);
-    border-radius: var(--radius);
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  .profile-image {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1/1;
-
-    border-radius: 50%;
-    background-color: var(--color-primary);
-  }
-
-  .profile-info {
-    width: 0;
-    height: 0;
-
-    visibility: hidden;
-  }
-  
   .menu-item {
-    width: 100%;
-    height: auto;
-
-    padding: 0;
-    margin-top: 0.5rem;
-
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    aspect-ratio: 1/1;
+    height: 2rem;
+    padding-right: 0.5rem;
   }
 
   .menu-item span {
@@ -379,21 +337,62 @@ input:focus {
     visibility: hidden;
   }
 
-  .anonymity-comment {
+  .profile-container{
+    width: 100%;
+    height: 40%;
+
+    padding: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  }
+
+  .profile{
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  }
+
+  .profile-info{
     width: 0;
     height: 0;
+
+    margin: 0;
+    padding: 0;
+
     visibility: hidden;
   }
 
-  .login-button {
+  .anonymity-comment, .profile-container a{
     width: 0;
-    height: 0;
     visibility: hidden;
   }
 
-  .register-button {
-    width: 0;
-    height: 0;
-    visibility: hidden;
+  .profile-image-anonymous{
+    width: 70%;
+    height: auto;
+    aspect-ratio: 1/1;
+
+    border-radius: 50%;
+    background-image: url("../assets/login.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .profile-image-anonymous:hover{
+    cursor: pointer;
+  }
+
+  .profile-image{
+    width: 70%;
+    height: auto;
+
+    aspect-ratio: 1/1;
+    border-radius: 50%;
   }
 }

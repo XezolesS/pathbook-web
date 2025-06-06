@@ -3,7 +3,10 @@ import MeRequest from "../api/pathbook/requests/auth/MeRequest.js";
 import type { User } from "../api/pathbook/types/User";
 import book_svg from "../assets/book.svg";
 import home_svg from "../assets/home.svg";
-import menu_svg from "../assets/menu.svg";
+import heart_svg from "../assets/heart2.svg";
+import flag_svg from "../assets/flag.svg";
+import check_svg from "../assets/check.svg";
+import question_svg from "../assets/question.svg";
 import ring_svg from "../assets/ring.svg";
 import search_svg from "../assets/search.svg";
 import star_svg from "../assets/star.svg";
@@ -15,8 +18,11 @@ import ArticleWrite from "../components/PostWrite.js";
 import UserProfileComponent from "../components/UserProfile.js";
 import articleList from "../mock/ArticleData.json";
 import { parseCookies } from "../scripts/cookie.ts";
+import PostListRequest from "../api/pathbook/requests/post/GetPostList.ts";
+import PostDetailRequest from "../api/pathbook/requests/post/GetPostDetailRequest.ts";
 import "./Main.css";
 import type { Route } from "./pages/+types/Main";
+import { backgroundImage } from "html2canvas/dist/types/css/property-descriptors/background-image";
 
 export async function loader({ request }: Route.ClientLoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -43,7 +49,22 @@ export default function MainPage({ loaderData }: Route.ComponentProps) {
   const selectedData = articleList.find(
     (item) => item.articleID === selectedArticleID
   );
-
+  /*
+  // 게시글 관련 정보 불러오기
+  useEffect(()=>{
+    const fetchPosts = async () => {
+      const request = new PostListRequest();
+      const response = await request.send();
+      console.log(response);
+    };
+    const loadPostDetail = async (postId: number) => {
+    const request = new PostDetailRequest(postId);
+    const post = await request.send();
+    console.log(post.title, post.content, post.id);
+    };
+    fetchPosts();
+  },[])
+  */
   // 유저 불러오기
   useEffect(() => {
     const fetchUser = async () => {
@@ -96,17 +117,25 @@ export default function MainPage({ loaderData }: Route.ComponentProps) {
     <div className="mainpage">
       <div className="main-menu-container">
         <div className="menu-container" ref={menuRef}>
-          {currentUser ? (
-            <UserProfileComponent user={currentUser} />
-          ) : (
-            <AnonymousProfileComponent />
-          )}
-          {[
+          <div className="profile-container">
+            {currentUser ? (
+              <UserProfileComponent user={currentUser} />
+            ) : (
+              <>
+                <div className="profile-image-anonymous"></div>
+                <AnonymousProfileComponent />
+              </>
+            )}
+          </div>
+          <div className="Kategorie-container">
+            {[
             { name: "menu-home", icon: home_svg, label: "메인페이지" },
-            { name: "menu-ring", icon: ring_svg, label: "공지사항" },
-            { name: "menu-star", icon: star_svg, label: "인기 게시판" },
-            { name: "menu-book", icon: book_svg, label: "북마크 게시판" },
-            { name: "menu-menu", icon: menu_svg, label: "메뉴 더보기" },
+            { name: "menu-ring", icon: ring_svg, label: "공지 게시판" },
+            { name: "menu-1", icon: heart_svg, label: "인기 게시판" },
+            { name: "menu-2", icon: check_svg, label: "인증 게시판" },
+            { name: "menu-3", icon: question_svg, label: "질문 게시판" },
+            { name: "menu-4", icon: flag_svg, label: "자유 게시판" },
+            { name: "menu-book", icon: book_svg, label: "북마크" },
           ].map((item) => (
             <div
               key={item.name}
@@ -119,6 +148,7 @@ export default function MainPage({ loaderData }: Route.ComponentProps) {
               <span>{item.label}</span>
             </div>
           ))}
+          </div>
         </div>
       </div>
 
