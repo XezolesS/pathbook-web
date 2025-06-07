@@ -37,7 +37,7 @@
 }
 
 .draw-tool-container{
-  width: 7%;
+  width: 6%;
   height: 100%;
 
   padding: 1%;
@@ -56,6 +56,7 @@
   width: 100%;
   height: auto;
 
+  border-radius: var(--radius);
   box-shadow: var(--box-shadow);
   background-size: contain;
   background-repeat: no-repeat;
@@ -87,11 +88,12 @@
 
 .map-search-container{
   width: 30%;
-  height: 10%;
+  height: 7%;
 
   top: 1%;
   right: 1%;
 
+  border-radius: var(--radius);
   display: flex;
   box-shadow: var(--box-shadow);
   background-color: var(--color-contents-bg);
@@ -122,8 +124,9 @@
   height: 100%;
 
   padding: 1%;
+  padding-left: 0.75rem;
 
-  font-size: 1.2vw;
+  font-size: 0.75rem;
 }
 
 .frame {
@@ -152,6 +155,17 @@
   color: var(--color-primary);
   font-weight: 400;
   border-bottom: 1px solid #000000;
+}
+
+.ql-container.ql-snow {
+  overflow-y: auto;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.ql-editor img {
+  max-width: 60% !important;
+  height: auto !important;
 }
 
 .button-container {
@@ -196,3 +210,128 @@
   cursor: pointer;
 }
 
+.distance-display{
+  width: 95%;
+
+  padding: 1rem;
+  
+  border-radius: var(--radius);
+  border: 1px solid #000000;
+  gap: 1rem;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.total-distance-name, .transportation-name{
+  font-weight: bold;
+}
+
+.search-result {
+  width: 30%;
+  height: 70%;
+
+  top: 10%;
+  right: 1%;
+
+  position: absolute;
+  overflow: hidden;
+  background-color: var(--color-contents-bg);
+  border: 1px solid #000000;
+  border-radius: var(--radius);
+  z-index: 10;
+}
+.search-scroll {
+  max-height: 86%;
+  overflow-y: auto;
+  padding-right: 0px; 
+}
+
+.search-item {
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.search-item:hover {
+  background: #f1f1f1;
+}
+
+.place-name   { 
+  display:block; 
+  font-size:0.7rem; 
+  font-weight:600; 
+}
+
+.place-address { 
+  font-size:0.5rem; 
+  color:#666; 
+}
+
+.search-pagination {
+  width: 100%;
+  display:flex; 
+  justify-content:center; 
+  gap: 0.75rem;
+  padding: 2%;
+  font-size:0.75rem; 
+  border-top:1px solid #eee;
+  position: absolute;
+  bottom: 0;
+}
+
+.search-pagination:hover{
+  cursor: pointer;
+}
+
+.spell-corrector-container{
+  width: 95%;
+  height: auto;
+
+  padding: 1rem;
+  
+  border-radius: var(--radius);
+  border: 1px solid #000000;
+  gap: 1rem;
+  text-align: left;
+  font-size: 1rem;
+  aspect-ratio: 2/1;
+}
+
+.spell-corrector-container span{
+  font-size: 0.75rem;
+}
+
+.spell-corrector-textarea{
+  width: 100%;
+  height: 25%;
+
+  margin-top: 2%;
+  outline: none;
+  border: none;
+  resize: none;
+}
+.spell-corrector-response{
+  width: 100%;
+  height: 25%;
+
+  margin-top: 2%;
+  outline: none;
+  border: none;
+  resize: none;
+}
+
+.spell-corrector-toggle{
+  width: 95%;
+  height: auto;
+
+  color: darkblue;
+  text-decoration: underline;
+}
+
+.spell-corrector-edit-button{
+  width: 100%;
+
+  padding: 1rem;
+
+  font-weight: bold;
+  text-align: right;
+}

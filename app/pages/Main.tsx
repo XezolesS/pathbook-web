@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import UserRequest from "../api/pathbook/requests/auth/UserRequest.ts";
+import MeRequest from "../api/pathbook/requests/auth/MeRequest.js";
 import type { User } from "../api/pathbook/types/User";
 import book_svg from "../assets/book.svg";
 import home_svg from "../assets/home.svg";
@@ -54,8 +54,8 @@ export default function MainPage({ loaderData }: Route.ComponentProps) {
       }
 
       try {
-        const userRequest = new UserRequest();
-        const userResponse = await userRequest.send();
+        const meRequest = new MeRequest();
+        const userResponse = await meRequest.send();
 
         console.log(userResponse);
 
@@ -102,11 +102,11 @@ export default function MainPage({ loaderData }: Route.ComponentProps) {
             <AnonymousProfileComponent />
           )}
           {[
-            { name: "menu-home", icon: home_svg, label: "===========" },
-            { name: "menu-star", icon: star_svg, label: "===========" },
-            { name: "menu-ring", icon: ring_svg, label: "===========" },
-            { name: "menu-book", icon: book_svg, label: "===========" },
-            { name: "menu-menu", icon: menu_svg, label: "===========" },
+            { name: "menu-home", icon: home_svg, label: "메인페이지" },
+            { name: "menu-ring", icon: ring_svg, label: "공지사항" },
+            { name: "menu-star", icon: star_svg, label: "인기 게시판" },
+            { name: "menu-book", icon: book_svg, label: "북마크 게시판" },
+            { name: "menu-menu", icon: menu_svg, label: "메뉴 더보기" },
           ].map((item) => (
             <div
               key={item.name}

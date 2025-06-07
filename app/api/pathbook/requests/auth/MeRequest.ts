@@ -3,9 +3,9 @@ import type UserResponse from "../../responses/auth/UserResponse";
 import type { User } from "../../types/User";
 import HTTPRequest from "../HTTPRequest";
 
-export default class UserRequest extends HTTPRequest<UserResponse> {
+export default class MeRequest extends HTTPRequest<UserResponse> {
   constructor() {
-    super("/auth/user", HTTPMethod.GET);
+    super("/auth/me", HTTPMethod.GET);
 
     this.setCredentials("include");
     

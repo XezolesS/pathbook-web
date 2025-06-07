@@ -30,9 +30,10 @@ export default abstract class HTTPRequest<ResponseType> {
   private header: Headers;
   private body: Record<string, any> | null;
   private queryParams: URLSearchParams | null;
-  private pathParams: Record<string, any> | null;
+  private pathParams: Array<string> | null;
+  protected apiHost: string;
 
-  constructor(path: string, method: HTTPMethod) {
+  constructor(path: string, method: HTTPMethod, customHost?: string) {
     this.path = path;
     this.method = method;
     this.header = new Headers(APIConfig.API_HEADER);
@@ -40,6 +41,7 @@ export default abstract class HTTPRequest<ResponseType> {
     this.queryParams = null;
     this.pathParams = null;
     this.credentials = undefined;
+    this.apiHost = customHost ?? APIConfig.API_HOST;
   }
 
   /**
@@ -141,12 +143,8 @@ export default abstract class HTTPRequest<ResponseType> {
    *
    * @param params 패스 파라미터 값의 배열
    */
-  protected setPathParam(name: string, value: any): void {
-    if (!this.pathParams) {
-      this.pathParams = {};
-    }
-
-    this.pathParams[name] = value;
+  protected setPathParams(params: Array<string>): void {
+    this.pathParams = params;
   }
 
   /**
@@ -162,22 +160,19 @@ export default abstract class HTTPRequest<ResponseType> {
    * @returns 최종 요청 URL
    */
   protected buildUrl(): string {
-    let requestUrl = `${APIConfig.API_HOST}${this.path}`;
+    let requestUrl = `${this.apiHost}${this.path}`;
 
     // Path parameters 존재 시 순차 적용
     if (this.pathParams) {
-      console.debug(this.pathParams);
-      for (const [key, value] of Object.entries(this.pathParams)) {
-        requestUrl = requestUrl.replace(`:${key}`, value);
-      }
+      this.pathParams.forEach((param) => {
+        requestUrl = `${requestUrl}/${param}`;
+      });
     }
 
     // Query parameters 존재 시 적용
     if (this.queryParams) {
       requestUrl = `${requestUrl}?${this.queryParams.toString()}`;
     }
-
-    console.debug(`Request URL built: ${requestUrl}`);
 
     return requestUrl;
   }
