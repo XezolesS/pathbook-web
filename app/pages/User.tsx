@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { ReactNode } from "react";
 import BookmarkFolder from "../components/BookmarkFolder";
-
 import "./User.css";
 import type { User } from "../api/pathbook/types/User";
 import type { Route } from "./pages/+types/User";
