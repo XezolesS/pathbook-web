@@ -192,6 +192,15 @@ export default function MainPage({ loaderData }: Route.ComponentProps) {
               }}
             >
               <ArticleContents
+                title={article.title}
+                writerNickname={article.writerNickname}
+                writeTime={article.writeTime}
+                tagList={article.tagList}
+                description={article.description}
+                writerId={article.writerId}
+                chat={article.chat}
+                like={article.like}
+                bookmark={article.bookmark}
               />
             </div>
           ))}
