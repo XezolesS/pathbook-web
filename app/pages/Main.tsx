@@ -129,13 +129,12 @@ export default function MainPage({ loaderData }: Route.ComponentProps) {
           </div>
           <div className="Kategorie-container">
             {[
-            { name: "menu-home", icon: home_svg, label: "메인페이지" },
-            { name: "menu-ring", icon: ring_svg, label: "공지 게시판" },
-            { name: "menu-1", icon: heart_svg, label: "인기 게시판" },
-            { name: "menu-2", icon: check_svg, label: "인증 게시판" },
-            { name: "menu-3", icon: question_svg, label: "질문 게시판" },
-            { name: "menu-4", icon: flag_svg, label: "자유 게시판" },
-            { name: "menu-book", icon: book_svg, label: "북마크" },
+              { name: "menu-home", icon: home_svg, label: "메인 페이지" },
+              { name: "menu-ring", icon: ring_svg, label: "공지글" },
+              { name: "menu-1",   icon: heart_svg, label: "인기글" },
+              { name: "menu-2",   icon: check_svg, label: "인증글" },
+              { name: "menu-3",   icon: question_svg, label: "질문글" },
+              { name: "menu-book",icon: book_svg,  label: "북마크" },
           ].map((item) => (
             <div
               key={item.name}
