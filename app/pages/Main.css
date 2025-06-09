@@ -129,7 +129,8 @@ body {
 
 .main-content-container {
   width: 60%;
-  height: 5000px;
+  height: auto;
+  min-height: 100%;
 
   background-color: var(--color-bg);
   display: flex;
