@@ -1,37 +1,84 @@
-import { backgroundImage } from "html2canvas/dist/types/css/property-descriptors/background-image";
+import { useEffect, useState } from "react";
+import { Comment } from "../api/pathbook/types/Comment";
+import { Post } from "../api/pathbook/types/Post";
+import { User } from "../api/pathbook/types/User";
 import { formatCountNumber } from "../scripts/count";
 import "./Post.css";
-import { visibility } from "html2canvas/dist/types/css/property-descriptors/visibility";
 
-interface PostProps {
-  writerNickname?: string | null;
-  writeTime?: string | null;
-  title?: string | null;
-  tagList?: string | null;
-  description?: string | null;
-  writerId?: string | null;
-  chat?: number | null;
-  like?: number | null;
-  bookmark?: number | null;
-}
+export default function PostComponent({ post }: { post: Post }) {
+  const [postId, setPostId] = useState<number | null>(null);
+  const [author, setAuthor] = useState<User | null>(null);
+  const [title, setTitle] = useState<string | null>(null);
+  const [content, setContent] = useState<string | null>(null);
+  const [createdAt, setCreatedAt] = useState<string | null>(null);
+  const [commentCount, setCommentCount] = useState<number | null>(null);
+  const [likeCount, setLikeCount] = useState<number | null>(null);
+  const [bookmarkCount, setBookmarkCount] = useState<number | null>(null);
+  const [tags, setTags] = useState<string | null>(null);
 
-export default function PostComponent(Details: PostProps) {
-  const grayIfNull = (value: any, color:string, Width:string) => 
-    value === null || value === undefined ? { backgroundColor: color, width: Width} : { backgroundColor: "transparent"};
-  const hiddenSvg = (value: any) => value === null || value === undefined ? { width: "0" } : { width: "0.75rem" };
+  const delay = async (ms: number) =>
+    await new Promise((resolve) => setTimeout(resolve, ms));
+
+  // 임시 로딩
+  useEffect(() => {
+    const run = async () => {
+      await delay(1000); // Properly awaited
+
+      const dateString = new Date(post.createdAt).toLocaleString();
+
+      function countTotalComments(comment: Comment): number {
+        let total = 1;
+
+        if (comment.childComments) {
+          for (const child of comment.childComments) {
+            total += countTotalComments(child);
+          }
+        }
+
+        return total;
+      }
+
+      let totalCommentCount = 0;
+      for (const rootComment of post.rootComments) {
+        totalCommentCount += countTotalComments(rootComment);
+      }
+
+      setPostId(post.postId);
+      setAuthor(post.author);
+      setTitle(post.title);
+      setContent(post.content);
+      setCreatedAt(dateString);
+      setCommentCount(totalCommentCount);
+      setLikeCount(post.likeCount);
+      setBookmarkCount(post.bookmarkCount);
+      setTags(post.tags.join(" "));
+    };
+
+    run();
+  }, []);
+
   return (
     <>
       <div className="post-container">
         <div className="post-item">
           <div className="post-contents-text-container">
-            <div className="post-contents-title" style={grayIfNull(Details.title,"#a2a2a2","50%")}>
-              {Details.title}
+            <div
+              className="post-contents-title"
+              style={getBackgroundStyle(title, "#a2a2a2", "50%")}
+            >
+              {title}
             </div>
-            <div className="post-contents-description" style={grayIfNull(Details.title,"#e2e2e2","30%")}>
-              {Details.description}
+            <div
+              className="post-contents-description"
+              style={getBackgroundStyle(title, "#e2e2e2", "30%")}
+            >
+              {content}
             </div>
-            <div className="post-contents-taglist" style={grayIfNull(Details.title,"#e2e2e2","20%")}>
-              {Details.tagList}
+            <div
+              className="post-contents-taglist"
+              style={getBackgroundStyle(title, "#e2e2e2", "20%")}
+            >
+              {tags}
             </div>
           </div>
 
@@ -41,31 +88,58 @@ export default function PostComponent(Details: PostProps) {
             <div className="post-contents-writer">
               <div className="post-contents-profile-pic"></div>
               <div className="post-contents-profile-text">
-                <div className="post-contents-author" style={grayIfNull(Details.title,"#a2a2a2","3rem")}>
-                  {Details.writerNickname}
+                <div
+                  className="post-contents-author"
+                  style={getBackgroundStyle(title, "#a2a2a2", "3rem")}
+                >
+                  {author?.username}
                 </div>
-                <div className="post-contents-id" style={grayIfNull(Details.title,"#e2e2e2","5rem")}>
-                  {Details.writerId} · {Details.writeTime}
+                <div
+                  className="post-contents-id"
+                  style={getBackgroundStyle(title, "#e2e2e2", "5rem")}
+                >
+                  {postId} · {createdAt}
                 </div>
               </div>
             </div>
             <div className="post-contents-show-count">
-              <div className="chats" style={grayIfNull(Details.title,"#a2a2a2","5%")}>
-                <img className="chat" src=".\app\assets\chat.svg" style={hiddenSvg(Details.title)} />
-                <div className="chat-count">
-                  {formatCountNumber(Details.chat ?? 0)}
+              <div
+                className="chats"
+                style={getBackgroundStyle(title, "#a2a2a2", "5%")}
+              >
+                <img
+                  className="chat"
+                  src=".\app\assets\chat.svg"
+                  style={getSvgWidthStyle(title)}
+                />
+                <div className="chat-count" hidden={commentCount === null}>
+                  {formatCountNumber(commentCount)}
                 </div>
               </div>
-              <div className="likes" style={grayIfNull(Details.title,"#e2e2e2","5%")}>
-                <img className="heart" src=".\app\assets\heart.svg" style={hiddenSvg(Details.title)}/>
-                <div className="like-count">
-                  {formatCountNumber(Details.like ?? 0)}
+              <div
+                className="likes"
+                style={getBackgroundStyle(title, "#e2e2e2", "5%")}
+              >
+                <img
+                  className="heart"
+                  src=".\app\assets\heart.svg"
+                  style={getSvgWidthStyle(title)}
+                />
+                <div className="like-count" hidden={likeCount === null}>
+                  {formatCountNumber(likeCount)}
                 </div>
               </div>
-              <div className="bookmarks" style={grayIfNull(Details.title,"#e2e2e2","5%")}>
-                <img className="book-open" src=".\app\assets\book-open.svg" style={hiddenSvg(Details.title)} />
-                <div className="bookmark-count">
-                  {formatCountNumber(Details.bookmark ?? 0)}
+              <div
+                className="bookmarks"
+                style={getBackgroundStyle(title, "#e2e2e2", "5%")}
+              >
+                <img
+                  className="book-open"
+                  src=".\app\assets\book-open.svg"
+                  style={getSvgWidthStyle(title)}
+                />
+                <div className="bookmark-count" hidden={bookmarkCount === null}>
+                  {formatCountNumber(bookmarkCount)}
                 </div>
               </div>
             </div>
@@ -74,4 +148,21 @@ export default function PostComponent(Details: PostProps) {
       </div>
     </>
   );
+}
+
+function getBackgroundStyle(value: any, fallbackColor: string, width: string) {
+  const isNullish = value === null || value === undefined;
+
+  return {
+    backgroundColor: isNullish ? fallbackColor : "transparent",
+    width: width,
+  };
+}
+
+function getSvgWidthStyle(value: any) {
+  const isNullish = value === null || value === undefined;
+
+  return {
+    width: isNullish ? "0" : "0.75rem",
+  };
 }

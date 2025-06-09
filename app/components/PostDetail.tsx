@@ -1,20 +1,58 @@
+import { useEffect, useState } from "react";
+import { Post } from "../api/pathbook/types/Post";
 import { formatCountNumber } from "../scripts/count";
 import "./PostDetail.css";
+import { User } from "../api/pathbook/types/User";
+import { Comment } from "../api/pathbook/types/Comment";
 
-interface PostDetailProps {
-  writerNickname: string;
-  writeTime: string;
-  title: string;
-  tagList: string;
-  description: string;
-  writerId: string;
-  chat: number;
-  like: number;
-  bookmark: number;
-  cancelOnclick: () => void;
-}
+export default function PostDetailComponent({
+  post,
+  cancelOnClick,
+}: {
+  post: Post;
+  cancelOnClick: () => void;
+}) {
+  const [postId, setPostId] = useState<number | null>(null);
+  const [author, setAuthor] = useState<User | null>(null);
+  const [title, setTitle] = useState<string | null>(null);
+  const [content, setContent] = useState<string | null>(null);
+  const [createdAt, setCreatedAt] = useState<string | null>(null);
+  const [commentCount, setCommentCount] = useState<number | null>(null);
+  const [likeCount, setLikeCount] = useState<number | null>(null);
+  const [bookmarkCount, setBookmarkCount] = useState<number | null>(null);
+  const [tags, setTags] = useState<string | null>(null);
 
-export default function PostDetailComponent(Details: PostDetailProps) {
+  useEffect(() => {
+    const dateString = new Date(post.createdAt).toLocaleString();
+
+    function countTotalComments(comment: Comment): number {
+      let total = 1;
+
+      if (comment.childComments) {
+        for (const child of comment.childComments) {
+          total += countTotalComments(child);
+        }
+      }
+
+      return total;
+    }
+
+    let totalCommentCount = 0;
+    for (const rootComment of post.rootComments) {
+      totalCommentCount += countTotalComments(rootComment);
+    }
+
+    setPostId(post.postId);
+    setAuthor(post.author);
+    setTitle(post.title);
+    setContent(post.content);
+    setCreatedAt(dateString);
+    setCommentCount(totalCommentCount);
+    setLikeCount(post.likeCount);
+    setBookmarkCount(post.bookmarkCount);
+    setTags(post.tags.join(" "));
+  }, []);
+
   return (
     <>
       <div className="post-detail-frame">
@@ -23,10 +61,10 @@ export default function PostDetailComponent(Details: PostDetailProps) {
           <div className="post-detail-writer">
             <div className="post-detail-profile-pic"></div>
             <div className="post-detail-text">
-              <div className="post-detail-author">{Details.writerNickname}</div>
+              <div className="post-detail-author">{author?.username}</div>
               <div className="post-detail-id-with-time">
-                <div className="post-detail-id">{Details.writerId}</div>
-                <div className="post-detail-time">{Details.writeTime}</div>
+                <div className="post-detail-id">{author?.userId}</div>
+                <div className="post-detail-time">{createdAt}</div>
               </div>
             </div>
           </div>
@@ -34,13 +72,13 @@ export default function PostDetailComponent(Details: PostDetailProps) {
             <div className="post-detail-chats">
               <img className="post-detail-chat" src=".\app\assets\chat.svg" />
               <div className="post-detail-chat-count">
-                {formatCountNumber(Details.chat)}
+                {formatCountNumber(commentCount)}
               </div>
             </div>
             <div className="post-detail-likes">
               <img className="post-detail-heart" src=".\app\assets\heart.svg" />
               <div className="post-detail-like-count">
-                {formatCountNumber(Details.like)}
+                {formatCountNumber(likeCount)}
               </div>
             </div>
             <div className="post-detail-bookmarks">
@@ -49,17 +87,15 @@ export default function PostDetailComponent(Details: PostDetailProps) {
                 src=".\app\assets\book-open.svg"
               />
               <div className="post-detail-bookmark-count">
-                {formatCountNumber(Details.bookmark)}
+                {formatCountNumber(bookmarkCount)}
               </div>
             </div>
           </div>
         </div>
         <div className="post-detail-show-text">
-          <div className="post-detail-subject-detail">{Details.title}</div>
-          <div className="post-detail-tag-list">{Details.tagList}</div>
-          <div className="post-detail-description-all">
-            {Details.description}
-          </div>
+          <div className="post-detail-subject-detail">{title}</div>
+          <div className="post-detail-tag-list">{tags}</div>
+          <div className="post-detail-description-all">{content}</div>
         </div>
 
         <div className="post-detail-comment-desc">
@@ -186,10 +222,7 @@ export default function PostDetailComponent(Details: PostDetailProps) {
           </div>
         </div>
         <div className="post-detail-button-container">
-          <button
-            className="post-detail-cancel"
-            onClick={Details.cancelOnclick}
-          >
+          <button className="post-detail-cancel" onClick={cancelOnClick}>
             돌아가기
           </button>
         </div>
