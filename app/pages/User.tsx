@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { redirect, useNavigate, useParams } from "react-router";
-import "./User.css";
-import type { User } from "../api/pathbook/types/User";
-import type { Route } from "./pages/+types/User";
-import UserRequest from "../api/pathbook/requests/user/UserRequest";
-import GetIconRequest from "../api/pathbook/requests/user/GetIconRequest";
+import React, { ReactNode, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import GetBannerRequest from "../api/pathbook/requests/user/GetBannerRequest";
+import GetIconRequest from "../api/pathbook/requests/user/GetIconRequest";
+import UserRequest from "../api/pathbook/requests/user/UserRequest";
+import type { User } from "../api/pathbook/types/User";
+import BookmarkFolder from "../components/BookmarkFolder";
+import type { Route } from "./pages/+types/User";
+import "./User.css";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   return { userId: params.userid };
@@ -162,7 +163,11 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
       case "likes":
         return <EmptyContent label="좋아요" />;
       case "bookmarks":
-        return <EmptyContent label="북마크" />;
+        return (
+          <EmptyContent label="북마크">
+            <BookmarkFolder />
+          </EmptyContent>
+        );
       default:
         return null;
     }
@@ -265,8 +270,8 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
   );
 }
 
-const EmptyContent = ({ label }: { label: string }) => (
+const EmptyContent = ({ label, children }: { label: string; children: ReactNode; }) => (
   <div className="mypage-content">
-    <div className="content-area">{label}</div>
+    <div className="content-area">{children}</div>
   </div>
 );
