@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { HexColorPicker } from "react-colorful";
 
-import "./BookmarkFolder.css";
 import delete_icon from "../assets/delete.svg";
+import "./BookmarkFolder.css";
 
-export function BookFolder({ 
+export function BookmarkFolderComponent({ 
   bookType, userId, bookTitle="제목", bgColor="var(--color-primary)", inModal=false, isAdd=false }: 
   { bookType: string; userId: string; bookTitle: string; bgColor: string; inModal?: boolean; isAdd?: boolean; }) {
   const [showBookmarkAddModal, setShowBookmarkAddModal] = useState(false);
@@ -75,17 +75,17 @@ const BookmarkEditModal = ({setShowBookmarkEditModal }: {showBookmarkEditModal: 
         </div>
         <div className="bookmark-edit-modal-content">
           <div className="bookmark-edit-list">
-            <BookFolder bookType="book-type1" userId="user1" bookTitle="광주 산책 코스" bgColor="#e4fbbe" inModal={true}/>
-            <BookFolder bookType="book-type1" userId="user2" bookTitle="등산 코스" bgColor="#bec3fb" inModal={true}/>
-            <BookFolder bookType="book-type2" userId="user3" bookTitle="벚꽃 구경" bgColor="#fbbec8" inModal={true}/>
-            <BookFolder bookType="book-type3" userId="user4" bookTitle="드라이브 가자가자가자고" bgColor="#bec3fb" inModal={true}/>
+            <BookmarkFolderComponent bookType="book-type1" userId="user1" bookTitle="광주 산책 코스" bgColor="#e4fbbe" inModal={true}/>
+            <BookmarkFolderComponent bookType="book-type1" userId="user2" bookTitle="등산 코스" bgColor="#bec3fb" inModal={true}/>
+            <BookmarkFolderComponent bookType="book-type2" userId="user3" bookTitle="벚꽃 구경" bgColor="#fbbec8" inModal={true}/>
+            <BookmarkFolderComponent bookType="book-type3" userId="user4" bookTitle="드라이브 가자가자가자고" bgColor="#bec3fb" inModal={true}/>
 
-            <BookFolder bookType="book-type1" userId="user1" bookTitle="광주 산책 코스" bgColor="#e4fbbe" inModal={true}/>
-            <BookFolder bookType="book-type1" userId="user2" bookTitle="등산 코스" bgColor="#bec3fb" inModal={true}/>
-            <BookFolder bookType="book-type2" userId="user3" bookTitle="벚꽃 구경" bgColor="#fbbec8" inModal={true}/>
-            <BookFolder bookType="book-type3" userId="user4" bookTitle="드라이브 가자가자가자고" bgColor="#bec3fb" inModal={true}/>
+            <BookmarkFolderComponent bookType="book-type1" userId="user1" bookTitle="광주 산책 코스" bgColor="#e4fbbe" inModal={true}/>
+            <BookmarkFolderComponent bookType="book-type1" userId="user2" bookTitle="등산 코스" bgColor="#bec3fb" inModal={true}/>
+            <BookmarkFolderComponent bookType="book-type2" userId="user3" bookTitle="벚꽃 구경" bgColor="#fbbec8" inModal={true}/>
+            <BookmarkFolderComponent bookType="book-type3" userId="user4" bookTitle="드라이브 가자가자가자고" bgColor="#bec3fb" inModal={true}/>
             
-            <BookFolder bookType="book-type-add" userId="userID" bookTitle="" bgColor="#d9d9d9" inModal={true}/>
+            <BookmarkFolderComponent bookType="book-type-add" userId="userID" bookTitle="" bgColor="#d9d9d9" inModal={true}/>
           </div>
         </div>
       </div>
@@ -100,7 +100,7 @@ const BookmarkAddModal = ({ setShowBookmarkAddModal }: {showBookmarkAddModal: bo
   const [showModal, setShowModal] = useState(false);
 
   const renderPreview = () => (
-    <BookFolder
+    <BookmarkFolderComponent
       bookType={showPreview}
       bgColor={bgColor}
       userId="userID"
@@ -132,17 +132,17 @@ const BookmarkAddModal = ({ setShowBookmarkAddModal }: {showBookmarkAddModal: bo
               <div
                 className={`tap-type ${showPreview === "book-type1" ? "active" : ""}`}
                 onClick={() => setShowPreview("book-type1")}
-              > <BookFolder bookType="book-type1" userId="userID" inModal={true} isAdd={true}/>
+              > <BookmarkFolderComponent bookType="book-type1" userId="userID" inModal={true} isAdd={true}/>
               </div>
               <div
                 className={`tap-type ${showPreview === "book-type2" ? "active" : ""}`}
                 onClick={() => setShowPreview("book-type2")}
-              > <BookFolder bookType="book-type2" userId="userID" inModal={true} isAdd={true}/>
+              > <BookmarkFolderComponent bookType="book-type2" userId="userID" inModal={true} isAdd={true}/>
               </div>
               <div
                 className={`tab-type ${showPreview === "book-type3" ? "active" : ""}`}
                 onClick={() => setShowPreview("book-type3")}
-              > <BookFolder bookType="book-type3" userId="userID" inModal={true} isAdd={true}/>
+              > <BookmarkFolderComponent bookType="book-type3" userId="userID" inModal={true} isAdd={true}/>
               </div>
             </div>
             <span className="bookmark-design-label">미리보기</span>
@@ -208,10 +208,10 @@ export default function BookmarkFolderomponent() {
           {showBookmarkEditModal ? <BookmarkEditModal showBookmarkEditModal={showBookmarkEditModal} setShowBookmarkEditModal={setShowBookmarkEditModal} /> : null} 
         </div>
         <div className="bookmark-folder-content">
-          <BookFolder bookType="book-type1" userId="user1" bookTitle="광주 산책 코스" bgColor="#e4fbbe"/>
-          <BookFolder bookType="book-type1" userId="user2" bookTitle="등산 코스" bgColor="#bec3fb"/>
-          <BookFolder bookType="book-type2" userId="user3" bookTitle="벚꽃 구경" bgColor="#fbbec8"/>
-          <BookFolder bookType="book-type3" userId="user4" bookTitle="드라이브 가자가자가자고" bgColor="#bec3fb"/>
+          <BookmarkFolderComponent bookType="book-type1" userId="user1" bookTitle="광주 산책 코스" bgColor="#e4fbbe"/>
+          <BookmarkFolderComponent bookType="book-type1" userId="user2" bookTitle="등산 코스" bgColor="#bec3fb"/>
+          <BookmarkFolderComponent bookType="book-type2" userId="user3" bookTitle="벚꽃 구경" bgColor="#fbbec8"/>
+          <BookmarkFolderComponent bookType="book-type3" userId="user4" bookTitle="드라이브 가자가자가자고" bgColor="#bec3fb"/>
         </div>
       </div>    
     </>

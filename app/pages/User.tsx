@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { ReactNode } from "react";
-import BookmarkFolder from "../components/BookmarkFolder";
-import "./User.css";
-import type { User } from "../api/pathbook/types/User";
-import type { Route } from "./pages/+types/User";
-import UserRequest from "../api/pathbook/requests/user/UserRequest";
-import GetIconRequest from "../api/pathbook/requests/user/GetIconRequest";
+import React, { ReactNode, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import GetBannerRequest from "../api/pathbook/requests/user/GetBannerRequest";
+import GetIconRequest from "../api/pathbook/requests/user/GetIconRequest";
+import UserRequest from "../api/pathbook/requests/user/UserRequest";
+import type { User } from "../api/pathbook/types/User";
+import BookmarkFolder from "../components/BookmarkFolder";
+import type { Route } from "./pages/+types/User";
+import "./User.css";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   return { userId: params.userid };
