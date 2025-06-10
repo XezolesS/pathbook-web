@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import RegisterRequest from "../api/pathbook/requests/auth/RegisterRequest";
-import textLogo from "../assets/textLogo.png";
 import "./Register.css";
 
 export default function RegisterPage() {
@@ -96,136 +95,126 @@ export default function RegisterPage() {
 
   return (
     <>
-      <div>
-        <div className="logo">
-          <a href="./#">
-            <img src={textLogo}></img>
-          </a>
-        </div>
-
-        <div className="register">
-          <div className="register-container">
-            <div className="register-text">회원가입</div>
-            <form className="register-form" onSubmit={handleSubmit}>
-              <label htmlFor="email">이메일</label>
-              <div className="register-form-section">
-                <input
-                  className="input input-email"
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="이메일을 입력하세요"
-                  required
-                />
+      <div className="register">
+        <div className="register-container">
+          <div className="register-text">회원가입</div>
+          <form className="register-form" onSubmit={handleSubmit}>
+            <label htmlFor="email">이메일</label>
+            <div className="register-form-section">
+              <input
+                className="input input-email"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="이메일을 입력하세요"
+                required
+              />
+            </div>
+            <div className="register-form-section">
+              <label htmlFor="password">비밀번호</label>
+              <input
+                className="input input-password"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="비밀번호를 입력하세요"
+                required
+                value={password}
+                onChange={handlePasswordChange}
+              />
+              <div className="password-guide">
+                <p
+                  className={
+                    isValidLength ? "constraint-satisfied" : "constraint"
+                  }
+                >
+                  {isValidLength ? "🟢" : "🔴"} 8자 이상, 20자 미만
+                </p>
+                <p
+                  className={
+                    hasUppercase ? "constraint-satisfied" : "constraint"
+                  }
+                >
+                  {hasUppercase ? "🟢" : "🔴"} 영어 대문자 포함
+                </p>
+                <p
+                  className={
+                    hasLowercase ? "constraint-satisfied" : "constraint"
+                  }
+                >
+                  {hasLowercase ? "🟢" : "🔴"} 영어 소문자 포함
+                </p>
+                <p
+                  className={hasNumber ? "constraint-satisfied" : "constraint"}
+                >
+                  {hasNumber ? "🟢" : "🔴"} 숫자(0-9) 포함
+                </p>
+                <p
+                  className={
+                    hasSpecialChar ? "constraint-satisfied" : "constraint"
+                  }
+                >
+                  {hasSpecialChar ? "🟢" : "🔴"} 특수문자 1자 이상 포함
+                </p>
               </div>
-              <div className="register-form-section">
-                <label htmlFor="password">비밀번호</label>
-                <input
-                  className="input input-password"
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="비밀번호를 입력하세요"
-                  required
-                  value={password}
-                  onChange={handlePasswordChange}
-                />
-                <div className="password-guide">
-                  <p
-                    className={
-                      isValidLength ? "constraint-satisfied" : "constraint"
-                    }
-                  >
-                    {isValidLength ? "🟢" : "🔴"} 8자 이상, 20자 미만
-                  </p>
-                  <p
-                    className={
-                      hasUppercase ? "constraint-satisfied" : "constraint"
-                    }
-                  >
-                    {hasUppercase ? "🟢" : "🔴"} 영어 대문자 포함
-                  </p>
-                  <p
-                    className={
-                      hasLowercase ? "constraint-satisfied" : "constraint"
-                    }
-                  >
-                    {hasLowercase ? "🟢" : "🔴"} 영어 소문자 포함
-                  </p>
-                  <p
-                    className={
-                      hasNumber ? "constraint-satisfied" : "constraint"
-                    }
-                  >
-                    {hasNumber ? "🟢" : "🔴"} 숫자(0-9) 포함
-                  </p>
-                  <p
-                    className={
-                      hasSpecialChar ? "constraint-satisfied" : "constraint"
-                    }
-                  >
-                    {hasSpecialChar ? "🟢" : "🔴"} 특수문자 1자 이상 포함
-                  </p>
+            </div>
+            <div className="register-form-section">
+              <label htmlFor="confirm-password">비밀번호 재입력</label>
+              <input
+                className="input input-confirm-password"
+                type="password"
+                id="confirm-password"
+                name="confirmPassword"
+                placeholder="비밀번호를 다시 입력하세요"
+                required
+                ref={confirmRef}
+                value={confirmPassword}
+                onChange={handleConfirmPasswordChange}
+              />
+              {confirmPasswordTouched && !passwordMatch && (
+                <div className="password-mismatch">
+                  입력한 비밀번호가 일치하지 않습니다.
                 </div>
-              </div>
-              <div className="register-form-section">
-                <label htmlFor="confirm-password">비밀번호 재입력</label>
-                <input
-                  className="input input-confirm-password"
-                  type="password"
-                  id="confirm-password"
-                  name="confirmPassword"
-                  placeholder="비밀번호를 다시 입력하세요"
-                  required
-                  ref={confirmRef}
-                  value={confirmPassword}
-                  onChange={handleConfirmPasswordChange}
-                />
-                {confirmPasswordTouched && !passwordMatch && (
-                  <div className="password-mismatch">
-                    입력한 비밀번호가 일치하지 않습니다.
-                  </div>
-                )}
-              </div>
-              <div className="register-form-section">
-                <label htmlFor="userid">아이디</label>
-                <input
-                  className="input input-userid"
-                  type="text"
-                  id="userid"
-                  name="userid"
-                  placeholder="아이디를 입력하세요"
-                  required
-                  defaultValue={"@" + temporaryName}
-                />
-              </div>
-              <div className="register-form-section">
-                <label htmlFor="username">닉네임</label>
-                <input
-                  className="input input-username"
-                  type="text"
-                  id="username"
-                  name="username"
-                  placeholder="닉네임을 입력하세요"
-                  required
-                  defaultValue={temporaryName}
-                />
-              </div>
-              <button
-                type="submit"
-                className="register-form-submit"
-                disabled={isValidPassword && passwordMatch ? false : true}
-              >
-                회원가입
-              </button>
-            </form>
-          </div>
+              )}
+            </div>
+            <div className="register-form-section">
+              <label htmlFor="userid">아이디</label>
+              <input
+                className="input input-userid"
+                type="text"
+                id="userid"
+                name="userid"
+                placeholder="아이디를 입력하세요"
+                required
+                defaultValue={"@" + temporaryName}
+              />
+            </div>
+            <div className="register-form-section">
+              <label htmlFor="username">닉네임</label>
+              <input
+                className="input input-username"
+                type="text"
+                id="username"
+                name="username"
+                placeholder="닉네임을 입력하세요"
+                required
+                defaultValue={temporaryName}
+              />
+            </div>
+            <button
+              type="submit"
+              className="register-form-submit"
+              disabled={isValidPassword && passwordMatch ? false : true}
+            >
+              회원가입
+            </button>
+          </form>
         </div>
+      </div>
 
-        <div className="other-menu-container">
-          계정이 있으신가요? &nbsp;
-          <a href="/login">로그인 하러가기</a>
-        </div>
+      <div className="other-menu-container">
+        계정이 있으신가요? &nbsp;
+        <a href="/login">로그인 하러가기</a>
       </div>
     </>
   );

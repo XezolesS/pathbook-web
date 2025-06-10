@@ -1,5 +1,4 @@
 import "./ResetPassword.css";
-import textLogo from "../assets/textLogo.png";
 
 export default function ForgotPasswordPage() {
   const handleSubmit = (e: React.FormEvent) => {
@@ -10,44 +9,36 @@ export default function ForgotPasswordPage() {
 
   return (
     <>
-      <div>
-        <div className="logo">
-          <a href="./#">
-            <img src={textLogo}></img>
-          </a>
-        </div>
+      <div className="find-password">
+        <div className="find-password-container">
+          <div className="find-password-text">비밀번호 재설정</div>
+          <form className="find-password-form" onSubmit={handleSubmit}>
+            <div className="find-password-description">
+              가입한 이메일을 입력하시고 ‘비밀번호 재설정’ 버튼을 누르시면
+              입력한 이메일 주소로 비밀번호 재설정 링크가 전송됩니다.
+              <br />
+              <br />
+              전송된 링크에 접속하여 비밀번호를 재설정 해주세요.
+              <br />
+              <br />
+            </div>
 
-        <div className="find-password">
-          <div className="find-password-container">
-            <div className="find-password-text">비밀번호 재설정</div>
-            <form className="find-password-form" onSubmit={handleSubmit}>
-              <div className="find-password-description">
-                가입한 이메일을 입력하시고 ‘비밀번호 재설정’ 버튼을 누르시면
-                입력한 이메일 주소로 비밀번호 재설정 링크가 전송됩니다.
-                <br />
-                <br />
-                전송된 링크에 접속하여 비밀번호를 재설정 해주세요.
-                <br />
-                <br />
-              </div>
+            <label htmlFor="email">이메일</label>
+            <div className="find-password-form-section">
+              <input
+                className="input input-email"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="이메일을 입력하세요"
+                required
+              />
+            </div>
 
-              <label htmlFor="email">이메일</label>
-              <div className="find-password-form-section">
-                <input
-                  className="input input-email"
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="이메일을 입력하세요"
-                  required
-                />
-              </div>
-
-              <button type="submit" className="find-password-submit">
-                비밀번호 재설정
-              </button>
-            </form>
-          </div>
+            <button type="submit" className="find-password-submit">
+              비밀번호 재설정
+            </button>
+          </form>
         </div>
       </div>
     </>

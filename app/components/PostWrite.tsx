@@ -3,10 +3,7 @@ import "./PostWrite.css";
 import RichTextEditor from "./RichTextEditor";
 import html2canvas from "html2canvas";
 import CorrectTextRequest from "../api/spellcorrector/requests/spellcorrector/CorrectTextRequest";
-
-interface PostWriteProps {
-  cancelOnclick: () => void;
-}
+import { useNavigate } from "react-router";
 
 declare global {
   interface Window {
@@ -14,10 +11,18 @@ declare global {
   }
 }
 
-export default function PostWriteComponent(props: PostWriteProps) {
+export default function PostWriteComponent() {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1); // Navigates back one entry in the history stack
+  };
+
   const [isDrawingMode, setIsDrawingMode] = useState(false);
   const [path, setPath] = useState<{ lat: number; lng: number }[]>([]);
-  const [redoStack, setRedoStack] = useState<{ lat: number; lng: number }[]>([]);
+  const [redoStack, setRedoStack] = useState<{ lat: number; lng: number }[]>(
+    []
+  );
   const [mapLoaded, setMapLoaded] = useState(false);
   const [totalDistance, setTotalDistance] = useState(0);
 
@@ -26,14 +31,14 @@ export default function PostWriteComponent(props: PostWriteProps) {
   const [pagination, setPagination] = useState<any | null>(null);
 
   const isDrawingModeRef = useRef(isDrawingMode);
-  const pathRef          = useRef(path);
-  const redoRef          = useRef(redoStack);
+  const pathRef = useRef(path);
+  const redoRef = useRef(redoStack);
 
-  const mapRef           = useRef<HTMLDivElement | null>(null);
-  const mapInstanceRef   = useRef<any>(null);
-  const polylineRef      = useRef<any>(null);
-  const previewLineRef   = useRef<any>(null);
-  const markersRef       = useRef<any[]>([]);
+  const mapRef = useRef<HTMLDivElement | null>(null);
+  const mapInstanceRef = useRef<any>(null);
+  const polylineRef = useRef<any>(null);
+  const previewLineRef = useRef<any>(null);
+  const markersRef = useRef<any[]>([]);
   const placesServiceRef = useRef<any>(null);
 
   const [spellInput, setSpellInput] = useState("");
@@ -54,7 +59,7 @@ export default function PostWriteComponent(props: PostWriteProps) {
   const [spellCorrectorVisible, setSpellCorrectorVisible] = useState(false);
 
   const toggleSpellCorrectorContainer = () => {
-    setSpellCorrectorVisible(prev => !prev);
+    setSpellCorrectorVisible((prev) => !prev);
   };
 
   const formatTime = (hours: number) => {
@@ -65,9 +70,15 @@ export default function PostWriteComponent(props: PostWriteProps) {
   };
   const SPEED = { WALK: 4, BIKE: 15, MOTOR: 25 };
 
-  useEffect(() => { isDrawingModeRef.current = isDrawingMode; }, [isDrawingMode]);
-  useEffect(() => { pathRef.current          = path;          }, [path]);
-  useEffect(() => { redoRef.current          = redoStack;     }, [redoStack]);
+  useEffect(() => {
+    isDrawingModeRef.current = isDrawingMode;
+  }, [isDrawingMode]);
+  useEffect(() => {
+    pathRef.current = path;
+  }, [path]);
+  useEffect(() => {
+    redoRef.current = redoStack;
+  }, [redoStack]);
 
   useEffect(() => {
     if (searchKeyword.trim() === "") {
@@ -88,7 +99,7 @@ export default function PostWriteComponent(props: PostWriteProps) {
   useLayoutEffect(() => {
     if (!mapLoaded || !mapRef.current) return;
 
-    const target   = mapRef.current;
+    const target = mapRef.current;
     const observer = new ResizeObserver((entries) => {
       const { width, height } = entries[0].contentRect;
       if (!width || !height) return;
@@ -96,7 +107,10 @@ export default function PostWriteComponent(props: PostWriteProps) {
       observer.disconnect();
 
       const map = new window.kakao.maps.Map(target, {
-        center: new window.kakao.maps.LatLng(35.1398173087151, 126.931692188988),
+        center: new window.kakao.maps.LatLng(
+          35.1398173087151,
+          126.931692188988
+        ),
         level: 4,
       });
       mapInstanceRef.current = map;
@@ -125,7 +139,10 @@ export default function PostWriteComponent(props: PostWriteProps) {
       window.kakao.maps.event.addListener(map, "click", (e: any) => {
         if (!isDrawingModeRef.current) return;
         const latlng = e.latLng;
-        setPath([...pathRef.current, { lat: latlng.getLat(), lng: latlng.getLng() }]);
+        setPath([
+          ...pathRef.current,
+          { lat: latlng.getLat(), lng: latlng.getLng() },
+        ]);
         setRedoStack([]);
       });
 
@@ -140,7 +157,8 @@ export default function PostWriteComponent(props: PostWriteProps) {
           e.latLng,
         ];
         previewLineRef.current.setPath(linePath);
-        if (!previewLineRef.current.getMap()) previewLineRef.current.setMap(map);
+        if (!previewLineRef.current.getMap())
+          previewLineRef.current.setMap(map);
       };
       window.kakao.maps.event.addListener(map, "mousemove", mouseMoveFn);
     });
@@ -170,14 +188,14 @@ export default function PostWriteComponent(props: PostWriteProps) {
 
   const syncMarkers = (newPath: { lat: number; lng: number }[]) => {
     if (!mapInstanceRef.current) return;
-    const map     = mapInstanceRef.current;
+    const map = mapInstanceRef.current;
     const markers = markersRef.current;
 
     while (markers.length < newPath.length) {
       const idx = markers.length;
-      const p   = newPath[idx];
+      const p = newPath[idx];
       const marker = new window.kakao.maps.Marker({
-        position : new window.kakao.maps.LatLng(p.lat, p.lng),
+        position: new window.kakao.maps.LatLng(p.lat, p.lng),
         map,
         draggable: true,
       });
@@ -216,7 +234,8 @@ export default function PostWriteComponent(props: PostWriteProps) {
   }, [path]);
 
   useEffect(() => {
-    if (!isDrawingMode && previewLineRef.current) previewLineRef.current.setMap(null);
+    if (!isDrawingMode && previewLineRef.current)
+      previewLineRef.current.setMap(null);
   }, [isDrawingMode]);
 
   const toggleDrawing = () => {
@@ -226,13 +245,13 @@ export default function PostWriteComponent(props: PostWriteProps) {
   const handleUndo = () => {
     if (!pathRef.current.length) return;
     const newPath = [...pathRef.current];
-    const last    = newPath.pop()!;
+    const last = newPath.pop()!;
     setPath(newPath);
     setRedoStack([...redoRef.current, last]);
   };
   const handleRedo = () => {
     if (!redoRef.current.length) return;
-    const newRedo   = [...redoRef.current];
+    const newRedo = [...redoRef.current];
     const recovered = newRedo.pop()!;
     setPath([...pathRef.current, recovered]);
     setRedoStack(newRedo);
@@ -249,9 +268,7 @@ export default function PostWriteComponent(props: PostWriteProps) {
 
   const handlePlaceClick = (p: any) => {
     const { y, x } = p;
-    mapInstanceRef.current?.setCenter(
-      new window.kakao.maps.LatLng(y, x)
-    );
+    mapInstanceRef.current?.setCenter(new window.kakao.maps.LatLng(y, x));
     setSearchKeyword("");
   };
 
@@ -260,23 +277,26 @@ export default function PostWriteComponent(props: PostWriteProps) {
   };
 
   async function downloadMap() {
-    const map   = mapInstanceRef.current;
-    const poly  = polylineRef.current;
-    const cont  = mapRef.current;
+    const map = mapInstanceRef.current;
+    const poly = polylineRef.current;
+    const cont = mapRef.current;
     if (!map || !poly || !cont) return;
 
     const prev = poly.getStrokeOpacity?.() ?? 0.6;
     poly.setOptions({ strokeOpacity: 0 });
 
-    const rect = cont.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
-    const tmp  = document.createElement("canvas");
-    tmp.width = rect.width * dpr;  tmp.height = rect.height * dpr;
-    tmp.style.cssText = "position:absolute;top:0;left:0;pointer-events:none;z-index:4;";
+    const rect = cont.getBoundingClientRect(),
+      dpr = window.devicePixelRatio || 1;
+    const tmp = document.createElement("canvas");
+    tmp.width = rect.width * dpr;
+    tmp.height = rect.height * dpr;
+    tmp.style.cssText =
+      "position:absolute;top:0;left:0;pointer-events:none;z-index:4;";
     cont.appendChild(tmp);
 
     const ctx = tmp.getContext("2d")!;
     ctx.lineWidth = 6 * dpr;
-    ctx.lineJoin  = "round";
+    ctx.lineJoin = "round";
     ctx.strokeStyle = "#FF0000";
 
     const proj = map.getProjection();
@@ -300,27 +320,32 @@ export default function PostWriteComponent(props: PostWriteProps) {
     });
     ctx.stroke();
     const markers = markersRef.current;
-    markers.forEach(m=>m.setMap(null));
+    markers.forEach((m) => m.setMap(null));
 
     try {
-      const shot = await html2canvas(cont,{
-        proxy:"http://localhost:8080/proxy/image",
-        useCORS:false,
-        allowTaint:true,
-        backgroundColor:null,
+      const shot = await html2canvas(cont, {
+        proxy: "http://localhost:8080/proxy/image",
+        useCORS: false,
+        allowTaint: true,
+        backgroundColor: null,
       });
-      shot.toBlob(b=>{
-        if(!b) return;
-        const url=URL.createObjectURL(b);
-        const a  = document.createElement("a");
-        a.download=`pathbook-map-${Date.now()}.png`;
-        a.href=url; a.click();
-        URL.revokeObjectURL(url);
-      },"image/png",1);
+      shot.toBlob(
+        (b) => {
+          if (!b) return;
+          const url = URL.createObjectURL(b);
+          const a = document.createElement("a");
+          a.download = `pathbook-map-${Date.now()}.png`;
+          a.href = url;
+          a.click();
+          URL.revokeObjectURL(url);
+        },
+        "image/png",
+        1
+      );
     } finally {
       cont.removeChild(tmp);
       poly.setOptions({ strokeOpacity: prev });
-      markers.forEach(m=>m.setMap(map));
+      markers.forEach((m) => m.setMap(map));
     }
   }
   return (
@@ -337,8 +362,8 @@ export default function PostWriteComponent(props: PostWriteProps) {
               cursor: "pointer",
             }}
           />
-          <div className="draw-tool-redo"  onClick={handleRedo}  />
-          <div className="draw-tool-undo"  onClick={handleUndo}  />
+          <div className="draw-tool-redo" onClick={handleRedo} />
+          <div className="draw-tool-undo" onClick={handleUndo} />
           <div className="draw-tool-reset" onClick={handleReset} />
         </div>
 
@@ -355,7 +380,10 @@ export default function PostWriteComponent(props: PostWriteProps) {
               }
             }}
           />
-          <div className="map-search-icon" onClick={() => executeSearch(searchKeyword.trim(), 1)} />
+          <div
+            className="map-search-icon"
+            onClick={() => executeSearch(searchKeyword.trim(), 1)}
+          />
         </div>
         {searchKeyword.trim() !== "" && places.length > 0 && (
           <div className="search-result">
@@ -408,31 +436,35 @@ export default function PostWriteComponent(props: PostWriteProps) {
         </p>
         <span>
           <span className="transportation-name">도보</span>&nbsp;:&nbsp;
-          {formatTime((totalDistance / 1000) / SPEED.WALK)},&nbsp;
+          {formatTime(totalDistance / 1000 / SPEED.WALK)},&nbsp;
         </span>
         <span>
           <span className="transportation-name">자전거</span>&nbsp;:&nbsp;
-          {formatTime((totalDistance / 1000) / SPEED.BIKE)},&nbsp;
+          {formatTime(totalDistance / 1000 / SPEED.BIKE)},&nbsp;
         </span>
         <span>
-          <span className="transportation-name">바이크&자동차</span>&nbsp;:&nbsp;
-          {formatTime((totalDistance / 1000) / SPEED.MOTOR)}
+          <span className="transportation-name">바이크&자동차</span>
+          &nbsp;:&nbsp;
+          {formatTime(totalDistance / 1000 / SPEED.MOTOR)}
         </span>
       </div>
 
       {/* 글쓰기 영역 */}
       <div className="frame">
         <input className="write-subject" placeholder="제목을 입력해 주세요" />
-        <br/>
+        <br />
         <input className="tag-list" placeholder="#태그_추가" />
         <RichTextEditor />
       </div>
 
-      <a className="spell-corrector-toggle" href="#" onClick={
-        e => {
-         e.preventDefault(); 
-         toggleSpellCorrectorContainer(); 
-        }}>
+      <a
+        className="spell-corrector-toggle"
+        href="#"
+        onClick={(e) => {
+          e.preventDefault();
+          toggleSpellCorrectorContainer();
+        }}
+      >
         맞춤법 검사기 사용해보기...
       </a>
       {spellCorrectorVisible && (
@@ -444,10 +476,14 @@ export default function PostWriteComponent(props: PostWriteProps) {
             value={spellInput}
             onChange={(e) => setSpellInput(e.target.value)}
           ></textarea>
-          <div className="spell-corrector-edit-button" onClick={handleSpellCorrect}>
+          <div
+            className="spell-corrector-edit-button"
+            onClick={handleSpellCorrect}
+          >
             수정하기
           </div>
-          <hr/><br/>
+          <hr />
+          <br />
           수정된 내용:
           <textarea
             className="spell-corrector-response"
@@ -458,7 +494,7 @@ export default function PostWriteComponent(props: PostWriteProps) {
         </div>
       )}
       <div className="button-container">
-        <button className="cancel" onClick={props.cancelOnclick}>
+        <button className="cancel" onClick={handleGoBack}>
           작성취소
         </button>
         <button className="submit" onClick={downloadMap}>
