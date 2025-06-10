@@ -16,7 +16,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   return { isLoggedIn: isLoggedIn };
 }
 
-export default function LoginPage({ loaderData }: Route.ComponentProps) {
+export default function AuthLayout({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <div className="logo">

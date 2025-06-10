@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { Comment } from "../api/pathbook/types/Comment";
 import { Post } from "../api/pathbook/types/Post";
+import { User } from "../api/pathbook/types/User";
 import { formatCountNumber } from "../scripts/count";
 import "./PostDetail.css";
-import { User } from "../api/pathbook/types/User";
-import { Comment } from "../api/pathbook/types/Comment";
 
-export default function PostDetailComponent({
-  post,
-  cancelOnClick,
-}: {
-  post: Post;
-  cancelOnClick: () => void;
-}) {
+export default function PostDetailComponent({ post }: { post: Post }) {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1); // Navigates back one entry in the history stack
+  };
+
   const [postId, setPostId] = useState<number | null>(null);
   const [author, setAuthor] = useState<User | null>(null);
   const [title, setTitle] = useState<string | null>(null);
@@ -222,7 +223,7 @@ export default function PostDetailComponent({
           </div>
         </div>
         <div className="post-detail-button-container">
-          <button className="post-detail-cancel" onClick={cancelOnClick}>
+          <button className="post-detail-cancel" onClick={handleGoBack}>
             돌아가기
           </button>
         </div>

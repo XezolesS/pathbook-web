@@ -62,12 +62,12 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
         const getIconRequest = new GetIconRequest(userId);
         const getIconResponse = await getIconRequest.send();
 
-        console.log(getIconResponse)
+        console.log(getIconResponse);
         setIcon(blob2Url(getIconResponse.image));
       } catch (error) {
         console.error(error);
       }
-    }
+    };
 
     const fetchBanner = async () => {
       try {
@@ -76,12 +76,12 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
         const getBannerRequest = new GetBannerRequest(userId);
         const getBannerResponse = await getBannerRequest.send();
 
-        console.log(getBannerResponse)
+        console.log(getBannerResponse);
         setBanner(blob2Url(getBannerResponse.image));
       } catch (error) {
         console.error(error);
       }
-    }
+    };
 
     if (user === null) return;
 
@@ -249,7 +249,9 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
         {["posts", "comments", "likes", "bookmarks"].map((tab) => (
           <div
             key={tab}
-            className={`tab-item cursor-pointer ${activeTab === tab ? "active" : ""}`}
+            className={`tab-item cursor-pointer ${
+              activeTab === tab ? "active" : ""
+            }`}
             onClick={() => setActiveTab(tab)}
           >
             {tab === "posts" && "작성글"}
@@ -270,7 +272,13 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
   );
 }
 
-const EmptyContent = ({ label, children }: { label: string; children: ReactNode; }) => (
+const EmptyContent = ({
+  label,
+  children,
+}: {
+  label: string;
+  children: ReactNode;
+}) => (
   <div className="mypage-content">
     <div className="content-area">{children}</div>
   </div>

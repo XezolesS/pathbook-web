@@ -17,9 +17,16 @@ export default [
     route("reset-password", "./pages/ResetPassword.tsx"),
   ]),
 
-  route("main", "./pages/Main.tsx"),
+  // Main layout driven pages
+  layout("./layouts/MainLayout.tsx", [
+    route("main", "./pages/PostMainViewPage.tsx"),
+    ...prefix("post", [
+      route(":postid", "./pages/PostDetailPage.tsx"),
+      route("write", "./pages/PostWritePage.tsx"),
+    ]),
 
-  ...prefix("user", [route(":userid", "./pages/User.tsx")]),
-  route("setting", "./pages/Setting.tsx"),
-  route("report", "./pages/ReportPage.tsx"),
+    ...prefix("user", [route(":userid", "./pages/User.tsx")]),
+    route("setting", "./pages/Setting.tsx"),
+    route("report", "./pages/ReportPage.tsx"),
+  ]),
 ] satisfies RouteConfig;
