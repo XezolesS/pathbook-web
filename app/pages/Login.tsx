@@ -1,9 +1,8 @@
 import { redirect, useNavigate } from "react-router";
 import LoginRequest from "../api/pathbook/requests/auth/LoginRequest";
-import textLogo from "../assets/textLogo.png";
 import { parseCookies } from "../scripts/cookie";
-import type { Route } from "./pages/+types/Login";
 import "./Login.css";
+import type { Route } from "./pages/+types/Login";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -40,11 +39,6 @@ export default function LoginPage({ loaderData }: Route.ComponentProps) {
 
   return (
     <>
-      <div className="logo">
-        <a href="./#">
-          <img src={textLogo}></img>
-        </a>
-      </div>
       <div className="login">
         <div className="login-container">
           <div className="login-text">로그인</div>
