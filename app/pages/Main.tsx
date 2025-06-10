@@ -3,7 +3,10 @@ import MeRequest from "../api/pathbook/requests/auth/MeRequest.js";
 import type { User } from "../api/pathbook/types/User";
 import book_svg from "../assets/book.svg";
 import home_svg from "../assets/home.svg";
-import menu_svg from "../assets/menu.svg";
+import heart_svg from "../assets/heart2.svg";
+import flag_svg from "../assets/flag.svg";
+import check_svg from "../assets/check.svg";
+import question_svg from "../assets/question.svg";
 import ring_svg from "../assets/ring.svg";
 import search_svg from "../assets/search.svg";
 import star_svg from "../assets/star.svg";
@@ -13,10 +16,14 @@ import ArticleContents from "../components/Post.js";
 import ArticleContentsDetail from "../components/PostDetail.js";
 import ArticleWrite from "../components/PostWrite.js";
 import UserProfileComponent from "../components/UserProfile.js";
-import articleList from "../mock/ArticleData.json";
+import postMockups from "../mock/PostMockups.json";
 import { parseCookies } from "../scripts/cookie.ts";
+import PostListRequest from "../api/pathbook/requests/post/GetPostList.ts";
+import PostDetailRequest from "../api/pathbook/requests/post/GetPostDetailRequest.ts";
 import "./Main.css";
 import type { Route } from "./pages/+types/Main";
+import { backgroundImage } from "html2canvas/dist/types/css/property-descriptors/background-image";
+import { Post } from "../api/pathbook/types/Post";
 
 export async function loader({ request }: Route.ClientLoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -31,18 +38,42 @@ export default function MainPage({ loaderData }: Route.ComponentProps) {
   const { loggedIn } = loaderData;
 
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [selectedArticleID, setSelectedArticleID] = useState<number | null>(
-    null
-  );
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [selectedMenu, setSelectedMenu] = useState("menu-home");
   const [showWrite, setShowWrite] = useState(false);
   const [showContentsDetail, setContentsDetail] = useState(false);
+  const [loadedPosts, setLoadedPosts] = useState<Post[] | null>(null);
 
   const menuRef = useRef<HTMLDivElement | null>(null);
 
-  const selectedData = articleList.find(
-    (item) => item.articleID === selectedArticleID
-  );
+  // 게시글 관련 정보 불러오기
+  useEffect(() => {
+    /*
+    const fetchPosts = async () => {
+      const request = new PostListRequest();
+      const response = await request.send();
+      console.log(response);
+    };
+    const loadPostDetail = async (postId: number) => {
+    const request = new PostDetailRequest(postId);
+    const post = await request.send();
+    console.log(post.title, post.content, post.id);
+    };
+    fetchPosts();
+    */
+
+    // mockup 로딩
+    const fetchPosts = async () => {
+      return postMockups;
+    };
+
+    const load = async () => {
+      const posts = await fetchPosts();
+      setLoadedPosts(posts);
+    };
+
+    load();
+  }, []);
 
   // 유저 불러오기
   useEffect(() => {
@@ -96,29 +127,37 @@ export default function MainPage({ loaderData }: Route.ComponentProps) {
     <div className="mainpage">
       <div className="main-menu-container">
         <div className="menu-container" ref={menuRef}>
-          {currentUser ? (
-            <UserProfileComponent user={currentUser} />
-          ) : (
-            <AnonymousProfileComponent />
-          )}
-          {[
-            { name: "menu-home", icon: home_svg, label: "메인페이지" },
-            { name: "menu-ring", icon: ring_svg, label: "공지사항" },
-            { name: "menu-star", icon: star_svg, label: "인기 게시판" },
-            { name: "menu-book", icon: book_svg, label: "북마크 게시판" },
-            { name: "menu-menu", icon: menu_svg, label: "메뉴 더보기" },
-          ].map((item) => (
-            <div
-              key={item.name}
-              className={`menu-item ${
-                selectedMenu === item.name ? "selected" : ""
-              }`}
-              onClick={() => setSelectedMenu(item.name)}
-            >
-              <img className={item.name} src={item.icon} alt={item.name} />
-              <span>{item.label}</span>
-            </div>
-          ))}
+          <div className="profile-container">
+            {currentUser ? (
+              <UserProfileComponent user={currentUser} />
+            ) : (
+              <>
+                <div className="profile-image-anonymous"></div>
+                <AnonymousProfileComponent />
+              </>
+            )}
+          </div>
+          <div className="Kategorie-container">
+            {[
+              { name: "menu-home", icon: home_svg, label: "메인 페이지" },
+              { name: "menu-ring", icon: ring_svg, label: "공지글" },
+              { name: "menu-1", icon: heart_svg, label: "인기글" },
+              { name: "menu-2", icon: check_svg, label: "인증글" },
+              { name: "menu-3", icon: question_svg, label: "질문글" },
+              { name: "menu-book", icon: book_svg, label: "북마크" },
+            ].map((item) => (
+              <div
+                key={item.name}
+                className={`menu-item ${
+                  selectedMenu === item.name ? "selected" : ""
+                }`}
+                onClick={() => setSelectedMenu(item.name)}
+              >
+                <img className={item.name} src={item.icon} alt={item.name} />
+                <span>{item.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -154,25 +193,15 @@ export default function MainPage({ loaderData }: Route.ComponentProps) {
             display: !showContentsDetail && !showWrite ? "block" : "none",
           }}
         >
-          {articleList.slice(0, 3).map((article) => (
+          {loadedPosts?.map((post) => (
             <div
-              key={article.articleID}
+              key={post.postId}
               onClick={() => {
-                setSelectedArticleID(article.articleID);
+                setSelectedPost(post);
                 setContentsDetail(true);
               }}
             >
-              <ArticleContents
-                title={article.title}
-                writerNickname={article.writerNickname}
-                writeTime={article.writeTime}
-                tagList={article.tagList}
-                description={article.description}
-                writerId={article.writerId}
-                chat={article.chat}
-                like={article.like}
-                bookmark={article.bookmark}
-              />
+              <ArticleContents post={post} />
             </div>
           ))}
         </div>
@@ -184,19 +213,14 @@ export default function MainPage({ loaderData }: Route.ComponentProps) {
             display: showContentsDetail && !showWrite ? "block" : "none",
           }}
         >
-          {selectedData && (
+          {selectedPost && (
             <>
               <ArticleContentsDetail
-                title={selectedData.title}
-                writerNickname={selectedData.writerNickname}
-                writeTime={selectedData.writeTime}
-                tagList={selectedData.tagList}
-                description={selectedData.description}
-                writerId={selectedData.writerId}
-                chat={selectedData.chat}
-                like={selectedData.like}
-                bookmark={selectedData.bookmark}
-                cancelOnclick={() => setContentsDetail(false)}
+                post={selectedPost}
+                cancelOnClick={() => {
+                  setSelectedPost(null)
+                  setContentsDetail(false)
+                }}
               />
             </>
           )}

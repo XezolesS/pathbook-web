@@ -28,13 +28,13 @@ export default function UserProfileComponent({
             <span>{user.username}</span>
             <img className="edit" src={edit_svg}></img>
           </div>
-          <div className="profile-id">{user.id}</div>
+          <div className="profile-id">{user.userId}</div>
           <div className="profile-bio">
             <span>바이오/자기소개</span>
             <img className="edit" src={edit_svg}></img>
           </div>
           <div className="profile-options">
-            <a href="/mypage">마이페이지</a>
+            <a href={`/user/${user.userId}`}>마이페이지</a>
             <a href="" onClick={handleLogoutClick}>
               로그아웃
             </a>
