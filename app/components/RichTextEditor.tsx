@@ -1,16 +1,23 @@
 import "quill/dist/quill.snow.css";
 import { useEffect, useRef } from "react";
 
-export default function RichTextEditorComponent() {
-  const editorRef = useRef<HTMLDivElement>(null);
-  const quillRef = useRef<any>(null);
+export interface RichTextEditorProps {
+  initialHTML?: string;
+  onChange?: (html: string) => void;
+}
+
+export default function RichTextEditor({
+  initialHTML = "",
+  onChange,
+}: RichTextEditorProps) {
+  const editorRef = useRef<HTMLDivElement | null>(null);
+  const quillRef  = useRef<any>(null);
 
   useEffect(() => {
-    import("quill").then((QuillModule) => {
-      const Quill = QuillModule.default;
-      const Delta = Quill.import("delta");
+    let mounted = true;
 
-      if (!editorRef.current) return;
+    import("quill").then(({ default: Quill }) => {
+      if (!mounted || !editorRef.current) return;
 
       const quill = new Quill(editorRef.current, {
         theme: "snow",
@@ -20,34 +27,34 @@ export default function RichTextEditorComponent() {
             ["bold", "italic", "underline", "strike"],
             ["image"],
             [{ list: "ordered" }, { list: "bullet" }],
-            [{ 'align': [] }, { size: ["small", false, "large", "huge"] }],
+            [{ align: [] }, { size: ["small", false, "large", "huge"] }],
             [{ color: [] }, { background: [] }],
           ],
         },
       });
 
-      // 에디터 초기값 (Delta로)
-      const initialContent = new Delta().insert("");
+      if (initialHTML) {
+        quill.clipboard.dangerouslyPasteHTML(initialHTML);
+      }
 
-      quill.setContents(initialContent);
+      quill.on("text-change", () => {
+        onChange?.(quill.root.innerHTML);
+      });
+
       quillRef.current = quill;
-
-      const toolbar = document.querySelector(".ql-toolbar");
-      if (toolbar) {
-        (toolbar as HTMLElement).style.borderBottom = "1px solid #000";
-        (toolbar as HTMLElement).style.borderTop = "none";
-      }
-
-      const container = document.querySelector(".ql-container");
-      if (container) {
-        (container as HTMLElement).style.border = "none";
-      }
     });
+
+    return () => {
+      mounted = false;
+      quillRef.current = null;
+    };
   }, []);
 
-  return (
-    <>
-      <div ref={editorRef} style={{ height: "400px" }} />
-    </>
-  );
+  useEffect(() => {
+    if (quillRef.current && initialHTML) {
+      quillRef.current.clipboard.dangerouslyPasteHTML(initialHTML);
+    }
+  }, [initialHTML]);
+
+  return <div ref={editorRef} style={{ height: 400 }} />;
 }
