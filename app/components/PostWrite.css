@@ -3,12 +3,16 @@
   height: auto;
 
   padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: transparent;
+  box-shadow: var(--box-shadow-a);
+  border-radius: var(--radius);
+  background-color: var(--color-contents-bg);
   gap: 1rem;
 }
 
