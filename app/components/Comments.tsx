@@ -225,7 +225,7 @@ const CommentItem: React.FC<ItemProps> = ({
             >
               <div className="comment">
                 <div className="avatar more-avatar">＋</div>
-                <span className="more-label">{displayCnt}개 댓글 더보기</span>
+                <span className="more-label">댓글 더보기</span>
               </div>
             </li>
           ) : (
