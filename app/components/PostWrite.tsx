@@ -4,6 +4,7 @@ import RichTextEditor from "./RichTextEditor";
 import html2canvas from "html2canvas";
 import CorrectTextRequest from "../api/spellcorrector/requests/spellcorrector/CorrectTextRequest";
 import { useNavigate } from "react-router";
+import { Post } from "../api/pathbook/types/Post";
 
 declare global {
   interface Window {
@@ -11,8 +12,16 @@ declare global {
   }
 }
 
-export default function PostWriteComponent() {
+interface PostWriteProps {
+  editingPost?: Post;          // ← 추가
+}
+
+export default function PostWriteComponent({ editingPost }: PostWriteProps) {  // ← 변경
   const navigate = useNavigate();
+
+  const [titleValue,    setTitleValue]    = useState(editingPost?.title   ?? "");
+  const [tagValue,      setTagValue]      = useState(editingPost?.tags?.join(" ") ?? "");
+  const [contentValue,  setContentValue]  = useState(editingPost?.content ?? "");
 
   const handleGoBack = () => {
     navigate(-1); // Navigates back one entry in the history stack
@@ -451,10 +460,23 @@ export default function PostWriteComponent() {
 
       {/* 글쓰기 영역 */}
       <div className="frame">
-        <input className="write-subject" placeholder="제목을 입력해 주세요" />
+        <input
+          className="write-subject"
+          placeholder="제목을 입력해 주세요"
+          value={titleValue}
+          onChange={(e) => setTitleValue(e.target.value)}
+        />
         <br />
-        <input className="tag-list" placeholder="#태그_추가" />
-        <RichTextEditor />
+        <input
+          className="tag-list"
+          placeholder="#태그_추가"
+          value={tagValue}
+          onChange={(e) => setTagValue(e.target.value)}
+        />
+        <RichTextEditor
+          initialHTML={editingPost?.content ?? ""}
+          onChange={setContentValue}
+        />
       </div>
 
       <a
@@ -498,7 +520,7 @@ export default function PostWriteComponent() {
           작성취소
         </button>
         <button className="submit" onClick={downloadMap}>
-          작성하기
+          {editingPost ? "수정하기" : "작성하기"}
         </button>
       </div>
     </div>
