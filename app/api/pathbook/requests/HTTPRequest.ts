@@ -31,6 +31,7 @@ export default abstract class HTTPRequest<ResponseType> {
   private body: Record<string, any> | null;
   private queryParams: URLSearchParams | null;
   private pathParams: Record<string, any> | null;
+  private bodyType: "application/json" | "multipart/form-data" = "application/json";
 
   constructor(path: string, method: HTTPMethod) {
     this.path = path;
@@ -96,6 +97,18 @@ export default abstract class HTTPRequest<ResponseType> {
     }
 
     delete this.body[name];
+  }
+
+  /**
+   * 전송 본문의 타입을 지정한다.
+   * @param bodyType "json" | "multipart"
+   */
+  protected setBodyType(bodyType: string): void {
+    if (bodyType === "multipart/form-data" || bodyType === "application/json") {
+      this.bodyType = bodyType;
+    } else {
+      console.warn("잘못된 형식의 타입");
+    }
   }
 
   /**
@@ -242,15 +255,28 @@ export default abstract class HTTPRequest<ResponseType> {
       credentials: this.credentials,
     };
 
-    // GET/HEAD method가 아닌 경우 body 설정
     if (this.body) {
       if (this.method === HTTPMethod.GET || this.method === HTTPMethod.HEAD) {
         console.warn(`Ignore body because the method is ${this.method}`);
       } else {
-        if (!this.header.has("Content-Type")) {
-          this.header.set("Content-Type", "application/json");
+        if (this.bodyType === "multipart/form-data") {
+          const formData = new FormData();
+          Object.entries(this.body).forEach(([name, value]) => {
+            if (value instanceof File || value instanceof Blob) {
+              formData.append(name, value);
+            } else {
+              formData.append(name, value as any);
+            }
+          });
+
+          this.header.delete("Content-Type");
+          requestOption.body = formData;
+        } else {
+          if (!this.header.has("Content-Type")) {
+            this.header.set("Content-Type", "application/json");
+          }
+          requestOption.body = JSON.stringify(this.body);
         }
-        requestOption.body = JSON.stringify(this.body);
       }
     }
 

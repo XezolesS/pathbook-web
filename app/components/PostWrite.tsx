@@ -5,6 +5,7 @@ import html2canvas from "html2canvas";
 import CorrectTextRequest from "../api/spellcorrector/requests/spellcorrector/CorrectTextRequest";
 import { useNavigate } from "react-router";
 import { Post } from "../api/pathbook/types/Post";
+import PostWriteRequest from "../api/pathbook/requests/post/PostWriteRequest";
 
 declare global {
   interface Window {
@@ -13,15 +14,15 @@ declare global {
 }
 
 interface PostWriteProps {
-  editingPost?: Post;
+  editingPost?: Post;          // ← 추가
 }
 
-export default function PostWriteComponent({ editingPost }: PostWriteProps) {
+export default function PostWriteComponent({ editingPost }: PostWriteProps) {  // ← 변경
   const navigate = useNavigate();
 
-  const [titleValue, setTitleValue] = useState(editingPost?.title ?? "");
-  const [tagValue, setTagValue] = useState(editingPost?.tags?.join(" ") ?? "");
-  const [contentValue, setContentValue] = useState(editingPost?.content ?? "");
+  const [titleValue,    setTitleValue]    = useState(editingPost?.title   ?? "");
+  const [tagValue,      setTagValue]      = useState(editingPost?.tags?.join(" ") ?? "");
+  const [contentValue,  setContentValue]  = useState(editingPost?.content ?? "");
 
   const handleGoBack = () => {
     navigate(-1); // Navigates back one entry in the history stack
@@ -357,6 +358,92 @@ export default function PostWriteComponent({ editingPost }: PostWriteProps) {
       markers.forEach((m) => m.setMap(map));
     }
   }
+
+  function dataURIToBlob(dataUri: string): Blob {
+    const [meta, b64] = dataUri.split(",");
+    const mime = meta.match(/data:(.*);base64/)![1];
+    const bin   = atob(b64);
+    const len   = bin.length;
+    const buf   = new Uint8Array(len);
+    for (let i = 0; i < len; i++) buf[i] = bin.charCodeAt(i);
+    return new Blob([buf], { type: mime });
+  }
+
+  async function buildPostFormData(
+    title: string,
+    tags: string[],
+    rawHtml: string
+  ): Promise<FormData> {
+    const dom  = new DOMParser().parseFromString(rawHtml, "text/html");
+    const imgs = Array.from(dom.querySelectorAll("img[src^='data:']"));
+
+    const form = new FormData();
+    form.append("title", title);
+    tags.forEach((t) => form.append("tags[]", t));
+
+    imgs.forEach((img, idx) => {
+      const dataUri = img.getAttribute("src")!;
+      const blob    = dataURIToBlob(dataUri);
+
+      const mime = blob.type;
+      const ext  = mime.split("/")[1] || "png";
+      const fname = `img_${Date.now()}_${idx}.${ext}`;
+
+      img.removeAttribute("src");
+      img.setAttribute("data-filename", fname);
+      form.append("files", blob, fname);
+    });
+
+    form.append("content", dom.body.innerHTML);
+    return form;
+  }
+
+  const submitPost = async () => {
+    try {
+      
+      if (!titleValue.trim() || !contentValue.trim()) {
+        alert("제목과 내용을 입력해주세요.");
+        return;
+      }
+
+      const canvas = await html2canvas(mapRef.current!);
+      const mapBlob = await new Promise<Blob>((ok, err) =>
+        canvas.toBlob(b => (b ? ok(b) : err(new Error("error"))), "image/png")
+      );
+
+      const extractDataURIs = (html: string) =>
+        Array.from(html.matchAll(/<img[^>]+src="([^"]+)"/g)).map(m => m[1]);
+
+      const dataURIToFile = (uri: string, idx: number) => {
+        const [meta, b64] = uri.split(",");
+        const mime = meta.match(/data:(.+);/)![1];
+        const bin  = atob(b64);
+        const buf  = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) buf[i] = bin.charCodeAt(i);
+        const ext  = mime.split("/")[1] ?? "bin";
+        return new File([buf], `quill_${idx}.${ext}`, { type: mime });
+      };
+
+      const quillFiles = extractDataURIs(contentValue).map(dataURIToFile);
+
+      const contents = {
+        title: titleValue,
+        content: contentValue,
+        path: {
+          pathPoints: path.map(({ lat, lng }) => ({
+            latitude: lat,
+            longitude: lng,
+          })),
+        },
+      };
+    
+      const request = new PostWriteRequest(contents, mapBlob, quillFiles);
+      await request.send();
+    } catch (e) {
+      console.error("submitPost 실패:", e);
+    }
+  };
+
   return (
     <div className="post-write-frame">
       <div className="draw-path">
@@ -519,7 +606,7 @@ export default function PostWriteComponent({ editingPost }: PostWriteProps) {
         <button className="cancel" onClick={handleGoBack}>
           작성취소
         </button>
-        <button className="submit" onClick={downloadMap}>
+        <button className="submit" onClick={submitPost}> 
           {editingPost ? "수정하기" : "작성하기"}
         </button>
       </div>
