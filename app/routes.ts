@@ -12,6 +12,7 @@ export default [
   // Auth pages
   layout("./layouts/AuthLayout.tsx", [
     route("login", "./pages/Login.tsx"),
+    route("SignupComplete", "./pages/SignupComplete.tsx"),
     route("register", "./pages/Register.tsx"),
     route("forgot-password", "./pages/ForgotPassword.tsx"),
     route("reset-password", "./pages/ResetPassword.tsx"),
