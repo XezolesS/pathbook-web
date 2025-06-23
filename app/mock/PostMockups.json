@@ -5,18 +5,25 @@
       "userId": "u001",
       "username": "travelgwangju",
       "email": "travelgwangju@example.com",
-      "verified": true
+      "verified": true,
+      "icon_url": "../app/mock/images/iconu001.png",
+      "banner_url": "../app/mock/images/banneru001.png"
     },
     "title": "광주천 따라 걷기 좋은 산책로",
     "content": "광주천을 따라 아침 산책을 하며 찍은 경로입니다. 선선한 바람과 시원한 물소리가 너무 좋았어요. 사진 속 파란 선이 제가 걸은 경로예요.",
     "createdAt": 1717900000000,
     "updatedAt": 1717900000000,
     "pathId": 101,
-    "attachments": ["gwangjucheon-route.jpg"],
+    "attachments": [],
     "rootComments": [],
     "likeCount": 32,
     "bookmarkCount": 12,
-    "tags": ["#광주", "#산책", "#광주천", "#자연"]
+    "tags": [
+      "#광주",
+      "#산책",
+      "#광주천",
+      "#자연"
+    ]
   },
   {
     "postId": 2,
@@ -24,54 +31,598 @@
       "userId": "u002",
       "username": "historyfan",
       "email": "historyfan@example.com",
-      "verified": true
+      "verified": true,
+      "icon_url": "../app/mock/images/iconu002.png",
+      "banner_url": "../app/mock/images/banneru002.png"
     },
     "title": "조선대학교 캠퍼스 투어 경로 공유",
     "content": "조선대학교 안에서 찍은 캠퍼스 투어 경로입니다. 역사관부터 중앙도서관까지 이어지는 루트로, 건물 설명도 함께 적어두었어요.",
     "createdAt": 1717910000000,
     "updatedAt": 1717910000000,
     "pathId": 102,
-    "attachments": ["chosun-univ-tour.jpg"],
+    "attachments": [
+      "../app/mock/images/i1.jpg"
+    ],
     "rootComments": [
       {
-        "commentId": 201,
+        "commentId": 1000,
         "postId": 2,
         "author": {
           "userId": "u010",
           "username": "campusfan",
           "email": "campusfan@example.com",
-          "verified": false
+          "verified": false,
+          "icon_url": "../app/mock/images/iconu010.png",
+          "banner_url": "../app/mock/images/banneru010.png"
         },
-        "content": "조선대 캠퍼스 진짜 예쁘죠! 저도 지난주에 다녀왔어요.",
+        "content": "조선대 캠퍼스 진짜 예쁘죠! 저도 지난주에 다녀왔어요.1",
         "createdAt": 1717910100000,
         "updatedAt": null,
         "likeCount": 12,
         "childComments": [
           {
-            "commentId": 202,
+            "commentId": 1001,
             "postId": 2,
             "author": {
               "userId": "u002",
               "username": "historyfan",
               "email": "historyfan@example.com",
-              "verified": true
+              "verified": true,
+              "icon_url": "../app/mock/images/iconu002.png",
+              "banner_url": "../app/mock/images/banneru002.png"
             },
-            "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 :)",
+            "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 :)2",
             "createdAt": 1717910200000,
             "updatedAt": null,
             "likeCount": 4,
             "childComments": []
+          },
+          {
+            "commentId": 1002,
+            "postId": 2,
+            "author": {
+              "userId": "u010",
+              "username": "campusfan",
+              "email": "campusfan@example.com",
+              "verified": false,
+              "icon_url": "../app/mock/images/iconu010.png",
+              "banner_url": "../app/mock/images/banneru010.png"
+            },
+            "content": "조선대 캠퍼스 진짜 예쁘죠! 저도 지난주에 다녀왔어요.3",
+            "createdAt": 1717910100000,
+            "updatedAt": null,
+            "likeCount": 12,
+            "childComments": [
+              {
+                "commentId": 1003,
+                "postId": 2,
+                "author": {
+                  "userId": "u002",
+                  "username": "historyfan",
+                  "email": "historyfan@example.com",
+                  "verified": true,
+                  "icon_url": "../app/mock/images/iconu002.png",
+                  "banner_url": "../app/mock/images/banneru002.png"
+                },
+                "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 :)4",
+                "createdAt": 1717910200000,
+                "updatedAt": null,
+                "likeCount": 4,
+                "childComments": [
+                  {
+                    "commentId": 1004,
+                    "postId": 2,
+                    "author": {
+                      "userId": "u002",
+                      "username": "historyfan",
+                      "email": "historyfan@example.com",
+                      "verified": true,
+                      "icon_url": "../app/mock/images/iconu002.png",
+                      "banner_url": "../app/mock/images/banneru002.png"
+                    },
+                    "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 :)5",
+                    "createdAt": 1717910200000,
+                    "updatedAt": null,
+                    "likeCount": 4,
+                    "childComments": [
+                      {
+                        "commentId": 1005,
+                        "postId": 2,
+                        "author": {
+                          "userId": "u002",
+                          "username": "historyfan",
+                          "email": "historyfan@example.com",
+                          "verified": true,
+                          "icon_url": "../app/mock/images/iconu002.png",
+                          "banner_url": "../app/mock/images/banneru002.png"
+                        },
+                        "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 :)6",
+                        "createdAt": 1717910200000,
+                        "updatedAt": null,
+                        "likeCount": 4,
+                        "childComments": [
+                          {
+                            "commentId": 1006,
+                            "postId": 2,
+                            "author": {
+                              "userId": "u002",
+                              "username": "historyfan",
+                              "email": "historyfan@example.com",
+                              "verified": true,
+                              "icon_url": "../app/mock/images/iconu002.png",
+                              "banner_url": "../app/mock/images/banneru002.png"
+                            },
+                            "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 :)7",
+                            "createdAt": 1717910200000,
+                            "updatedAt": null,
+                            "likeCount": 4,
+                            "childComments": [
+                              {
+                                "commentId": 1007,
+                                "postId": 2,
+                                "author": {
+                                  "userId": "u002",
+                                  "username": "historyfan",
+                                  "email": "historyfan@example.com",
+                                  "verified": true,
+                                  "icon_url": "../app/mock/images/iconu002.png",
+                                  "banner_url": "../app/mock/images/banneru002.png"
+                                },
+                                "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 :)8",
+                                "createdAt": 1717910200000,
+                                "updatedAt": null,
+                                "likeCount": 4,
+                                "childComments": [
+                                  {
+                                    "commentId": 1008,
+                                    "postId": 2,
+                                    "author": {
+                                      "userId": "u002",
+                                      "username": "historyfan",
+                                      "email": "historyfan@example.com",
+                                      "verified": true,
+                                      "icon_url": "../app/mock/images/iconu002.png",
+                                      "banner_url": "../app/mock/images/banneru002.png"
+                                    },
+                                    "content": "맞아요! 봄에 벚꽃도 예쁘더라고요맞아요! 봄에 벚꽃도 예쁘더라고요맞아요! 봄에 벚꽃도 예쁘더라고요맞아요! 봄에 벚꽃도 예쁘더라고요맞아요! 봄에 벚꽃도 예쁘더라고요맞아요! 봄에 벚꽃도 예쁘더라고요 =:)9",
+                                    "createdAt": 1717910200000,
+                                    "updatedAt": null,
+                                    "likeCount": 4,
+                                    "childComments": [
+                                      {
+                                        "commentId": 1009,
+                                        "postId": 2,
+                                        "author": {
+                                          "userId": "u002",
+                                          "username": "historyfan",
+                                          "email": "historyfan@example.com",
+                                          "verified": true,
+                                          "icon_url": "../app/mock/images/iconu002.png",
+                                          "banner_url": "../app/mock/images/banneru002.png"
+                                        },
+                                        "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 =============================================:)10",
+                                        "createdAt": 1717910200000,
+                                        "updatedAt": null,
+                                        "likeCount": 4,
+                                        "childComments": [
+                                          {
+                                            "commentId": 1010,
+                                            "postId": 2,
+                                            "author": {
+                                              "userId": "u002",
+                                              "username": "historyfan",
+                                              "email": "historyfan@example.com",
+                                              "verified": true,
+                                              "icon_url": "../app/mock/images/iconu002.png",
+                                              "banner_url": "../app/mock/images/banneru002.png"
+                                            },
+                                            "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 =============================================:)11",
+                                            "createdAt": 1717910200000,
+                                            "updatedAt": null,
+                                            "likeCount": 4,
+                                            "childComments": [
+                                              {
+                                                "commentId": 1011,
+                                                "postId": 2,
+                                                "author": {
+                                                  "userId": "u002",
+                                                  "username": "historyfan",
+                                                  "email": "historyfan@example.com",
+                                                  "verified": true,
+                                                  "icon_url": "../app/mock/images/iconu002.png",
+                                                  "banner_url": "../app/mock/images/banneru002.png"
+                                                },
+                                                "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 =============================================:)12",
+                                                "createdAt": 1717910200000,
+                                                "updatedAt": null,
+                                                "likeCount": 4,
+                                                "childComments": [
+                                                  {
+                                                    "commentId": 1012,
+                                                    "postId": 2,
+                                                    "author": {
+                                                      "userId": "u002",
+                                                      "username": "historyfan",
+                                                      "email": "historyfan@example.com",
+                                                      "verified": true,
+                                                      "icon_url": "../app/mock/images/iconu002.png",
+                                                      "banner_url": "../app/mock/images/banneru002.png"
+                                                    },
+                                                    "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 =============================================:)13",
+                                                    "createdAt": 1717910200000,
+                                                    "updatedAt": null,
+                                                    "likeCount": 4,
+                                                    "childComments": []
+                                                  },
+                                                  {
+                                                    "commentId": 1013,
+                                                    "postId": 2,
+                                                    "author": {
+                                                      "userId": "u002",
+                                                      "username": "historyfan",
+                                                      "email": "historyfan@example.com",
+                                                      "verified": true,
+                                                      "icon_url": "../app/mock/images/iconu002.png",
+                                                      "banner_url": "../app/mock/images/banneru002.png"
+                                                    },
+                                                    "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 =============================================:)1311111",
+                                                    "createdAt": 1717910200000,
+                                                    "updatedAt": null,
+                                                    "likeCount": 4,
+                                                    "childComments": []
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                                  {
+                                                    "commentId": 1114,
+                                                    "postId": 2,
+                                                    "author": {
+                                                      "userId": "u002",
+                                                      "username": "historyfan",
+                                                      "email": "historyfan@example.com",
+                                                      "verified": true,
+                                                      "icon_url": "../app/mock/images/iconu002.png",
+                                                      "banner_url": "../app/mock/images/banneru002.png"
+                                                    },
+                                                    "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 ==========1114",
+                                                    "createdAt": 1717910200000,
+                                                    "updatedAt": null,
+                                                    "likeCount": 4,
+                                                    "childComments": []
+                                                  },
+                                                  {
+                                    "commentId": 1008,
+                                    "postId": 2,
+                                    "author": {
+                                      "userId": "u002",
+                                      "username": "historyfan",
+                                      "email": "historyfan@example.com",
+                                      "verified": true,
+                                      "icon_url": "../app/mock/images/iconu002.png",
+                                      "banner_url": "../app/mock/images/banneru002.png"
+                                    },
+                                    "content": "맞아요! 봄에 벚꽃도 예쁘더라고요맞아요! 봄에 벚꽃도 예쁘더라고요맞아요! 봄에 벚꽃도 예쁘더라고요맞아요! 봄에 벚꽃도 예쁘더라고요맞아요! 봄에 벚꽃도 예쁘더라고요맞아요! 봄에 벚꽃도 예쁘더라고요 =:)9",
+                                    "createdAt": 1717910200000,
+                                    "updatedAt": null,
+                                    "likeCount": 4,
+                                    "childComments": [
+                                      {
+                                        "commentId": 1009,
+                                        "postId": 2,
+                                        "author": {
+                                          "userId": "u002",
+                                          "username": "historyfan",
+                                          "email": "historyfan@example.com",
+                                          "verified": true,
+                                          "icon_url": "../app/mock/images/iconu002.png",
+                                          "banner_url": "../app/mock/images/banneru002.png"
+                                        },
+                                        "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 =============================================:)10",
+                                        "createdAt": 1717910200000,
+                                        "updatedAt": null,
+                                        "likeCount": 4,
+                                        "childComments": [
+                                          {
+                                            "commentId": 1010,
+                                            "postId": 2,
+                                            "author": {
+                                              "userId": "u002",
+                                              "username": "historyfan",
+                                              "email": "historyfan@example.com",
+                                              "verified": true,
+                                              "icon_url": "../app/mock/images/iconu002.png",
+                                              "banner_url": "../app/mock/images/banneru002.png"
+                                            },
+                                            "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 =============================================:)11",
+                                            "createdAt": 1717910200000,
+                                            "updatedAt": null,
+                                            "likeCount": 4,
+                                            "childComments": [
+                                              {
+                                                "commentId": 1011,
+                                                "postId": 2,
+                                                "author": {
+                                                  "userId": "u002",
+                                                  "username": "historyfan",
+                                                  "email": "historyfan@example.com",
+                                                  "verified": true,
+                                                  "icon_url": "../app/mock/images/iconu002.png",
+                                                  "banner_url": "../app/mock/images/banneru002.png"
+                                                },
+                                                "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 =============================================:)12",
+                                                "createdAt": 1717910200000,
+                                                "updatedAt": null,
+                                                "likeCount": 4,
+                                                "childComments": [
+                                                  {
+                                                    "commentId": 1012,
+                                                    "postId": 2,
+                                                    "author": {
+                                                      "userId": "u002",
+                                                      "username": "historyfan",
+                                                      "email": "historyfan@example.com",
+                                                      "verified": true,
+                                                      "icon_url": "../app/mock/images/iconu002.png",
+                                                      "banner_url": "../app/mock/images/banneru002.png"
+                                                    },
+                                                    "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 =============================================:)13",
+                                                    "createdAt": 1717910200000,
+                                                    "updatedAt": null,
+                                                    "likeCount": 4,
+                                                    "childComments": []
+                                                  },
+                                                  {
+                                                    "commentId": 1013,
+                                                    "postId": 2,
+                                                    "author": {
+                                                      "userId": "u002",
+                                                      "username": "historyfan",
+                                                      "email": "historyfan@example.com",
+                                                      "verified": true,
+                                                      "icon_url": "../app/mock/images/iconu002.png",
+                                                      "banner_url": "../app/mock/images/banneru002.png"
+                                                    },
+                                                    "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 =============================================:)1311111",
+                                                    "createdAt": 1717910200000,
+                                                    "updatedAt": null,
+                                                    "likeCount": 4,
+                                                    "childComments": []
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "commentId": 1013,
+            "postId": 2,
+            "author": {
+              "userId": "u010",
+              "username": "campusfan",
+              "email": "campusfan@example.com",
+              "verified": false,
+              "icon_url": "../app/mock/images/iconu010.png",
+              "banner_url": "../app/mock/images/banneru010.png"
+            },
+            "content": "조선대 캠퍼스 진짜 예쁘죠! 저도 지난주에 다녀왔어요.3",
+            "createdAt": 1717910100000,
+            "updatedAt": null,
+            "likeCount": 12,
+            "childComments": [
+              {
+                "commentId": 1014,
+                "postId": 2,
+                "author": {
+                  "userId": "u002",
+                  "username": "historyfan",
+                  "email": "historyfan@example.com",
+                  "verified": true,
+                  "icon_url": "../app/mock/images/iconu002.png",
+                  "banner_url": "../app/mock/images/banneru002.png"
+                },
+                "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 :)4",
+                "createdAt": 1717910200000,
+                "updatedAt": null,
+                "likeCount": 4,
+                "childComments": [
+                  {
+                    "commentId": 1015,
+                    "postId": 2,
+                    "author": {
+                      "userId": "u002",
+                      "username": "historyfan",
+                      "email": "historyfan@example.com",
+                      "verified": true,
+                      "icon_url": "../app/mock/images/iconu002.png",
+                      "banner_url": "../app/mock/images/banneru002.png"
+                    },
+                    "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 :)5",
+                    "createdAt": 1717910200000,
+                    "updatedAt": null,
+                    "likeCount": 4,
+                    "childComments": [
+                      {
+                        "commentId": 1016,
+                        "postId": 2,
+                        "author": {
+                          "userId": "u002",
+                          "username": "historyfan",
+                          "email": "historyfan@example.com",
+                          "verified": true,
+                          "icon_url": "../app/mock/images/iconu002.png",
+                          "banner_url": "../app/mock/images/banneru002.png"
+                        },
+                        "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 :)6",
+                        "createdAt": 1717910200000,
+                        "updatedAt": null,
+                        "likeCount": 4,
+                        "childComments": [
+                          {
+                            "commentId": 1017,
+                            "postId": 2,
+                            "author": {
+                              "userId": "u002",
+                              "username": "historyfan",
+                              "email": "historyfan@example.com",
+                              "verified": true,
+                              "icon_url": "../app/mock/images/iconu002.png",
+                              "banner_url": "../app/mock/images/banneru002.png"
+                            },
+                            "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 :)7",
+                            "createdAt": 1717910200000,
+                            "updatedAt": null,
+                            "likeCount": 4,
+                            "childComments": [
+                              {
+                                "commentId": 1018,
+                                "postId": 2,
+                                "author": {
+                                  "userId": "u002",
+                                  "username": "historyfan",
+                                  "email": "historyfan@example.com",
+                                  "verified": true,
+                                  "icon_url": "../app/mock/images/iconu002.png",
+                                  "banner_url": "../app/mock/images/banneru002.png"
+                                },
+                                "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 :)8",
+                                "createdAt": 1717910200000,
+                                "updatedAt": null,
+                                "likeCount": 4,
+                                "childComments": [
+                                  {
+                                    "commentId": 1019,
+                                    "postId": 2,
+                                    "author": {
+                                      "userId": "u002",
+                                      "username": "historyfan",
+                                      "email": "historyfan@example.com",
+                                      "verified": true,
+                                      "icon_url": "../app/mock/images/iconu002.png",
+                                      "banner_url": "../app/mock/images/banneru002.png"
+                                    },
+                                    "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 =============================================:)9",
+                                    "createdAt": 1717910200000,
+                                    "updatedAt": null,
+                                    "likeCount": 4,
+                                    "childComments": [
+                                      {
+                                        "commentId": 1020,
+                                        "postId": 2,
+                                        "author": {
+                                          "userId": "u002",
+                                          "username": "historyfan",
+                                          "email": "historyfan@example.com",
+                                          "verified": true,
+                                          "icon_url": "../app/mock/images/iconu002.png",
+                                          "banner_url": "../app/mock/images/banneru002.png"
+                                        },
+                                        "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 =============================================:)10",
+                                        "createdAt": 1717910200000,
+                                        "updatedAt": null,
+                                        "likeCount": 4,
+                                        "childComments": [
+                                          {
+                                            "commentId": 1021,
+                                            "postId": 2,
+                                            "author": {
+                                              "userId": "u002",
+                                              "username": "historyfan",
+                                              "email": "historyfan@example.com",
+                                              "verified": true,
+                                              "icon_url": "../app/mock/images/iconu002.png",
+                                              "banner_url": "../app/mock/images/banneru002.png"
+                                            },
+                                            "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 =============================================:)11",
+                                            "createdAt": 1717910200000,
+                                            "updatedAt": null,
+                                            "likeCount": 4,
+                                            "childComments": [
+                                              {
+                                                "commentId": 1022,
+                                                "postId": 2,
+                                                "author": {
+                                                  "userId": "u002",
+                                                  "username": "historyfan",
+                                                  "email": "historyfan@example.com",
+                                                  "verified": true,
+                                                  "icon_url": "../app/mock/images/iconu002.png",
+                                                  "banner_url": "../app/mock/images/banneru002.png"
+                                                },
+                                                "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 =============================================:)12",
+                                                "createdAt": 1717910200000,
+                                                "updatedAt": null,
+                                                "likeCount": 4,
+                                                "childComments": [
+                                                  {
+                                                    "commentId": 1023,
+                                                    "postId": 2,
+                                                    "author": {
+                                                      "userId": "u002",
+                                                      "username": "historyfan",
+                                                      "email": "historyfan@example.com",
+                                                      "verified": true,
+                                                      "icon_url": "../app/mock/images/iconu002.png",
+                                                      "banner_url": "../app/mock/images/banneru002.png"
+                                                    },
+                                                    "content": "맞아요! 봄에 벚꽃도 예쁘더라고요 =============================================:)13",
+                                                    "createdAt": 1717910200000,
+                                                    "updatedAt": null,
+                                                    "likeCount": 4,
+                                                    "childComments": []
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
       {
-        "commentId": 203,
+        "commentId": 1024,
         "postId": 2,
         "author": {
           "userId": "u011",
           "username": "gwjwalker",
           "email": "gwjwalker@example.com",
-          "verified": true
+          "verified": true,
+          "icon_url": "../app/mock/images/iconu011.png",
+          "banner_url": "../app/mock/images/banneru011.png"
         },
         "content": "경로 사진 너무 보기 좋아요! 혹시 총 소요 시간도 알려주실 수 있나요?",
         "createdAt": 1717910300000,
@@ -79,13 +630,15 @@
         "likeCount": 7,
         "childComments": [
           {
-            "commentId": 204,
+            "commentId": 1025,
             "postId": 2,
             "author": {
               "userId": "u002",
               "username": "historyfan",
               "email": "historyfan@example.com",
-              "verified": true
+              "verified": true,
+              "icon_url": "../app/mock/images/iconu002.png",
+              "banner_url": "../app/mock/images/banneru002.png"
             },
             "title": "",
             "content": "전체 둘러보는 데는 대략 1시간 반 정도 걸렸어요!",
@@ -97,13 +650,15 @@
         ]
       },
       {
-        "commentId": 205,
+        "commentId": 1026,
         "postId": 2,
         "author": {
           "userId": "u012",
           "username": "photoguy",
           "email": "photoguy@example.com",
-          "verified": false
+          "verified": false,
+          "icon_url": "../app/mock/images/iconu012.png",
+          "banner_url": "../app/mock/images/banneru012.png"
         },
         "content": "경로 안에 있는 역사관 이름이 뭔가요?",
         "createdAt": 1717910500000,
@@ -111,13 +666,15 @@
         "likeCount": 2,
         "childComments": [
           {
-            "commentId": 206,
+            "commentId": 1027,
             "postId": 2,
             "author": {
               "userId": "u002",
               "username": "historyfan",
               "email": "historyfan@example.com",
-              "verified": true
+              "verified": true,
+              "icon_url": "../app/mock/images/iconu002.png",
+              "banner_url": "../app/mock/images/banneru002.png"
             },
             "title": "",
             "content": "조선대학교 박물관이에요. 근처에 조형물도 많답니다.",
@@ -129,13 +686,15 @@
         ]
       },
       {
-        "commentId": 207,
+        "commentId": 1028,
         "postId": 2,
         "author": {
           "userId": "u013",
           "username": "alumni1995",
           "email": "alumni1995@example.com",
-          "verified": true
+          "verified": true,
+          "icon_url": "../app/mock/images/iconu013.png",
+          "banner_url": "../app/mock/images/banneru013.png"
         },
         "content": "졸업한 지 오래됐는데, 이렇게 보니 추억이 새록새록하네요. 감사합니다!",
         "createdAt": 1717910700000,
@@ -144,13 +703,15 @@
         "childComments": []
       },
       {
-        "commentId": 208,
+        "commentId": 1029,
         "postId": 2,
         "author": {
           "userId": "u014",
           "username": "gwangjulocal",
           "email": "gwangjulocal@example.com",
-          "verified": false
+          "verified": false,
+          "icon_url": "../app/mock/images/iconu014.png",
+          "banner_url": "../app/mock/images/banneru014.png"
         },
         "content": "캠퍼스 내에 주차는 가능한가요?",
         "createdAt": 1717910800000,
@@ -158,13 +719,15 @@
         "likeCount": 1,
         "childComments": [
           {
-            "commentId": 209,
+            "commentId": 1030,
             "postId": 2,
             "author": {
               "userId": "u002",
               "username": "historyfan",
               "email": "historyfan@example.com",
-              "verified": true
+              "verified": true,
+              "icon_url": "../app/mock/images/iconu002.png",
+              "banner_url": "../app/mock/images/banneru002.png"
             },
             "title": "",
             "content": "정문 근처에 유료 주차장 있어요. 주말엔 비교적 자리 여유 있습니다.",
@@ -178,7 +741,12 @@
     ],
     "likeCount": 45,
     "bookmarkCount": 20,
-    "tags": ["#조선대학교", "#캠퍼스투어", "#광주", "#대학산책"]
+    "tags": [
+      "#조선대학교",
+      "#캠퍼스투어",
+      "#광주",
+      "#대학산책"
+    ]
   },
   {
     "postId": 3,
@@ -186,18 +754,28 @@
       "userId": "u003",
       "username": "mountainhiker",
       "email": "hiker@example.com",
-      "verified": false
+      "verified": false,
+      "icon_url": "../app/mock/images/iconu003.png",
+      "banner_url": "../app/mock/images/banneru003.png"
     },
     "title": "무등산 등산 코스 경로 공유합니다",
     "content": "장불재까지 올라간 무등산 등산 코스를 지도에 표시해보았어요. 체력은 좀 필요하지만 경치는 최고입니다!",
     "createdAt": 1717920000000,
     "updatedAt": 1717920000000,
     "pathId": 103,
-    "attachments": ["mudeungsan-hike.jpg"],
+    "attachments": [
+      "../app/mock/images/i2.jpg",
+      "../app/mock/images/i3.jpg"
+    ],
     "rootComments": [],
     "likeCount": 54,
     "bookmarkCount": 35,
-    "tags": ["#무등산", "#광주", "#등산", "#자연경관"]
+    "tags": [
+      "#무등산",
+      "#광주",
+      "#등산",
+      "#자연경관"
+    ]
   },
   {
     "postId": 4,
@@ -205,18 +783,27 @@
       "userId": "u004",
       "username": "artlover",
       "email": "artlover@example.com",
-      "verified": true
+      "verified": true,
+      "icon_url": "../app/mock/images/iconu004.png",
+      "banner_url": "../app/mock/images/banneru004.png"
     },
     "title": "비엔날레 전시관 주변 산책 루트",
     "content": "광주 비엔날레 전시관을 중심으로 한 산책 코스를 그려봤습니다. 예술작품도 보고, 주변 공원에서 여유도 느낄 수 있는 루트예요.",
     "createdAt": 1717930000000,
     "updatedAt": 1717930000000,
     "pathId": 104,
-    "attachments": ["biennale-walk.jpg"],
+    "attachments": [
+      "../app/mock/images/i4.jpg"
+    ],
     "rootComments": [],
     "likeCount": 21,
     "bookmarkCount": 10,
-    "tags": ["#비엔날레", "#예술", "#산책", "#광주"]
+    "tags": [
+      "#비엔날레",
+      "#예술",
+      "#산책",
+      "#광주"
+    ]
   },
   {
     "postId": 5,
@@ -224,18 +811,27 @@
       "userId": "u005",
       "username": "culturetrip",
       "email": "culturetrip@example.com",
-      "verified": false
+      "verified": false,
+      "icon_url": "../app/mock/images/iconu005.png",
+      "banner_url": "../app/mock/images/banneru005.png"
     },
     "title": "양림동 역사문화마을 탐방 경로",
     "content": "양림동의 근대역사문화마을을 둘러본 경로입니다. 오랜 건축물과 골목이 인상적이었어요. 지도에 표시된 경로를 참고해보세요!",
     "createdAt": 1717940000000,
     "updatedAt": 1717940000000,
     "pathId": 105,
-    "attachments": ["yangnim-culture-route.jpg"],
+    "attachments": [
+      "../app/mock/images/i6.jpg"
+    ],
     "rootComments": [],
     "likeCount": 28,
     "bookmarkCount": 15,
-    "tags": ["#양림동", "#역사", "#문화", "#도보여행"]
+    "tags": [
+      "#양림동",
+      "#역사",
+      "#문화",
+      "#도보여행"
+    ]
   },
   {
     "postId": 6,
@@ -243,18 +839,25 @@
       "userId": "u006",
       "username": "familyday",
       "email": "familyday@example.com",
-      "verified": true
+      "verified": true,
+      "icon_url": "../app/mock/images/iconu006.png",
+      "banner_url": "../app/mock/images/banneru006.png"
     },
     "title": "광주호수생태원 가족 산책 코스",
     "content": "광주호수생태원을 아이들과 함께 걸은 산책 코스입니다. 길이 잘 정비되어 있어서 아이들도 즐거워했어요. 사진에 경로 포함되어 있어요.",
     "createdAt": 1717950000000,
     "updatedAt": 1717950000000,
     "pathId": 106,
-    "attachments": ["lake-eco-park.jpg"],
+    "attachments": [],
     "rootComments": [],
     "likeCount": 39,
     "bookmarkCount": 25,
-    "tags": ["#광주호수생태원", "#가족", "#산책", "#자연"]
+    "tags": [
+      "#광주호수생태원",
+      "#가족",
+      "#산책",
+      "#자연"
+    ]
   },
   {
     "postId": 7,
@@ -262,18 +865,29 @@
       "userId": "u007",
       "username": "parkgoer",
       "email": "parkgoer@example.com",
-      "verified": false
+      "verified": false,
+      "icon_url": "../app/mock/images/iconu007.png",
+      "banner_url": "../app/mock/images/banneru007.png"
     },
     "title": "중외공원 일주 코스 공유",
     "content": "중외공원을 한 바퀴 돌 수 있는 경로를 그려봤어요. 조용하고 사람들이 많지 않아 산책하기 좋습니다.",
     "createdAt": 1717960000000,
     "updatedAt": 1717960000000,
     "pathId": 107,
-    "attachments": ["jungoe-park-loop.jpg"],
+    "attachments": [
+      "../app/mock/images/i6.jpg",
+      "../app/mock/images/i7.jpg",
+      "../app/mock/images/i8.jpg"
+    ],
     "rootComments": [],
     "likeCount": 17,
     "bookmarkCount": 8,
-    "tags": ["#중외공원", "#산책", "#자연", "#광주"]
+    "tags": [
+      "#중외공원",
+      "#산책",
+      "#자연",
+      "#광주"
+    ]
   },
   {
     "postId": 8,
@@ -281,17 +895,26 @@
       "userId": "u008",
       "username": "nightwalker",
       "email": "nightwalker@example.com",
-      "verified": true
+      "verified": true,
+      "icon_url": "../app/mock/images/iconu008.png",
+      "banner_url": "../app/mock/images/banneru008.png"
     },
     "title": "금남로 야경 산책 경로",
     "content": "금남로를 따라 밤에 산책한 루트입니다. 조명이 아름답고, 야경이 멋져서 추천드려요. 사진엔 경로가 표시되어 있어요.",
     "createdAt": 1717970000000,
     "updatedAt": 1717970000000,
     "pathId": 108,
-    "attachments": ["geumnamro-night.jpg"],
+    "attachments": [
+      "../app/mock/images/i9.jpg"
+    ],
     "rootComments": [],
     "likeCount": 42,
     "bookmarkCount": 19,
-    "tags": ["#금남로", "#야경", "#산책", "#광주"]
+    "tags": [
+      "#금남로",
+      "#야경",
+      "#산책",
+      "#광주"
+    ]
   }
 ]

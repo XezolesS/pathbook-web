@@ -3,4 +3,6 @@ export type User = {
   username: string;
   email: string;
   verified: boolean;
+  icon_url: string;
+  banner_url: string;
 };

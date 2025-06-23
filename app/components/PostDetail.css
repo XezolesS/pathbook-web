@@ -4,21 +4,36 @@
 
   padding-top: 1rem;
   padding-bottom: 1rem;
-  padding-right: 5rem;
-  padding-left: 5rem;
+  padding-right: 3rem;
+  padding-left: 3rem;
+
+  background-color: transparent;
+}
+
+.post-detail-item {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-right: 2rem;
+  padding-left: 2rem;
 
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: transparent;
+  box-shadow: var(--box-shadow-a);
+  border-radius: var(--radius);
+  background-color: var(--color-contents-bg);
   gap: 1rem;
 }
 
 .post-detail-map {
   width: 100%;
 
-  background-image: url("./app/assets/image/samplepic3.png");
+  background-image: url("");
   background-size: cover;
   background-position: center;
 
@@ -30,6 +45,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  background-color: var(--color-bg);
 }
 
 .post-detail-show-detail {
@@ -54,12 +70,15 @@
 
 .post-detail-profile-pic {
   width: clamp(30px, 1.2vw, 35px);
+  height: auto;
+
+  margin-bottom: auto;
 
   aspect-ratio: 1 / 1;
-
   background: darkgray;
   border-radius: 50%;
   flex-shrink: 0;
+  z-index: 1;
 }
 
 .post-detail-author {
@@ -68,18 +87,6 @@
   font-weight: 400;
   letter-spacing: 0.05em;
   text-align: left;
-}
-
-.post-detail-comment-info {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.post-detail-interaction-container {
-  display: flex;
-  justify-self: start;
-  gap: 0.5rem;
 }
 
 .post-detail-id-with-time {
@@ -96,43 +103,6 @@
   flex-direction: row;
   align-items: center;
   color: rgba(219, 219, 219, 0.8);
-}
-
-.post-detail-cm-id {
-  font-size: clamp(8px, 1rem, 12px);
-
-  color: #000000;
-  font-weight: bold;
-}
-
-.post-detail-comment-likes {
-  font-size: clamp(10px, 0.65rem, 12px);
-
-  margin-left: auto;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5em;
-  letter-spacing: 0.05em;
-}
-
-.post-detail-comment-reply {
-  font-size: clamp(10px, 0.65rem, 12px);
-
-  margin-left: auto;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5em;
-  letter-spacing: 0.05em;
-}
-
-.post-detail-cm-like-count {
-  display: inline-block;
-}
-
-.post-detail-cm-reply-count {
-  display: inline-block;
 }
 
 .post-detail-show-count {
@@ -237,7 +207,7 @@
 }
 
 .post-detail-comment-container {
-  width: calc(100% - 3rem);
+  width: 100%;
 
   border-radius: var(--radius);
   border: 1px solid #000000;
@@ -245,77 +215,56 @@
   flex-direction: column;
 }
 
+.post-detail-comment-buttons {
+  width: 100%;
+  height: auto;
+
+  padding: 0.5rem;
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.comment-btn-cancel,
+.comment-btn-submit {
+  width: 10%;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.comment-btn-cancel {
+  background: var(--color-bg);
+}
+
+.comment-btn-submit {
+  background: var(--color-primary);
+}
+
 .post-detail-comment-textarea {
   width: 100%;
 
-  padding: 1rem;
+  padding: 0.5rem;
   gap: 1rem;
 
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #000000;
 }
 
 .post-detail-comment-input {
   width: 100%;
 
   font-size: clamp(15px, 0.65rem, 18px);
-
   padding: 0.5rem 1rem;
-  border: 1px solid #000000;
   border-radius: var(--radius);
 }
-
-.post-detail-comment-push {
-  font-size: clamp(15px, 0.65rem, 18px);
-
-  padding: 0.5rem 1rem;
-  aspect-ratio: 2 / 1;
-  margin-left: auto;
-
-  border-radius: var(--radius);
-  font-weight: bold;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--color-primary);
+.post-detail-comment-input:focus {
+  outline: none;
 }
 
 .post-detail-comment-push:hover {
   cursor: pointer;
-}
-
-.post-detail-comment-list {
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-}
-
-.post-detail-comment-item,
-.post-detail-reply-item {
-  width: 100%;
-
-  font-size: clamp(15px, 0.65rem, 18px);
-
-  padding: 0.5rem;
-}
-
-.post-detail-comment-item {
-  display: flex;
-  border-top: 1px solid #000000;
-}
-
-.post-detail-reply-item {
-  padding-left: 3rem;
-  display: flex;
-  align-items: center;
-  border-top: 1px solid hsl(0, 0%, 0%);
-}
-
-.post-detail-space {
-  width: 100%;
 }
 
 .post-detail-text {
@@ -348,25 +297,97 @@
   width: 100%;
   height: auto;
 
-  width: 95%;
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
 }
 
-.post-detail-cancel {
-  width: 15rem;
+.post-detail-cancel,
+.post-detail-edit,
+.post-detail-delete {
+  width: 7rem;
   height: auto;
 
-  padding: 0.5rem;
+  padding: 0.1rem;
 
-  font-size: clamp(12px, 1rem, 20px);
-  font-weight: bold;
+  font-size: 0.9rem;
   text-align: center;
   background-color: var(--color-primary);
   border-radius: var(--radius);
 }
 
-.post-detail-cancel:hover {
+.post-detail-cancel:hover,
+.post-detail-edit:hover,
+.post-detail-delete:hover {
   cursor: pointer;
+}
+.post-detail-comment-likes {
+  font-size: clamp(10px, 0.65rem, 12px);
+
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+  letter-spacing: 0.05em;
+}
+
+.post-detail-comment-item,
+.post-detail-reply-item {
+  width: 100%;
+
+  font-size: clamp(15px, 0.65rem, 18px);
+
+  padding: 0.5rem;
+}
+
+.post-detail-reply-item {
+  padding-left: 3rem;
+  display: flex;
+  align-items: start;
+}
+
+.post-detail-space {
+  width: 100%;
+}
+
+.post-detail-cm-id {
+  font-size: clamp(8px, 1rem, 12px);
+
+  color: #000000;
+  font-weight: bold;
+}
+
+.post-detail-interaction-container {
+  display: flex;
+  justify-self: start;
+  gap: 0.5rem;
+}
+
+.post-detail-cm-like-count {
+  display: inline-block;
+}
+
+.post-detail-cm-reply-count {
+  display: inline-block;
+}
+
+.post-detail-comment-reply {
+  font-size: clamp(10px, 0.65rem, 12px);
+
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+  letter-spacing: 0.05em;
+}
+.post-detail-comments-container {
+  width: 100%;
+  height: auto;
+
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  overflow-x: hidden;
 }

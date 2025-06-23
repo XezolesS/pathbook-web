@@ -4,6 +4,7 @@ import { Post } from "../api/pathbook/types/Post";
 import { User } from "../api/pathbook/types/User";
 import { formatCountNumber } from "../scripts/count";
 import "./Post.css";
+import pathData from "../mock/Path.json";
 
 export default function PostComponent({ post }: { post: Post }) {
   const [postId, setPostId] = useState<number | null>(null);
@@ -15,6 +16,54 @@ export default function PostComponent({ post }: { post: Post }) {
   const [likeCount, setLikeCount] = useState<number | null>(null);
   const [bookmarkCount, setBookmarkCount] = useState<number | null>(null);
   const [tags, setTags] = useState<string | null>(null);
+  const [showImage, setShowImage] = useState(false);
+
+  const isLoader = post.title == null && post.content == null;
+
+  const pathInfo =
+    post.pathId != null
+      ? pathData.find((p) => p.pathId === post.pathId) // TODO: Path 백엔드 연동
+      : null;
+
+  const pathThumb =
+    pathInfo && pathInfo.pathThumbnailUrl?.trim() !== ""
+      ? pathInfo.pathThumbnailUrl
+      : null;
+
+  const hasPathThumb = !!pathThumb;
+  const hasAttach = !!(post.attachments && post.attachments.length > 0);
+  const firstAttach = hasAttach ? post.attachments![0] : null;
+  const attachCount = post.attachments?.length ?? 0;
+  const hasMultiAtt = attachCount > 1;
+  const hasImageCandidate = hasPathThumb || hasAttach;
+  let imgDOM: React.ReactNode = null;
+  if (!isLoader && showImage) {
+    if (hasPathThumb && hasAttach) {
+      imgDOM = (
+        <>
+          <img src={pathThumb!} className="post-img-main" draggable={false} />
+          <div className="img-wrapper" style={{ flex: "1 0 0" }}>
+            <img
+              src={firstAttach!}
+              className="post-img-sub"
+              draggable={false}
+            />
+            {hasMultiAtt && (
+              <div className="img-overlay">+{attachCount - 1}</div>
+            )}
+          </div>
+        </>
+      );
+    } else if (hasPathThumb) {
+      imgDOM = (
+        <img src={pathThumb!} className="post-img-single" draggable={false} />
+      );
+    } else if (hasAttach) {
+      imgDOM = (
+        <img src={firstAttach!} className="post-img-single" draggable={false} />
+      );
+    }
+  }
 
   const delay = async (ms: number) =>
     await new Promise((resolve) => setTimeout(resolve, ms));
@@ -22,7 +71,9 @@ export default function PostComponent({ post }: { post: Post }) {
   // 임시 로딩
   useEffect(() => {
     const run = async () => {
-      await delay(1000); // Properly awaited
+      await delay(500); // Properly awaited
+
+      setShowImage(true);
 
       const dateString = new Date(post.createdAt).toLocaleString();
 
@@ -82,7 +133,15 @@ export default function PostComponent({ post }: { post: Post }) {
             </div>
           </div>
 
-          <div className="post-contents-img-container"></div>
+          <div
+            className={`post-contents-img-container ${
+              isLoader ? "loading-placeholder" : ""
+            }`}
+            style={!hasImageCandidate ? { display: "none" } : undefined}
+          >
+            {!showImage && <div className="post-image-loader" />}
+            {imgDOM}
+          </div>
 
           <div className="post-contents-info">
             <div className="post-contents-writer">
@@ -153,16 +212,17 @@ export default function PostComponent({ post }: { post: Post }) {
 function getBackgroundStyle(value: any, fallbackColor: string, width: string) {
   const isNullish = value === null || value === undefined;
 
-  return {
-    backgroundColor: isNullish ? fallbackColor : "transparent",
-    width: width,
-  };
+  return isNullish
+    ? {
+        backgroundColor: fallbackColor,
+        width: width,
+        color: "transparent",
+      }
+    : undefined;
 }
 
 function getSvgWidthStyle(value: any) {
   const isNullish = value === null || value === undefined;
 
-  return {
-    width: isNullish ? "0" : "0.75rem",
-  };
+  return isNullish ? { width: 0 } : undefined;
 }
