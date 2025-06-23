@@ -1,6 +1,7 @@
 import { Outlet, redirect } from "react-router";
 import textLogo from "../assets/textLogo.png";
 import { parseCookies } from "../scripts/cookie";
+import "./AuthLayout.css";
 import type { Route } from "./pages/+types/AuthLayout";
 
 export async function loader({ request }: Route.LoaderArgs) {

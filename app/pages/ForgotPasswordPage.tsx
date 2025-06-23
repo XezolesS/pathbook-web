@@ -1,5 +1,3 @@
-import "./ResetPassword.css";
-
 export default function ForgotPasswordPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -9,11 +7,11 @@ export default function ForgotPasswordPage() {
 
   return (
     <>
-      <div className="find-password">
-        <div className="find-password-container">
-          <div className="find-password-text">비밀번호 재설정</div>
-          <form className="find-password-form" onSubmit={handleSubmit}>
-            <div className="find-password-description">
+      <div className="auth forgot-password">
+        <div className="auth-container">
+          <div className="auth-title">비밀번호 재설정</div>
+          <form className="auth-form" onSubmit={handleSubmit}>
+            <div>
               가입한 이메일을 입력하시고 ‘비밀번호 재설정’ 버튼을 누르시면
               입력한 이메일 주소로 비밀번호 재설정 링크가 전송됩니다.
               <br />
@@ -24,7 +22,7 @@ export default function ForgotPasswordPage() {
             </div>
 
             <label htmlFor="email">이메일</label>
-            <div className="find-password-form-section">
+            <div className="auth-form-section">
               <input
                 className="input input-email"
                 type="email"
@@ -35,7 +33,7 @@ export default function ForgotPasswordPage() {
               />
             </div>
 
-            <button type="submit" className="find-password-submit">
+            <button type="submit" className="auth-form-submit">
               비밀번호 재설정
             </button>
           </form>

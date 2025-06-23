@@ -1,8 +1,7 @@
 import { redirect, useNavigate } from "react-router";
 import LoginRequest from "../api/pathbook/requests/auth/LoginRequest";
 import { parseCookies } from "../scripts/cookie";
-import "./Login.css";
-import type { Route } from "./pages/+types/Login";
+import type { Route } from "./pages/+types/LoginPage";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");
@@ -39,11 +38,11 @@ export default function LoginPage({ loaderData }: Route.ComponentProps) {
 
   return (
     <>
-      <div className="login">
-        <div className="login-container">
-          <div className="login-text">로그인</div>
-          <form className="login-form" action={handleLoginAction}>
-            <div className="login-form-section">
+      <div className="auth login">
+        <div className="auth-container">
+          <div className="auth-title">로그인</div>
+          <form className="auth-form" action={handleLoginAction}>
+            <div className="auth-form-section">
               <label htmlFor="email">이메일</label>
               <input
                 className="input input-email"
@@ -54,7 +53,7 @@ export default function LoginPage({ loaderData }: Route.ComponentProps) {
                 required
               />
             </div>
-            <div className="login-form-section">
+            <div className="auth-form-section">
               <label htmlFor="password">비밀번호</label>
               <input
                 className="input input-password"
@@ -65,18 +64,20 @@ export default function LoginPage({ loaderData }: Route.ComponentProps) {
                 required
               />
             </div>
-            <label className="logged-checkbox" htmlFor="keep-logged">
-              <input type="checkbox" id="keep-logged" name="keepLogged" />
-              로그인 상태 유지
-            </label>
-            <button type="submit" className="login-form-submit">
+            <div className="auth-form-section">
+              <label className="input-checkbox" htmlFor="keep-logged">
+                <input type="checkbox" id="keep-logged" name="keepLogged" />
+                로그인 상태 유지
+              </label>
+            </div>
+            <button type="submit" className="auth-form-submit">
               로그인
             </button>
           </form>
         </div>
       </div>
 
-      <div className="other-menu-container">
+      <div className="auth-menu-footer">
         <a href="/register">회원가입</a>
         <a href="/forgot-password">비밀번호를 잊어버렸어요</a>
       </div>

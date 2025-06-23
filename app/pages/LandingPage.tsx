@@ -4,8 +4,8 @@ import Details from "../components/Details";
 import LandingContentsViewer from "../components/PostSlidePreview";
 import Welcome from "../components/Welcome";
 import { parseCookies } from "../scripts/cookie";
-import "./Landing.css";
-import type { Route } from "./pages/+types/Landing";
+import "./LandingPage.css";
+import type { Route } from "./pages/+types/LandingPage";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const cookieHeader = request.headers.get("Cookie");

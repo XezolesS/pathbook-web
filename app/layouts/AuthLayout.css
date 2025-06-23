@@ -1,3 +1,133 @@
+html,
+body {
+  background-color: var(--color-contents-bg);
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+
+  margin-top: 2rem;
+
+  display: flex;
+  justify-content: center;
+}
+
+.logo img {
+  width: 12vw;
+  min-width: 150px;
+}
+
+.auth {
+  width: 100%;
+  height: auto;
+
+  margin-bottom: 0.5rem;
+
+  display: flex;
+  justify-content: center;
+}
+
+.auth-container {
+  background-color: var(--color-bg);
+
+  width: 50%;
+  max-width: 450px;
+  min-width: 135px;
+  height: auto;
+
+  margin-top: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+
+  border-radius: var(--radius);
+  box-shadow: var(--box-shadow);
+}
+
+.auth-title {
+  width: 100%;
+  height: auto;
+
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.7rem;
+}
+
+.auth-form-section {
+  margin-bottom: 1rem;
+}
+
+.input {
+  width: 100%;
+  height: auto;
+
+  padding: 0.2rem 0.5rem;
+
+  background-color: var(--color-contents-bg);
+
+  border-radius: var(--radius);
+}
+input:focus {
+  outline: 2px solid var(--color-primary); /* 너비, 색상 등 원하는 대로 조정 */
+}
+
+.input-checkbox {
+  margin: 1rem 0;
+}
+.input-checkbox > input {
+  margin-right: 0.65rem;
+}
+
+.auth-form-submit {
+  width: 100%;
+  min-height: 2rem;
+  height: auto;
+
+  margin-top: 3rem;
+
+  background-color: var(--color-primary);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.auth-menu-footer {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  color: black;
+  font-size: small;
+}
+.auth-menu-footer > a {
+  padding: 0 1.5rem;
+  text-decoration: underline;
+}
+
+.password-mismatch {
+  font-size: small;
+}
+
+.password-guide {
+  margin-bottom: 0.5rem;
+
+  font-size: small;
+}
+
+.constraint {
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+.constraint-satisfied {
+  color: #54b961;
+  font-weight: bold;
+}
+
 @keyframes shake {
   0% {
     transform: translateX(0);
@@ -25,132 +155,25 @@
   }
 }
 
-html,
-body {
-  background-color: var(--color-contents-bg);
-}
-
 .shake {
   animation: shake 0.3s;
 }
 
-.logo {
-  width: 100%;
-  height: auto;
-
-  margin-top: 2rem;
-
-  display: flex;
-  justify-content: center;
-}
-.logo img {
-  width: 12vw;
-  min-width: 150px;
-}
-
-.register {
-  width: 100%;
-  height: auto;
-
-  margin-bottom: 0.5rem;
-
-  display: flex;
-  justify-content: center;
+@keyframes growShrink {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.13);
+  }
+  60% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
-.register-container {
-  background-color: var(--color-bg);
-
-  width: 50%;
-  max-width: 500px;
-  min-width: 300px;
-  height: auto;
-
-  margin-top: 3rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-bottom: 1rem;
-
-  border-radius: var(--radius);
-  box-shadow: var(--box-shadow);
-}
-
-.register-text {
-  width: 100%;
-  height: auto;
-
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-
-  text-align: center;
-  font-weight: bold;
-}
-
-input:focus {
-  outline: 2px solid var(--color-primary);
-}
-
-.register-form-section {
-  margin-bottom: 1rem;
-}
-
-.input {
-  width: 100%;
-  height: auto;
-
-  padding: 0.2rem 0.5rem;
-
-  background-color: var(--color-contents-bg);
-
-  border-radius: var(--radius);
-}
-
-.register-form-submit {
-  width: 100%;
-  min-height: 2rem;
-  height: auto;
-
-  margin-top: 3rem;
-
-  background-color: var(--color-primary);
-  border-radius: var(--radius);
-  cursor: pointer;
-}
-
-.register-form-submit:disabled {
-  background-color: #94928a;
-}
-
-.other-menu-container {
-  width: 100%;
-
-  display: flex;
-  justify-content: center;
-
-  color: black;
-  font-size: small;
-}
-.other-menu-container a {
-  color: black;
-  text-decoration: underline;
-}
-
-.password-mismatch {
-  font-size: small;
-}
-
-.password-guide {
-  margin-bottom: 0.5rem;
-
-  font-size: small;
-}
-
-.constraint {
-  color: var(--color-accent);
-  font-weight: bold;
-}
-
-.constraint-satisfied {
-  color: #54b961;
-  font-weight: bold;
+.grow-shrink {
+  animation: growShrink 0.4s;
 }

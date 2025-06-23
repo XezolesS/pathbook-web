@@ -7,14 +7,15 @@ import {
 } from "@react-router/dev/routes";
 
 export default [
-  index("./pages/Landing.tsx"),
+  index("./pages/LandingPage.tsx"),
 
   // Auth pages
   layout("./layouts/AuthLayout.tsx", [
-    route("login", "./pages/Login.tsx"),
-    route("register", "./pages/Register.tsx"),
-    route("forgot-password", "./pages/ForgotPassword.tsx"),
-    route("reset-password", "./pages/ResetPassword.tsx"),
+    route("login", "./pages/LoginPage.tsx"),
+    route("registered", "./pages/RegisteredPage.tsx"),
+    route("register", "./pages/RegisterPage.tsx"),
+    route("forgot-password", "./pages/ForgotPasswordPage.tsx"),
+    route("reset-password", "./pages/ResetPasswordPage.tsx"),
   ]),
 
   // Main layout driven pages

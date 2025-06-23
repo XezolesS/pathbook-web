@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import RegisterRequest from "../api/pathbook/requests/auth/RegisterRequest";
-import "./Register.css";
 
 export default function RegisterPage() {
   const [password, setPassword] = useState("");
@@ -95,12 +94,12 @@ export default function RegisterPage() {
 
   return (
     <>
-      <div className="register">
-        <div className="register-container">
-          <div className="register-text">회원가입</div>
-          <form className="register-form" onSubmit={handleSubmit}>
+      <div className="auth register">
+        <div className="auth-container">
+          <div className="auth-title">회원가입</div>
+          <form className="auth-form" onSubmit={handleSubmit}>
             <label htmlFor="email">이메일</label>
-            <div className="register-form-section">
+            <div className="auth-form-section">
               <input
                 className="input input-email"
                 type="email"
@@ -110,7 +109,7 @@ export default function RegisterPage() {
                 required
               />
             </div>
-            <div className="register-form-section">
+            <div className="auth-form-section">
               <label htmlFor="password">비밀번호</label>
               <input
                 className="input input-password"
@@ -158,7 +157,7 @@ export default function RegisterPage() {
                 </p>
               </div>
             </div>
-            <div className="register-form-section">
+            <div className="auth-form-section">
               <label htmlFor="confirm-password">비밀번호 재입력</label>
               <input
                 className="input input-confirm-password"
@@ -177,7 +176,7 @@ export default function RegisterPage() {
                 </div>
               )}
             </div>
-            <div className="register-form-section">
+            <div className="auth-form-section">
               <label htmlFor="userid">아이디</label>
               <input
                 className="input input-userid"
@@ -189,7 +188,7 @@ export default function RegisterPage() {
                 defaultValue={"@" + temporaryName}
               />
             </div>
-            <div className="register-form-section">
+            <div className="auth-form-section">
               <label htmlFor="username">닉네임</label>
               <input
                 className="input input-username"
@@ -203,7 +202,7 @@ export default function RegisterPage() {
             </div>
             <button
               type="submit"
-              className="register-form-submit"
+              className="auth-form-submit"
               disabled={isValidPassword && passwordMatch ? false : true}
             >
               회원가입
@@ -212,7 +211,7 @@ export default function RegisterPage() {
         </div>
       </div>
 
-      <div className="other-menu-container">
+      <div className="auth-menu-footer">
         계정이 있으신가요? &nbsp;
         <a href="/login">로그인 하러가기</a>
       </div>
