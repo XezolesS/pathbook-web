@@ -2,35 +2,38 @@
   box-sizing: border-box;
 }
 .basic-book {
-  font-size: clamp(6px, 1vw, 16px);
-  width: 15em;
-  height: 20em;
+  width: 80%;
+  min-width: 50px;
+  max-width: 160px;
+  height: auto;
+  aspect-ratio: 3 / 4;
   position: relative;
   margin: 0 auto;
 }
 .book-shape {
+  width: 100%;
+  height: 100%;
   background: #ffffff;
   border: 0.0625em solid #818181;
   border-radius: var(--radius);
   display: flex;
   flex-direction: row;
-  width: 15em;
-  height: 20em;
   position: relative;
   cursor: pointer;
+  font-size: clamp(1rem, 1.5vw, 2em);
 }
 
 .delete-icon {
+  width: 1em;
+  height: auto;
+  min-width: 15px;
+  max-width: 24px;
+
   position: absolute;
-  top: -0.5em;
+  top: -0.3em;
   right: -0.5em;
-  width: 2em;
-  min-width: 20px;
-  height: 2em;
-  min-height: 20px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+
+  object-fit: contain;
   cursor: pointer;
 }
 
@@ -56,11 +59,12 @@
   background-color: var(--color-primary);
   display: flex;
   flex-direction: row;
-  width: 12.1875em;
-  height: 9.25em;
+  width: 80%;
+  height: auto;
+  aspect-ratio: 1 / 1;
   position: absolute;
-  left: 3.125em;
-  top: 7.875em;
+  right: -6%;
+  top: 30%;
 }
 .book-type-add {
   background-color: #ffffff;
@@ -94,7 +98,7 @@
 
 .book-line {
   position: absolute;
-  left: 1.3856em;
+  left: 15%;
   width: 1px;
   height: 100%;
   background-color: black;
@@ -112,13 +116,13 @@
     -0.8px  1px 0 #ffffff,
      0.8px  1px 0 #ffffff;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 0.5em;
   font-weight: 600;
 
   position: absolute;
-  left: 1em;
-  top: 1em;
-  width: 90%;
+  right: 0.5em;
+  top: 8%;
+  width: 80%;
 }
 .book-user {
   color: #000000;
@@ -128,11 +132,11 @@
     -0.8px  1px 0 #ffffff,
      0.8px  1px 0 #ffffff;
   text-align: left;
-  font-size: 1em;
+  font-size: 0.4em;
   text-align: end;
   position: absolute;
-  left: 2em;
-  top: 3.5em;
+  right: 0.5em;
+  top: 18%;
   width: 80%;
 }
 
@@ -144,13 +148,13 @@
     -0.8px  1px 0 #ffffff,
      0.8px  1px 0 #ffffff;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 0.5em;
   font-weight: 600;
   
   position: absolute;
-  left: 2.2em;
-  top: 6em;
-  width: 75%;
+  right: 0.5%;
+  top: 42%;
+  width: 70%;
 }
 
 .bookmark-edit-modal-overlay {
@@ -169,6 +173,7 @@
 .bookmark-edit-modal-background {
   background: #ffffff;
   width: 60%;
+  max-width: 700px;
   height: 80%;
   border-radius: var(--radius);
   position: relative;
@@ -194,6 +199,7 @@
 .bookmark-color-modal-background {
   background: #ffffff;
   width: 40%;
+  max-width: 400px; 
   height: 30%;
   border-radius: var(--radius);
   position: relative;
@@ -214,11 +220,12 @@
 
 .bookmark-edit-modal-header {
   width: 100%;
+  display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
   padding: 0.5em;
 
-  position: relative; 
   font-size: 16px;
 }
 
@@ -229,9 +236,9 @@
   padding: 2px 3px;
 
   background-color: white;
-  color: #0f6cfc;
+  color: #333333;
   
-  border: 1px solid #0f6cfc;
+  border: 1px solid #a6a6a6;
   border-radius: --radius;
   box-shadow: var(--box-shadow-a);
 }
@@ -243,6 +250,7 @@
 
 .bookmark-edit-modal-content {
   width: 100%;
+  height: calc(100% - 3em);
   padding-top: 0.5em;
   overflow-y: auto;
 }
@@ -281,7 +289,7 @@
   border: 1px solid #a6a6a6;
   border-radius: var(--radius);
   cursor: pointer;
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow-a);
 }
 
 .bookmark-add-modal-overlay {
@@ -306,36 +314,49 @@
 .choose-bookmark-design {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 0.2em;
 }
 .bookmark-design-label {
-  font-size: 17px;
+  font-size: 0.8em;
   font-weight: 600;
   text-align: left;
   margin-left: 2em;
-  margin-top: 1em;
+  margin-top: 0.4em;
+}
+
+.preview-bookmark-design-label {
+  font-size: 0.8em;
+  font-weight: 600;
+  text-align: left;
 }
 
 .preview-bookmark-design {
   display: flex;
   flex-direction: row;
-  margin-right: 2em;
+  padding: 0.5em;
+  align-items: center;
+}
+
+.render-preview-bookmark-design {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
 .set-book-design {
   display: flex;
-  width: 60%;
+  width: 50%;
   flex-direction: column;
   align-items: left;
   justify-content: center;
-  padding-bottom: 2em;
+  gap: 0.5em;
 }
 
 .bookmark-title-input {
   width: 80%;
-  margin-left: 2em;
-  padding: 0.5em;
+  padding: 0.3em;
   font-size: 1rem;
   border: 1px solid #a6a6a6;
   border-radius: var(--radius);
@@ -345,7 +366,7 @@
   flex-direction: row;
   align-items: end;
   justify-content: left;
-  padding-bottom: 2em;
+  padding-bottom: 0.5em;
 }
 .color-square {
   background-color: var(--color-primary);
@@ -366,8 +387,9 @@
 }
 
 .bookmark-add-done {
-  width: 80%;
-  margin-left: 2em;
+  width: 75%;
+  align-items: center;
+  margin-left: 1em;
   background-color: var(--color-primary);
   border: 1px solid #a6a6a6;
   border-radius: var(--radius);

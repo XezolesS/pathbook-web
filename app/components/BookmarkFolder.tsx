@@ -1,18 +1,19 @@
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { HexColorPicker } from "react-colorful";
 
 import delete_icon from "../assets/delete.svg";
 import "./BookmarkFolder.css";
 
 export function BookmarkFolderComponent({ 
-  bookType, userId, bookTitle="제목", bgColor="var(--color-primary)", inModal=false, isAdd=false }: 
-  { bookType: string; userId: string; bookTitle: string; bgColor: string; inModal?: boolean; isAdd?: boolean; }) {
+  bookType, userId, bookTitle="제목", bgColor="var(--color-primary)", isDelete=false }: 
+  { bookType: string; userId: string; bookTitle?: string; bgColor?: string; isDelete?: boolean;}) {
   const [showBookmarkAddModal, setShowBookmarkAddModal] = useState(false);
 
   return (
-    <div className={`basic-book ${inModal ? 'modal-version' : ''}`}>
+    <div className={'basic-book'}>
       <div className="book-shape">
-        {inModal && bookType !== 'book-type-add' && !isAdd &&(
+        {bookType !== 'book-type-add' && isDelete &&(
           <img
             className="delete-icon"
             src={delete_icon}
@@ -58,7 +59,7 @@ function BookColorModal({ color, onChange, onClose }: { color: string; onChange:
 }
 
 const BookmarkEditModal = ({setShowBookmarkEditModal }: {showBookmarkEditModal: boolean; setShowBookmarkEditModal: (value: boolean) => void;}) => {
-  return (
+  return createPortal(
     <div className="bookmark-edit-modal-overlay">
       <div className="bookmark-edit-modal-background">
         <div className="bookmark-edit-modal-header">
@@ -75,21 +76,16 @@ const BookmarkEditModal = ({setShowBookmarkEditModal }: {showBookmarkEditModal: 
         </div>
         <div className="bookmark-edit-modal-content">
           <div className="bookmark-edit-list">
-            <BookmarkFolderComponent bookType="book-type1" userId="user1" bookTitle="광주 산책 코스" bgColor="#e4fbbe" inModal={true}/>
-            <BookmarkFolderComponent bookType="book-type1" userId="user2" bookTitle="등산 코스" bgColor="#bec3fb" inModal={true}/>
-            <BookmarkFolderComponent bookType="book-type2" userId="user3" bookTitle="벚꽃 구경" bgColor="#fbbec8" inModal={true}/>
-            <BookmarkFolderComponent bookType="book-type3" userId="user4" bookTitle="드라이브 가자가자가자고" bgColor="#bec3fb" inModal={true}/>
-
-            <BookmarkFolderComponent bookType="book-type1" userId="user1" bookTitle="광주 산책 코스" bgColor="#e4fbbe" inModal={true}/>
-            <BookmarkFolderComponent bookType="book-type1" userId="user2" bookTitle="등산 코스" bgColor="#bec3fb" inModal={true}/>
-            <BookmarkFolderComponent bookType="book-type2" userId="user3" bookTitle="벚꽃 구경" bgColor="#fbbec8" inModal={true}/>
-            <BookmarkFolderComponent bookType="book-type3" userId="user4" bookTitle="드라이브 가자가자가자고" bgColor="#bec3fb" inModal={true}/>
-            
-            <BookmarkFolderComponent bookType="book-type-add" userId="userID" bookTitle="" bgColor="#d9d9d9" inModal={true}/>
+            <BookmarkFolderComponent bookType="book-type1" userId="user1" bookTitle="광주 산책 코스" bgColor="#e4fbbe" isDelete={true}/>
+            <BookmarkFolderComponent bookType="book-type1" userId="user2" bookTitle="등산 코스" bgColor="#bec3fb" isDelete={true}/>
+            <BookmarkFolderComponent bookType="book-type2" userId="user3" bookTitle="벚꽃 구경" bgColor="#fbbec8" isDelete={true}/>
+            <BookmarkFolderComponent bookType="book-type3" userId="user4" bookTitle="드라이브 가자가자가자고" bgColor="#bec3fb" isDelete={true}/>
+            <BookmarkFolderComponent bookType="book-type-add" userId="userID" bookTitle="" bgColor="#d9d9d9"/>
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
@@ -105,8 +101,6 @@ const BookmarkAddModal = ({ setShowBookmarkAddModal }: {showBookmarkAddModal: bo
       bgColor={bgColor}
       userId="userID"
       bookTitle={bookTitle}
-      inModal={true}
-      isAdd={true}
     />
   );
 
@@ -132,24 +126,26 @@ const BookmarkAddModal = ({ setShowBookmarkAddModal }: {showBookmarkAddModal: bo
               <div
                 className={`tap-type ${showPreview === "book-type1" ? "active" : ""}`}
                 onClick={() => setShowPreview("book-type1")}
-              > <BookmarkFolderComponent bookType="book-type1" userId="userID" inModal={true} isAdd={true}/>
+              > <BookmarkFolderComponent bookType="book-type1" userId="userID"/>
               </div>
               <div
                 className={`tap-type ${showPreview === "book-type2" ? "active" : ""}`}
                 onClick={() => setShowPreview("book-type2")}
-              > <BookmarkFolderComponent bookType="book-type2" userId="userID" inModal={true} isAdd={true}/>
+              > <BookmarkFolderComponent bookType="book-type2" userId="userID"/>
               </div>
               <div
                 className={`tab-type ${showPreview === "book-type3" ? "active" : ""}`}
                 onClick={() => setShowPreview("book-type3")}
-              > <BookmarkFolderComponent bookType="book-type3" userId="userID" inModal={true} isAdd={true}/>
+              > <BookmarkFolderComponent bookType="book-type3" userId="userID"/>
               </div>
             </div>
             <span className="bookmark-design-label">미리보기</span>
             <div className="preview-bookmark-design">
-              {renderPreview()}
+              <div className="render-preview-bookmark-design">
+                {renderPreview()}
+              </div>
               <div className="set-book-design">
-                <div className="bookmark-design-label">Pathbook 제목</div>
+                <div className="preview-bookmark-design-label">Pathbook 제목</div>
                 <input
                   type="text"
                   value={bookTitle}
@@ -158,7 +154,7 @@ const BookmarkAddModal = ({ setShowBookmarkAddModal }: {showBookmarkAddModal: bo
                   placeholder="책 제목을 입력하세요"
                 />
                 <div className="set-book-color">
-                  <div className="bookmark-design-label">색상</div>
+                  <div className="preview-bookmark-design-label">색상</div>
                   <button 
                     className="color-picker" 
                     style={{ backgroundColor: bgColor }}
