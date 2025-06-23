@@ -238,7 +238,7 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
       </div>
 
       <div className="mypage-tabmenu">
-        {["posts", "comments", "likes", "bookmarks"].map((tab) => (
+        {["posts", "comments", "likes", "pathbooks"].map((tab) => (
           <div
             key={tab}
             className={`tab-item cursor-pointer ${
@@ -249,7 +249,7 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
             {tab === "posts" && "작성글"}
             {tab === "comments" && "작성 댓글"}
             {tab === "likes" && "좋아요"}
-            {tab === "bookmarks" && "북마크"}
+            {tab === "pathbooks" && "패스북"}
           </div>
         ))}
       </div>
