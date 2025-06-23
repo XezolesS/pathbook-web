@@ -4,7 +4,7 @@ import GetBannerRequest from "../api/pathbook/requests/user/GetBannerRequest";
 import GetIconRequest from "../api/pathbook/requests/user/GetIconRequest";
 import UserRequest from "../api/pathbook/requests/user/UserRequest";
 import type { User } from "../api/pathbook/types/User";
-import BookmarkFolder from "../components/BookmarkFolder";
+import PathGroupomponent from "../components/PathGroup";
 import type { Route } from "./pages/+types/User";
 import "./User.css";
 
@@ -157,7 +157,7 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
       case "bookmarks":
         return (
           <EmptyContent label="북마크">
-            <BookmarkFolder />
+            <PathGroupomponent />
           </EmptyContent>
         );
       default:
@@ -238,7 +238,7 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
       </div>
 
       <div className="mypage-tabmenu">
-        {["posts", "comments", "likes", "bookmarks"].map((tab) => (
+        {["posts", "comments", "likes", "pathbooks"].map((tab) => (
           <div
             key={tab}
             className={`tab-item cursor-pointer ${
@@ -249,7 +249,7 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
             {tab === "posts" && "작성글"}
             {tab === "comments" && "작성 댓글"}
             {tab === "likes" && "좋아요"}
-            {tab === "bookmarks" && "북마크"}
+            {tab === "pathbooks" && "패스북"}
           </div>
         ))}
       </div>
