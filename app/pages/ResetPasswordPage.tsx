@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import "./ResetPassword.css";
 
 export default function ResetPasswordPage() {
   const [password, setPassword] = useState("");
@@ -48,11 +47,11 @@ export default function ResetPasswordPage() {
 
   return (
     <>
-      <div className="find-password">
-        <div className="find-password-container">
-          <div className="find-password-text">비밀번호 재설정</div>
-          <form className="find-password-form" onSubmit={handleSubmit}>
-            <div className="find-password-form-section">
+      <div className="auth reset-password">
+        <div className="auth-container">
+          <div className="auth-title">비밀번호 재설정</div>
+          <form className="auth-form" onSubmit={handleSubmit}>
+            <div className="auth-form-section">
               <label htmlFor="password">비밀번호</label>
               <input
                 className="input input-password"
@@ -98,7 +97,7 @@ export default function ResetPasswordPage() {
                 </p>
               </div>
             </div>
-            <div className="find-password-form-section">
+            <div className="auth-form-section">
               <label htmlFor="confirm-password">비밀번호 재입력</label>
               <input
                 className="input input-confirm-password"
@@ -117,7 +116,7 @@ export default function ResetPasswordPage() {
                 </div>
               )}
             </div>
-            <button type="submit" className="find-password-submit">
+            <button type="submit" className="auth-form-submit">
               비밀번호 재설정
             </button>
           </form>

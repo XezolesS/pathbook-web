@@ -1,6 +1,7 @@
-import { Outlet, redirect, useLocation } from "react-router";
+import { Outlet, redirect } from "react-router";
 import textLogo from "../assets/textLogo.png";
 import { parseCookies } from "../scripts/cookie";
+import "./AuthLayout.css";
 import type { Route } from "./pages/+types/AuthLayout";
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -17,18 +18,13 @@ export async function loader({ request }: Route.LoaderArgs) {
 }
 
 export default function AuthLayout({ loaderData }: Route.ComponentProps) {
-  const location = useLocation();
-  const isSignupComplete = location.pathname.toLowerCase().includes("signupcomplete");
-
   return (
     <>
-      {!isSignupComplete && (
-        <div className="logo">
-          <a href="./#">
-            <img src={textLogo} alt="로고" />
-          </a>
-        </div>
-      )}
+      <div className="logo">
+        <a href="./#">
+          <img src={textLogo}></img>
+        </a>
+      </div>
       <Outlet />
     </>
   );
