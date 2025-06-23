@@ -13,10 +13,10 @@ declare global {
 }
 
 interface PostWriteProps {
-  editingPost?: Post;          // ← 추가
+  editingPost?: Post;
 }
 
-export default function PostWriteComponent({ editingPost }: PostWriteProps) {  // ← 변경
+export default function PostWriteComponent({ editingPost }: PostWriteProps) {
   const navigate = useNavigate();
 
   const [titleValue,    setTitleValue]    = useState(editingPost?.title   ?? "");
