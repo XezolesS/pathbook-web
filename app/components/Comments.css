@@ -1,5 +1,5 @@
 :root {
-  --indent: 1rem; 
+  --indent: 1rem;
   --gap: 0.5rem;
   --rail-w: 2px;
   --rail-color: var(--color-primary);
@@ -9,7 +9,11 @@
   --font-action: 0.75rem;
   --comment-gap: 0.75rem;
 }
-.comment-list { list-style: none; margin: 0; padding: 0; }
+.comment-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 .comment-item {
   position: relative;
   --avatar-size: var(--avatar-root);
@@ -23,7 +27,9 @@
   padding-left: calc(var(--indent) + var(--avatar-size));
 }
 
-.comment-item.is-last { padding-bottom: 0; }
+.comment-item.is-last {
+  padding-bottom: 0;
+}
 
 .comment-item:not(.depth-0):not(.is-last)::before {
   width: var(--rail-w);
@@ -48,7 +54,7 @@
   position: absolute;
   border-left: var(--rail-w) solid var(--rail-color);
   border-bottom: var(--rail-w) solid var(--rail-color);
-  border-bottom-left-radius: calc(var(--indent)/2);
+  border-bottom-left-radius: calc(var(--indent) / 2);
 }
 
 .comment.has-children::before {
@@ -66,8 +72,8 @@
 .comment-item.depth-0 {
   padding-left: 0;
 }
-.comment-item.depth-0::before { 
-  display: none; 
+.comment-item.depth-0::before {
+  display: none;
 }
 
 .comment {
@@ -90,50 +96,50 @@
   overflow: hidden;
 }
 
-.avatar img { 
-  width: 100%; 
+.avatar img {
+  width: 100%;
   height: 100%;
 
-  object-fit: cover; 
+  object-fit: cover;
 }
 
 .avatar span {
-  width: 100%; 
+  width: 100%;
   height: 100%;
 
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
   justify-content: center;
   font-weight: 700;
   color: #555;
 }
 
-.more-avatar{
+.more-avatar {
   border: none;
 }
 
-.comment-body   { 
-  font-size: var(--font-body); 
-  line-height: 1.45; 
+.comment-body {
+  font-size: var(--font-body);
+  line-height: 1.45;
 }
 
-.comment-author { 
-  margin: 0; 
+.comment-author {
+  margin: 0;
 
-  font-weight: 600; 
-  display: flex; 
+  font-weight: 600;
+  display: flex;
   align-items: end;
 }
 
-.comment-actions{
-  display: flex; 
-  gap: 0.5rem; 
-  margin-top: .25rem;
-  font-size: var(--font-action); 
+.comment-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+  font-size: var(--font-action);
   color: #555;
 }
 
-.comment-actions button{
+.comment-actions button {
   padding: 0;
 
   border: none;
@@ -158,7 +164,7 @@
   cursor: pointer;
 }
 
-.comment-date{
+.comment-date {
   color: #999;
   font-size: 0.6rem;
 }
@@ -192,50 +198,53 @@
 }
 
 .comment-more:hover .more-avatar {
-  opacity: .8;
+  opacity: 0.8;
 }
 
 .more-label {
-  margin-left: .4rem;
+  margin-left: 0.4rem;
 }
 
-.comment-more .comment{
-  display:flex; gap:var(--gap); align-items:center;
+.comment-more .comment {
+  display: flex;
+  gap: var(--gap);
+  align-items: center;
 }
 
-.avatar.more-avatar{
-  width:var(--avatar-size); 
-  height:var(--avatar-size);
+.avatar.more-avatar {
+  width: var(--avatar-size);
+  height: var(--avatar-size);
 
   --avatar-size: var(--avatar-reply);
-  flex:0 0 var(--avatar-size);
-  border-radius:50%; 
-  background:var(--color-primary);
-  display:flex; align-items:center; 
-  justify-content:center;
-  font-weight:700; 
-  color:#fff;
+  flex: 0 0 var(--avatar-size);
+  border-radius: 50%;
+  background: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #fff;
 }
 
-.comment-more.collapse .more-avatar{
-  background:#ddd; 
+.comment-more.collapse .more-avatar {
+  background: #ddd;
 }
 
-.more-label{ 
-  margin-left:.4rem;
-  font-size:var(--font-action); 
+.more-label {
+  margin-left: 0.4rem;
+  font-size: var(--font-action);
 }
 
-.comment-item.no-rail::before { 
-  display:none; 
+.comment-item.no-rail::before {
+  display: none;
 }
 
-.comment.comment-more{
+.comment.comment-more {
   padding: 0;
   padding-bottom: 1rem;
 }
 
-.comment-content{
+.comment-content {
   word-break: break-all;
   overflow-wrap: break-word;
   word-wrap: break-word;

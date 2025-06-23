@@ -28,17 +28,16 @@
   box-shadow: var(--box-shadow-a);
 }
 
-.post-contents-text-container{
+.post-contents-text-container {
   width: 100%;
 
   padding-top: 0;
   padding-left: 2rem;
   padding-right: 2rem;
   padding-bottom: 0;
-
 }
 
-.post-contents-title{
+.post-contents-title {
   width: 100%;
   height: 2.25rem;
 
@@ -55,7 +54,7 @@
   background-color: none;
 }
 
-.post-contents-description{
+.post-contents-description {
   width: 100%;
   height: 1.5rem;
 
@@ -71,7 +70,7 @@
   background-color: none;
 }
 
-.post-contents-taglist{
+.post-contents-taglist {
   width: 100%;
   height: 1.5rem;
 
@@ -88,10 +87,10 @@
   background-color: none;
 }
 
-.post-contents-img-container{
+.post-contents-img-container {
   width: 100%;
   height: auto;
-  
+
   margin-bottom: 1rem;
 
   aspect-ratio: 3/1;
@@ -161,7 +160,9 @@
   justify-content: flex-end;
 }
 
-.chat, .book-open, .heart {
+.chat,
+.book-open,
+.heart {
   width: 0.75rem;
 
   flex-shrink: 0;
@@ -169,7 +170,9 @@
   vertical-align: middle;
 }
 
-.chats, .likes, .bookmarks {
+.chats,
+.likes,
+.bookmarks {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -193,10 +196,10 @@
   font-size: clamp(15px, 0.65rem, 18px);
 }
 
-.post-contents-img-container{
+.post-contents-img-container {
   width: 100%;
   height: auto;
-  
+
   margin-bottom: 1rem;
 
   overflow: hidden;
@@ -209,43 +212,43 @@
   background: #e2e2e2;
 }
 
-.post-img-main { 
-  width: 100%; 
-  height: 100%; 
+.post-img-main {
+  width: 100%;
+  height: 100%;
 
-  flex: 2 0 0; 
-  object-fit: cover; 
+  flex: 2 0 0;
+  object-fit: cover;
 }
 
-.post-img-sub  { 
-  width: 100%; 
-  height: 100%; 
+.post-img-sub {
+  width: 100%;
+  height: 100%;
 
-  flex: 1 0 0; 
-  object-fit: cover; 
+  flex: 1 0 0;
+  object-fit: cover;
 }
 
-.post-img-single { 
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
+.post-img-single {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.img-wrapper{
+.img-wrapper {
   width: 100%;
   height: 100%;
 
   position: relative;
 }
 
-.img-overlay{
+.img-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,.45);
+  background: rgba(0, 0, 0, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(24px,3vw,40px);
+  font-size: clamp(24px, 3vw, 40px);
   font-weight: 700;
   color: #fff;
   user-select: none;

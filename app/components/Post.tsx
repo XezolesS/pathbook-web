@@ -17,14 +17,12 @@ export default function PostComponent({ post }: { post: Post }) {
   const [bookmarkCount, setBookmarkCount] = useState<number | null>(null);
   const [tags, setTags] = useState<string | null>(null);
   const [showImage, setShowImage] = useState(false);
-  
-  const isLoader =
-    post.title == null &&
-    post.content == null;
+
+  const isLoader = post.title == null && post.content == null;
 
   const pathInfo =
     post.pathId != null
-      ? pathData.find((p) => p.pathId === post.pathId)  // TODO: Path 백엔드 연동
+      ? pathData.find((p) => p.pathId === post.pathId) // TODO: Path 백엔드 연동
       : null;
 
   const pathThumb =
@@ -32,12 +30,11 @@ export default function PostComponent({ post }: { post: Post }) {
       ? pathInfo.pathThumbnailUrl
       : null;
 
-
   const hasPathThumb = !!pathThumb;
   const hasAttach = !!(post.attachments && post.attachments.length > 0);
   const firstAttach = hasAttach ? post.attachments![0] : null;
-  const attachCount  = post.attachments?.length ?? 0;
-  const hasMultiAtt  = attachCount > 1;
+  const attachCount = post.attachments?.length ?? 0;
+  const hasMultiAtt = attachCount > 1;
   const hasImageCandidate = hasPathThumb || hasAttach;
   let imgDOM: React.ReactNode = null;
   if (!isLoader && showImage) {
@@ -46,7 +43,11 @@ export default function PostComponent({ post }: { post: Post }) {
         <>
           <img src={pathThumb!} className="post-img-main" draggable={false} />
           <div className="img-wrapper" style={{ flex: "1 0 0" }}>
-            <img src={firstAttach!} className="post-img-sub" draggable={false} />
+            <img
+              src={firstAttach!}
+              className="post-img-sub"
+              draggable={false}
+            />
             {hasMultiAtt && (
               <div className="img-overlay">+{attachCount - 1}</div>
             )}
@@ -54,9 +55,13 @@ export default function PostComponent({ post }: { post: Post }) {
         </>
       );
     } else if (hasPathThumb) {
-      imgDOM = <img src={pathThumb!} className="post-img-single" draggable={false} />;
+      imgDOM = (
+        <img src={pathThumb!} className="post-img-single" draggable={false} />
+      );
     } else if (hasAttach) {
-      imgDOM = <img src={firstAttach!} className="post-img-single" draggable={false} />;
+      imgDOM = (
+        <img src={firstAttach!} className="post-img-single" draggable={false} />
+      );
     }
   }
 
@@ -99,7 +104,7 @@ export default function PostComponent({ post }: { post: Post }) {
       setBookmarkCount(post.bookmarkCount);
       setTags(post.tags.join(" "));
     };
-    
+
     run();
   }, []);
 
@@ -129,16 +134,12 @@ export default function PostComponent({ post }: { post: Post }) {
           </div>
 
           <div
-            className={`post-contents-img-container ${isLoader ? "loading-placeholder" : ""}`}
-            style={
-              !hasImageCandidate
-                ? { display: "none" }
-                : undefined 
-            }
+            className={`post-contents-img-container ${
+              isLoader ? "loading-placeholder" : ""
+            }`}
+            style={!hasImageCandidate ? { display: "none" } : undefined}
           >
-            {!showImage && (
-              <div className="post-image-loader" />
-            )}
+            {!showImage && <div className="post-image-loader" />}
             {imgDOM}
           </div>
 
@@ -223,7 +224,5 @@ function getBackgroundStyle(value: any, fallbackColor: string, width: string) {
 function getSvgWidthStyle(value: any) {
   const isNullish = value === null || value === undefined;
 
-  return isNullish
-    ? { width: 0 }
-    : undefined;
+  return isNullish ? { width: 0 } : undefined;
 }

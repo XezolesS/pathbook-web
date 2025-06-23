@@ -7,8 +7,9 @@ const BATCH = 3;
 const REMOVE_LEVELS = 3;
 
 const initial = (n: string) => n.slice(0, 1).toUpperCase();
-const fmtDate  = (t: number | string) => new Date(t).toLocaleString();
-const countDesc = (c: Comment): number => c.childComments.reduce((s, ch) => s + 1 + countDesc(ch), 0);
+const fmtDate = (t: number | string) => new Date(t).toLocaleString();
+const countDesc = (c: Comment): number =>
+  c.childComments.reduce((s, ch) => s + 1 + countDesc(ch), 0);
 
 interface CollapseInfo {
   anchorId: number;
@@ -23,7 +24,11 @@ const isAnchor = (info: CollapseInfo | null, path: Comment[]) =>
   path.length === info.depth + 1 &&
   path[path.length - 1].commentId === info.anchorId;
 
-export default function Comments({ comments }: { comments: Comment[] }): React.ReactElement {
+export default function Comments({
+  comments,
+}: {
+  comments: Comment[];
+}): React.ReactElement {
   const [collapse, setCollapse] = useState<CollapseInfo | null>(null);
 
   const renderList = (items: Comment[], path: Comment[]): ReactNode =>
@@ -55,7 +60,7 @@ export default function Comments({ comments }: { comments: Comment[] }): React.R
           isLast={isLast}
           onlyChild={onlyChild}
           onMore={(itemDepth, fullPath) =>
-            setCollapse(prev => {
+            setCollapse((prev) => {
               const anchorDepth = itemDepth - (REMOVE_LEVELS - 1);
               return {
                 anchorId: fullPath[anchorDepth].commentId,
@@ -91,7 +96,11 @@ const CollapsedSubtree: React.FC<ColProps> = ({
   onClose,
   setCollapse,
 }) => {
-  const renderChildren = (list: Comment[], path: Comment[], depth: number): ReactNode =>
+  const renderChildren = (
+    list: Comment[],
+    path: Comment[],
+    depth: number
+  ): ReactNode =>
     list.map((c, idx) => {
       const curPath = [...path, c];
       const onlyChild = list.length === 1;
@@ -106,7 +115,7 @@ const CollapsedSubtree: React.FC<ColProps> = ({
           isLast={isLastItem}
           onlyChild={onlyChild}
           onMore={(itemDepth, fullPath) =>
-            setCollapse(prev => {
+            setCollapse((prev) => {
               const anchorDepthNext = itemDepth - (REMOVE_LEVELS - 1);
               return {
                 anchorId: fullPath[anchorDepthNext].commentId,
@@ -126,7 +135,9 @@ const CollapsedSubtree: React.FC<ColProps> = ({
     "comment-item",
     `depth-${anchorDepth}`,
     isLast ? "is-last no-rail" : "",
-  ].filter(Boolean).join(" ");
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <li className={liClass}>
@@ -169,13 +180,11 @@ const CommentItem: React.FC<ItemProps> = ({
   const nextDepth = depth + 1;
 
   const showMore =
-    depth !== 0 &&
-    depth % REMOVE_LEVELS === 0 &&
-    countDesc(comment) > BATCH;
+    depth !== 0 && depth % REMOVE_LEVELS === 0 && countDesc(comment) > BATCH;
 
   const displayCnt = Math.min(BATCH, countDesc(comment));
 
-   const avatarStyle: CSSProperties | undefined = comment.author.icon_url
+  const avatarStyle: CSSProperties | undefined = comment.author.icon_url
     ? {
         backgroundImage: `url(${comment.author.icon_url})`,
         backgroundSize: "cover",
@@ -203,15 +212,25 @@ const CommentItem: React.FC<ItemProps> = ({
           <div className="comment-body">
             <p className="comment-author">
               {comment.author.username}
-              <span className="comment-date"> · {fmtDate(comment.createdAt)}</span>
+              <span className="comment-date">
+                {" "}
+                · {fmtDate(comment.createdAt)}
+              </span>
             </p>
             <p className="comment-content">{comment.content}</p>
           </div>
           <div className="comment-actions">
-            <img className="comment-detail-heart" src="../app/assets/heart.svg" />
-            <div className="post-detail-cm-like-count">{formatCountNumber(comment.likeCount)}</div>
+            <img
+              className="comment-detail-heart"
+              src="../app/assets/heart.svg"
+            />
+            <div className="post-detail-cm-like-count">
+              {formatCountNumber(comment.likeCount)}
+            </div>
             <img className="comment-detail-chat" src="../app/assets/chat.svg" />
-            <div className="post-detail-cm-reply-count">{formatCountNumber(comment.childComments.length)}</div>
+            <div className="post-detail-cm-reply-count">
+              {formatCountNumber(comment.childComments.length)}
+            </div>
           </div>
         </div>
       </div>

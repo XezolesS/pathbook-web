@@ -24,7 +24,7 @@ export default function PostDetailComponent({ post }: { post: Post }) {
 
   const pathInfo =
     post.pathId != null
-      ? pathData.find((p) => p.pathId === post.pathId)  // TODO: Path 백엔드 연동
+      ? pathData.find((p) => p.pathId === post.pathId) // TODO: Path 백엔드 연동
       : null;
 
   const pathThumb =
@@ -70,13 +70,15 @@ export default function PostDetailComponent({ post }: { post: Post }) {
 
   const countAllComments = (root: Post["rootComments"][number]): number =>
     1 + root.childComments.reduce((acc, c) => acc + countAllComments(c), 0);
-  
+
   useEffect(() => {
     setAuthor(post.author);
     setTitle(post.title);
     setContent(post.content);
     setCreatedAt(new Date(post.createdAt).toLocaleString());
-    setCommentCount(post.rootComments.reduce((acc, c) => acc + countAllComments(c), 0));
+    setCommentCount(
+      post.rootComments.reduce((acc, c) => acc + countAllComments(c), 0)
+    );
     setLikeCount(post.likeCount);
     setBookmarkCount(post.bookmarkCount);
     setTags(post.tags.join(" "));
@@ -86,7 +88,10 @@ export default function PostDetailComponent({ post }: { post: Post }) {
     <>
       <div className="post-detail-frame">
         <div className="post-detail-item">
-          <div className="post-detail-map" style={{backgroundImage:`url(.${pathThumb})`}}></div>
+          <div
+            className="post-detail-map"
+            style={{ backgroundImage: `url(.${pathThumb})` }}
+          ></div>
           <div className="post-detail-show-detail">
             <div className="post-detail-writer">
               <div className="post-detail-profile-pic"></div>
@@ -100,13 +105,19 @@ export default function PostDetailComponent({ post }: { post: Post }) {
             </div>
             <div className="post-detail-show-count">
               <div className="post-detail-chats">
-                <img className="post-detail-chat" src="..\app\assets\chat.svg" />
+                <img
+                  className="post-detail-chat"
+                  src="..\app\assets\chat.svg"
+                />
                 <div className="post-detail-chat-count">
                   {formatCountNumber(commentCount)}
                 </div>
               </div>
               <div className="post-detail-likes">
-                <img className="post-detail-heart" src="..\app\assets\heart.svg" />
+                <img
+                  className="post-detail-heart"
+                  src="..\app\assets\heart.svg"
+                />
                 <div className="post-detail-like-count">
                   {formatCountNumber(likeCount)}
                 </div>
@@ -166,7 +177,7 @@ export default function PostDetailComponent({ post }: { post: Post }) {
               </div>
             )}
           </div>
-          
+
           <div className="post-detail-comments-container">
             <Comments comments={post.rootComments} />
           </div>

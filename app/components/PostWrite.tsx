@@ -19,9 +19,9 @@ interface PostWriteProps {
 export default function PostWriteComponent({ editingPost }: PostWriteProps) {
   const navigate = useNavigate();
 
-  const [titleValue,    setTitleValue]    = useState(editingPost?.title   ?? "");
-  const [tagValue,      setTagValue]      = useState(editingPost?.tags?.join(" ") ?? "");
-  const [contentValue,  setContentValue]  = useState(editingPost?.content ?? "");
+  const [titleValue, setTitleValue] = useState(editingPost?.title ?? "");
+  const [tagValue, setTagValue] = useState(editingPost?.tags?.join(" ") ?? "");
+  const [contentValue, setContentValue] = useState(editingPost?.content ?? "");
 
   const handleGoBack = () => {
     navigate(-1); // Navigates back one entry in the history stack

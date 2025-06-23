@@ -11,7 +11,7 @@ export default function RichTextEditor({
   onChange,
 }: RichTextEditorProps) {
   const editorRef = useRef<HTMLDivElement | null>(null);
-  const quillRef  = useRef<any>(null);
+  const quillRef = useRef<any>(null);
 
   useEffect(() => {
     let mounted = true;
