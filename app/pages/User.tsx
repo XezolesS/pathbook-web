@@ -36,8 +36,6 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        console.log(userId);
-
         const userRequest = new UserRequest(userId);
         const userResponse = await userRequest.send();
 
@@ -57,12 +55,9 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
 
     const fetchIcon = async () => {
       try {
-        console.log(userId);
-
         const getIconRequest = new GetIconRequest(userId);
         const getIconResponse = await getIconRequest.send();
 
-        console.log(getIconResponse);
         setIcon(blob2Url(getIconResponse.image));
       } catch (error) {
         console.error(error);
@@ -71,12 +66,9 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
 
     const fetchBanner = async () => {
       try {
-        console.log(userId);
-
         const getBannerRequest = new GetBannerRequest(userId);
         const getBannerResponse = await getBannerRequest.send();
 
-        console.log(getBannerResponse);
         setBanner(blob2Url(getBannerResponse.image));
       } catch (error) {
         console.error(error);
@@ -262,11 +254,6 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
         ))}
       </div>
 
-      <div className="mypage-searchbar">
-        <input type="text" placeholder="검색..." />
-        <button>＋</button>
-      </div>
-
       {renderContent()}
     </div>
   );
@@ -277,7 +264,7 @@ const EmptyContent = ({
   children,
 }: {
   label: string;
-  children: ReactNode;
+  children?: ReactNode;
 }) => (
   <div className="mypage-content">
     <div className="content-area">{children}</div>
