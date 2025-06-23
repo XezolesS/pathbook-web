@@ -4,7 +4,7 @@ import GetBannerRequest from "../api/pathbook/requests/user/GetBannerRequest";
 import GetIconRequest from "../api/pathbook/requests/user/GetIconRequest";
 import UserRequest from "../api/pathbook/requests/user/UserRequest";
 import type { User } from "../api/pathbook/types/User";
-import BookmarkFolder from "../components/BookmarkFolder";
+import PathGroupomponent from "../components/PathGroup";
 import type { Route } from "./pages/+types/User";
 import "./User.css";
 
@@ -157,7 +157,7 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
       case "bookmarks":
         return (
           <EmptyContent label="북마크">
-            <BookmarkFolder />
+            <PathGroupomponent />
           </EmptyContent>
         );
       default:
