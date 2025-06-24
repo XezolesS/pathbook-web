@@ -368,7 +368,9 @@ export default function PostWriteComponent({ editingPost }: PostWriteProps) {  /
     for (let i = 0; i < len; i++) buf[i] = bin.charCodeAt(i);
     return new Blob([buf], { type: mime });
   }
-
+  function sanitizeFilename(filename: string): string {
+    return filename.replace(/[^\w.\-]/g, "_");
+  }
   async function buildPostFormData(
     title: string,
     tags: string[],
@@ -397,19 +399,76 @@ export default function PostWriteComponent({ editingPost }: PostWriteProps) {  /
     form.append("content", dom.body.innerHTML);
     return form;
   }
+  async function getMapBlob(): Promise<Blob | null> {
+    const map = mapInstanceRef.current;
+    const poly = polylineRef.current;
+    const cont = mapRef.current;
+    if (!map || !poly || !cont) return null;
+
+    const prevOpacity = poly.getStrokeOpacity?.() ?? 0.6;
+    poly.setOptions({ strokeOpacity: 0 });
+
+    const rect = cont.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+
+    const canvas = document.createElement("canvas");
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    canvas.style.cssText = "position:absolute;top:0;left:0;pointer-events:none;z-index:4;";
+    cont.appendChild(canvas);
+
+    const ctx = canvas.getContext("2d")!;
+    ctx.lineWidth = 6 * dpr;
+    ctx.lineJoin = "round";
+    ctx.strokeStyle = "#FF0000";
+
+    const proj = map.getProjection();
+    const toPt = (lat: number, lng: number) => {
+      const pt = proj.containerPointFromCoords(new window.kakao.maps.LatLng(lat, lng));
+      return { x: pt.x * dpr, y: pt.y * dpr };
+    };
+
+    ctx.beginPath();
+    let started = false;
+    pathRef.current.forEach(({ lat, lng }) => {
+      const { x, y } = toPt(lat, lng);
+      if (!started) {
+        ctx.moveTo(x, y);
+        started = true;
+      } else {
+        ctx.lineTo(x, y);
+      }
+    });
+    ctx.stroke();
+
+    const markers = markersRef.current;
+    markers.forEach((m) => m.setMap(null));
+
+    try {
+      const shot = await html2canvas(cont, {
+        proxy: "http://localhost:8080/proxy/image",
+        useCORS: false,
+        allowTaint: true,
+        backgroundColor: null,
+      });
+      return await new Promise((resolve) => {
+        shot.toBlob((b) => resolve(b), "image/png");
+      });
+    } finally {
+      cont.removeChild(canvas);
+      poly.setOptions({ strokeOpacity: prevOpacity });
+      markers.forEach((m) => m.setMap(map));
+    }
+  }
 
   const submitPost = async () => {
     try {
-      
       if (!titleValue.trim() || !contentValue.trim()) {
         alert("제목과 내용을 입력해주세요.");
         return;
       }
 
-      const canvas = await html2canvas(mapRef.current!);
-      const mapBlob = await new Promise<Blob>((ok, err) =>
-        canvas.toBlob(b => (b ? ok(b) : err(new Error("error"))), "image/png")
-      );
+      const mapBlob = await getMapBlob();
 
       const extractDataURIs = (html: string) =>
         Array.from(html.matchAll(/<img[^>]+src="([^"]+)"/g)).map(m => m[1]);
@@ -419,25 +478,49 @@ export default function PostWriteComponent({ editingPost }: PostWriteProps) {  /
         const mime = meta.match(/data:(.+);/)![1];
         const bin  = atob(b64);
         const buf  = new Uint8Array(bin.length);
-        for (let i = 0; i < bin.length; i++) buf[i] = bin.charCodeAt(i);
+        for (let i = 0; i < bin.length; i++) 
+          buf[i] = bin.charCodeAt(i);
         const ext  = mime.split("/")[1] ?? "bin";
-        return new File([buf], `quill_${idx}.${ext}`, { type: mime });
+        const rawName = `quill_${idx}.${ext}`;
+        const safeName = sanitizeFilename(rawName);
+        return new File([buf], safeName, { type: mime });
       };
 
       const quillFiles = extractDataURIs(contentValue).map(dataURIToFile);
 
-      const contents = {
+      const pathPoints = path.map(({ lat, lng }) => ({
+        latitude: lat,
+        longitude: lng,
+      }));
+
+      const contents: {
+        title: string;
+        tags: string[];
+        content: string;
+        path?: { pathPoints: { latitude: number; longitude: number }[] };
+      } = {
         title: titleValue,
+        tags: tagValue
+          .split(" ")
+          .map((t) => t.trim())
+          .filter((t) => t.startsWith("#") && t.length > 1),
         content: contentValue,
-        path: {
-          pathPoints: path.map(({ lat, lng }) => ({
-            latitude: lat,
-            longitude: lng,
-          })),
-        },
       };
-    
-      const request = new PostWriteRequest(contents, mapBlob, quillFiles);
+
+      if (path.length > 0) {
+        contents.path = { pathPoints };
+      }
+      
+      console.log("submitPost 전송 데이터:");
+      console.log("contents:", contents);
+      console.log("attachments:", quillFiles.map(f => ({
+        name: f.name,
+        size: f.size,
+        type: f.type
+      })));
+      console.log("path_thumbnail:", mapBlob?.size, mapBlob);
+
+      const request = new PostWriteRequest(contents, mapBlob ?? undefined, quillFiles);
       await request.send();
     } catch (e) {
       console.error("submitPost 실패:", e);
