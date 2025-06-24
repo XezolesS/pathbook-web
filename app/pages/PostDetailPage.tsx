@@ -1,63 +1,60 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
-import { Post } from "../api/pathbook/types/Post";
-import ArticleContentsDetail from "../components/PostDetail.js";
-import postMockups from "../mock/PostMockups.json";
+import { useNavigate, useParams } from "react-router";
+import type { Post } from "../api/pathbook/types/Post";
+import GetPostDetailRequest from "../api/pathbook/requests/post/GetPostDetailRequest";
+import PostDetail from "../components/PostDetail";          // ← 컴포넌트 경로 주의
 import "./Main.css";
-import type { Route } from "./pages/+types/PostDetailPage";
 
-export async function loader({ request, params }: Route.LoaderArgs) {
-  return { postId: params.postid };
+/* 백엔드 DTO → 프런트 Post 인터페이스 맞추기 */
+function mapToPost(dto: any): Post {
+  return {
+    ...dto,
+    pathThumbnailUrl: dto.path?.thumbnail
+      ? `/file/${dto.path.thumbnail.filename}`
+      : undefined,
+    attachments: (dto.attachments ?? []).map((f: any) => `/file/${f.filename}`),
+    rootComments: dto.comments ?? [],
+    tags: dto.tags ?? [],
+  };
 }
 
-export default function PostDetailPage({ loaderData }: Route.ComponentProps) {
-  const { postId } = loaderData;
+export default function PostDetailPage() {
+  /* Route 세그먼트 이름이 :postid 이든 :id 이든 자동 대응 */
+  const { postid, id } = useParams();
+  const postId = (postid ?? id) as string | undefined;
+  const navigate = useNavigate();
 
-  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [post, setPost]    = useState<Post | null>(null);
+  const [loading, setLoad] = useState(true);
 
-  console.log(postId);
-
-  // 게시글 관련 정보 불러오기
+  /* ---- 실데이터 로드 ---- */
   useEffect(() => {
-    /*
-    const fetchPosts = async () => {
-      const request = new PostListRequest();
-      const response = await request.send();
-      console.log(response);
-    };
-    const loadPostDetail = async (postId: number) => {
-    const request = new PostDetailRequest(postId);
-    const post = await request.send();
-    console.log(post.title, post.content, post.id);
-    };
-    fetchPosts();
-    */
+    if (!postId) { setLoad(false); return; }
 
-    // mockup 로딩
-    const fetchPosts = async () => {
-      return postMockups;
-    };
+    (async () => {
+      try {
+        const dto  = await new GetPostDetailRequest(postId).send();
+        setPost(mapToPost(dto));
+      } catch (err) {
+        console.error("상세 로드 실패:", err);
+      } finally {
+        setLoad(false);
+      }
+    })();
+  }, [postId]);
 
-    const load = async () => {
-      const posts = await fetchPosts();
-      const post = posts.find((post) => post.postId == postId) as Post;
-
-      console.log(post);
-      setSelectedPost(post);
-    };
-
-    load();
-  }, []);
+  if (loading) return <div className="post-detail-frame">로딩 중…</div>;
+  if (!post)   return <div className="post-detail-frame">게시글이 없습니다.</div>;
 
   return (
-    <>
-      <div className="article-detail-contents">
-        {selectedPost && (
-          <>
-            <ArticleContentsDetail post={selectedPost} />
-          </>
-        )}
+    <div className="article-detail-contents">
+      <PostDetail post={post} />
+      <div className="post-detail-control">
+        <button onClick={() => navigate(-1)}>뒤로가기</button>
+        <button onClick={() => navigate("/post/write", { state: { post } })}>
+          수정
+        </button>
       </div>
-    </>
+    </div>
   );
 }
