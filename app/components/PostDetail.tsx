@@ -6,6 +6,7 @@ import type { User } from "../api/pathbook/types/User";
 import { formatCountNumber } from "../scripts/count";
 import Comments from "./Comments";
 import "./PostDetail.css";
+import GetFileRequest from "../api/pathbook/requests/file/GetFileRequest";
 
 export default function PostDetailComponent({ post }: { post: Post }) {
   /* ---------- 라우팅 액션 ---------- */
@@ -16,8 +17,8 @@ export default function PostDetailComponent({ post }: { post: Post }) {
 
   /* ---------- 썸네일 ---------- */
   const pathThumb =
-    post.pathThumbnailUrl?.trim()
-      ? post.pathThumbnailUrl
+    post.path?.thumbnail.filename.trim()
+      ? new GetFileRequest(post.path.thumbnail.filename).resolveUrl()
       : post.attachments[0] ?? null;
 
   /* ---------- 화면에 표시할 값들을 상태로 보관 ---------- */
@@ -56,7 +57,7 @@ export default function PostDetailComponent({ post }: { post: Post }) {
   };
 
   /* ---------- 댓글 수 재귀 계산 ---------- */
-  const countAll = (c: Post["rootComments"][number]): number =>
+  const countAll = (c: Post["comments"][number]): number =>
     1 + c.childComments.reduce((s, ch) => s + countAll(ch), 0);
 
   /* ---------- post prop 변경 시 화면 데이터 세팅 ---------- */
@@ -65,7 +66,7 @@ export default function PostDetailComponent({ post }: { post: Post }) {
     setTitle(post.title);
     setContent(post.content);
     setCreatedAt(new Date(post.createdAt).toLocaleString());
-    setCommentCount(post.rootComments.reduce((s, c) => s + countAll(c), 0));
+    setCommentCount(post.comments.reduce((s, c) => s + countAll(c), 0));
     setLikeCount(post.likeCount);
     setBookmarkCount(post.bookmarkCount);
     setTags(post.tags.join(" "));
@@ -79,7 +80,9 @@ export default function PostDetailComponent({ post }: { post: Post }) {
           <div
             className="post-detail-map"
             style={{ backgroundImage: `url(.${pathThumb})` }}
-          ></div>
+          >
+            <img src={pathThumb}></img>
+          </div>
 
           <div className="post-detail-show-detail">
             <div className="post-detail-writer">
@@ -157,7 +160,7 @@ export default function PostDetailComponent({ post }: { post: Post }) {
           </div>
 
           <div className="post-detail-comments-container">
-            <Comments comments={post.rootComments} />
+            <Comments comments={post.comments} />
           </div>
 
           <div className="post-detail-button-container">
