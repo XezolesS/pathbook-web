@@ -7,6 +7,8 @@ import PathGroupomponent from "../components/PathGroup";
 import type { Route } from "./pages/+types/User";
 import "./User.css";
 import UpdateUserProfileRequest from "../api/pathbook/requests/user/UpdateUserProfileRequest";
+import UpdateUserProfileBannerRequest from "../api/pathbook/requests/user/UpdateUserProfileBannerRequest";
+import UpdateUserProfileIconRequest from "../api/pathbook/requests/user/UpdateUserProfileIconRequest";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   return { userId: params.userid };
@@ -55,7 +57,7 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
     if (user === null) return;
 
     setUsername(user.username);
-    setId;
+    setId(user.id);
     setBio(user.bio);
     setIcon(new GetFileRequest(user.icon.filename).resolveUrl());
     setBanner(new GetFileRequest(user.banner.filename).resolveUrl());
@@ -65,15 +67,37 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
     e: React.ChangeEvent<HTMLInputElement>,
     type: "background" | "profile"
   ) => {
+    const updateBanner = async (data) => {
+      try {
+        const request = new UpdateUserProfileBannerRequest(data);
+        const response = await request.send();
+        setBanner(new GetFileRequest(response.filename).resolveUrl());
+      } catch (error) {
+        console.error(error);
+        navigate("/");
+      }
+    };
+
+    const updateIcon = async (data) => {
+      try {
+        const request = new UpdateUserProfileIconRequest(data);
+        const response = await request.send();
+        setIcon(new GetFileRequest(response.filename).resolveUrl());
+      } catch (error) {
+        console.error(error);
+        navigate("/");
+      }
+    };
+
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       const fileReader = new FileReader();
       fileReader.onload = () => {
         if (type === "background") {
-          setBanner(fileReader.result as string);
+          updateBanner(file);
           setShowBgModal(false);
         } else {
-          setIcon(fileReader.result as string);
+          updateIcon(file);
           setShowProfileModal(false);
         }
         setSelectedFileName(file.name);
