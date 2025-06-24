@@ -34,7 +34,7 @@ export default function UserProfileComponent({
             <img className="edit" src={edit_svg}></img>
           </div>
           <div className="profile-options">
-            <a href={`/user/${user.userId}`}>마이페이지</a>
+            <a href={`/user/${user.id}`}>마이페이지</a>
             <a href="" onClick={handleLogoutClick}>
               로그아웃
             </a>

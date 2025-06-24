@@ -1,12 +1,14 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import GetBannerRequest from "../api/pathbook/requests/user/GetBannerRequest";
-import GetIconRequest from "../api/pathbook/requests/user/GetIconRequest";
-import UserRequest from "../api/pathbook/requests/user/UserRequest";
+import GetFileRequest from "../api/pathbook/requests/file/GetFileRequest";
+import UserProfileRequest from "../api/pathbook/requests/user/UserProfileRequest";
 import type { User } from "../api/pathbook/types/User";
 import PathGroupomponent from "../components/PathGroup";
 import type { Route } from "./pages/+types/User";
 import "./User.css";
+import UpdateUserProfileRequest from "../api/pathbook/requests/user/UpdateUserProfileRequest";
+import UpdateUserProfileBannerRequest from "../api/pathbook/requests/user/UpdateUserProfileBannerRequest";
+import UpdateUserProfileIconRequest from "../api/pathbook/requests/user/UpdateUserProfileIconRequest";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   return { userId: params.userid };
@@ -19,6 +21,7 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
 
   const [activeTab, setActiveTab] = useState("posts");
   const [isEditing, setIsEditing] = useState(false);
+  const [id, setId] = useState(userId);
   const [username, setUsername] = useState("닉네임");
   const [bio, setBio] = useState("바이오 / 상태 메시지");
   const [banner, setBanner] = useState("/app/assets/image/samplepic1_a.jpg");
@@ -36,7 +39,7 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const userRequest = new UserRequest(userId);
+        const userRequest = new UserProfileRequest(userId);
         const userResponse = await userRequest.send();
 
         setUser(userResponse.user);
@@ -51,50 +54,50 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
 
   // 유저 정보 설정하기
   useEffect(() => {
-    const blob2Url = (blob: Blob) => URL.createObjectURL(blob);
-
-    const fetchIcon = async () => {
-      try {
-        const getIconRequest = new GetIconRequest(userId);
-        const getIconResponse = await getIconRequest.send();
-
-        setIcon(blob2Url(getIconResponse.image));
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    const fetchBanner = async () => {
-      try {
-        const getBannerRequest = new GetBannerRequest(userId);
-        const getBannerResponse = await getBannerRequest.send();
-
-        setBanner(blob2Url(getBannerResponse.image));
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
     if (user === null) return;
 
     setUsername(user.username);
-    fetchIcon();
-    fetchBanner();
+    setId(user.id);
+    setBio(user.bio);
+    setIcon(new GetFileRequest(user.icon.filename).resolveUrl());
+    setBanner(new GetFileRequest(user.banner.filename).resolveUrl());
   }, [user]);
 
   const handleImageUpload = (
     e: React.ChangeEvent<HTMLInputElement>,
     type: "background" | "profile"
   ) => {
+    const updateBanner = async (data) => {
+      try {
+        const request = new UpdateUserProfileBannerRequest(data);
+        const response = await request.send();
+        setBanner(new GetFileRequest(response.filename).resolveUrl());
+      } catch (error) {
+        console.error(error);
+        navigate("/");
+      }
+    };
+
+    const updateIcon = async (data) => {
+      try {
+        const request = new UpdateUserProfileIconRequest(data);
+        const response = await request.send();
+        setIcon(new GetFileRequest(response.filename).resolveUrl());
+      } catch (error) {
+        console.error(error);
+        navigate("/");
+      }
+    };
+
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       const fileReader = new FileReader();
       fileReader.onload = () => {
         if (type === "background") {
-          setBanner(fileReader.result as string);
+          updateBanner(file);
           setShowBgModal(false);
         } else {
-          setIcon(fileReader.result as string);
+          updateIcon(file);
           setShowProfileModal(false);
         }
         setSelectedFileName(file.name);
@@ -105,7 +108,11 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
 
   const handleEditSave = async () => {
     try {
-      // await new UpdateProfileRequest(nickname, bio).send();
+      await new UpdateUserProfileRequest({
+        id: id,
+        username: username,
+        bio: bio,
+      }).send();
       setIsEditing(false);
       alert("프로필이 저장되었습니다.");
     } catch {
@@ -210,6 +217,11 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
                 />
                 <input
                   type="text"
+                  value={id}
+                  onChange={(e) => setId(e.target.value)}
+                />
+                <input
+                  type="text"
                   value={bio}
                   onChange={(e) => setBio(e.target.value)}
                 />
@@ -217,7 +229,7 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
             ) : (
               <>
                 <h2>
-                  {username} <span>{userId}</span>
+                  {username} <span>{id}</span>
                 </h2>
                 <p>{bio}</p>
               </>
