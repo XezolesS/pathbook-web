@@ -1,7 +1,10 @@
 export type User = {
   id: string;
-  username: string;
   email: string;
+  username: string;
+  sex: string;
+  birthDate: string | null;
+  bio: string | null;
   icon: File;
   banner: File;
 };
