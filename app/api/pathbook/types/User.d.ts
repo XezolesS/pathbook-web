@@ -1,9 +1,13 @@
+import { File } from "./File";
+
 export type User = {
-  userId: string;
-  username: string;
+  id: string;
   email: string;
-  verified: boolean;
-  icon_url: string;
-  banner_url: string;
+  username: string;
+  sex: string;
+  birthDate: string | null;
+  bio: string | null;
+  icon: File;
+  banner: File;
 };
 

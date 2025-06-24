@@ -4,7 +4,7 @@ import { Post } from "../api/pathbook/types/Post";
 import { Author } from "../api/pathbook/types/Author";
 import { formatCountNumber } from "../scripts/count";
 import "./Post.css";
-import pathData from "../mock/Path.json";
+import GetFileRequest from "../api/pathbook/requests/file/GetFileRequest";
 
 export default function PostComponent({ post }: { post: Post }) {
   const [postId, setPostId] = useState<number | null>(null);
@@ -20,14 +20,11 @@ export default function PostComponent({ post }: { post: Post }) {
 
   const isLoader = post.title == null && post.content == null;
 
-  const pathInfo =
-    post.id != null
-      ? pathData.find((p) => p.pathId === post.id) // TODO: Path 백엔드 연동
-      : null;
+  const pathInfo = post.path;
 
   const pathThumb =
-    pathInfo && pathInfo.pathThumbnailUrl?.trim() !== ""
-      ? pathInfo.pathThumbnailUrl
+    pathInfo && pathInfo?.thumbnail.filename.trim() !== ""
+      ? new GetFileRequest(pathInfo.thumbnail.filename).resolveUrl()
       : null;
 
   const hasPathThumb = !!pathThumb;

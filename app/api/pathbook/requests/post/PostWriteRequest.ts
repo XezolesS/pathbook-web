@@ -3,7 +3,6 @@ import { NoResponse } from "../../responses/NoResponse";
 import HTTPRequest from "../HTTPRequest";
 
 export default class PostWriteRequest extends HTTPRequest<NoResponse> {
-  
   constructor(
     contents: {
       title: string;
@@ -18,7 +17,9 @@ export default class PostWriteRequest extends HTTPRequest<NoResponse> {
       return filename.replace(/[^\w.\-]/g, "_");
     }
     super("/post/write", HTTPMethod.POST);
-    this.setCredentials("include"); 
+
+    this.setCredentials("include");
+ 
     this.setBodyType("multipart/form-data");
     this.setBody(
       "contents",
@@ -40,8 +41,12 @@ export default class PostWriteRequest extends HTTPRequest<NoResponse> {
     attachments
       .filter((f) => f.size > 0)
       .forEach((file) => {
-        const safeName = sanitizeFilename(file.name) || uniqueName("file", "bin");
-        this.setBody("attachments", new File([file], safeName, { type: file.type }));
+        const safeName =
+          sanitizeFilename(file.name) || uniqueName("file", "bin");
+        this.setBody(
+          "attachments",
+          new File([file], safeName, { type: file.type })
+        );
       });
 
     this.setHeader("Accept", "application/json");

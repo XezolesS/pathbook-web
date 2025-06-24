@@ -107,56 +107,55 @@ export default function PostDetailComponent({ post }: { post: Post }) {
           <div
             className="post-detail-map"
             style={{ backgroundImage: `url(.${pathThumb})` }}
-          ></div>
+          >
+            <img src={pathThumb}></img>
+          </div>
+
           <div className="post-detail-show-detail">
             <div className="post-detail-writer">
               <div className="post-detail-profile-pic"></div>
               <div className="post-detail-text">
                 <div className="post-detail-author">{author?.username}</div>
                 <div className="post-detail-id-with-time">
-                  <div className="post-detail-id">{author?.userId}</div>
+                  <div className="post-detail-id">{author?.id}</div>
                   <div className="post-detail-time">{createdAt}</div>
                 </div>
               </div>
             </div>
+
             <div className="post-detail-show-count">
               <div className="post-detail-chats">
-                <img
-                  className="post-detail-chat"
-                  src="..\app\assets\chat.svg"
-                />
+                <img className="post-detail-chat" src="../app/assets/chat.svg" />
                 <div className="post-detail-chat-count">
                   {formatCountNumber(commentCount)}
                 </div>
               </div>
               <div className="post-detail-likes">
-                <img
-                  className="post-detail-heart"
-                  src="..\app\assets\heart.svg"
-                />
+                <img className="post-detail-heart" src="../app/assets/heart.svg" />
                 <div className="post-detail-like-count">
                   {formatCountNumber(likeCount)}
                 </div>
               </div>
               <div className="post-detail-bookmarks">
-                <img
-                  className="post-detail-book-open"
-                  src="..\app\assets\book-open.svg"
-                />
+                <img className="post-detail-book-open" src="../app/assets/book-open.svg" />
                 <div className="post-detail-bookmark-count">
                   {formatCountNumber(bookmarkCount)}
                 </div>
               </div>
             </div>
           </div>
+
           <div className="post-detail-show-text">
             <div className="post-detail-subject-detail">{title}</div>
             <div className="post-detail-tag-list">{tags}</div>
-            <div className="post-detail-description-all">{content}</div>
+            <div
+              className="post-detail-description-all"
+              dangerouslySetInnerHTML={{ __html: content ?? "" }}
+            ></div>
           </div>
 
           <div className="post-detail-comment-desc">
-            <img className="post-detail-chat" src="..\app\assets\chat.svg" />
+            <img className="post-detail-chat" src="../app/assets/chat.svg" />
             <div className="post-detail-comment-explain">댓글</div>
           </div>
 
@@ -177,17 +176,10 @@ export default function PostDetailComponent({ post }: { post: Post }) {
 
             {isCommentActive && (
               <div className="post-detail-comment-buttons">
-                <button
-                  className="comment-btn-cancel"
-                  onClick={handleCancelComment}
-                >
+                <button className="comment-btn-cancel" onClick={handleCancelComment}>
                   취소
                 </button>
-
-                <button
-                  className="comment-btn-submit"
-                  onClick={handleSubmitComment}
-                >
+                <button className="comment-btn-submit" onClick={handleSubmitComment}>
                   작성
                 </button>
               </div>

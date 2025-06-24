@@ -1,11 +1,11 @@
 import { HTTPMethod } from "../../enums/HTTPMethod";
-import type UserResponse from "../../responses/auth/UserResponse";
+import type UserResponse from "../../responses/auth/UserProfileResponse";
 import type { User } from "../../types/User";
 import HTTPRequest from "../HTTPRequest";
 
-export default class UserRequest extends HTTPRequest<UserResponse> {
+export default class UserProfileRequest extends HTTPRequest<UserResponse> {
   constructor(userId: string) {
-    super("/user/:userId", HTTPMethod.GET);
+    super("/user/profile/:userId", HTTPMethod.GET);
 
     this.setCredentials("include");
     this.setPathParam("userId", userId);
