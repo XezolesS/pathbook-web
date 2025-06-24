@@ -4,8 +4,6 @@ import GetBannerRequest from "../api/pathbook/requests/user/GetBannerRequest";
 import GetIconRequest from "../api/pathbook/requests/user/GetIconRequest";
 import UserRequest from "../api/pathbook/requests/user/UserRequest";
 import type { User } from "../api/pathbook/types/User";
-import type { Post } from "../api/pathbook/types/Post";
-import type { Comment } from "../api/pathbook/types/Comment";
 import PathGroupomponent from "../components/PathGroup";
 import type { Route } from "./pages/+types/User";
 import "./User.css";
@@ -30,15 +28,9 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [selectedFileName, setSelectedFileName] = useState("선택된 파일 없음");
 
+  const [tabData, setTabData] = useState<any[]>([]);
+  const [tabLoading, setTabLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
-
-  // --- 추가: 게시글, 댓글, 좋아요 상태 및 로딩 상태
-  const [userPosts, setUserPosts] = useState<Post[]>([]);
-  const [userComments, setUserComments] = useState<Comment[]>([]);
-  const [userLikes, setUserLikes] = useState<Post[]>([]);
-  const [postsLoading, setPostsLoading] = useState(false);
-  const [commentsLoading, setCommentsLoading] = useState(false);
-  const [likesLoading, setLikesLoading] = useState(false);
 
   // 유저 정보 불러오기
   useEffect(() => {
@@ -89,51 +81,6 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
     fetchIcon();
     fetchBanner();
   }, [user]);
-
-  //  작성글, 댓글, 좋아요 데이터 불러오기
-  useEffect(() => {
-    if (!userId) return;
-
-    const fetchUserPosts = async () => {
-      setPostsLoading(true);
-      try {
-        const res = await fetch(`/post/list?userId=${userId}`);
-        const data = await res.json();
-        setUserPosts(data);
-      } catch (e) {
-        console.error("유저 게시글 불러오기 실패:", e);
-      }
-      setPostsLoading(false);
-    };
-
-    const fetchUserComments = async () => {
-      setCommentsLoading(true);
-      try {
-        const res = await fetch(`/comment/list?userId=${userId}`);
-        const data = await res.json();
-        setUserComments(data);
-      } catch (e) {
-        console.error("유저 댓글 불러오기 실패:", e);
-      }
-      setCommentsLoading(false);
-    };
-
-    const fetchUserLikes = async () => {
-      setLikesLoading(true);
-      try {
-        const res = await fetch(`/post/liked?userId=${userId}`);
-        const data = await res.json();
-        setUserLikes(data);
-      } catch (e) {
-        console.error("유저 좋아요 불러오기 실패:", e);
-      }
-      setLikesLoading(false);
-    };
-
-    fetchUserPosts();
-    fetchUserComments();
-    fetchUserLikes();
-  }, [userId]);
 
   const handleImageUpload = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -202,70 +149,14 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
   const renderContent = () => {
     switch (activeTab) {
       case "posts":
-        return (
-          <EmptyContent label="작성글">
-            {postsLoading ? (
-              <div>로딩중...</div>
-            ) : userPosts.length === 0 ? (
-              <div>작성한 게시글이 없습니다.</div>
-            ) : (
-              userPosts.map((post) => (
-                <div
-                  key={post.id}
-                  className="user-post-item"
-                  onClick={() => navigate(`/post/${post.id}`)}
-                >
-                  <h3>{post.title}</h3>
-                  <p>{post.content.slice(0, 100)}...</p>
-                  <small>{new Date(post.createdAt).toLocaleDateString()}</small>
-                </div>
-              ))
-            )}
-          </EmptyContent>
-        );
+        return <EmptyContent label="작성글" />;
       case "comments":
-        return (
-          <EmptyContent label="작성 댓글">
-            {commentsLoading ? (
-              <div>로딩중...</div>
-            ) : userComments.length === 0 ? (
-              <div>작성한 댓글이 없습니다.</div>
-            ) : (
-              userComments.map((comment) => (
-                <div key={comment.commentId} className="user-comment-item">
-                  <div>
-                    <b>{comment.content.slice(0, 50)}</b>
-                  </div>
-                  <small>{new Date(comment.createdAt).toLocaleDateString()}</small>
-                </div>
-              ))
-            )}
-          </EmptyContent>
-        );
+        return <EmptyContent label="작성 댓글" />;
       case "likes":
+        return <EmptyContent label="좋아요" />;
+      case "bookmarks":
         return (
-          <EmptyContent label="좋아요">
-            {likesLoading ? (
-              <div>로딩중...</div>
-            ) : userLikes.length === 0 ? (
-              <div>좋아요한 게시글이 없습니다.</div>
-            ) : (
-              userLikes.map((post) => (
-                <div
-                  key={post.id}
-                  className="user-like-item"
-                  onClick={() => navigate(`/post/${post.id}`)}
-                >
-                  <h3>{post.title}</h3>
-                  <small>{new Date(post.createdAt).toLocaleDateString()}</small>
-                </div>
-              ))
-            )}
-          </EmptyContent>
-        );
-      case "pathbooks":
-        return (
-          <EmptyContent label="패스북">
+          <EmptyContent label="북마크">
             <PathGroupomponent />
           </EmptyContent>
         );
@@ -376,7 +267,6 @@ const EmptyContent = ({
   children?: ReactNode;
 }) => (
   <div className="mypage-content">
-    <h3>{label}</h3>
     <div className="content-area">{children}</div>
   </div>
 );
