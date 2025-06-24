@@ -1,13 +1,12 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import GetBannerRequest from "../api/pathbook/requests/user/GetBannerRequest";
-import GetIconRequest from "../api/pathbook/requests/user/GetIconRequest";
+import GetFileRequest from "../api/pathbook/requests/file/GetFileRequest";
 import UserProfileRequest from "../api/pathbook/requests/user/UserProfileRequest";
 import type { User } from "../api/pathbook/types/User";
 import PathGroupomponent from "../components/PathGroup";
 import type { Route } from "./pages/+types/User";
 import "./User.css";
-import GetFileRequest from "../api/pathbook/requests/file/GetFileRequest";
+import UpdateUserProfileRequest from "../api/pathbook/requests/user/UpdateUserProfileRequest";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   return { userId: params.userid };
@@ -20,6 +19,7 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
 
   const [activeTab, setActiveTab] = useState("posts");
   const [isEditing, setIsEditing] = useState(false);
+  const [id, setId] = useState(userId);
   const [username, setUsername] = useState("닉네임");
   const [bio, setBio] = useState("바이오 / 상태 메시지");
   const [banner, setBanner] = useState("/app/assets/image/samplepic1_a.jpg");
@@ -55,6 +55,7 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
     if (user === null) return;
 
     setUsername(user.username);
+    setId;
     setBio(user.bio);
     setIcon(new GetFileRequest(user.icon.filename).resolveUrl());
     setBanner(new GetFileRequest(user.banner.filename).resolveUrl());
@@ -83,7 +84,11 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
 
   const handleEditSave = async () => {
     try {
-      // await new UpdateProfileRequest(nickname, bio).send();
+      await new UpdateUserProfileRequest({
+        id: id,
+        username: username,
+        bio: bio,
+      }).send();
       setIsEditing(false);
       alert("프로필이 저장되었습니다.");
     } catch {
@@ -188,6 +193,11 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
                 />
                 <input
                   type="text"
+                  value={id}
+                  onChange={(e) => setId(e.target.value)}
+                />
+                <input
+                  type="text"
                   value={bio}
                   onChange={(e) => setBio(e.target.value)}
                 />
@@ -195,7 +205,7 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
             ) : (
               <>
                 <h2>
-                  {username} <span>{userId}</span>
+                  {username} <span>{id}</span>
                 </h2>
                 <p>{bio}</p>
               </>
