@@ -1,3 +1,5 @@
+import { File } from "./File";
+
 export type User = {
   id: string;
   email: string;

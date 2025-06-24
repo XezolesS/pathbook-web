@@ -2,11 +2,12 @@ import React, { ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import GetBannerRequest from "../api/pathbook/requests/user/GetBannerRequest";
 import GetIconRequest from "../api/pathbook/requests/user/GetIconRequest";
-import UserProfileRequest from "../api/pathbook/requests/user/UserRequest";
+import UserProfileRequest from "../api/pathbook/requests/user/UserProfileRequest";
 import type { User } from "../api/pathbook/types/User";
 import PathGroupomponent from "../components/PathGroup";
 import type { Route } from "./pages/+types/User";
 import "./User.css";
+import GetFileRequest from "../api/pathbook/requests/file/GetFileRequest";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   return { userId: params.userid };
@@ -51,35 +52,12 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
 
   // 유저 정보 설정하기
   useEffect(() => {
-    const blob2Url = (blob: Blob) => URL.createObjectURL(blob);
-
-    const fetchIcon = async () => {
-      try {
-        const getIconRequest = new GetIconRequest(userId);
-        const getIconResponse = await getIconRequest.send();
-
-        setIcon(blob2Url(getIconResponse.image));
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    const fetchBanner = async () => {
-      try {
-        const getBannerRequest = new GetBannerRequest(userId);
-        const getBannerResponse = await getBannerRequest.send();
-
-        setBanner(blob2Url(getBannerResponse.image));
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
     if (user === null) return;
 
     setUsername(user.username);
-    fetchIcon();
-    fetchBanner();
+    setBio(user.bio);
+    setIcon(new GetFileRequest(user.icon.filename).resolveUrl());
+    setBanner(new GetFileRequest(user.banner.filename).resolveUrl());
   }, [user]);
 
   const handleImageUpload = (
