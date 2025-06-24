@@ -3,7 +3,6 @@ import { NoResponse } from "../../responses/NoResponse";
 import HTTPRequest from "../HTTPRequest";
 
 export default class PostWriteRequest extends HTTPRequest<NoResponse> {
-  
   constructor(
     contents: {
       title: string;
@@ -18,6 +17,7 @@ export default class PostWriteRequest extends HTTPRequest<NoResponse> {
       return filename.replace(/[^\w.\-]/g, "_");
     }
     super("/post/write", HTTPMethod.POST);
+    
     this.setCredentials("include"); 
     this.setBodyType("multipart/form-data");
     this.setBody(

@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import GetBannerRequest from "../api/pathbook/requests/user/GetBannerRequest";
 import GetIconRequest from "../api/pathbook/requests/user/GetIconRequest";
-import UserRequest from "../api/pathbook/requests/user/UserRequest";
+import UserProfileRequest from "../api/pathbook/requests/user/UserRequest";
 import type { User } from "../api/pathbook/types/User";
 import PathGroupomponent from "../components/PathGroup";
 import type { Route } from "./pages/+types/User";
@@ -36,7 +36,7 @@ export default function UserPage({ loaderData }: Route.ComponentProps) {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const userRequest = new UserRequest(userId);
+        const userRequest = new UserProfileRequest(userId);
         const userResponse = await userRequest.send();
 
         setUser(userResponse.user);

@@ -1,5 +1,5 @@
 import { HTTPMethod } from "../../enums/HTTPMethod";
-import type UserResponse from "../../responses/auth/UserResponse";
+import type UserResponse from "../../responses/auth/UserProfileResponse";
 import ImageResponse from "../../responses/ImageResponse";
 import type { User } from "../../types/User";
 import HTTPRequest from "../HTTPRequest";
