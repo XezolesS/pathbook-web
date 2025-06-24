@@ -1,17 +1,17 @@
 import { HTTPMethod } from "../../enums/HTTPMethod";
-import type { GetPostListResponse } from "../../responses/post/PostResponse";
+import type { Post } from "../../types/Post";
 import HTTPRequest from "../HTTPRequest";
 
-export default class PostListRequest extends HTTPRequest<GetPostListResponse> {
-  constructor() {
-    super("/post/list", HTTPMethod.GET);
+export default class GetPostList extends HTTPRequest<Post[]> {
+  constructor(page = 0, size = 10, sort: string = "updatedat_desc") {
+    const qs = `p=${page}&s=${size}&sort=${sort}`;
+    super(`/post/list?${qs}`, HTTPMethod.GET);
     this.setHeader("Accept", "application/json");
   }
 
-  protected override async parseSuccessResponse(
-    response: Response
-  ): Promise<GetPostListResponse> {
-    const data = await response.json();
-    return data;
+  // Page<Post> → Post[]
+  protected override async parseSuccessResponse(res: Response): Promise<Post[]> {
+    const { content } = await res.json();
+    return content;
   }
 }

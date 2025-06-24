@@ -8,7 +8,7 @@ export default class PostWriteRequest extends HTTPRequest<NoResponse> {
       title: string;
       tags: string[];
       content: string;
-      path?: { pathPoints: { latitude: number; longitude: number }[] };
+      path?: { pathPoints: { latitude: number; longitude: number }[] }; 
     },
     pathThumbnail?: Blob,
     attachments: File[] = []
@@ -19,6 +19,7 @@ export default class PostWriteRequest extends HTTPRequest<NoResponse> {
     super("/post/write", HTTPMethod.POST);
 
     this.setCredentials("include");
+ 
     this.setBodyType("multipart/form-data");
     this.setBody(
       "contents",

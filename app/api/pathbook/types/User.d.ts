@@ -10,3 +10,4 @@ export type User = {
   icon: File;
   banner: File;
 };
+

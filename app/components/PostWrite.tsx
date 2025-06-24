@@ -502,8 +502,8 @@ export default function PostWriteComponent({ editingPost }: PostWriteProps) {  /
         title: titleValue,
         tags: tagValue
           .split(" ")
-          .map((t) => t.trim())
-          .filter((t) => t.startsWith("#") && t.length > 1),
+          .map((t: string) => t.trim())
+          .filter((t: string) => t.startsWith("#") && t.length > 1),
         content: contentValue,
       };
 
