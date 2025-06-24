@@ -1,12 +1,14 @@
-import { User } from "./User";
+export interface CommentAuthor {
+  id: string;
+  username: string;
+  icon_url: string | null;
+}
 
-export type Comment = {
+export interface Comment {
   commentId: number;
-  postId: number;
-  author: User;
-  content: stirng;
-  createdAt: number;
-  updatedAt: number | null;
+  author: CommentAuthor;
+  content: string;
   likeCount: number;
+  createdAt: string;
   childComments: Comment[];
-};
+}

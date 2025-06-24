@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Comment } from "../api/pathbook/types/Comment";
 import { Post } from "../api/pathbook/types/Post";
-import { User } from "../api/pathbook/types/User";
+import { Author } from "../api/pathbook/types/Author";
 import { formatCountNumber } from "../scripts/count";
 import "./Post.css";
 import pathData from "../mock/Path.json";
 
 export default function PostComponent({ post }: { post: Post }) {
   const [postId, setPostId] = useState<number | null>(null);
-  const [author, setAuthor] = useState<User | null>(null);
+  const [author, setAuthor] = useState<Author | null>(null);
   const [title, setTitle] = useState<string | null>(null);
   const [content, setContent] = useState<string | null>(null);
   const [createdAt, setCreatedAt] = useState<string | null>(null);
@@ -21,8 +21,8 @@ export default function PostComponent({ post }: { post: Post }) {
   const isLoader = post.title == null && post.content == null;
 
   const pathInfo =
-    post.pathId != null
-      ? pathData.find((p) => p.pathId === post.pathId) // TODO: Path 백엔드 연동
+    post.id != null
+      ? pathData.find((p) => p.pathId === post.id) // TODO: Path 백엔드 연동
       : null;
 
   const pathThumb =
@@ -89,12 +89,13 @@ export default function PostComponent({ post }: { post: Post }) {
         return total;
       }
 
+      const rootComments = post.rootComments ?? [];
       let totalCommentCount = 0;
-      for (const rootComment of post.rootComments) {
+      for (const rootComment of rootComments) {
         totalCommentCount += countTotalComments(rootComment);
       }
 
-      setPostId(post.postId);
+      setPostId(post.id);
       setAuthor(post.author);
       setTitle(post.title);
       setContent(post.content);

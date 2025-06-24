@@ -1,17 +1,21 @@
-import { User } from "./User";
-import { Comment } from "./Comment";
+import { Author } from "./Author";
+import type { Comment } from "./Comment";
 
-export type Post = {
-  postId: number;
-  author: User;
+export interface Post {
+  id: number;
   title: string;
   content: string;
-  createdAt: number;
-  updatedAt: number;
-  pathId: number;
-  attachments: string[];
-  rootComments: Comment[];
+  author: Author;
+  view: number;
   likeCount: number;
   bookmarkCount: number;
-  tags: string[];
-};
+  commentCount: number;
+
+  tags: string[];                 // 예: ["#산책", "#봄나들이"]
+  attachments: string[];          // 첨부 이미지 URL 배열
+  pathThumbnailUrl?: string;      // 지도 썸네일 (옵션)
+  rootComments: Comment[];        // 상세에서만 채워짐
+
+  createdAt: string;
+  updatedAt: string;
+}

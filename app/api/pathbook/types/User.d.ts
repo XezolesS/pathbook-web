@@ -6,3 +6,4 @@ export type User = {
   icon_url: string;
   banner_url: string;
 };
+
