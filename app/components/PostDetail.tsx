@@ -1,45 +1,45 @@
-/* ───────── components/PostDetail.tsx ───────── */
+/* ───────── components/PostDetail.tsx (SCRIPT 영역 포함 전체 코드) ───────── */
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import type { Post } from "../api/pathbook/types/Post";
-import type { User } from "../api/pathbook/types/User";
+import type { Comment } from "../api/pathbook/types/Comment";
+import { APIConfig } from "../api/pathbook/APIConfig";
 import { formatCountNumber } from "../scripts/count";
 import Comments from "./Comments";
 import "./PostDetail.css";
-import GetFileRequest from "../api/pathbook/requests/file/GetFileRequest";
 
 export default function PostDetailComponent({ post }: { post: Post }) {
-  /* ---------- 라우팅 액션 ---------- */
+  /* ---------- 네비게이션 ---------- */
   const navigate = useNavigate();
   const handleEditPost   = () => navigate("/post/write", { state: { post } });
-  const handleDeletePost = () => {/* TODO: DELETE */};
+  const handleDeletePost = () => {/* TODO */};
   const handleGoBack     = () => navigate(-1);
 
   /* ---------- 썸네일 ---------- */
   const pathThumb =
-    post.path?.thumbnail.filename.trim()
-      ? new GetFileRequest(post.path.thumbnail.filename).resolveUrl()
+    post.pathThumbnailUrl?.trim()
+      ? post.pathThumbnailUrl
       : post.attachments[0] ?? null;
 
-  /* ---------- 화면에 표시할 값들을 상태로 보관 ---------- */
-  const [author,        setAuthor]        = useState<User | null>(null);
+  /* ---------- 상태 ---------- */
+  const [author,        setAuthor]        = useState<any>(null);   // any → userId 대응
   const [title,         setTitle]         = useState<string | null>(null);
   const [content,       setContent]       = useState<string | null>(null);
   const [createdAt,     setCreatedAt]     = useState<string | null>(null);
+  const [rootComments,  setRootComments]  = useState<Comment[]>(post.rootComments);
   const [commentCount,  setCommentCount]  = useState<number | null>(null);
   const [likeCount,     setLikeCount]     = useState<number | null>(null);
   const [bookmarkCount, setBookmarkCount] = useState<number | null>(null);
   const [tags,          setTags]          = useState<string | null>(null);
 
-  /* ---------- 댓글 입력 컨트롤 ---------- */
-  const [commentValue,   setCommentValue]   = useState("");
-  const [isCommentActive,setCommentActive]  = useState(false);
-  const inputRef       = useRef<HTMLTextAreaElement | null>(null);
-  const initHeight     = useRef<string | null>(null);
+  /* ---------- 댓글 입력 ---------- */
+  const [commentValue,   setCommentValue]  = useState("");
+  const [isCommentActive,setCommentActive] = useState(false);
+  const inputRef = useRef<HTMLTextAreaElement | null>(null);
+  const initHeight = useRef<string | null>(null);
 
   const resetHeight = () => {
-    if (inputRef.current)
-      inputRef.current.style.height = initHeight.current || "auto";
+    if (inputRef.current) inputRef.current.style.height = initHeight.current || "auto";
   };
 
   const handleCancelComment = () => {
@@ -48,31 +48,58 @@ export default function PostDetailComponent({ post }: { post: Post }) {
     resetHeight();
   };
 
-  const handleSubmitComment = () => {
-    if (!commentValue.trim()) return;
-    /* TODO: POST /post/{id}/comment */
+  const handleSubmitComment = async () => {
+  const text = commentValue.trim();
+  if (!text) return;
+
+  try {
+    const res = await fetch(`${APIConfig.API_HOST}/post/comment/write`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ postId: post.id, content: text })
+    });
+
+    if (!res.ok) throw await res.text();
+
+    const newComment: Comment = await res.json();
+
+    /* ✨ childComments 가 없으면 빈 배열로 만들어 줌 */
+    if (!Array.isArray(newComment.childComments))
+      newComment.childComments = [];
+
+    setRootComments(prev => [...prev, newComment]);
+    setCommentCount(prev => (prev ?? 0) + 1);
+
     setCommentValue("");
     setCommentActive(false);
     resetHeight();
-  };
+  } catch (e) {
+    console.error("댓글 작성 실패:", e);
+    alert("댓글 작성에 실패했습니다.");
+  }
+};
 
-  /* ---------- 댓글 수 재귀 계산 ---------- */
-  const countAll = (c: Post["comments"][number]): number =>
-    1 + c.childComments.reduce((s, ch) => s + countAll(ch), 0);
 
-  /* ---------- post prop 변경 시 화면 데이터 세팅 ---------- */
+
+  /* ---------- 댓글 수 계산 ---------- */
+  const total = (c: Comment): number =>
+    1 + c.childComments.reduce((s, ch) => s + total(ch), 0);
+
+  /* ---------- 초기 데이터 세팅 ---------- */
   useEffect(() => {
-    setAuthor(post.author);
+    setAuthor({ ...post.author, userId: post.author.id }); // userId 필드 대응
     setTitle(post.title);
     setContent(post.content);
     setCreatedAt(new Date(post.createdAt).toLocaleString());
-    setCommentCount(post.comments.reduce((s, c) => s + countAll(c), 0));
+    setRootComments(post.rootComments);
+    setCommentCount(post.rootComments.reduce((s, c) => s + total(c), 0));
     setLikeCount(post.likeCount);
     setBookmarkCount(post.bookmarkCount);
     setTags(post.tags.join(" "));
   }, [post]);
 
-  /* ---------- HTML (기존 구조 그대로) ---------- */
+/* ----------------------- ↓ HTML 영역 (수정 금지) ↓ ----------------------- */
   return (
     <>
       <div className="post-detail-frame">
@@ -160,7 +187,7 @@ export default function PostDetailComponent({ post }: { post: Post }) {
           </div>
 
           <div className="post-detail-comments-container">
-            <Comments comments={post.comments} />
+            <Comments comments={rootComments} />
           </div>
 
           <div className="post-detail-button-container">

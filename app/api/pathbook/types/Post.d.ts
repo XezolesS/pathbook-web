@@ -12,6 +12,7 @@ export interface Post {
   bookmarkCount: number;
   commentCount: number;
 
+
   path?: {
     pathPoints: [
       {
